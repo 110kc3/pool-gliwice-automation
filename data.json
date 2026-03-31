@@ -1,31 +1,1801 @@
 [
     {
-        "name": "Delfin Pool",
+        "name": "Mewa",
         "schedule": [
             {
-                "day": "Monday",
-                "time": "8:00 - 9:00",
-                "availableLanes": 5
+                "day": "Poniedziałek",
+                "time": "7.00- 8.00",
+                "availableLanes": "Pływalnia dostępna"
             },
             {
-                "day": "Monday",
-                "time": "9:00 - 10:00",
-                "availableLanes": 4
+                "day": "Wtorek",
+                "time": "7.00- 8.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Środa",
+                "time": "7.00- 8.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Czwartek",
+                "time": "7.00- 8.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Piątek",
+                "time": "7.00- 8.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "7.00- 8.00",
+                "availableLanes": "Pływalnia nieczynna"
+            },
+            {
+                "day": "Niedziela",
+                "time": "7.00- 8.00",
+                "availableLanes": "Pływalnia nieczynna"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "8.00-9.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Wtorek",
+                "time": "8.00-9.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Środa",
+                "time": "8.00-9.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Czwartek",
+                "time": "8.00-9.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Piątek",
+                "time": "8.00-9.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "8.00-9.00",
+                "availableLanes": "Pływalnia nieczynna"
+            },
+            {
+                "day": "Niedziela",
+                "time": "8.00-9.00",
+                "availableLanes": "Pływalnia nieczynna"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "9.00- 10.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Wtorek",
+                "time": "9.00- 10.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Środa",
+                "time": "9.00- 10.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Czwartek",
+                "time": "9.00- 10.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Piątek",
+                "time": "9.00- 10.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "9.00- 10.00",
+                "availableLanes": "Pływalnia nieczynna"
+            },
+            {
+                "day": "Niedziela",
+                "time": "9.00- 10.00",
+                "availableLanes": "Pływalnia nieczynna"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "10.00- 11.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Wtorek",
+                "time": "10.00- 11.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Środa",
+                "time": "10.00- 11.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Czwartek",
+                "time": "10.00- 11.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Piątek",
+                "time": "10.00- 11.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "10.00- 11.00",
+                "availableLanes": "Zajęte 3 tory"
+            },
+            {
+                "day": "Niedziela",
+                "time": "10.00- 11.00",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "11.00- 12.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Wtorek",
+                "time": "11.00- 12.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Środa",
+                "time": "11.00- 12.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Czwartek",
+                "time": "11.00- 12.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Piątek",
+                "time": "11.00- 12.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "11.00- 12.00",
+                "availableLanes": "Zajęte 3 tory"
+            },
+            {
+                "day": "Niedziela",
+                "time": "11.00- 12.00",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "12.00- 13.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Wtorek",
+                "time": "12.00- 13.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Środa",
+                "time": "12.00- 13.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Czwartek",
+                "time": "12.00- 13.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Piątek",
+                "time": "12.00- 13.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "12.00- 13.00",
+                "availableLanes": "Zajęte 3 tory"
+            },
+            {
+                "day": "Niedziela",
+                "time": "12.00- 13.00",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "13.00- 14.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Wtorek",
+                "time": "13.00- 14.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Środa",
+                "time": "13.00- 14.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Czwartek",
+                "time": "13.00- 14.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Piątek",
+                "time": "13.00- 14.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "13.00- 14.00",
+                "availableLanes": "Zajęte 3 tory"
+            },
+            {
+                "day": "Niedziela",
+                "time": "13.00- 14.00",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "14.00- 15.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Wtorek",
+                "time": "14.00- 15.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Środa",
+                "time": "14.00- 15.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Czwartek",
+                "time": "14.00- 15.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Piątek",
+                "time": "14.00- 15.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "14.00- 15.00",
+                "availableLanes": "Zajęte 3 tory"
+            },
+            {
+                "day": "Niedziela",
+                "time": "14.00- 15.00",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "15.00- 16.00",
+                "availableLanes": "Zajęty 1 tor"
+            },
+            {
+                "day": "Wtorek",
+                "time": "15.00- 16.00",
+                "availableLanes": "Zajęty 1 tor"
+            },
+            {
+                "day": "Środa",
+                "time": "15.00- 16.00",
+                "availableLanes": "Zajęty 1 tor"
+            },
+            {
+                "day": "Czwartek",
+                "time": "15.00- 16.00",
+                "availableLanes": "Zajęty 1 tor"
+            },
+            {
+                "day": "Piątek",
+                "time": "15.00- 16.00",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Sobota",
+                "time": "15.00- 16.00",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Niedziela",
+                "time": "15.00- 16.00",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "16.00- 17.00",
+                "availableLanes": "Zajęty 3 tory"
+            },
+            {
+                "day": "Wtorek",
+                "time": "16.00- 17.00",
+                "availableLanes": "Zajęty 3 tory"
+            },
+            {
+                "day": "Środa",
+                "time": "16.00- 17.00",
+                "availableLanes": "Zajęty 2 tory"
+            },
+            {
+                "day": "Czwartek",
+                "time": "16.00- 17.00",
+                "availableLanes": "Zajęte 2 tory"
+            },
+            {
+                "day": "Piątek",
+                "time": "16.00- 17.00",
+                "availableLanes": "Zajęte 3 tory"
+            },
+            {
+                "day": "Sobota",
+                "time": "16.00- 17.00",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Niedziela",
+                "time": "16.00- 17.00",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "17.00- 18.00",
+                "availableLanes": "Zajęty 2 tory"
+            },
+            {
+                "day": "Wtorek",
+                "time": "17.00- 18.00",
+                "availableLanes": "Zajęty 2 tory"
+            },
+            {
+                "day": "Środa",
+                "time": "17.00- 18.00",
+                "availableLanes": "Zajęty 3 tory"
+            },
+            {
+                "day": "Czwartek",
+                "time": "17.00- 18.00",
+                "availableLanes": "Zajęte 2 tory"
+            },
+            {
+                "day": "Piątek",
+                "time": "17.00- 18.00",
+                "availableLanes": "Zajęty 2 tory"
+            },
+            {
+                "day": "Sobota",
+                "time": "17.00- 18.00",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Niedziela",
+                "time": "17.00- 18.00",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "18.00- 19.00",
+                "availableLanes": "Zajęty 2 tory"
+            },
+            {
+                "day": "Wtorek",
+                "time": "18.00- 19.00",
+                "availableLanes": "Zajęty 2 tory"
+            },
+            {
+                "day": "Środa",
+                "time": "18.00- 19.00",
+                "availableLanes": "Zajęty 2 tory"
+            },
+            {
+                "day": "Czwartek",
+                "time": "18.00- 19.00",
+                "availableLanes": "Zajęte 2 tory"
+            },
+            {
+                "day": "Piątek",
+                "time": "18.00- 19.00",
+                "availableLanes": "Zajęty 2 tory"
+            },
+            {
+                "day": "Sobota",
+                "time": "18.00- 19.00",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Niedziela",
+                "time": "18.00- 19.00",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "19.00- 20.00",
+                "availableLanes": "Zajęty 3 tory"
+            },
+            {
+                "day": "Wtorek",
+                "time": "19.00- 20.00",
+                "availableLanes": "Zajęty 3 tory"
+            },
+            {
+                "day": "Środa",
+                "time": "19.00- 20.00",
+                "availableLanes": "Zajęty 3 tory"
+            },
+            {
+                "day": "Czwartek",
+                "time": "19.00- 20.00",
+                "availableLanes": "Zajęty 3 tory"
+            },
+            {
+                "day": "Piątek",
+                "time": "19.00- 20.00",
+                "availableLanes": "Zajęty 2 tory"
+            },
+            {
+                "day": "Sobota",
+                "time": "19.00- 20.00",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Niedziela",
+                "time": "19.00- 20.00",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "20.00- 21.00",
+                "availableLanes": "Zajęte 3 tory"
+            },
+            {
+                "day": "Wtorek",
+                "time": "20.00- 21.00",
+                "availableLanes": "Zajęty 3 tory"
+            },
+            {
+                "day": "Środa",
+                "time": "20.00- 21.00",
+                "availableLanes": "Zajęty 3 tory"
+            },
+            {
+                "day": "Czwartek",
+                "time": "20.00- 21.00",
+                "availableLanes": "Zajęty 3 tory"
+            },
+            {
+                "day": "Piątek",
+                "time": "20.00- 21.00",
+                "availableLanes": "Zajęty 2 tory"
+            },
+            {
+                "day": "Sobota",
+                "time": "20.00- 21.00",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Niedziela",
+                "time": "20.00- 21.00",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "21.00- 21.45",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Wtorek",
+                "time": "21.00- 21.45",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Środa",
+                "time": "21.00- 21.45",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Czwartek",
+                "time": "21.00- 21.45",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Piątek",
+                "time": "21.00- 21.45",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "21.00- 21.45",
+                "availableLanes": "wolne wszystkie tory"
+            },
+            {
+                "day": "Niedziela",
+                "time": "21.00- 21.45",
+                "availableLanes": "wolne wszystkie tory"
             }
         ]
     },
     {
-        "name": "Olimpijczyk Pool",
+        "name": "Delfin",
         "schedule": [
             {
-                "day": "Tuesday",
-                "time": "10:00 - 11:00",
-                "availableLanes": 3
+                "day": "Poniedziałek",
+                "time": "6.00- 7.00",
+                "availableLanes": "Pływalnia dostępna"
             },
             {
-                "day": "Tuesday",
-                "time": "11:00 - 12:00",
-                "availableLanes": 6
+                "day": "Wtorek",
+                "time": "6.00- 7.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Środa",
+                "time": "6.00- 7.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Czwartek",
+                "time": "6.00- 7.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Piątek",
+                "time": "6.00- 7.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "6.00- 7.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Niedziela",
+                "time": "6.00- 7.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "7.00- 8.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Wtorek",
+                "time": "7.00- 8.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Środa",
+                "time": "7.00- 8.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Czwartek",
+                "time": "7.00- 8.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Piątek",
+                "time": "7.00- 8.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "7.00- 8.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Niedziela",
+                "time": "7.00- 8.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "8.00-9.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Wtorek",
+                "time": "8.00-9.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Środa",
+                "time": "8.00-9.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Czwartek",
+                "time": "8.00-9.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Piątek",
+                "time": "8.00-9.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "8.00-9.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Niedziela",
+                "time": "8.00-9.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "9.00- 10.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1\rtor"
+            },
+            {
+                "day": "Wtorek",
+                "time": "9.00- 10.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Środa",
+                "time": "9.00- 10.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Czwartek",
+                "time": "9.00- 10.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Piątek",
+                "time": "9.00- 10.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "9.00- 10.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1 tor"
+            },
+            {
+                "day": "Niedziela",
+                "time": "9.00- 10.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "10.00- 11.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Wtorek",
+                "time": "10.00- 11.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Środa",
+                "time": "10.00- 11.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Czwartek",
+                "time": "10.00- 11.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Piątek",
+                "time": "10.00- 11.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "10.00- 11.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1 tor"
+            },
+            {
+                "day": "Niedziela",
+                "time": "10.00- 11.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "11.00- 12.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Wtorek",
+                "time": "11.00- 12.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Środa",
+                "time": "11.00- 12.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Czwartek",
+                "time": "11.00- 12.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Piątek",
+                "time": "11.00- 12.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "11.00- 12.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1 tor"
+            },
+            {
+                "day": "Niedziela",
+                "time": "11.00- 12.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "12.00- 13.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Wtorek",
+                "time": "12.00- 13.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Środa",
+                "time": "12.00- 13.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Czwartek",
+                "time": "12.00- 13.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Piątek",
+                "time": "12.00- 13.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "12.00- 13.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1 tor"
+            },
+            {
+                "day": "Niedziela",
+                "time": "12.00- 13.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "13.00- 14.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Wtorek",
+                "time": "13.00- 14.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Środa",
+                "time": "13.00- 14.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Czwartek",
+                "time": "13.00- 14.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Piątek",
+                "time": "13.00- 14.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "13.00- 14.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1 tor"
+            },
+            {
+                "day": "Niedziela",
+                "time": "13.00- 14.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "14.00- 15.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Wtorek",
+                "time": "14.00- 15.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Środa",
+                "time": "14.00- 15.00",
+                "availableLanes": "Pływalnia niedostępna"
+            },
+            {
+                "day": "Czwartek",
+                "time": "14.00- 15.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Piątek",
+                "time": "14.00- 15.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "14.00- 15.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1 tor"
+            },
+            {
+                "day": "Niedziela",
+                "time": "14.00- 15.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "15.00- 16.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Wtorek",
+                "time": "15.00- 16.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 2\rtory"
+            },
+            {
+                "day": "Środa",
+                "time": "15.00- 16.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Czwartek",
+                "time": "15.00- 16.00",
+                "availableLanes": "Pływalnia dostępna-zajęte 2\rtory"
+            },
+            {
+                "day": "Piątek",
+                "time": "15.00- 16.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "15.00- 16.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1 tor"
+            },
+            {
+                "day": "Niedziela",
+                "time": "15.00- 16.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "16.00- 17.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1\rtor"
+            },
+            {
+                "day": "Wtorek",
+                "time": "16.00- 17.00",
+                "availableLanes": "Pływalnia dostępna-zajęte 2\rtory"
+            },
+            {
+                "day": "Środa",
+                "time": "16.00- 17.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1\rtor"
+            },
+            {
+                "day": "Czwartek",
+                "time": "16.00- 17.00",
+                "availableLanes": "Pływalnia dostępna-zajęte 2\rtory"
+            },
+            {
+                "day": "Piątek",
+                "time": "16.00- 17.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1 tor"
+            },
+            {
+                "day": "Sobota",
+                "time": "16.00- 17.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1 tor"
+            },
+            {
+                "day": "Niedziela",
+                "time": "16.00- 17.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "17.00- 18.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1\rtor"
+            },
+            {
+                "day": "Wtorek",
+                "time": "17.00- 18.00",
+                "availableLanes": "Pływalnia dostępna-zajęte 2\rtory"
+            },
+            {
+                "day": "Środa",
+                "time": "17.00- 18.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1\rtor"
+            },
+            {
+                "day": "Czwartek",
+                "time": "17.00- 18.00",
+                "availableLanes": "Pływalnia dostępna-zajęte 2\rtory"
+            },
+            {
+                "day": "Piątek",
+                "time": "17.00- 18.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1 tor"
+            },
+            {
+                "day": "Sobota",
+                "time": "17.00- 18.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 2 tor"
+            },
+            {
+                "day": "Niedziela",
+                "time": "17.00- 18.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "18.00- 19.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1\rtor"
+            },
+            {
+                "day": "Wtorek",
+                "time": "18.00- 19.00",
+                "availableLanes": "Pływalnia dostępna-zajęte 2\rtory"
+            },
+            {
+                "day": "Środa",
+                "time": "18.00- 19.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1\rtor"
+            },
+            {
+                "day": "Czwartek",
+                "time": "18.00- 19.00",
+                "availableLanes": "Pływalnia dostępna-zajęte 2\rtory"
+            },
+            {
+                "day": "Piątek",
+                "time": "18.00- 19.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1 tor"
+            },
+            {
+                "day": "Sobota",
+                "time": "18.00- 19.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1 tor"
+            },
+            {
+                "day": "Niedziela",
+                "time": "18.00- 19.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "19.00- 20.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1\rtor"
+            },
+            {
+                "day": "Wtorek",
+                "time": "19.00- 20.00",
+                "availableLanes": "Pływalnia dostępna-zajęte 2\rtory"
+            },
+            {
+                "day": "Środa",
+                "time": "19.00- 20.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1\rtor"
+            },
+            {
+                "day": "Czwartek",
+                "time": "19.00- 20.00",
+                "availableLanes": "Pływalnia dostępna-zajęte 2\rtory"
+            },
+            {
+                "day": "Piątek",
+                "time": "19.00- 20.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1 tor"
+            },
+            {
+                "day": "Sobota",
+                "time": "19.00- 20.00",
+                "availableLanes": "Pływalnia dostępna-zajęty 1 tor"
+            },
+            {
+                "day": "Niedziela",
+                "time": "19.00- 20.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "20.00- 21.00",
+                "availableLanes": "Pływalnia dostępna-zajęte 2\rtory"
+            },
+            {
+                "day": "Wtorek",
+                "time": "20.00- 21.00",
+                "availableLanes": "Pływalnia dostępna-zajęte 2\rtory"
+            },
+            {
+                "day": "Środa",
+                "time": "20.00- 21.00",
+                "availableLanes": "Pływalnia dostępna-zajęte 2\rtory"
+            },
+            {
+                "day": "Czwartek",
+                "time": "20.00- 21.00",
+                "availableLanes": "Pływalnia dostępna-zajęte 2\rtory"
+            },
+            {
+                "day": "Piątek",
+                "time": "20.00- 21.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "20.00- 21.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Niedziela",
+                "time": "20.00- 21.00",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "21.00- 21.45",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Wtorek",
+                "time": "21.00- 21.45",
+                "availableLanes": "Pływalnia dostępna-zajęty 1\rtor"
+            },
+            {
+                "day": "Środa",
+                "time": "21.00- 21.45",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Czwartek",
+                "time": "21.00- 21.45",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Piątek",
+                "time": "21.00- 21.45",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Sobota",
+                "time": "21.00- 21.45",
+                "availableLanes": "Pływalnia dostępna"
+            },
+            {
+                "day": "Niedziela",
+                "time": "21.00- 21.45",
+                "availableLanes": "Pływalnia dostępna"
+            }
+        ]
+    },
+    {
+        "name": "Olimpijczyk",
+        "schedule": [
+            {
+                "day": "Poniedziałek",
+                "time": "Dzień\rtygodnia",
+                "availableLanes": "Poniedziałek"
+            },
+            {
+                "day": "Wtorek",
+                "time": "Dzień\rtygodnia",
+                "availableLanes": "Wtorek"
+            },
+            {
+                "day": "Środa",
+                "time": "Dzień\rtygodnia",
+                "availableLanes": "Środa"
+            },
+            {
+                "day": "Czwartek",
+                "time": "Dzień\rtygodnia",
+                "availableLanes": "Czwartek"
+            },
+            {
+                "day": "Piątek",
+                "time": "Dzień\rtygodnia",
+                "availableLanes": "Piątek"
+            },
+            {
+                "day": "Sobota",
+                "time": "Dzień\rtygodnia",
+                "availableLanes": "Sobota"
+            },
+            {
+                "day": "Niedziela",
+                "time": "Dzień\rtygodnia",
+                "availableLanes": "Niedziela"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "Data",
+                "availableLanes": "30 marca"
+            },
+            {
+                "day": "Wtorek",
+                "time": "Data",
+                "availableLanes": "31 marca"
+            },
+            {
+                "day": "Środa",
+                "time": "Data",
+                "availableLanes": "1 kwietnia"
+            },
+            {
+                "day": "Czwartek",
+                "time": "Data",
+                "availableLanes": "2 kwietnia"
+            },
+            {
+                "day": "Piątek",
+                "time": "Data",
+                "availableLanes": "3 kwietnia"
+            },
+            {
+                "day": "Sobota",
+                "time": "Data",
+                "availableLanes": "4 kwietnia"
+            },
+            {
+                "day": "Niedziela",
+                "time": "Data",
+                "availableLanes": "5 kwietnia"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "Godzina",
+                "availableLanes": "Ilość wolnych torów"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "06:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "06:00",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "06:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "06:00",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "06:00",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "06:00",
+                "availableLanes": "P\rł\ry\rw"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "06:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "06:15",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "06:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "06:15",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "06:15",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "06:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "06:30",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "06:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "06:30",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "06:30",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "06:45",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "06:45",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "06:45",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "06:45",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "06:45",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "07:00",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "07:00",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "07:00",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "07:00",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "07:00",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "07:15",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "07:15",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "07:15",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "07:15",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "07:15",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "07:15",
+                "availableLanes": "a"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "07:30",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "07:30",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "07:30",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "07:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "07:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "07:30",
+                "availableLanes": "l"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "07:45",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "07:45",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "07:45",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "07:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "07:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "07:45",
+                "availableLanes": "n"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "08:00",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "08:00",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Środa",
+                "time": "08:00",
+                "availableLanes": "1x50m"
+            },
+            {
+                "day": "Czwartek",
+                "time": "08:00",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Piątek",
+                "time": "08:00",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "08:15",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "08:15",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Środa",
+                "time": "08:15",
+                "availableLanes": "1x50m"
+            },
+            {
+                "day": "Czwartek",
+                "time": "08:15",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Piątek",
+                "time": "08:15",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "08:30",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "08:30",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Środa",
+                "time": "08:30",
+                "availableLanes": "1x50m"
+            },
+            {
+                "day": "Czwartek",
+                "time": "08:30",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Piątek",
+                "time": "08:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "08:45",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "08:45",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Środa",
+                "time": "08:45",
+                "availableLanes": "1x50m"
+            },
+            {
+                "day": "Czwartek",
+                "time": "08:45",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Piątek",
+                "time": "08:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "09:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "09:00",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Środa",
+                "time": "09:00",
+                "availableLanes": "8x50m"
+            },
+            {
+                "day": "Czwartek",
+                "time": "09:00",
+                "availableLanes": "8x50m"
+            },
+            {
+                "day": "Piątek",
+                "time": "09:00",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "09:00",
+                "availableLanes": "n"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "09:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "09:15",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Środa",
+                "time": "09:15",
+                "availableLanes": "8x50m"
+            },
+            {
+                "day": "Czwartek",
+                "time": "09:15",
+                "availableLanes": "8x50m"
+            },
+            {
+                "day": "Piątek",
+                "time": "09:15",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "09:15",
+                "availableLanes": "i"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "09:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "09:30",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Środa",
+                "time": "09:30",
+                "availableLanes": "8x50m"
+            },
+            {
+                "day": "Czwartek",
+                "time": "09:30",
+                "availableLanes": "8x50m"
+            },
+            {
+                "day": "Piątek",
+                "time": "09:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "09:30",
+                "availableLanes": "e"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "09:45",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "09:45",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Środa",
+                "time": "09:45",
+                "availableLanes": "8x50m"
+            },
+            {
+                "day": "Czwartek",
+                "time": "09:45",
+                "availableLanes": "8x50m"
+            },
+            {
+                "day": "Piątek",
+                "time": "09:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "10:00",
+                "availableLanes": "5x50m, 1x25m"
+            },
+            {
+                "day": "Wtorek",
+                "time": "10:00",
+                "availableLanes": "5x50m, 1x25m"
+            },
+            {
+                "day": "Środa",
+                "time": "10:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "10:00",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "10:00",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "10:15",
+                "availableLanes": "5x50m, 1x25m"
+            },
+            {
+                "day": "Wtorek",
+                "time": "10:15",
+                "availableLanes": "5x50m, 1x25m"
+            },
+            {
+                "day": "Środa",
+                "time": "10:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "10:15",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "10:15",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "10:30",
+                "availableLanes": "5x50m, 1x25m"
+            },
+            {
+                "day": "Wtorek",
+                "time": "10:30",
+                "availableLanes": "5x50m, 1x25m"
+            },
+            {
+                "day": "Środa",
+                "time": "10:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "10:30",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "10:30",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "10:45",
+                "availableLanes": "5x50m, 1x25m"
+            },
+            {
+                "day": "Wtorek",
+                "time": "10:45",
+                "availableLanes": "5x50m, 1x25m"
+            },
+            {
+                "day": "Środa",
+                "time": "10:45",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "10:45",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "10:45",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "10:45",
+                "availableLanes": "n"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "11:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "11:00",
+                "availableLanes": "8x50m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "11:00",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "11:00",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "11:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "11:00",
+                "availableLanes": "n"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "11:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "11:15",
+                "availableLanes": "8x50m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "11:15",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "11:15",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "11:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "11:15",
+                "availableLanes": "a"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "11:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "11:30",
+                "availableLanes": "8x50m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "11:30",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "11:30",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "11:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
             }
         ]
     }
