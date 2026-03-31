@@ -1,0 +1,40 @@
+name: Weekly Schedule Update
+
+on:
+  schedule:
+    - cron: '0 0 * * 1' # Runs every Monday at midnight
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y default-jre
+          pip install tabula-py pandas numpy
+
+      - name: Run Parsers
+        run: |
+          python parse_mewa.py
+          python parse_delfin.py
+          python parse_olimpijczyk.py
+
+      - name: Run Aggregator
+        run: python master_aggregator.py
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add all_pools_data.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m 'Update pool schedules' && git push)

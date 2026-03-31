@@ -1,0 +1,4 @@
+tabula-py
+pandas
+numpy
+json
