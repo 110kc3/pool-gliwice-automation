@@ -1,13 +1,16 @@
 import json
 
 def aggregate_data(file_paths, output_path):
-    aggregated = {}
+    aggregated = []
     
     for pool_name, file_path in file_paths.items():
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-                aggregated[pool_name] = data
+                # Ensure the data has the name field
+                if "name" not in data:
+                    data["name"] = pool_name.capitalize()
+                aggregated.append(data)
         except FileNotFoundError:
             print(f"Warning: {file_path} not found. Skipping.")
         except json.JSONDecodeError:
