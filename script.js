@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('all_pools_data.json')
+    fetch('data.json')
         .then(response => response.json())
         .then(data => {
             const poolAvailabilityDiv = document.getElementById('pool-availability');
