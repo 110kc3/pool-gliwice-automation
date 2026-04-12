@@ -18,12 +18,11 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+          cache: 'pip' # Use pip caching for dependencies
 
       - name: Install dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y default-jre
-          pip install tabula-py pandas numpy
+          pip install -r requirements.txt
 
       - name: Run Parsers
         run: |
