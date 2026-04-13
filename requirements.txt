@@ -1,4 +1,4 @@
 tabula-py
 pandas
 numpy
-json
+# json is a built-in library, not required in requirements.txt

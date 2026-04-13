@@ -20,18 +20,20 @@ jobs:
           python-version: '3.9'
           cache: 'pip' # Use pip caching for dependencies
 
-      - name: Install dependencies
+      - name: Set up Python Environment
         run: |
+          python -m venv venv
+          source venv/bin/activate
           pip install -r requirements.txt
 
       - name: Run Parsers
         run: |
-          python parse_mewa.py
-          python parse_delfin.py
-          python parse_olimpijczyk.py
+          ./venv/bin/python parse_mewa.py
+          ./venv/bin/python parse_delfin.py
+          ./venv/bin/python parse_olimpijczyk.py
 
       - name: Run Aggregator
-        run: python master_aggregator.py
+        run: ./venv/bin/python master_aggregator.py
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
