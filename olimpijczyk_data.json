@@ -1,0 +1,326 @@
+[
+    {
+        "time": "Harmonogram dostępności niecki basenowej od 30 marca do 5 kwietnia 2026",
+        "days": {
+            "Poniedziałek": NaN,
+            "Wtorek": NaN,
+            "Środa": NaN,
+            "Czwartek": NaN,
+            "Piątek": NaN,
+            "Sobota": NaN,
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "Dzień\rtygodnia",
+        "days": {
+            "Poniedziałek": "Poniedziałek",
+            "Wtorek": "Wtorek",
+            "Środa": "Środa",
+            "Czwartek": "Czwartek",
+            "Piątek": "Piątek",
+            "Sobota": "Sobota",
+            "Niedziela": "Niedziela"
+        }
+    },
+    {
+        "time": "Data",
+        "days": {
+            "Poniedziałek": "30 marca",
+            "Wtorek": "31 marca",
+            "Środa": "1 kwietnia",
+            "Czwartek": "2 kwietnia",
+            "Piątek": "3 kwietnia",
+            "Sobota": "4 kwietnia",
+            "Niedziela": "5 kwietnia"
+        }
+    },
+    {
+        "time": "Godzina",
+        "days": {
+            "Poniedziałek": "Ilość wolnych torów",
+            "Wtorek": NaN,
+            "Środa": NaN,
+            "Czwartek": NaN,
+            "Piątek": NaN,
+            "Sobota": NaN,
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "06:00",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "6x50m, 1x25m i wypł",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "8x50m, 1x25m i wypł",
+            "Piątek": "8x50m, 1x25m i wypł",
+            "Sobota": "P\rł\ry\rw",
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "06:15",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "6x50m, 1x25m i wypł",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "8x50m, 1x25m i wypł",
+            "Piątek": "8x50m, 1x25m i wypł",
+            "Sobota": NaN,
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "06:30",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "6x50m, 1x25m i wypł",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "8x50m, 1x25m i wypł",
+            "Piątek": "8x50m, 1x25m i wypł",
+            "Sobota": NaN,
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "06:45",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "6x50m, 1x25m i wypł",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "8x50m, 1x25m i wypł",
+            "Piątek": "8x50m, 1x25m i wypł",
+            "Sobota": NaN,
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "07:00",
+        "days": {
+            "Poniedziałek": "3x50m, 1x25m i wypł",
+            "Wtorek": "3x50m, 1x25m i wypł",
+            "Środa": "2x50m, 1x25m i wypł",
+            "Czwartek": "5x50m, 1x25m i wypł",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": NaN,
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "07:15",
+        "days": {
+            "Poniedziałek": "3x50m, 1x25m i wypł",
+            "Wtorek": "3x50m, 1x25m i wypł",
+            "Środa": "2x50m, 1x25m i wypł",
+            "Czwartek": "5x50m, 1x25m i wypł",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": "a",
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "07:30",
+        "days": {
+            "Poniedziałek": "3x50m, 1x25m i wypł",
+            "Wtorek": "3x50m, 1x25m i wypł",
+            "Środa": "2x50m, 1x25m i wypł",
+            "Czwartek": "5x50m, 1x25m i wypł",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": "l",
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "07:45",
+        "days": {
+            "Poniedziałek": "3x50m, 1x25m i wypł",
+            "Wtorek": "3x50m, 1x25m i wypł",
+            "Środa": "2x50m, 1x25m i wypł",
+            "Czwartek": "5x50m, 1x25m i wypł",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": "n",
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "08:00",
+        "days": {
+            "Poniedziałek": "3x50m, 1x25m i wypł",
+            "Wtorek": "4x50m",
+            "Środa": "1x50m",
+            "Czwartek": "4x50m",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": NaN,
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "08:15",
+        "days": {
+            "Poniedziałek": "3x50m, 1x25m i wypł",
+            "Wtorek": "4x50m",
+            "Środa": "1x50m",
+            "Czwartek": "4x50m",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": NaN,
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "08:30",
+        "days": {
+            "Poniedziałek": "3x50m, 1x25m i wypł",
+            "Wtorek": "4x50m",
+            "Środa": "1x50m",
+            "Czwartek": "4x50m",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": NaN,
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "08:45",
+        "days": {
+            "Poniedziałek": "3x50m, 1x25m i wypł",
+            "Wtorek": "4x50m",
+            "Środa": "1x50m",
+            "Czwartek": "4x50m",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": NaN,
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "09:00",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "4x50m",
+            "Środa": "8x50m",
+            "Czwartek": "8x50m",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": "n",
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "09:15",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "4x50m",
+            "Środa": "8x50m",
+            "Czwartek": "8x50m",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": "i",
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "09:30",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "4x50m",
+            "Środa": "8x50m",
+            "Czwartek": "8x50m",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": "e",
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "09:45",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "4x50m",
+            "Środa": "8x50m",
+            "Czwartek": "8x50m",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": NaN,
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "10:00",
+        "days": {
+            "Poniedziałek": "5x50m, 1x25m",
+            "Wtorek": "5x50m, 1x25m",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "4x50m, 1x25m i wypł",
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": NaN,
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "10:15",
+        "days": {
+            "Poniedziałek": "5x50m, 1x25m",
+            "Wtorek": "5x50m, 1x25m",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "4x50m, 1x25m i wypł",
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": NaN,
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "10:30",
+        "days": {
+            "Poniedziałek": "5x50m, 1x25m",
+            "Wtorek": "5x50m, 1x25m",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "4x50m, 1x25m i wypł",
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": NaN,
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "10:45",
+        "days": {
+            "Poniedziałek": "5x50m, 1x25m",
+            "Wtorek": "5x50m, 1x25m",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "4x50m, 1x25m i wypł",
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": "n",
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "11:00",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "8x50m i wypł",
+            "Środa": "4x50m, 1x25m i wypł",
+            "Czwartek": "8x50m, 1x25m i wypł",
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "n",
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "11:15",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "8x50m i wypł",
+            "Środa": "4x50m, 1x25m i wypł",
+            "Czwartek": "8x50m, 1x25m i wypł",
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "a",
+            "Niedziela": NaN
+        }
+    },
+    {
+        "time": "11:30",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "8x50m i wypł",
+            "Środa": "4x50m, 1x25m i wypł",
+            "Czwartek": "8x50m, 1x25m i wypł",
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": NaN,
+            "Niedziela": NaN
+        }
+    }
+]
