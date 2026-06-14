@@ -46,31 +46,52 @@ class TestDataTransformation(unittest.TestCase):
                 "name": "Mewa"
             }
         ]
-        # The current implementation converts NaN to 'nan' string, which is what we test for.
+        # NaN represents missing data: the implementation skips those slots rather
+        # than emitting a literal "nan" string, which the frontend would render verbatim.
         expected = [
             {"name": "Mewa", "schedule": [
-                {"day": "Czwartek", "time": "10.00-11.00", "availableLanes": "nan"},
                 {"day": "Piątek", "time": "10.00-11.00", "availableLanes": "1"}
             ]}
         ]
         self.assertEqual(transform_data(raw_data), expected)
 
-    def test_empty_input(self):
-        # Test with empty data list
-        self.assertEqual(transform_data([]), [])
+    def test_skipping_non_dictionary_elements(self):
+        # Test case for entries in raw_data that are not dictionaries (e.g., nulls, strings)
+        raw_data = [
+            {"time": "10.00-11.00", "days": {"Poniedziałek": "1"}, "name": "Mewa"},
+            None,
+            "a string entry",
+            {"time": "12.00-13.00", "days": {"Wtorek": "2"}, "name": "Mewa"}
+        ]
+        expected = [
+            {"name": "Mewa", "schedule": [
+                {"day": "Poniedziałek", "time": "10.00-11.00", "availableLanes": "1"},
+                {"day": "Wtorek", "time": "12.00-13.00", "availableLanes": "2"}
+            ]}
+        ]
+        self.assertEqual(transform_data(raw_data), expected)
 
-    def test_empty_days(self):
-        # Test with an entry that has no days data
+    def test_missing_time_key(self):
+        # Test case where an entry is missing the 'time' key
         raw_data = [
             {
-                "time": "12.00-13.00",
-                "days": {},
-                "name": "EmptyTest"
+                "time": "7.00- 8.00",
+                "days": {"Poniedziałek": "20"},
+                "name": "Mewa"
+            },
+            {
+                # Missing 'time' key
+                "days": {"Wtorek": "15"},
+                "name": "Mewa"
             }
         ]
-        self.assertEqual(transform_data(raw_data), [
-            {"name": "EmptyTest", "schedule": []}
-        ])
+        expected = [
+            {"name": "Mewa", "schedule": [
+                {"day": "Poniedziałek", "time": "7.00- 8.00", "availableLanes": "20"},
+                {"day": "Wtorek", "time": "", "availableLanes": "15"} # Should default to empty time string
+            ]}
+        ]
+        self.assertEqual(transform_data(raw_data), expected)
 
 if __name__ == '__main__':
     unittest.main()

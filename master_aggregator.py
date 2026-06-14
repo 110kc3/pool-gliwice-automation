@@ -25,6 +25,11 @@ def transform_data(raw_data):
     grouped = defaultdict(list)
 
     for entry in raw_data:
+        # Skip entries that are not dictionaries (e.g., None, strings) to avoid
+        # AttributeError when accessing keys. Raw data may contain malformed items.
+        if not isinstance(entry, dict):
+            continue
+
         pool_name = entry.get("name", "Unknown")
         time_slot = entry.get("time", "")
         days_data = entry.get("days", {})
@@ -64,7 +69,10 @@ def aggregate_data(file_paths, output_path):
                 data = json.load(f)
                 if isinstance(data, list):
                     for entry in data:
-                        if isinstance(entry, dict) and "name" not in entry:
+                        if not isinstance(entry, dict):
+                            print(f"Warning: Skipping non-dictionary item in {file_path}.")
+                            continue
+                        if "name" not in entry:
                             entry["name"] = pool_name.capitalize()
                         all_raw_data.append(entry)
                 elif isinstance(data, dict):
@@ -72,11 +80,12 @@ def aggregate_data(file_paths, output_path):
                         data["name"] = pool_name.capitalize()
                     all_raw_data.append(data)
         except json.JSONDecodeError as e:
-            print(f"Error: Could not decode JSON from {file_path}. Details: {e}")
+            print(f"Error: Failed to decode JSON from {file_path} due to JSON error: {e}")
         except FileNotFoundError:
             print(f"Warning: File not found at {file_path}. Skipping.")
         except Exception as e:
-            print(f"Warning: An unexpected error occurred while processing {file_path}: {e}")
+            # Catch any other unexpected error during file processing (e.g., permissions, encoding issues)
+            print(f"Error: An unexpected error occurred while processing {file_path}: {e}")
 
     transformed = transform_data(all_raw_data)
 
