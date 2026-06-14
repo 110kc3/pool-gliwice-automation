@@ -1,4 +1,8 @@
-tabula-py
-pandas
-numpy
-# json is a built-in library, not required in requirements.txt
+# Runtime dependencies for the data pipeline (PDF parsing + aggregation).
+# NOTE: tabula-py requires a Java runtime (JRE 8+) to be installed.
+tabula-py==2.10.0
+pandas==2.3.3
+numpy==2.2.6
+
+# Testing
+pytest==9.0.3

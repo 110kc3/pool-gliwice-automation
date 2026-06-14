@@ -1,6 +1,7 @@
 import tabula
 import json
 import pandas as pd
+from pdf_utils import nan_to_none
 
 def parse_olimpijczyk_pdf(pdf_path):
     # Extract tables from the PDF
@@ -47,9 +48,10 @@ def parse_olimpijczyk_pdf(pdf_path):
 if __name__ == "__main__":
     import re
     olimpijczyk_pdf_path = "Harmonogram_Olimpijczyk_30_03-05_04_2026.pdf"
-    data = parse_olimpijczyk_pdf(olimpijczyk_pdf_path)
-    
-    # Save to JSON
+    data = nan_to_none(parse_olimpijczyk_pdf(olimpijczyk_pdf_path))
+
+    # Save to JSON (allow_nan=False enforces valid JSON; nan_to_none already
+    # replaced empty-cell NaNs with null, and the aggregator drops header/date rows).
     with open('olimpijczyk_data.json', 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
+        json.dump(data, f, ensure_ascii=False, indent=4, allow_nan=False)
     print("Successfully saved data to olimpijczyk_data.json")

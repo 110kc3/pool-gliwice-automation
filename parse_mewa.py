@@ -2,6 +2,7 @@ import tabula
 import json
 import re
 import pandas as pd
+from pdf_utils import nan_to_none
 
 def parse_mewa_pdf(pdf_path):
     # Extract tables from the PDF
@@ -61,8 +62,8 @@ def parse_mewa_pdf(pdf_path):
 
 if __name__ == "__main__":
     mewa_pdf_path = "mewa.pdf"
-    data = parse_mewa_pdf(mewa_pdf_path)
-    
+    data = nan_to_none(parse_mewa_pdf(mewa_pdf_path))
+
     with open('mewa_data.json', 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
+        json.dump(data, f, ensure_ascii=False, indent=4, allow_nan=False)
     print("Successfully saved data to mewa_data.json")

@@ -93,5 +93,80 @@ class TestDataTransformation(unittest.TestCase):
         ]
         self.assertEqual(transform_data(raw_data), expected)
 
+    def test_skips_header_and_date_rows(self):
+        # Noise rows that the Olimpijczyk PDF emits: a title row, a "day of week"
+        # header row, and a date row. None should survive into the output.
+        raw_data = [
+            {"time": "Harmonogram dostępności niecki basenowej", "days": {"Poniedziałek": float('nan')}, "name": "Olimpijczyk"},
+            {"time": "Dzień\rtygodnia", "days": {"Poniedziałek": "Poniedziałek"}, "name": "Olimpijczyk"},
+            {"time": "Data", "days": {"Poniedziałek": "30 marca"}, "name": "Olimpijczyk"},
+            {"time": "7.00- 8.00", "days": {"Poniedziałek": "4x50m"}, "name": "Olimpijczyk"},
+        ]
+        expected = [
+            {"name": "Olimpijczyk", "schedule": [
+                {"day": "Poniedziałek", "time": "7.00- 8.00", "availableLanes": "4x50m"}
+            ]}
+        ]
+        self.assertEqual(transform_data(raw_data), expected)
+
+    def test_skips_noise_values_within_valid_rows(self):
+        # A genuine time slot whose individual cells are junk (stray letter, column
+        # header) should drop those cells but keep the real ones.
+        raw_data = [
+            {"time": "7.00- 8.00",
+             "days": {"Poniedziałek": "n", "Wtorek": "Ilość wolnych torów", "Środa": "8x50m"},
+             "name": "Olimpijczyk"},
+        ]
+        expected = [
+            {"name": "Olimpijczyk", "schedule": [
+                {"day": "Środa", "time": "7.00- 8.00", "availableLanes": "8x50m"}
+            ]}
+        ]
+        self.assertEqual(transform_data(raw_data), expected)
+
+    def test_strips_carriage_returns(self):
+        raw_data = [
+            {"time": "7.00-\r8.00", "days": {"Poniedziałek": "Pływalnia dostępna-zajęte 2\rtory"}, "name": "Mewa"},
+        ]
+        expected = [
+            {"name": "Mewa", "schedule": [
+                {"day": "Poniedziałek", "time": "7.00- 8.00", "availableLanes": "Pływalnia dostępna-zajęte 2 tory"}
+            ]}
+        ]
+        self.assertEqual(transform_data(raw_data), expected)
+
+    def test_skips_none_lane_values(self):
+        raw_data = [
+            {"time": "7.00- 8.00", "days": {"Poniedziałek": None, "Wtorek": "5x50m"}, "name": "Olimpijczyk"},
+        ]
+        expected = [
+            {"name": "Olimpijczyk", "schedule": [
+                {"day": "Wtorek", "time": "7.00- 8.00", "availableLanes": "5x50m"}
+            ]}
+        ]
+        self.assertEqual(transform_data(raw_data), expected)
+
+
+class TestNoiseHelpers(unittest.TestCase):
+
+    def test_is_noise_time(self):
+        for junk in ["Data", "Dzień\rtygodnia", "Harmonogram dostępności", "Godzina"]:
+            self.assertTrue(is_noise_time(junk), junk)
+        for real in ["7.00- 8.00", "9.00-10.00", ""]:
+            self.assertFalse(is_noise_time(real), real)
+
+    def test_is_noise_value(self):
+        for junk in ["n", "a", "Środa", "Poniedziałek", "30 marca", "5 kwietnia",
+                     "Ilość wolnych torów", "P\rł\ry\rw", ""]:
+            self.assertTrue(is_noise_value(junk), junk)
+        for real in ["4x50m", "Pływalnia dostępna", "wolne wszystkie tory",
+                     "Zajęty 3 tory", "Pływalnia niedostępna"]:
+            self.assertFalse(is_noise_value(real), real)
+
+    def test_clean_cell(self):
+        self.assertEqual(clean_cell("a\rb  c"), "a b c")
+        self.assertEqual(clean_cell(None), "")
+
+
 if __name__ == '__main__':
     unittest.main()

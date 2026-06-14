@@ -2,6 +2,8 @@
 import tabula
 import json
 import re
+import pandas as pd
+from pdf_utils import nan_to_none
 
 def parse_delfin_pdf(pdf_path):
     # Extract tables from the PDF without area restriction for debugging
@@ -86,10 +88,13 @@ def parse_delfin_pdf(pdf_path):
         for day in days_of_week:
             try:
                 day_index = headers.index(day)
-                day_content = str(row.iloc[day_index])
+                raw = row.iloc[day_index]
+                # Empty cells arrive as NaN; keep them as None rather than the
+                # literal string "nan", which would otherwise reach the frontend.
+                day_content = None if pd.isna(raw) else str(raw)
             except ValueError:
-                day_content = ""
-            
+                day_content = None
+
             days_data[day] = day_content
 
         pool_schedule.append({
@@ -102,8 +107,8 @@ def parse_delfin_pdf(pdf_path):
 
 if __name__ == "__main__":
     delfin_pdf_path = "delfin.pdf"
-    data = parse_delfin_pdf(delfin_pdf_path)
-    
+    data = nan_to_none(parse_delfin_pdf(delfin_pdf_path))
+
     with open('delfin_data.json', 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
+        json.dump(data, f, ensure_ascii=False, indent=4, allow_nan=False)
     print("Successfully saved data to delfin_data.json")
