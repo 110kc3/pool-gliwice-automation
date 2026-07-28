@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Gliwice Pool Availability">
+  <rect width="1200" height="630" fill="#0d3b66"/>
+  <rect x="0" y="0" width="1200" height="8" fill="#4cc9f0"/>
+  <text x="80" y="250" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="86" font-weight="700" fill="#ffffff">Gliwice Pool</text>
+  <text x="80" y="345" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="86" font-weight="700" fill="#4cc9f0">Availability</text>
+  <text x="80" y="430" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="32" fill="#c9d6e3">Delfin &#183; Mewa &#183; Olimpijczyk</text>
+  <text x="80" y="490" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="28" fill="#8fa6bb">Weekly timetables, parsed from the operators' PDFs</text>
+  <text x="80" y="556" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" fill="#6b8199">data.json &#183; refreshed weekly</text>
+</svg>
