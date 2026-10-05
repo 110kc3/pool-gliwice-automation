@@ -1,0 +1,182 @@
+[
+    {
+        "time": "7.00- 8.00",
+        "days": {
+            "Poniedziałek": "Pływalnia dostępna",
+            "Wtorek": "Pływalnia dostępna",
+            "Środa": "Pływalnia dostępna",
+            "Czwartek": "Pływalnia dostępna",
+            "Piątek": "Pływalnia dostępna",
+            "Sobota": "Pływalnia nieczynna",
+            "Niedziela": "Pływalnia nieczynna"
+        }
+    },
+    {
+        "time": "8.00-9.00",
+        "days": {
+            "Poniedziałek": "Pływalnia niedostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Pływalnia nieczynna",
+            "Niedziela": "Pływalnia nieczynna"
+        }
+    },
+    {
+        "time": "9.00- 10.00",
+        "days": {
+            "Poniedziałek": "Pływalnia niedostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Pływalnia nieczynna",
+            "Niedziela": "Pływalnia nieczynna"
+        }
+    },
+    {
+        "time": "10.00- 11.00",
+        "days": {
+            "Poniedziałek": "Pływalnia niedostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Zajęte 3 tory",
+            "Niedziela": "wolne wszystkie tory"
+        }
+    },
+    {
+        "time": "11.00- 12.00",
+        "days": {
+            "Poniedziałek": "Pływalnia niedostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Zajęte 3 tory",
+            "Niedziela": "wolne wszystkie tory"
+        }
+    },
+    {
+        "time": "12.00- 13.00",
+        "days": {
+            "Poniedziałek": "Pływalnia niedostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Zajęte 3 tory",
+            "Niedziela": "wolne wszystkie tory"
+        }
+    },
+    {
+        "time": "13.00- 14.00",
+        "days": {
+            "Poniedziałek": "Pływalnia niedostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Zajęte 3 tory",
+            "Niedziela": "wolne wszystkie tory"
+        }
+    },
+    {
+        "time": "14.00- 15.00",
+        "days": {
+            "Poniedziałek": "Pływalnia niedostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Zajęte 3 tory",
+            "Niedziela": "wolne wszystkie tory"
+        }
+    },
+    {
+        "time": "15.00- 16.00",
+        "days": {
+            "Poniedziałek": "Zajęty 1 tor",
+            "Wtorek": "Zajęty 1 tor",
+            "Środa": "Zajęty 1 tor",
+            "Czwartek": "Zajęty 1 tor",
+            "Piątek": "wolne wszystkie tory",
+            "Sobota": "wolne wszystkie tory",
+            "Niedziela": "wolne wszystkie tory"
+        }
+    },
+    {
+        "time": "16.00- 17.00",
+        "days": {
+            "Poniedziałek": "Zajęty 3 tory",
+            "Wtorek": "Zajęty 3 tory",
+            "Środa": "Zajęty 2 tory",
+            "Czwartek": "Zajęte 2 tory",
+            "Piątek": "Zajęte 3 tory",
+            "Sobota": "wolne wszystkie tory",
+            "Niedziela": "wolne wszystkie tory"
+        }
+    },
+    {
+        "time": "17.00- 18.00",
+        "days": {
+            "Poniedziałek": "Zajęty 2 tory",
+            "Wtorek": "Zajęty 2 tory",
+            "Środa": "Zajęty 3 tory",
+            "Czwartek": "Zajęte 2 tory",
+            "Piątek": "Zajęty 2 tory",
+            "Sobota": "wolne wszystkie tory",
+            "Niedziela": "wolne wszystkie tory"
+        }
+    },
+    {
+        "time": "18.00- 19.00",
+        "days": {
+            "Poniedziałek": "Zajęty 2 tory",
+            "Wtorek": "Zajęty 2 tory",
+            "Środa": "Zajęty 2 tory",
+            "Czwartek": "Zajęte 2 tory",
+            "Piątek": "Zajęty 2 tory",
+            "Sobota": "wolne wszystkie tory",
+            "Niedziela": "wolne wszystkie tory"
+        }
+    },
+    {
+        "time": "19.00- 20.00",
+        "days": {
+            "Poniedziałek": "Zajęty 3 tory",
+            "Wtorek": "Zajęty 3 tory",
+            "Środa": "Zajęty 3 tory",
+            "Czwartek": "Zajęty 3 tory",
+            "Piątek": "Zajęty 2 tory",
+            "Sobota": "wolne wszystkie tory",
+            "Niedziela": "wolne wszystkie tory"
+        }
+    },
+    {
+        "time": "20.00- 21.00",
+        "days": {
+            "Poniedziałek": "Zajęte 3 tory",
+            "Wtorek": "Zajęty 3 tory",
+            "Środa": "Zajęty 3 tory",
+            "Czwartek": "Zajęty 3 tory",
+            "Piątek": "Zajęty 2 tory",
+            "Sobota": "wolne wszystkie tory",
+            "Niedziela": "wolne wszystkie tory"
+        }
+    },
+    {
+        "time": "21.00- 21.45",
+        "days": {
+            "Poniedziałek": "wolne wszystkie tory",
+            "Wtorek": "wolne wszystkie tory",
+            "Środa": "wolne wszystkie tory",
+            "Czwartek": "wolne wszystkie tory",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "wolne wszystkie tory",
+            "Niedziela": "wolne wszystkie tory"
+        }
+    }
+]
