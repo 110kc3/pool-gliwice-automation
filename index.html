@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gliwice Pool Availability — swimming pool timetables for Delfin, Mewa and Olimpijczyk</title>
+    <meta name="description" content="Weekly opening hours and free-swim availability for the Gliwice municipal swimming pools (Delfin, Mewa, Olimpijczyk), parsed from the operators' PDF timetables and refreshed every week.">
+    <link rel="canonical" href="https://110kc3.github.io/pool-gliwice-automation/">
+    <link rel="alternate" type="application/json" href="https://110kc3.github.io/pool-gliwice-automation/data.json" title="Pool availability (JSON)">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Gliwice Pool Availability">
+    <meta property="og:title" content="Gliwice Pool Availability">
+    <meta property="og:description" content="Weekly opening hours and free-swim availability for the Gliwice municipal swimming pools, refreshed every week from the operators' PDF timetables.">
+    <meta property="og:url" content="https://110kc3.github.io/pool-gliwice-automation/">
+    <meta property="og:image" content="https://110kc3.github.io/pool-gliwice-automation/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://110kc3.github.io/pool-gliwice-automation/#website",
+          "url": "https://110kc3.github.io/pool-gliwice-automation/",
+          "name": "Gliwice Pool Availability",
+          "description": "Weekly opening hours and free-swim availability for the Gliwice municipal swimming pools, parsed from the operators' PDF timetables.",
+          "inLanguage": "pl",
+          "isBasedOn": "https://110kc3.github.io/pool-gliwice-automation/data.json"
+        },
+        {
+          "@type": "ItemList",
+          "name": "Gliwice municipal swimming pools",
+          "numberOfItems": 3,
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "item": { "@type": "SportsActivityLocation", "name": "Pływalnia Delfin", "address": { "@type": "PostalAddress", "addressLocality": "Gliwice", "addressCountry": "PL" } } },
+            { "@type": "ListItem", "position": 2, "item": { "@type": "SportsActivityLocation", "name": "Pływalnia Mewa", "address": { "@type": "PostalAddress", "addressLocality": "Gliwice", "addressCountry": "PL" } } },
+            { "@type": "ListItem", "position": 3, "item": { "@type": "SportsActivityLocation", "name": "Pływalnia Olimpijczyk", "address": { "@type": "PostalAddress", "addressLocality": "Gliwice", "addressCountry": "PL" } } }
+          ]
+        }
+      ]
+    }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gliwice Pool Availability</h1>
+        
+        <div class="controls">
+            <select id="city-filter" disabled>
+                <option value="Gliwice">Gliwice</option>
+            </select>
+            <select id="day-filter">
+                <option value="all">Wszystkie dni</option>
+                <option value="Poniedziałek">Poniedziałek</option>
+                <option value="Wtorek">Wtorek</option>
+                <option value="Środa">Środa</option>
+                <option value="Czwartek">Czwartek</option>
+                <option value="Piątek">Piątek</option>
+                <option value="Sobota">Sobota</option>
+                <option value="Niedziela">Niedziela</option>
+            </select>
+        </div>
+
+        <div id="top-highlights">
+            <h2>Best Available Slots</h2>
+            <div id="highlights-container"></div>
+        </div>
+        <div id="pool-availability">
+            <!-- Pool data will be loaded here by JavaScript -->
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
