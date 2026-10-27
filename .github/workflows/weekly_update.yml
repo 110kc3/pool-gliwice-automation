@@ -47,6 +47,7 @@ jobs:
           ./venv/bin/python parse_mewa.py
           ./venv/bin/python parse_delfin.py
           ./venv/bin/python parse_olimpijczyk.py
+          ./venv/bin/python parse_neptun.py
 
       - name: Run aggregator
         run: ./venv/bin/python master_aggregator.py

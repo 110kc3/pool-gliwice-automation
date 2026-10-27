@@ -1105,7 +1105,7 @@
             {
                 "day": "Wtorek",
                 "time": "06:00",
-                "availableLanes": "6x50m, 1x25m i wypł"
+                "availableLanes": "8x50m, 1x25m i wypł"
             },
             {
                 "day": "Środa",
@@ -1115,7 +1115,7 @@
             {
                 "day": "Czwartek",
                 "time": "06:00",
-                "availableLanes": "8x50m, 1x25m i wypł"
+                "availableLanes": "7x50m, 1x25m i wypł"
             },
             {
                 "day": "Piątek",
@@ -1123,6 +1123,11 @@
                 "availableLanes": "8x50m, 1x25m i wypł"
             },
             {
+                "day": "Sobota",
+                "time": "06:00",
+                "availableLanes": "Pływalnia czynna od 8:00"
+            },
+            {
                 "day": "Poniedziałek",
                 "time": "06:15",
                 "availableLanes": "9x50m, 1x25m i wypł"
@@ -1130,7 +1135,7 @@
             {
                 "day": "Wtorek",
                 "time": "06:15",
-                "availableLanes": "6x50m, 1x25m i wypł"
+                "availableLanes": "8x50m, 1x25m i wypł"
             },
             {
                 "day": "Środa",
@@ -1140,7 +1145,7 @@
             {
                 "day": "Czwartek",
                 "time": "06:15",
-                "availableLanes": "8x50m, 1x25m i wypł"
+                "availableLanes": "7x50m, 1x25m i wypł"
             },
             {
                 "day": "Piątek",
@@ -1155,7 +1160,7 @@
             {
                 "day": "Wtorek",
                 "time": "06:30",
-                "availableLanes": "6x50m, 1x25m i wypł"
+                "availableLanes": "8x50m, 1x25m i wypł"
             },
             {
                 "day": "Środa",
@@ -1165,7 +1170,7 @@
             {
                 "day": "Czwartek",
                 "time": "06:30",
-                "availableLanes": "8x50m, 1x25m i wypł"
+                "availableLanes": "7x50m, 1x25m i wypł"
             },
             {
                 "day": "Piątek",
@@ -1180,7 +1185,7 @@
             {
                 "day": "Wtorek",
                 "time": "06:45",
-                "availableLanes": "6x50m, 1x25m i wypł"
+                "availableLanes": "8x50m, 1x25m i wypł"
             },
             {
                 "day": "Środa",
@@ -1189,338 +1194,383 @@
             },
             {
                 "day": "Czwartek",
+                "time": "06:45",
+                "availableLanes": "7x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
                 "time": "06:45",
                 "availableLanes": "8x50m, 1x25m i wypł"
             },
             {
-                "day": "Piątek",
-                "time": "06:45",
-                "availableLanes": "8x50m, 1x25m i wypł"
-            },
-            {
                 "day": "Poniedziałek",
                 "time": "07:00",
-                "availableLanes": "3x50m, 1x25m i wypł"
+                "availableLanes": "4x50m, 1x25m i wypł"
             },
             {
                 "day": "Wtorek",
                 "time": "07:00",
-                "availableLanes": "3x50m, 1x25m i wypł"
+                "availableLanes": "5x50m, 1x25m i wypł"
             },
             {
                 "day": "Środa",
                 "time": "07:00",
-                "availableLanes": "2x50m, 1x25m i wypł"
+                "availableLanes": "4x50m, 1x25m i wypł"
             },
             {
                 "day": "Czwartek",
                 "time": "07:00",
-                "availableLanes": "5x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Piątek",
-                "time": "07:00",
-                "availableLanes": "5x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Poniedziałek",
-                "time": "07:15",
-                "availableLanes": "3x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Wtorek",
-                "time": "07:15",
-                "availableLanes": "3x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Środa",
-                "time": "07:15",
-                "availableLanes": "2x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Czwartek",
-                "time": "07:15",
-                "availableLanes": "5x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Piątek",
-                "time": "07:15",
-                "availableLanes": "5x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Poniedziałek",
-                "time": "07:30",
-                "availableLanes": "3x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Wtorek",
-                "time": "07:30",
-                "availableLanes": "3x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Środa",
-                "time": "07:30",
-                "availableLanes": "2x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Czwartek",
-                "time": "07:30",
-                "availableLanes": "5x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Piątek",
-                "time": "07:30",
-                "availableLanes": "5x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Poniedziałek",
-                "time": "07:45",
-                "availableLanes": "3x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Wtorek",
-                "time": "07:45",
-                "availableLanes": "3x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Środa",
-                "time": "07:45",
-                "availableLanes": "2x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Czwartek",
-                "time": "07:45",
-                "availableLanes": "5x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Piątek",
-                "time": "07:45",
-                "availableLanes": "5x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Poniedziałek",
-                "time": "08:00",
-                "availableLanes": "3x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Wtorek",
-                "time": "08:00",
-                "availableLanes": "4x50m"
-            },
-            {
-                "day": "Środa",
-                "time": "08:00",
-                "availableLanes": "1x50m"
-            },
-            {
-                "day": "Czwartek",
-                "time": "08:00",
-                "availableLanes": "4x50m"
-            },
-            {
-                "day": "Piątek",
-                "time": "08:00",
-                "availableLanes": "5x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Poniedziałek",
-                "time": "08:15",
-                "availableLanes": "3x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Wtorek",
-                "time": "08:15",
-                "availableLanes": "4x50m"
-            },
-            {
-                "day": "Środa",
-                "time": "08:15",
-                "availableLanes": "1x50m"
-            },
-            {
-                "day": "Czwartek",
-                "time": "08:15",
-                "availableLanes": "4x50m"
-            },
-            {
-                "day": "Piątek",
-                "time": "08:15",
-                "availableLanes": "5x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Poniedziałek",
-                "time": "08:30",
-                "availableLanes": "3x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Wtorek",
-                "time": "08:30",
-                "availableLanes": "4x50m"
-            },
-            {
-                "day": "Środa",
-                "time": "08:30",
-                "availableLanes": "1x50m"
-            },
-            {
-                "day": "Czwartek",
-                "time": "08:30",
-                "availableLanes": "4x50m"
-            },
-            {
-                "day": "Piątek",
-                "time": "08:30",
-                "availableLanes": "5x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Poniedziałek",
-                "time": "08:45",
-                "availableLanes": "3x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Wtorek",
-                "time": "08:45",
-                "availableLanes": "4x50m"
-            },
-            {
-                "day": "Środa",
-                "time": "08:45",
-                "availableLanes": "1x50m"
-            },
-            {
-                "day": "Czwartek",
-                "time": "08:45",
-                "availableLanes": "4x50m"
-            },
-            {
-                "day": "Piątek",
-                "time": "08:45",
-                "availableLanes": "5x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Poniedziałek",
-                "time": "09:00",
-                "availableLanes": "9x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Wtorek",
-                "time": "09:00",
-                "availableLanes": "4x50m"
-            },
-            {
-                "day": "Środa",
-                "time": "09:00",
-                "availableLanes": "8x50m"
-            },
-            {
-                "day": "Czwartek",
-                "time": "09:00",
-                "availableLanes": "8x50m"
-            },
-            {
-                "day": "Piątek",
-                "time": "09:00",
-                "availableLanes": "5x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Poniedziałek",
-                "time": "09:15",
-                "availableLanes": "9x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Wtorek",
-                "time": "09:15",
-                "availableLanes": "4x50m"
-            },
-            {
-                "day": "Środa",
-                "time": "09:15",
-                "availableLanes": "8x50m"
-            },
-            {
-                "day": "Czwartek",
-                "time": "09:15",
-                "availableLanes": "8x50m"
-            },
-            {
-                "day": "Piątek",
-                "time": "09:15",
-                "availableLanes": "5x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Poniedziałek",
-                "time": "09:30",
-                "availableLanes": "9x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Wtorek",
-                "time": "09:30",
-                "availableLanes": "4x50m"
-            },
-            {
-                "day": "Środa",
-                "time": "09:30",
-                "availableLanes": "8x50m"
-            },
-            {
-                "day": "Czwartek",
-                "time": "09:30",
-                "availableLanes": "8x50m"
-            },
-            {
-                "day": "Piątek",
-                "time": "09:30",
-                "availableLanes": "5x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Poniedziałek",
-                "time": "09:45",
-                "availableLanes": "9x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Wtorek",
-                "time": "09:45",
-                "availableLanes": "4x50m"
-            },
-            {
-                "day": "Środa",
-                "time": "09:45",
-                "availableLanes": "8x50m"
-            },
-            {
-                "day": "Czwartek",
-                "time": "09:45",
-                "availableLanes": "8x50m"
-            },
-            {
-                "day": "Piątek",
-                "time": "09:45",
-                "availableLanes": "5x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Poniedziałek",
-                "time": "10:00",
-                "availableLanes": "5x50m, 1x25m"
-            },
-            {
-                "day": "Wtorek",
-                "time": "10:00",
-                "availableLanes": "5x50m, 1x25m"
-            },
-            {
-                "day": "Środa",
-                "time": "10:00",
-                "availableLanes": "9x50m, 1x25m i wypł"
-            },
-            {
-                "day": "Czwartek",
-                "time": "10:00",
                 "availableLanes": "4x50m, 1x25m i wypł"
             },
             {
                 "day": "Piątek",
+                "time": "07:00",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "07:15",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "07:15",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "07:15",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "07:15",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "07:15",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "07:30",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "07:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "07:30",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "07:30",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "07:30",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "07:45",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "07:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "07:45",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "07:45",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "07:45",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "08:00",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "08:00",
+                "availableLanes": "0"
+            },
+            {
+                "day": "Środa",
+                "time": "08:00",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "08:00",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "08:00",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "08:00",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "08:15",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "08:15",
+                "availableLanes": "0"
+            },
+            {
+                "day": "Środa",
+                "time": "08:15",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "08:15",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "08:15",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "08:15",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "08:30",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "08:30",
+                "availableLanes": "0"
+            },
+            {
+                "day": "Środa",
+                "time": "08:30",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "08:30",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "08:30",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "08:30",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "08:45",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "08:45",
+                "availableLanes": "0"
+            },
+            {
+                "day": "Środa",
+                "time": "08:45",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "08:45",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "08:45",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "08:45",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "09:00",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "09:00",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Środa",
+                "time": "09:00",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "09:00",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "09:00",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "09:00",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "09:15",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "09:15",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Środa",
+                "time": "09:15",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "09:15",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "09:15",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "09:15",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "09:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "09:30",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Środa",
+                "time": "09:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "09:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "09:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "09:30",
+                "availableLanes": "1x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "09:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "09:45",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Środa",
+                "time": "09:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "09:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "09:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "09:45",
+                "availableLanes": "1x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
                 "time": "10:00",
-                "availableLanes": "6x50m, 1x25m i wypł"
+                "availableLanes": "5x50m, 1x25m"
+            },
+            {
+                "day": "Wtorek",
+                "time": "10:00",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "10:00",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "10:00",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "10:00",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "10:00",
+                "availableLanes": "1x50m, 1x25m i wypł"
             },
             {
                 "day": "Poniedziałek",
@@ -1530,22 +1580,27 @@
             {
                 "day": "Wtorek",
                 "time": "10:15",
-                "availableLanes": "5x50m, 1x25m"
+                "availableLanes": "5x50m, 1x25m i wypł"
             },
             {
                 "day": "Środa",
                 "time": "10:15",
-                "availableLanes": "9x50m, 1x25m i wypł"
+                "availableLanes": "5x50m, 1x25m i wypł"
             },
             {
                 "day": "Czwartek",
                 "time": "10:15",
-                "availableLanes": "4x50m, 1x25m i wypł"
+                "availableLanes": "3x50m, 1x25m i wypł"
             },
             {
                 "day": "Piątek",
                 "time": "10:15",
-                "availableLanes": "6x50m, 1x25m i wypł"
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "10:15",
+                "availableLanes": "1x50m, 1x25m i wypł"
             },
             {
                 "day": "Poniedziałek",
@@ -1555,22 +1610,27 @@
             {
                 "day": "Wtorek",
                 "time": "10:30",
-                "availableLanes": "5x50m, 1x25m"
+                "availableLanes": "5x50m, 1x25m i wypł"
             },
             {
                 "day": "Środa",
                 "time": "10:30",
-                "availableLanes": "9x50m, 1x25m i wypł"
+                "availableLanes": "5x50m, 1x25m i wypł"
             },
             {
                 "day": "Czwartek",
                 "time": "10:30",
-                "availableLanes": "4x50m, 1x25m i wypł"
+                "availableLanes": "3x50m, 1x25m i wypł"
             },
             {
                 "day": "Piątek",
                 "time": "10:30",
-                "availableLanes": "6x50m, 1x25m i wypł"
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "10:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
             },
             {
                 "day": "Poniedziałek",
@@ -1580,22 +1640,27 @@
             {
                 "day": "Wtorek",
                 "time": "10:45",
-                "availableLanes": "5x50m, 1x25m"
+                "availableLanes": "5x50m, 1x25m i wypł"
             },
             {
                 "day": "Środa",
                 "time": "10:45",
-                "availableLanes": "9x50m, 1x25m i wypł"
+                "availableLanes": "5x50m, 1x25m i wypł"
             },
             {
                 "day": "Czwartek",
                 "time": "10:45",
-                "availableLanes": "4x50m, 1x25m i wypł"
+                "availableLanes": "3x50m, 1x25m i wypł"
             },
             {
                 "day": "Piątek",
                 "time": "10:45",
-                "availableLanes": "6x50m, 1x25m i wypł"
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "10:45",
+                "availableLanes": "9x50m, 1x25m i wypł"
             },
             {
                 "day": "Poniedziałek",
@@ -1605,72 +1670,3022 @@
             {
                 "day": "Wtorek",
                 "time": "11:00",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Środa",
+                "time": "11:00",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "11:00",
+                "availableLanes": "9x50m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "11:00",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "11:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "11:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "11:15",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Środa",
+                "time": "11:15",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "11:15",
+                "availableLanes": "9x50m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "11:15",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "11:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "11:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "11:30",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Środa",
+                "time": "11:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "11:30",
+                "availableLanes": "9x50m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "11:30",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "11:30",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "11:45",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "11:45",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Środa",
+                "time": "11:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "11:45",
+                "availableLanes": "9x50m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "11:45",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "11:45",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "12:00",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "12:00",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "12:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "12:00",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "12:00",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "12:00",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "12:15",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "12:15",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "12:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "12:15",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "12:15",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "12:15",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "12:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "12:30",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "12:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "12:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "12:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "12:30",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "12:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "12:45",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "12:45",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "12:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "12:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "12:45",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "13:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "13:00",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "13:00",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "13:00",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "13:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "13:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "13:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "13:15",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "13:15",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "13:15",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "13:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "13:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "13:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "13:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "13:30",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "13:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "13:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "13:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "13:45",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "13:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "13:45",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "13:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "13:45",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "13:45",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "14:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "14:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "14:00",
+                "availableLanes": "3x50m, 1x25m"
+            },
+            {
+                "day": "Czwartek",
+                "time": "14:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "14:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "14:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "14:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "14:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "14:15",
+                "availableLanes": "3x50m, 1x25m"
+            },
+            {
+                "day": "Czwartek",
+                "time": "14:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "14:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "14:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "14:30",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "14:30",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "14:30",
+                "availableLanes": "1x25m"
+            },
+            {
+                "day": "Czwartek",
+                "time": "14:30",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "14:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "14:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "14:45",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "14:45",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "14:45",
+                "availableLanes": "1x25m"
+            },
+            {
+                "day": "Czwartek",
+                "time": "14:45",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "14:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "14:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "15:00",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "15:00",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "15:00",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "15:00",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "15:00",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "15:00",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "15:15",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "15:15",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "15:15",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "15:15",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "15:15",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "15:15",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "15:30",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "15:30",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "15:30",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "15:30",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "15:30",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "15:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "15:45",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "15:45",
+                "availableLanes": "1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "15:45",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "15:45",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "15:45",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "15:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "16:00",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "16:00",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "16:00",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "16:00",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "16:00",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "16:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "16:15",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "16:15",
+                "availableLanes": "4x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "16:15",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "16:15",
+                "availableLanes": "2x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "16:15",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "16:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "16:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "16:30",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "16:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "16:30",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "16:30",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "16:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "16:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "16:45",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "16:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "16:45",
+                "availableLanes": "5x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "16:45",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "16:45",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "17:00",
+                "availableLanes": "2x50m"
+            },
+            {
+                "day": "Wtorek",
+                "time": "17:00",
+                "availableLanes": "3x50m"
+            },
+            {
+                "day": "Środa",
+                "time": "17:00",
+                "availableLanes": "4x50m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "17:00",
+                "availableLanes": "3x50m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "17:00",
+                "availableLanes": "2x50m, 1x25m"
+            },
+            {
+                "day": "Sobota",
+                "time": "17:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "17:15",
+                "availableLanes": "2x50m"
+            },
+            {
+                "day": "Wtorek",
+                "time": "17:15",
+                "availableLanes": "3x50m"
+            },
+            {
+                "day": "Środa",
+                "time": "17:15",
+                "availableLanes": "4x50m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "17:15",
+                "availableLanes": "3x50m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "17:15",
+                "availableLanes": "2x50m, 1x25m"
+            },
+            {
+                "day": "Sobota",
+                "time": "17:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "17:30",
+                "availableLanes": "3x50m"
+            },
+            {
+                "day": "Wtorek",
+                "time": "17:30",
+                "availableLanes": "3x50m"
+            },
+            {
+                "day": "Środa",
+                "time": "17:30",
                 "availableLanes": "8x50m i wypł"
             },
             {
-                "day": "Środa",
-                "time": "11:00",
-                "availableLanes": "4x50m, 1x25m i wypł"
-            },
-            {
                 "day": "Czwartek",
-                "time": "11:00",
-                "availableLanes": "8x50m, 1x25m i wypł"
+                "time": "17:30",
+                "availableLanes": "6x50m i wypł"
             },
             {
                 "day": "Piątek",
-                "time": "11:00",
+                "time": "17:30",
+                "availableLanes": "2x50m, 1x25m"
+            },
+            {
+                "day": "Sobota",
+                "time": "17:30",
                 "availableLanes": "9x50m, 1x25m i wypł"
             },
             {
                 "day": "Poniedziałek",
-                "time": "11:15",
-                "availableLanes": "9x50m, 1x25m i wypł"
+                "time": "17:45",
+                "availableLanes": "3x50m"
             },
             {
                 "day": "Wtorek",
-                "time": "11:15",
-                "availableLanes": "8x50m i wypł"
+                "time": "17:45",
+                "availableLanes": "3x50m"
             },
             {
                 "day": "Środa",
-                "time": "11:15",
-                "availableLanes": "4x50m, 1x25m i wypł"
+                "time": "17:45",
+                "availableLanes": "8x50m i wypł"
             },
             {
                 "day": "Czwartek",
-                "time": "11:15",
-                "availableLanes": "8x50m, 1x25m i wypł"
+                "time": "17:45",
+                "availableLanes": "6x50m i wypł"
             },
             {
                 "day": "Piątek",
-                "time": "11:15",
+                "time": "17:45",
+                "availableLanes": "2x50m, 1x25m"
+            },
+            {
+                "day": "Sobota",
+                "time": "17:45",
                 "availableLanes": "9x50m, 1x25m i wypł"
             },
             {
                 "day": "Poniedziałek",
-                "time": "11:30",
+                "time": "18:00",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Wtorek",
+                "time": "18:00",
+                "availableLanes": "6x50m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "18:00",
+                "availableLanes": "7x50m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "18:00",
+                "availableLanes": "8x50m, 1x25m"
+            },
+            {
+                "day": "Piątek",
+                "time": "18:00",
+                "availableLanes": "7x50m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "18:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "18:15",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Wtorek",
+                "time": "18:15",
+                "availableLanes": "6x50m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "18:15",
+                "availableLanes": "7x50m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "18:15",
+                "availableLanes": "8x50m, 1x25m"
+            },
+            {
+                "day": "Piątek",
+                "time": "18:15",
+                "availableLanes": "7x50m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "18:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "18:30",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Wtorek",
+                "time": "18:30",
+                "availableLanes": "6x50m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "18:30",
+                "availableLanes": "7x50m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "18:30",
+                "availableLanes": "8x50m, 1x25m"
+            },
+            {
+                "day": "Piątek",
+                "time": "18:30",
+                "availableLanes": "7x50m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "18:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "18:45",
+                "availableLanes": "4x50m"
+            },
+            {
+                "day": "Wtorek",
+                "time": "18:45",
+                "availableLanes": "6x50m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "18:45",
+                "availableLanes": "7x50m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "18:45",
+                "availableLanes": "8x50m, 1x25m"
+            },
+            {
+                "day": "Piątek",
+                "time": "18:45",
+                "availableLanes": "7x50m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "18:45",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "19:00",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "19:00",
+                "availableLanes": "9x50m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "19:00",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "19:00",
+                "availableLanes": "7x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "19:00",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "19:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "19:15",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "19:15",
+                "availableLanes": "9x50m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "19:15",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "19:15",
+                "availableLanes": "7x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "19:15",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "19:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "19:30",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "19:30",
+                "availableLanes": "9x50m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "19:30",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "19:30",
+                "availableLanes": "7x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "19:30",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "19:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "19:45",
+                "availableLanes": "3x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "19:45",
+                "availableLanes": "9x50m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "19:45",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "19:45",
+                "availableLanes": "7x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "19:45",
+                "availableLanes": "6x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "19:45",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "20:00",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "20:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "20:00",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "20:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "20:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "20:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "20:15",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "20:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "20:15",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "20:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "20:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "20:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "20:30",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "20:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "20:30",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "20:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "20:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "20:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "20:45",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "20:45",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "20:45",
+                "availableLanes": "8x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "20:45",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "20:45",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "20:45",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "21:00",
                 "availableLanes": "9x50m, 1x25m i wypł"
             },
             {
                 "day": "Wtorek",
+                "time": "21:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "21:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "21:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "21:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "21:00",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "21:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "21:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "21:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "21:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "21:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "21:15",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "21:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Wtorek",
+                "time": "21:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Środa",
+                "time": "21:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Czwartek",
+                "time": "21:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Piątek",
+                "time": "21:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Sobota",
+                "time": "21:30",
+                "availableLanes": "9x50m, 1x25m i wypł"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "21:45",
+                "availableLanes": "Czas wyjścia z wody i sauny"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "22:00",
+                "availableLanes": "Koniec pracy pływalni"
+            }
+        ]
+    },
+    {
+        "name": "Neptun",
+        "schedule": [
+            {
+                "day": "Poniedziałek",
+                "time": "7:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "7:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "7:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "7:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "7:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "7:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "7:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "7:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "7:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "7:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "7:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "7:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "7:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "7:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "7:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "7:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "7:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "7:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "7:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "7:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "8:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "8:00",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Środa",
+                "time": "8:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "8:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "8:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "8:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "8:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "8:15",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Środa",
+                "time": "8:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "8:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "8:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "8:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "8:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "8:30",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Środa",
+                "time": "8:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "8:30",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Piątek",
+                "time": "8:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "8:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "8:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "8:45",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Środa",
+                "time": "8:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "8:45",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Piątek",
+                "time": "8:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "8:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "9:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "9:00",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Środa",
+                "time": "9:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "9:00",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Piątek",
+                "time": "9:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "9:00",
+                "availableLanes": "1x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "9:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "9:15",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Środa",
+                "time": "9:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "9:15",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Piątek",
+                "time": "9:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "9:15",
+                "availableLanes": "1x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "9:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "9:30",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Środa",
+                "time": "9:30",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "9:30",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Piątek",
+                "time": "9:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "9:30",
+                "availableLanes": "1x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "9:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "9:45",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Środa",
+                "time": "9:45",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "9:45",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Piątek",
+                "time": "9:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "9:45",
+                "availableLanes": "1x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "10:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "10:00",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Środa",
+                "time": "10:00",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "10:00",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Piątek",
+                "time": "10:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "10:00",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "10:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "10:15",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Środa",
+                "time": "10:15",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "10:15",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Piątek",
+                "time": "10:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "10:15",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "10:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "10:30",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Środa",
+                "time": "10:30",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "10:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "10:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "10:30",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "10:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "10:45",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Środa",
+                "time": "10:45",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "10:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "10:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "10:45",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "11:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "11:00",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Środa",
+                "time": "11:00",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "11:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "11:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "11:00",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "11:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "11:15",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Środa",
+                "time": "11:15",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "11:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "11:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "11:15",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
                 "time": "11:30",
-                "availableLanes": "8x50m i wypł"
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "11:30",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
             },
             {
                 "day": "Środa",
                 "time": "11:30",
-                "availableLanes": "4x50m, 1x25m i wypł"
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
             },
             {
                 "day": "Czwartek",
                 "time": "11:30",
-                "availableLanes": "8x50m, 1x25m i wypł"
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
             },
             {
                 "day": "Piątek",
                 "time": "11:30",
-                "availableLanes": "9x50m, 1x25m i wypł"
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "11:30",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "11:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "11:45",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Środa",
+                "time": "11:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "11:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "11:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "11:45",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "12:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "12:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "12:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "12:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "12:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "12:00",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "12:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "12:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "12:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "12:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "12:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "12:15",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "12:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "12:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "12:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "12:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "12:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "12:30",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "12:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "12:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "12:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "12:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "12:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "12:45",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "13:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "13:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "13:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "13:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "13:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "13:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "13:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "13:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "13:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "13:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "13:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "13:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "13:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "13:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "13:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "13:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "13:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "13:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "13:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "13:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "13:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "13:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "13:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "13:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "14:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "14:15",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "14:15",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "14:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "14:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "14:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "14:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "14:30",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "14:30",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "14:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "14:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "14:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "14:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "14:45",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "14:45",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "14:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "14:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "14:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "15:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "15:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "15:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "15:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "15:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "15:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "15:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "15:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "15:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "15:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "15:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "15:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "15:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "15:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "15:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "15:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "15:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "15:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "15:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "15:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "15:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "15:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "15:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "15:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "16:00",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "16:00",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Środa",
+                "time": "16:00",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "16:00",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "16:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "16:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "16:15",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "16:15",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Środa",
+                "time": "16:15",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "16:15",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "16:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "16:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "16:30",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "16:30",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Środa",
+                "time": "16:30",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "16:30",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "16:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "16:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "16:45",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "16:45",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Środa",
+                "time": "16:45",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "16:45",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "16:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "16:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "17:00",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "17:00",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Środa",
+                "time": "17:00",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "17:00",
+                "availableLanes": "4x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Piątek",
+                "time": "17:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Sobota",
+                "time": "17:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "17:15",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "17:15",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Środa",
+                "time": "17:15",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "17:15",
+                "availableLanes": "4x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Piątek",
+                "time": "17:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Sobota",
+                "time": "17:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "17:30",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "17:30",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Środa",
+                "time": "17:30",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "17:30",
+                "availableLanes": "4x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Piątek",
+                "time": "17:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Sobota",
+                "time": "17:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "17:45",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "17:45",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Środa",
+                "time": "17:45",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "17:45",
+                "availableLanes": "4x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Piątek",
+                "time": "17:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Sobota",
+                "time": "17:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "18:00",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "18:00",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Środa",
+                "time": "18:00",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "18:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Piątek",
+                "time": "18:00",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Sobota",
+                "time": "18:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "18:15",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "18:15",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Środa",
+                "time": "18:15",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "18:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Piątek",
+                "time": "18:15",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Sobota",
+                "time": "18:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "18:30",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "18:30",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Środa",
+                "time": "18:30",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "18:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Piątek",
+                "time": "18:30",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Sobota",
+                "time": "18:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "18:45",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "18:45",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Środa",
+                "time": "18:45",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "18:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Piątek",
+                "time": "18:45",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Sobota",
+                "time": "18:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "19:00",
+                "availableLanes": "2x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "19:00",
+                "availableLanes": "2x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "19:00",
+                "availableLanes": "2x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "19:00",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Piątek",
+                "time": "19:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "19:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "19:15",
+                "availableLanes": "2x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "19:15",
+                "availableLanes": "2x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "19:15",
+                "availableLanes": "2x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "19:15",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Piątek",
+                "time": "19:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "19:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "19:30",
+                "availableLanes": "2x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "19:30",
+                "availableLanes": "2x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "19:30",
+                "availableLanes": "2x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "19:30",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Piątek",
+                "time": "19:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "19:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "19:45",
+                "availableLanes": "2x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "19:45",
+                "availableLanes": "2x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "19:45",
+                "availableLanes": "2x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "19:45",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)"
+            },
+            {
+                "day": "Piątek",
+                "time": "19:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "19:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "20:00",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "20:00",
+                "availableLanes": "4x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "20:00",
+                "availableLanes": "2x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "20:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "20:00",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "20:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "20:15",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "20:15",
+                "availableLanes": "4x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "20:15",
+                "availableLanes": "2x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "20:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "20:15",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "20:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "20:30",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "20:30",
+                "availableLanes": "4x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "20:30",
+                "availableLanes": "2x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "20:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "20:30",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "20:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "20:45",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "20:45",
+                "availableLanes": "4x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "20:45",
+                "availableLanes": "2x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "20:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "20:45",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "20:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "21:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "21:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "21:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "21:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "21:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "21:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "21:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "21:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "21:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "21:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "21:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "21:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Poniedziałek",
+                "time": "21:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Wtorek",
+                "time": "21:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Środa",
+                "time": "21:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Czwartek",
+                "time": "21:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Piątek",
+                "time": "21:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
+            },
+            {
+                "day": "Sobota",
+                "time": "21:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)"
             }
         ]
     }

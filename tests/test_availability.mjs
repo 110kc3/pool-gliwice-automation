@@ -151,6 +151,27 @@ test('getFreeLanesDetail returns correct lane counts and labels', () => {
     assert.equal(closed.freeLanes, 0);
     assert.equal(closed.openness, 0);
     assert.equal(closed.status, 'closed');
+
+    // Neptun 6 lanes
+    const neptun5 = getFreeLanesDetail('Neptun', '5x25m wolne (rekreacyjny: wolny)');
+    assert.equal(neptun5.freeLanes, 5);
+    assert.equal(neptun5.totalLanes, 6);
+    assert.equal(neptun5.openness, 5 / 6);
+    assert.equal(neptun5.status, 'high');
+
+    const neptun0 = getFreeLanesDetail('Neptun', '0 wolnych torów (rekreacyjny: zajęty)');
+    assert.equal(neptun0.freeLanes, 0);
+    assert.equal(neptun0.openness, 0);
+    assert.equal(neptun0.status, 'closed');
+});
+
+test('POOL_SPECS includes all 4 municipal pools', () => {
+    assert.ok(POOL_SPECS.Olimpijczyk);
+    assert.ok(POOL_SPECS.Mewa);
+    assert.ok(POOL_SPECS.Delfin);
+    assert.ok(POOL_SPECS.Neptun);
+    assert.equal(POOL_SPECS.Neptun.totalLanes, 6);
+    assert.equal(POOL_SPECS.Neptun.length, '25m');
 });
 
 // --- getTimeBucket & getPolishDayName --------------------------------------

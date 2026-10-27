@@ -24,17 +24,17 @@ class TestDataTransformation(unittest.TestCase):
         self.assertEqual(transform_data(raw_data), expected)
 
     def test_multiple_pools(self):
-        # Test case simulating data from multiple distinct pools
+        # Test case simulating data from multiple distinct pools including Neptun
         raw_data = [
             {"time": "9.00-10.00", "days": {"Poniedziałek": "10"}, "name": "Delfin"},
-            {"time": "14.00-15.00", "days": {"Środa": "5"}, "name": "Olimpijczyk"}
+            {"time": "14.00-15.00", "days": {"Środa": "5"}, "name": "Olimpijczyk"},
+            {"time": "16.00-17.00", "days": {"Piątek": "5x25m wolne"}, "name": "Neptun"}
         ]
         expected = [
             {"name": "Delfin", "schedule": [{"day": "Poniedziałek", "time": "9.00-10.00", "availableLanes": "10"}]},
-            {"name": "Olimpijczyk", "schedule": [{"day": "Środa", "time": "14.00-15.00", "availableLanes": "5"}]}
+            {"name": "Olimpijczyk", "schedule": [{"day": "Środa", "time": "14.00-15.00", "availableLanes": "5"}]},
+            {"name": "Neptun", "schedule": [{"day": "Piątek", "time": "16.00-17.00", "availableLanes": "5x25m wolne"}]}
         ]
-        # Note: The order might vary based on insertion order, so we compare sets/sorted structures if possible,
-        # but for this test, we assume the order dictated by the defaultdict keys is consistent.
         self.assertEqual(transform_data(raw_data), expected)
 
     def test_handling_nan_values(self):

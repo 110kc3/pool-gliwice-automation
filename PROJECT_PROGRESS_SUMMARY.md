@@ -1,42 +1,49 @@
 # Project Implementation & Review Summary
 
-**Overall Status:** Complete. All architectural weaknesses, source data noise issues, CI/CD pipeline gaps, and user requirements for a simple modern UI and intelligent lane suggester have been fully addressed and verified with comprehensive unit testing.
+**Overall Status:** Complete. All architectural weaknesses, source data noise issues, CI/CD pipeline gaps, and user requirements for a simple modern UI, intelligent lane suggester, full 4-pool support (including **Neptun**), and complete multi-table parsing for **Olimpijczyk** have been fully addressed and verified with comprehensive unit testing.
 
 ---
 
-## 🚀 Completed Tasks & Features
+## 🏊 Municipal Pools Covered (4 Objects in Gliwice)
+1. **Kryta Pływalnia „Olimpijczyk”** (ul. Oriona 120, Łabędy) — 50m basen olimpijski (10 torów), trybuny na 800 osób.
+2. **Kryta Pływalnia „Mewa”** (ul. Mewy 36, Sośnica) — 25m basen sportowy (6 torów), basen rekreacyjny, sauna.
+3. **Kryta Pływalnia „Delfin”** (ul. Warszawska 35, Śródmieście) — 25m basen sportowy (6 torów), mały basen.
+4. **Kryta Pływalnia „Neptun”** (ul. Dzionkarzy 29, Sośnica) — 25m basen sportowy (6 torów, do 5 wolnych), niecka rekreacyjna, zespół saun.
 
-### 1. Smart Lane Suggester ("Kiedy jest najwięcej wolnych torów?")
-* **Data-driven ranking:** Added pure recommendation engine (`aggregateHourlySlots`, `filterAndRankSlots`, `computeDataInsights`) that ranks time slots by absolute number of free lanes (up to 10 on Olimpijczyk 50m, up to 6 on Mewa and Delfin 25m) and openness percentage.
-* **Spotlight #1 Top Pick:** Prominently highlights the single best available time slot matching current user filters with capacity meter, pool details, and recommendation context.
-* **Interactive Filtering:**
-  * **Day:** Quick pills for "Wszystkie dni", dynamic "Dziś" (auto-detects current day in Poland), "Jutro", "Weekend (Sob-Nie)", "Dni robocze (Pn-Pt)", and individual days.
-  * **Time of Day:** "Wszystkie godziny", "🌅 Rano (06:00–12:00)", "☀️ Popołudnie (12:00–17:00)", "🌙 Wieczór (17:00–22:00)".
-  * **Pool preference:** "Wszystkie baseny", "Olimpijczyk (50m)", "Mewa (25m)", "Delfin (25m)".
-  * **Sorting & threshold:** Rank by most free lanes, highest openness %, or chronological order, with an optional toggle for high-availability slots only (≥80%).
-* **Actionable Data Insights Banner:** Displays high-level statistical takeaways calculated dynamically across all pool schedules:
-  * 🏆 **Najlepszy dzień:** Niedziela (~84% wolnych torów) i Sobota (~75%)
-  * 🌙 **Najlepsza pora:** Wieczory po 17:00 (~87% wolnych) oraz wczesne poranki (06:00–08:00)
-  * 🏊‍♂️ **Maksimum przestrzeni:** Olimpijczyk o 06:00 rano (aż 10 wolnych torów, w tym 9 torów 50m)
-  * ⚠️ **Godziny szczytu:** Dni robocze 08:00–14:00 (zajęcia szkolne i rezerwacje klubowe)
+---
 
-### 2. Simple, Modern, Responsive UI
-* **Aquatic Design System:** Redesigned `index.html` and `style.css` with clean oceanic blue accents, high-contrast typography, accessible color-coded availability badges (green/emerald for high, amber for medium, red/gray for low/closed), and smooth mobile-first responsive layout.
-* **Multi-View Switcher:**
-  1. 🎯 **Sugester wolnych torów** (Primary interactive recommender)
-  2. 📊 **Porównanie godzinowe** (Side-by-side hourly comparison matrix for any chosen day)
-  3. 📋 **Pełne harmonogramy** (Searchable and filterable timetables per pool)
-  4. ℹ️ **O pływalniach** (Technical specs, pool lengths, lane counts, addresses, and Google Maps links)
+## 🔍 Investigation: Why was Olimpijczyk poorly available?
+A thorough deep dive revealed two root causes that severely suppressed Olimpijczyk's availability in previous versions:
+1. **Parser truncation bug (`parse_olimpijczyk.py`):**
+   * Tabula splits the multi-page Olimpijczyk PDF into 3 separate tables: Table 0 (06:00–11:30), Table 1 (11:45–18:45), and Table 2 (19:00–22:00).
+   * Previously, `parse_olimpijczyk.py` had `df = tables[0]`, entirely dropping Table 1 and Table 2! Over 60% of daily slots (the entire afternoon and evening) were never extracted.
+   * **Fix:** `parse_olimpijczyk.py` now iterates through all tables (`for df in tables:`), increasing parsed slots from 23 to 65 slots per day (06:00 to 22:00), expanding schedule records from 115 to 373!
+2. **Stale holiday PDF in repo:**
+   * The previously committed PDF (`Harmonogram_Olimpijczyk_30_03-05_04_2026.pdf`) was from Easter weekend (April 4–5, 2026), where Saturday and Sunday were marked with vertical text "Pływalnia nieczynna".
+   * In standard weeks (such as the latest `Harmonogram_Olimpijczyk_26.10.2026_-_01.11.2026.pdf`), Saturday is open with 8–9 lanes free all afternoon.
+   * On weekdays, availability is genuinely constrained between 14:00 and 19:00 due to sports clubs (Sikret Gliwice) and swimming schools.
 
-### 3. Data Pipeline & Clean Source Ingestion
-* **Parser row filtering:** Hardened `parse_olimpijczyk.py` to enforce time format regex (`^\d{1,2}[:.]\d{2}`) and drop stray short-letter PDF parsing artifacts, eliminating header/date rows (`Harmonogram dostępności...`, `Dzień tygodnia`, `Data`, `Godzina`) at the source.
-* **Valid JSON enforcement:** `nan_to_none` replaces bare `NaN` with valid JSON `null` in all parser outputs, and `json.dump(..., allow_nan=False)` guarantees strict JSON standard compliance.
-* **Aggregator defense-in-depth:** `master_aggregator.py` filters noise rows, normalizes carriage returns, drops missing entries, and groups entries cleanly into `data.json`.
+---
 
-### 4. Unit Testing & CI/CD Hygiene
-* **Python tests:** 12 tests in `tests/test_master_aggregator.py` covering data transformations, handling of NaN, missing fields, noise filtering, and whitespace normalization (all 12 pass).
-* **JavaScript tests:** 15 tests in `tests/test_availability.mjs` covering cell cleaning, availability classification, capacity calculation, openness scoring, schema validation, free lane calculation, time-of-day bucketing, day-name mapping, hourly aggregation, and suggester filtering/ranking (all 15 pass).
-* **CI/CD (`.github/workflows/weekly_update.yml`):**
-  * Uses modern actions: `actions/checkout@v4`, `actions/setup-python@v5` (Python 3.12), `actions/setup-java@v4` (Java 17 Temurin), `actions/setup-node@v4` (Node 20), `peaceiris/actions-gh-pages@v4`.
-  * Enforces test verification (`pytest` and `node tests/test_availability.mjs`) before running parsers, aggregator, and deploying to GitHub Pages.
-  * Pinned dependencies in `requirements.txt`.
+## 🔱 Kryta Pływalnia Neptun Integration
+* **New parser `parse_neptun.py`:** Extracts 15-minute intervals from `neptun.pdf` (or `Harmonogram_Neptun_*.pdf`) using lattice grid extraction. Parses both `B. sportowy` (lane counts 0–5) and `B. rekreacyjny` ('wolny', 'zajęty', '1/3 wolna').
+* **Aggregator integration:** Added `"neptun": "neptun_data.json"` to `master_aggregator.py`.
+* **CI/CD pipeline:** Updated `.github/workflows/weekly_update.yml` to run `parse_neptun.py` during weekly deployments.
+* **Frontend support:** Added Neptun to pool filters, hourly comparison matrix (4-column layout), full schedules view, and pool specifications card.
+
+---
+
+## 🎯 Smart Lane Suggester & Modern UI
+* **Ranking engine:** Computes availability score based on free lane count and percentage of pool capacity.
+* **Spotlight #1 Top Pick:** Prominently highlights the single best available slot matching filters.
+* **Interactive Filtering:** Quick pills for Day (dynamic today, tomorrow, weekend, workdays, specific days), Time of Day (morning, afternoon, evening), Pool preference, and sorting criteria.
+* **Key Insights Banner:** Real-time data statistics across all 4 pools (best days, peak hours, club rush hours).
+* **Hourly Matrix Comparison:** Side-by-side view of all 4 pools hour-by-hour (06:00 to 22:00) for any selected day.
+* **Full Timetables & Search:** Real-time text search and filterable schedules for every pool.
+* **Responsive Aquatic Design:** Clean typography, color-coded badges, dark-mode support, and mobile-friendly layouts.
+
+---
+
+## 🧪 Test Coverage
+* **Python tests:** 12 passed in `tests/test_master_aggregator.py` (data transformations, NaN handling, noise filters).
+* **JavaScript tests:** 16 passed in `tests/test_availability.mjs` (availability classification, Neptun formats, lane scoring, time bucketing, ranking).

@@ -154,6 +154,7 @@ if __name__ == "__main__":
     files = {
         "mewa": "mewa_data.json",
         "delfin": "delfin_data.json",
-        "olimpijczyk": "olimpijczyk_data.json"
+        "olimpijczyk": "olimpijczyk_data.json",
+        "neptun": "neptun_data.json"
     }
     aggregate_data(files, "data.json")

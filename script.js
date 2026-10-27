@@ -36,6 +36,13 @@ const POOL_SPECS = {
         type: "Basen sportowy",
         address: "ul. Warszawska 35, Gliwice",
         features: "Basen 25m (6 torów), mały basen do nauki pływania"
+    },
+    "Neptun": {
+        totalLanes: 6,
+        length: "25m",
+        type: "Basen sportowy + rekreacyjny",
+        address: "ul. Dzionkarzy 29, Gliwice-Sośnica",
+        features: "Basen 25m (6 torów, do 5 wolnych dla klientów), basen rekreacyjny, strefa saun"
     }
 };
 
@@ -62,8 +69,10 @@ function classifyAvailability(raw) {
         return { noise: true };
     }
 
-    // --- Closed / unavailable (check "niedostępna"/"nieczynna" before "dostępna")
-    if (lower.includes('niedostępna') || lower.includes('nieczynna')) return { score: 0 };
+    // --- Closed / unavailable (check "niedostępna"/"nieczynna" before "dostępna", or 0 free lanes)
+    if (lower.includes('niedostępna') || lower.includes('nieczynna') || lower.includes('0 wolnych') || lower.includes('brak wolnych') || lower.startsWith('0 tor')) {
+        return { score: 0 };
+    }
 
     // --- All lanes free
     if (lower.includes('wolne wszystkie')) return { open: true };
@@ -76,12 +85,16 @@ function classifyAvailability(raw) {
     m = lower.match(/^zaj[ęe]t[ey]\s*(\d+)\s*tor/);
     if (m) return { occupied: parseInt(m[1], 10) };
 
-    // --- Lane counts: "9x50m, 1x25m i wypł" -> sum of the "Nx..m" groups
+    // --- Lane counts: "9x50m, 1x25m i wypł" or "5x25m wolne" -> sum of the "Nx..m" groups
     const laneMatches = [...lower.matchAll(/(\d+)\s*x\s*\d+\s*m/g)];
     if (laneMatches.length) {
         const lanes = laneMatches.reduce((sum, mm) => sum + parseInt(mm[1], 10), 0);
         return { freeLanes: lanes };
     }
+
+    // --- "N torów wolnych" / "N tor wolny"
+    const mFreeTor = lower.match(/(\d+)\s*tor[oó]w\s*woln/);
+    if (mFreeTor) return { freeLanes: parseInt(mFreeTor[1], 10) };
 
     // --- Generic "Pływalnia dostępna"
     if (lower.includes('dostępna')) return { open: true };
@@ -618,7 +631,7 @@ function initApp(rawData) {
         const hours = [];
         for (let h = 6; h <= 21; h++) hours.push(h);
 
-        const poolNames = ["Olimpijczyk", "Mewa", "Delfin"];
+        const poolNames = ["Olimpijczyk", "Mewa", "Delfin", "Neptun"];
 
         let rowsHtml = '';
         hours.forEach(h => {
@@ -660,6 +673,7 @@ function initApp(rawData) {
                             <th>Olimpijczyk <span class="th-sub">50m • 10 torów</span></th>
                             <th>Mewa <span class="th-sub">25m • 6 torów</span></th>
                             <th>Delfin <span class="th-sub">25m • 6 torów</span></th>
+                            <th>Neptun <span class="th-sub">25m • 6 torów</span></th>
                         </tr>
                     </thead>
                     <tbody>
