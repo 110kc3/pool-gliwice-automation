@@ -13,7 +13,14 @@ const {
     computeCapacities,
     opennessScore,
     validatePoolData,
-    DEFAULT_CAPACITY
+    DEFAULT_CAPACITY,
+    POOL_SPECS,
+    getFreeLanesDetail,
+    getTimeBucket,
+    getPolishDayName,
+    aggregateHourlySlots,
+    filterAndRankSlots,
+    computeDataInsights
 } = require(path.join(root, 'script.js'));
 
 let passed = 0;
@@ -106,6 +113,133 @@ test('validatePoolData drops malformed records and entries', () => {
     assert.equal(pools.length, 1);
     assert.equal(pools[0].schedule.length, 1);
     assert.ok(warnings.length >= 3);
+});
+
+// --- getFreeLanesDetail ----------------------------------------------------
+test('getFreeLanesDetail returns correct lane counts and labels', () => {
+    // Olimpijczyk 10 lanes
+    const oli10 = getFreeLanesDetail('Olimpijczyk', '9x50m, 1x25m i wypł');
+    assert.equal(oli10.freeLanes, 10);
+    assert.equal(oli10.totalLanes, 10);
+    assert.equal(oli10.openness, 1.0);
+    assert.equal(oli10.status, 'high');
+
+    const oli4 = getFreeLanesDetail('Olimpijczyk', '4x50m');
+    assert.equal(oli4.freeLanes, 4);
+    assert.equal(oli4.totalLanes, 10);
+    assert.equal(oli4.openness, 0.4);
+    assert.equal(oli4.status, 'medium');
+
+    // Mewa 6 lanes
+    const mewaOpen = getFreeLanesDetail('Mewa', 'wolne wszystkie tory');
+    assert.equal(mewaOpen.freeLanes, 6);
+    assert.equal(mewaOpen.totalLanes, 6);
+    assert.equal(mewaOpen.openness, 1.0);
+
+    const mewaOcc2 = getFreeLanesDetail('Mewa', 'Zajęte 2 tory');
+    assert.equal(mewaOcc2.freeLanes, 4);
+    assert.equal(mewaOcc2.totalLanes, 6);
+    assert.equal(mewaOcc2.openness, 4 / 6);
+
+    // Delfin 6 lanes
+    const delfinOcc1 = getFreeLanesDetail('Delfin', 'Pływalnia dostępna-zajęty 1 tor');
+    assert.equal(delfinOcc1.freeLanes, 5);
+    assert.equal(delfinOcc1.totalLanes, 6);
+    assert.equal(delfinOcc1.openness, 5 / 6);
+
+    const closed = getFreeLanesDetail('Delfin', 'Pływalnia niedostępna');
+    assert.equal(closed.freeLanes, 0);
+    assert.equal(closed.openness, 0);
+    assert.equal(closed.status, 'closed');
+});
+
+// --- getTimeBucket & getPolishDayName --------------------------------------
+test('getTimeBucket partitions hours into morning, afternoon, evening', () => {
+    assert.equal(getTimeBucket(6), 'morning');
+    assert.equal(getTimeBucket(11), 'morning');
+    assert.equal(getTimeBucket(12), 'afternoon');
+    assert.equal(getTimeBucket(16), 'afternoon');
+    assert.equal(getTimeBucket(17), 'evening');
+    assert.equal(getTimeBucket(21), 'evening');
+});
+
+test('getPolishDayName maps Date to Polish day names', () => {
+    // 2026-10-27 is Tuesday (Wtorek)
+    const tuesday = new Date('2026-10-27T12:00:00Z');
+    assert.equal(getPolishDayName(tuesday), 'Wtorek');
+});
+
+// --- aggregateHourlySlots & filterAndRankSlots -----------------------------
+test('aggregateHourlySlots groups and computes averages correctly', () => {
+    const mockPools = [
+        {
+            name: 'Olimpijczyk',
+            schedule: [
+                { day: 'Poniedziałek', time: '06:00', availableLanes: '9x50m, 1x25m i wypł' },
+                { day: 'Poniedziałek', time: '06:15', availableLanes: '9x50m, 1x25m i wypł' },
+                { day: 'Poniedziałek', time: '06:30', availableLanes: '9x50m, 1x25m i wypł' },
+                { day: 'Poniedziałek', time: '06:45', availableLanes: '9x50m, 1x25m i wypł' }
+            ]
+        },
+        {
+            name: 'Mewa',
+            schedule: [
+                { day: 'Poniedziałek', time: '7.00- 8.00', availableLanes: 'Pływalnia dostępna' },
+                { day: 'Niedziela', time: '12.00- 13.00', availableLanes: 'wolne wszystkie tory' }
+            ]
+        }
+    ];
+
+    const slots = aggregateHourlySlots(mockPools);
+    assert.equal(slots.length, 3);
+
+    const oli6 = slots.find(s => s.poolName === 'Olimpijczyk' && s.hour === 6);
+    assert.ok(oli6);
+    assert.equal(oli6.freeLanes, 10);
+    assert.equal(oli6.openness, 1.0);
+    assert.equal(oli6.timeBucket, 'morning');
+
+    // Test filterAndRankSlots by lanes
+    const rankedByLanes = filterAndRankSlots(slots, { sortBy: 'lanes' });
+    assert.equal(rankedByLanes[0].poolName, 'Olimpijczyk');
+    assert.equal(rankedByLanes[0].freeLanes, 10);
+
+    // Test filter by day
+    const sundayOnly = filterAndRankSlots(slots, { day: 'Niedziela' });
+    assert.equal(sundayOnly.length, 1);
+    assert.equal(sundayOnly[0].day, 'Niedziela');
+
+    // Test filter by weekend
+    const weekendOnly = filterAndRankSlots(slots, { day: 'weekend' });
+    assert.equal(weekendOnly.length, 1);
+    assert.equal(weekendOnly[0].day, 'Niedziela');
+
+    // Test filter by workdays
+    const workdaysOnly = filterAndRankSlots(slots, { day: 'workdays' });
+    assert.equal(workdaysOnly.length, 2);
+
+    // Test filter by time bucket
+    const morningOnly = filterAndRankSlots(slots, { timeBucket: 'morning' });
+    assert.equal(morningOnly.length, 2);
+
+    // Test filter by pool
+    const mewaOnly = filterAndRankSlots(slots, { pool: 'Mewa' });
+    assert.equal(mewaOnly.length, 2);
+});
+
+// --- computeDataInsights ---------------------------------------------------
+test('computeDataInsights accurately finds top days and buckets', () => {
+    const slots = [
+        { poolName: 'Mewa', day: 'Niedziela', hour: 10, timeBucket: 'morning', freeLanes: 6, openness: 1.0 },
+        { poolName: 'Mewa', day: 'Niedziela', hour: 11, timeBucket: 'morning', freeLanes: 6, openness: 1.0 },
+        { poolName: 'Delfin', day: 'Poniedziałek', hour: 8, timeBucket: 'morning', freeLanes: 0, openness: 0.0 },
+        { poolName: 'Olimpijczyk', day: 'Poniedziałek', hour: 6, timeBucket: 'morning', freeLanes: 10, openness: 1.0 }
+    ];
+
+    const ins = computeDataInsights(slots);
+    assert.equal(ins.bestDay, 'Niedziela');
+    assert.ok(ins.bestDayPercentage >= 90);
+    assert.ok(ins.peakSlot.includes('Olimpijczyk'));
 });
 
 console.log(`\n${passed} availability tests passed.`);

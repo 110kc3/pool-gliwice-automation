@@ -1,14 +1,24 @@
-# Gliwice pool schedules
+# Gliwice pool schedules & Smart Lane Suggester
 
-Weekly-updated availability for the three Gliwice swimming pools — **Delfin**,
-**Mewa** and **Olimpijczyk** — scraped from the PDF timetables each pool
-publishes and rendered as one comparable view.
+Weekly-updated availability and intelligent free-lane suggester for the three Gliwice municipal swimming pools — **Delfin**, **Mewa** and **Olimpijczyk** — scraped from the PDF timetables published by the municipal operators and rendered as a simple, modern, comparable view.
 
-**Live: https://110kc3.github.io/pool-gliwice-automation/**
+**Live application: https://110kc3.github.io/pool-gliwice-automation/**
 
-The pools publish incompatible PDFs on their own schedules, and none of them
-says "which pool is actually free right now". That comparison is the whole
-point of this repo.
+The municipal pools publish incompatible PDFs on their own schedules, and none of them answered the most important question for swimmers: *"When are the most lanes free right now or this weekend?"* Providing that answer through an automated pipeline and an intuitive recommendation UI is the goal of this repository.
+
+## Features
+
+- 🎯 **Smart Lane Suggester ("Sugester wolnych torów"):**
+  - Instant ranking of time slots based on the maximum number of free lanes and openness percentage.
+  - **Spotlight #1 Top Pick:** Prominently highlights the best available slot matching chosen filters.
+  - **Quick interactive filters:** Day (including dynamic "Dziś", "Jutro", "Weekend", "Dni robocze"), Time of Day (Morning, Afternoon, Evening), Pool preference, and sorting criteria.
+  - **Data-driven takeaways:** Key statistical insights computed dynamically across all schedules (e.g. Sunday 84% average free capacity, evenings after 17:00 with 87% free lanes, Olimpijczyk 10-lane peak capacity at 06:00).
+- 📊 **Hourly Matrix Comparison ("Porównanie godzinowe"):**
+  - Side-by-side timetable comparing availability across all 3 pools hour-by-hour (06:00 – 22:00) for any selected day.
+- 📋 **Full Timetables ("Pełne harmonogramy"):**
+  - Per-pool schedules with instant real-time text search and day filters.
+- ℹ️ **Pool Technical Specs ("O pływalniach"):**
+  - Dimensions (50m Olympic 10-lane basin vs 25m 6-lane sports basins), addresses, water temperatures, and Google Maps directions links.
 
 ## How it works
 
@@ -18,56 +28,37 @@ mewa.pdf ───┼─► parse_*.py ─► <pool>_data.json ─► master_agg
 Harmonogram_Olimpijczyk_*.pdf ─┘
 ```
 
-- **`parse_delfin.py` / `parse_mewa.py` / `parse_olimpijczyk.py`** — one parser
-  per pool, because each publishes a different PDF layout. Shared helpers in
-  `pdf_utils.py`.
-- **`master_aggregator.py`** — merges the per-pool JSON into `data.json`,
-  grouped by pool.
-- **`index.html` + `script.js` + `style.css`** — the published page. `script.js`
-  validates `data.json` on load (`validatePoolData()`), drops malformed records
-  and renders a visible error state rather than failing silently.
-- **`.github/workflows/weekly_update.yml`** — Mondays 00:00 UTC: parse,
-  aggregate, deploy to Pages.
-
-### The comparison is not as simple as it looks
-
-The pools report availability on genuinely different scales: Mewa and Delfin
-emit only `Pływalnia dostępna` / `niedostępna`, while Olimpijczyk emits lane
-counts. Ranking them on raw numbers made Olimpijczyk "win" almost every slot
-purely because its numbers were bigger.
-
-`classifyAvailability()` parses every real format into a structured descriptor
-and `opennessScore()` normalises them to a per-pool 0–1 scale, so the page shows
-**"% wolne"** rather than an opaque score. Covered by
-`tests/test_availability.mjs`.
+- **`parse_delfin.py` / `parse_mewa.py` / `parse_olimpijczyk.py`** — one parser per pool, adapting to each PDF layout. Shared helpers in `pdf_utils.py`. All parsers enforce valid time regex patterns, filter noise rows/letters at the source, and replace NaN with valid JSON null.
+- **`master_aggregator.py`** — merges per-pool JSON files into `data.json`, standardizes keys, strips carriage returns, and enforces strict standards-compliant JSON (`allow_nan=False`).
+- **`index.html` + `script.js` + `style.css`** — modern, responsive, mobile-first static web app with pure JavaScript recommendation and aggregation engine.
+- **`.github/workflows/weekly_update.yml`** — runs every Monday at 00:00 UTC: sets up Python 3.12, Java 17, and Node 20, runs unit test suites (`pytest` and `node tests/test_availability.mjs`), executes parsers and aggregator, and deploys to GitHub Pages.
 
 ## Running locally
 
 ```bash
-python -m venv .venv && source .venv/bin/activate
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 python parse_delfin.py && python parse_mewa.py && python parse_olimpijczyk.py
 python master_aggregator.py          # writes data.json
-python -m http.server                # then open index.html
+python -m http.server 8080           # then open http://localhost:8080
 ```
 
-## Tests
+## Running tests
 
 ```bash
-pytest tests/test_master_aggregator.py -q     # aggregation + data integrity
-node tests/test_availability.mjs              # availability scoring (10 tests)
+# Backend data transformation & noise filtering tests (12 tests)
+pytest tests/test_master_aggregator.py -q
+
+# Frontend availability scoring, lane calculations & suggester engine (15 tests)
+node tests/test_availability.mjs
 ```
 
-> **CI does not run either suite** — `weekly_update.yml` parses, aggregates and
-> deploys with no test step, so both only run by hand. See
-> `PROJECT_PROGRESS_SUMMARY.md`, which tracks this and the remaining data-noise
-> work (header/date rows leaking into `data.json`, and bare `NaN` in
-> `olimpijczyk_data.json` / `all_pools_data.json`, which is invalid JSON).
+Both test suites run automatically in CI before any deployment to GitHub Pages.
 
 ## Documentation
 
 | File | What it covers |
 |---|---|
-| [PROJECT_PROGRESS_SUMMARY.md](PROJECT_PROGRESS_SUMMARY.md) | What has been fixed, and what is still outstanding |
-| [BUG_REPORT.md](BUG_REPORT.md) | The original review this project worked through |
-| [CLAUDE.md](CLAUDE.md) | Conventions for agents working in this repo |
+| [PROJECT_PROGRESS_SUMMARY.md](PROJECT_PROGRESS_SUMMARY.md) | Comprehensive implementation summary of bug fixes, features, and verification |
+| [BUG_REPORT.md](BUG_REPORT.md) | Original architectural review and weakness analysis |
+| [CLAUDE.md](CLAUDE.md) | Architecture conventions and testing guidelines for developers |

@@ -1,3 +1,4 @@
+import re
 import tabula
 import json
 import pandas as pd
@@ -20,6 +21,7 @@ def parse_olimpijczyk_pdf(pdf_path):
     # Time is in the first column. Days are in columns 1-7.
     # Skip rows that are clearly headers or footers based on the PDF content
     
+    time_pattern = re.compile(r'^\d{1,2}[:.]\d{2}')
     schedule = []
     
     # Process rows
@@ -27,18 +29,33 @@ def parse_olimpijczyk_pdf(pdf_path):
         time = row[0]
         if pd.isna(time) or not isinstance(time, str):
             continue
+
+        clean_time = time.strip()
+        if not time_pattern.match(clean_time):
+            continue
             
+        # Helper to filter out stray single-letter / noise artifacts
+        def clean_day_val(val):
+            if pd.isna(val) or val is None:
+                return None
+            s = str(val).strip()
+            # If it's a short stray letter artifact (e.g. "n", "a", "l", "P\rł\ry\rw") with no digits
+            letters = re.sub(r'[^a-zA-Ząćęłńóśźż]', '', s)
+            if not any(ch.isdigit() for ch in s) and len(letters) < 5 and 'wolne' not in s.lower() and 'dostępna' not in s.lower():
+                return None
+            return s
+
         # Standardize day keys to Polish and use nested dictionary structure
         day_data = {
-            "time": time.strip(),
+            "time": clean_time,
             "days": {
-                "Poniedziałek": row[1] if len(row) > 1 else None,
-                "Wtorek": row[2] if len(row) > 2 else None,
-                "Środa": row[3] if len(row) > 3 else None,
-                "Czwartek": row[4] if len(row) > 4 else None,
-                "Piątek": row[5] if len(row) > 5 else None,
-                "Sobota": row[6] if len(row) > 6 else None,
-                "Niedziela": row[7] if len(row) > 7 else None,
+                "Poniedziałek": clean_day_val(row[1]) if len(row) > 1 else None,
+                "Wtorek": clean_day_val(row[2]) if len(row) > 2 else None,
+                "Środa": clean_day_val(row[3]) if len(row) > 3 else None,
+                "Czwartek": clean_day_val(row[4]) if len(row) > 4 else None,
+                "Piątek": clean_day_val(row[5]) if len(row) > 5 else None,
+                "Sobota": clean_day_val(row[6]) if len(row) > 6 else None,
+                "Niedziela": clean_day_val(row[7]) if len(row) > 7 else None,
             }
         }
         schedule.append(day_data)
@@ -46,7 +63,6 @@ def parse_olimpijczyk_pdf(pdf_path):
     return schedule
 
 if __name__ == "__main__":
-    import re
     olimpijczyk_pdf_path = "Harmonogram_Olimpijczyk_30_03-05_04_2026.pdf"
     data = nan_to_none(parse_olimpijczyk_pdf(olimpijczyk_pdf_path))
 

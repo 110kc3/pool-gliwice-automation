@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gliwice Pool Availability — swimming pool timetables for Delfin, Mewa and Olimpijczyk</title>
-    <meta name="description" content="Weekly opening hours and free-swim availability for the Gliwice municipal swimming pools (Delfin, Mewa, Olimpijczyk), parsed from the operators' PDF timetables and refreshed every week.">
+    <title>Gliwice Pływalnie — Sugester Wolnych Torów i Dostępność Basenów</title>
+    <meta name="description" content="Sprawdź kiedy na basenach w Gliwicach (Delfin, Mewa, Olimpijczyk) jest najwięcej wolnych torów. Inteligentny sugester godzin pływania na podstawie oficjalnych harmonogramów.">
     <link rel="canonical" href="https://110kc3.github.io/pool-gliwice-automation/">
     <link rel="alternate" type="application/json" href="https://110kc3.github.io/pool-gliwice-automation/data.json" title="Pool availability (JSON)">
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Gliwice Pool Availability">
-    <meta property="og:title" content="Gliwice Pool Availability">
-    <meta property="og:description" content="Weekly opening hours and free-swim availability for the Gliwice municipal swimming pools, refreshed every week from the operators' PDF timetables.">
+    <meta property="og:title" content="Gliwice Pływalnie — Kiedy jest najwięcej wolnych torów?">
+    <meta property="og:description" content="Inteligentny sugester wolnych torów na basenach Delfin, Mewa i Olimpijczyk w Gliwicach. Znajdź najlepszą godzinę na pływanie.">
     <meta property="og:url" content="https://110kc3.github.io/pool-gliwice-automation/">
     <meta property="og:image" content="https://110kc3.github.io/pool-gliwice-automation/og-image.svg">
     <meta name="twitter:card" content="summary_large_image">
@@ -34,9 +34,9 @@
           "name": "Gliwice municipal swimming pools",
           "numberOfItems": 3,
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "item": { "@type": "SportsActivityLocation", "name": "Pływalnia Delfin", "address": { "@type": "PostalAddress", "addressLocality": "Gliwice", "addressCountry": "PL" } } },
-            { "@type": "ListItem", "position": 2, "item": { "@type": "SportsActivityLocation", "name": "Pływalnia Mewa", "address": { "@type": "PostalAddress", "addressLocality": "Gliwice", "addressCountry": "PL" } } },
-            { "@type": "ListItem", "position": 3, "item": { "@type": "SportsActivityLocation", "name": "Pływalnia Olimpijczyk", "address": { "@type": "PostalAddress", "addressLocality": "Gliwice", "addressCountry": "PL" } } }
+            { "@type": "ListItem", "position": 1, "item": { "@type": "SportsActivityLocation", "name": "Pływalnia Delfin", "address": { "@type": "PostalAddress", "streetAddress": "ul. Warszawska 35", "addressLocality": "Gliwice", "addressCountry": "PL" } } },
+            { "@type": "ListItem", "position": 2, "item": { "@type": "SportsActivityLocation", "name": "Pływalnia Mewa", "address": { "@type": "PostalAddress", "streetAddress": "ul. Mewy 36", "addressLocality": "Gliwice", "addressCountry": "PL" } } },
+            { "@type": "ListItem", "position": 3, "item": { "@type": "SportsActivityLocation", "name": "Pływalnia Olimpijczyk", "address": { "@type": "PostalAddress", "streetAddress": "ul. Oriona 120", "addressLocality": "Gliwice", "addressCountry": "PL" } } }
           ]
         }
       ]
@@ -45,33 +45,256 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Gliwice Pool Availability</h1>
-        
-        <div class="controls">
-            <select id="city-filter" disabled>
-                <option value="Gliwice">Gliwice</option>
-            </select>
-            <select id="day-filter">
-                <option value="all">Wszystkie dni</option>
-                <option value="Poniedziałek">Poniedziałek</option>
-                <option value="Wtorek">Wtorek</option>
-                <option value="Środa">Środa</option>
-                <option value="Czwartek">Czwartek</option>
-                <option value="Piątek">Piątek</option>
-                <option value="Sobota">Sobota</option>
-                <option value="Niedziela">Niedziela</option>
-            </select>
+    <header class="app-header">
+        <div class="header-container">
+            <div class="brand">
+                <span class="brand-icon">🏊‍♂️</span>
+                <div class="brand-text">
+                    <h1>Pływalnie Gliwice</h1>
+                    <p class="tagline">Kiedy iść na basen? Sugester wolnych torów i porównanie dostępności</p>
+                </div>
+            </div>
+            <div class="header-badges">
+                <span class="badge live-badge"><span class="pulse-dot"></span> Dane cotygodniowe z PDF</span>
+                <span class="badge city-badge">Gliwice (Delfin • Mewa • Olimpijczyk)</span>
+            </div>
         </div>
+    </header>
 
-        <div id="top-highlights">
-            <h2>Best Available Slots</h2>
-            <div id="highlights-container"></div>
+    <main class="main-content">
+        <div id="error-banner" class="error-banner" style="display: none;"></div>
+
+        <!-- Navigation view switcher tabs -->
+        <nav class="nav-tabs" aria-label="Nawigacja po widokach">
+            <button type="button" class="nav-tab active" data-tab="suggester">
+                <span class="tab-icon">🎯</span> Sugester wolnych torów
+            </button>
+            <button type="button" class="nav-tab" data-tab="matrix">
+                <span class="tab-icon">📊</span> Porównanie godzinowe
+            </button>
+            <button type="button" class="nav-tab" data-tab="schedules">
+                <span class="tab-icon">📋</span> Pełne harmonogramy
+            </button>
+            <button type="button" class="nav-tab" data-tab="info">
+                <span class="tab-icon">ℹ️</span> O pływalniach
+            </button>
+        </nav>
+
+        <!-- VIEW 1: SMART SUGGESTER (PRIMARY) -->
+        <section id="view-suggester" class="view-panel active">
+            <!-- Data-driven key insights summary banner -->
+            <div class="insights-section">
+                <div class="section-heading-row">
+                    <h2>Wnioski z analizy harmonogramów</h2>
+                    <span class="section-subtext">Statystyki dostępności dla wszystkich basenów</span>
+                </div>
+                <div id="insights-grid" class="insights-grid">
+                    <!-- Populated dynamically by script.js -->
+                </div>
+            </div>
+
+            <!-- Suggester interactive control filter panel -->
+            <div class="suggester-panel">
+                <div class="panel-header">
+                    <h2>Znajdź najlepszy termin</h2>
+                    <span class="results-count" id="results-count">Ładowanie...</span>
+                </div>
+
+                <div class="filter-group">
+                    <span class="filter-label">📅 Dzień:</span>
+                    <div class="pill-group" id="day-pills">
+                        <button type="button" class="filter-pill filter-day-pill active" data-day="all">Wszystkie dni</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="today">Dziś</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="tomorrow">Jutro</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="weekend">Weekend</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="workdays">Dni robocze</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Poniedziałek">Pn</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Wtorek">Wt</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Środa">Śr</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Czwartek">Czw</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Piątek">Pt</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Sobota">Sob</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Niedziela">Nie</button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <span class="filter-label">⏰ Pora dnia:</span>
+                    <div class="pill-group" id="time-pills">
+                        <button type="button" class="filter-pill filter-time-pill active" data-time="all">Wszystkie godziny</button>
+                        <button type="button" class="filter-pill filter-time-pill" data-time="morning">🌅 Rano (06:00 – 12:00)</button>
+                        <button type="button" class="filter-pill filter-time-pill" data-time="afternoon">☀️ Popołudnie (12:00 – 17:00)</button>
+                        <button type="button" class="filter-pill filter-time-pill" data-time="evening">🌙 Wieczór (17:00 – 22:00)</button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <span class="filter-label">🏊 Basen:</span>
+                    <div class="pill-group" id="pool-pills">
+                        <button type="button" class="filter-pill filter-pool-pill active" data-pool="all">Wszystkie baseny</button>
+                        <button type="button" class="filter-pill filter-pool-pill" data-pool="Olimpijczyk">Olimpijczyk (50m olimpijski)</button>
+                        <button type="button" class="filter-pill filter-pool-pill" data-pool="Mewa">Mewa (25m Sośnica)</button>
+                        <button type="button" class="filter-pill filter-pool-pill" data-pool="Delfin">Delfin (25m Śródmieście)</button>
+                    </div>
+                </div>
+
+                <div class="filter-row-bottom">
+                    <div class="filter-subgroup">
+                        <span class="filter-label-inline">Sortuj według:</span>
+                        <div class="btn-group">
+                            <button type="button" class="btn-sort filter-sort-btn active" data-sort="lanes">Najwięcej wolnych torów</button>
+                            <button type="button" class="btn-sort filter-sort-btn" data-sort="openness">Najwyższy % wolnych</button>
+                            <button type="button" class="btn-sort filter-sort-btn" data-sort="time">Chronologicznie</button>
+                        </div>
+                    </div>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="toggle-only-high">
+                        <span class="checkmark"></span>
+                        Tylko wysoka dostępność (≥80% wolnych torów)
+                    </label>
+                </div>
+            </div>
+
+            <!-- Spotlight Top Pick Card -->
+            <div id="top-pick-container">
+                <!-- Populated dynamically -->
+            </div>
+
+            <!-- Grid of remaining recommendations -->
+            <div class="results-section">
+                <h3 class="results-title">Pozostałe rekomendowane terminy</h3>
+                <div id="suggester-results" class="slots-grid">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 2: HOURLY MATRIX COMPARISON -->
+        <section id="view-matrix" class="view-panel">
+            <div class="matrix-card">
+                <div class="section-heading-row">
+                    <h2>Porównanie basenów godzina po godzinie</h2>
+                    <span class="section-subtext">Sprawdź gdzie pójść o konkretnej godzinie w wybranym dniu</span>
+                </div>
+                <div id="matrix-content">
+                    <!-- Populated dynamically by script.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 3: FULL RAW TIMETABLES -->
+        <section id="view-schedules" class="view-panel">
+            <div class="schedules-filter-bar">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="schedule-search" placeholder="Szukaj terminu, dnia lub godziny..." aria-label="Szukaj w harmonogramach">
+                </div>
+                <div class="select-group">
+                    <select id="schedule-day-select" class="styled-select" aria-label="Wybierz dzień">
+                        <option value="all">Wszystkie dni</option>
+                        <option value="Poniedziałek">Poniedziałek</option>
+                        <option value="Wtorek">Wtorek</option>
+                        <option value="Środa">Środa</option>
+                        <option value="Czwartek">Czwartek</option>
+                        <option value="Piątek">Piątek</option>
+                        <option value="Sobota">Sobota</option>
+                        <option value="Niedziela">Niedziela</option>
+                    </select>
+                    <select id="schedule-pool-select" class="styled-select" aria-label="Wybierz basen">
+                        <option value="all">Wszystkie pływalnie</option>
+                        <option value="Olimpijczyk">Olimpijczyk</option>
+                        <option value="Mewa">Mewa</option>
+                        <option value="Delfin">Delfin</option>
+                    </select>
+                </div>
+            </div>
+            <div id="schedules-container" class="schedules-stack">
+                <!-- Populated dynamically -->
+            </div>
+        </section>
+
+        <!-- VIEW 4: POOL INFORMATION & SPECS -->
+        <section id="view-info" class="view-panel">
+            <div class="info-section">
+                <div class="section-heading-row">
+                    <h2>Pływalnie miejskie w Gliwicach</h2>
+                    <span class="section-subtext">Informacje techniczne, adresy i parametry niecek basenowych</span>
+                </div>
+                <div class="pools-info-grid">
+                    <div class="pool-info-card">
+                        <div class="pool-info-header">
+                            <span class="pool-spec-icon">🏊</span>
+                            <div>
+                                <h3>Kryta Pływalnia "Olimpijczyk"</h3>
+                                <span class="pool-type-tag">Basen Olimpijski 50m • 10 torów</span>
+                            </div>
+                        </div>
+                        <p class="pool-info-desc">Najnowocześniejsza pływalnia w Gliwicach z pełnowymiarową niecką olimpijską o wymiarach 50 × 25 m i głębokości 2,0 m. Może być dzielona na dwa baseny 25-metrowe z ruchomym pomostem. Posiada widownię na 800 miejsc.</p>
+                        <ul class="pool-details-list">
+                            <li><strong>📍 Adres:</strong> ul. Oriona 120, 44-117 Gliwice (Łabędy)</li>
+                            <li><strong>📏 Wymiary:</strong> 50 m × 25 m (10 torów)</li>
+                            <li><strong>💧 Temperatura wody:</strong> ~27,5°C</li>
+                            <li><strong>🏢 Zarządca:</strong> Miejski Zarząd Usług Komunalnych (MZUK)</li>
+                        </ul>
+                        <div class="pool-info-footer">
+                            <a href="https://maps.google.com/?q=Kryta+Pływalnia+Olimpijczyk+Gliwice" target="_blank" rel="noopener noreferrer" class="link-btn">🗺️ Pokaż na mapie</a>
+                        </div>
+                    </div>
+
+                    <div class="pool-info-card">
+                        <div class="pool-info-header">
+                            <span class="pool-spec-icon">🌊</span>
+                            <div>
+                                <h3>Kryta Pływalnia "Mewa"</h3>
+                                <span class="pool-type-tag">Basen Sportowy 25m • 6 torów</span>
+                            </div>
+                        </div>
+                        <p class="pool-info-desc">Popularna kryta pływalnia w dzielnicy Sośnica. Obejmuje basen sportowy z 6 torami oraz strefę rekreacyjną z brodzikiem, bąbelkami i sauną. Szczególnie wysoka dostępność w weekendy.</p>
+                        <ul class="pool-details-list">
+                            <li><strong>📍 Adres:</strong> ul. Mewy 36, 44-100 Gliwice (Sośnica)</li>
+                            <li><strong>📏 Wymiary:</strong> 25 m × 12,5 m (6 torów)</li>
+                            <li><strong>💧 Dodatkowo:</strong> sauna, brodzik, bicze wodne</li>
+                            <li><strong>🏢 Zarządca:</strong> MZUK Gliwice</li>
+                        </ul>
+                        <div class="pool-info-footer">
+                            <a href="https://maps.google.com/?q=Kryta+Pływalnia+Mewa+Gliwice" target="_blank" rel="noopener noreferrer" class="link-btn">🗺️ Pokaż na mapie</a>
+                        </div>
+                    </div>
+
+                    <div class="pool-info-card">
+                        <div class="pool-info-header">
+                            <span class="pool-spec-icon">🐬</span>
+                            <div>
+                                <h3>Kryta Pływalnia "Delfin"</h3>
+                                <span class="pool-type-tag">Basen Sportowy 25m • 6 torów</span>
+                            </div>
+                        </div>
+                        <p class="pool-info-desc">Pływalnia miejska zlokalizowana w centrum Gliwic. Wyposażona w 6-torowy basen pływacki oraz mały basen do nauki pływania dla dzieci. Idealna na wczesnoporanne i późnowieczorne pływanie.</p>
+                        <ul class="pool-details-list">
+                            <li><strong>📍 Adres:</strong> ul. Warszawska 35, 44-100 Gliwice (Śródmieście)</li>
+                            <li><strong>📏 Wymiary:</strong> 25 m × 12,5 m (6 torów)</li>
+                            <li><strong>💧 Dodatkowo:</strong> mała niecka do oswajania z wodą</li>
+                            <li><strong>🏢 Zarządca:</strong> MZUK Gliwice</li>
+                        </ul>
+                        <div class="pool-info-footer">
+                            <a href="https://maps.google.com/?q=Kryta+Pływalnia+Delfin+Gliwice" target="_blank" rel="noopener noreferrer" class="link-btn">🗺️ Pokaż na mapie</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <div class="footer-container">
+            <p>Harmonogramy basenów w Gliwicach • Dane aktualizowane automatycznie w każdy poniedziałek o północy z oficjalnych plików PDF operatora.</p>
+            <p class="footer-links">
+                <a href="data.json" target="_blank">JSON Data API</a> • 
+                <a href="https://github.com/110kc3/pool-gliwice-automation" target="_blank" rel="noopener noreferrer">Repozytorium GitHub</a>
+            </p>
         </div>
-        <div id="pool-availability">
-            <!-- Pool data will be loaded here by JavaScript -->
-        </div>
-    </div>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>

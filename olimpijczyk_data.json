@@ -1,53 +1,5 @@
 [
     {
-        "time": "Harmonogram dostępności niecki basenowej od 30 marca do 5 kwietnia 2026",
-        "days": {
-            "Poniedziałek": null,
-            "Wtorek": null,
-            "Środa": null,
-            "Czwartek": null,
-            "Piątek": null,
-            "Sobota": null,
-            "Niedziela": null
-        }
-    },
-    {
-        "time": "Dzień\rtygodnia",
-        "days": {
-            "Poniedziałek": "Poniedziałek",
-            "Wtorek": "Wtorek",
-            "Środa": "Środa",
-            "Czwartek": "Czwartek",
-            "Piątek": "Piątek",
-            "Sobota": "Sobota",
-            "Niedziela": "Niedziela"
-        }
-    },
-    {
-        "time": "Data",
-        "days": {
-            "Poniedziałek": "30 marca",
-            "Wtorek": "31 marca",
-            "Środa": "1 kwietnia",
-            "Czwartek": "2 kwietnia",
-            "Piątek": "3 kwietnia",
-            "Sobota": "4 kwietnia",
-            "Niedziela": "5 kwietnia"
-        }
-    },
-    {
-        "time": "Godzina",
-        "days": {
-            "Poniedziałek": "Ilość wolnych torów",
-            "Wtorek": null,
-            "Środa": null,
-            "Czwartek": null,
-            "Piątek": null,
-            "Sobota": null,
-            "Niedziela": null
-        }
-    },
-    {
         "time": "06:00",
         "days": {
             "Poniedziałek": "9x50m, 1x25m i wypł",
@@ -55,7 +7,7 @@
             "Środa": "9x50m, 1x25m i wypł",
             "Czwartek": "8x50m, 1x25m i wypł",
             "Piątek": "8x50m, 1x25m i wypł",
-            "Sobota": "P\rł\ry\rw",
+            "Sobota": null,
             "Niedziela": null
         }
     },
@@ -115,7 +67,7 @@
             "Środa": "2x50m, 1x25m i wypł",
             "Czwartek": "5x50m, 1x25m i wypł",
             "Piątek": "5x50m, 1x25m i wypł",
-            "Sobota": "a",
+            "Sobota": null,
             "Niedziela": null
         }
     },
@@ -127,7 +79,7 @@
             "Środa": "2x50m, 1x25m i wypł",
             "Czwartek": "5x50m, 1x25m i wypł",
             "Piątek": "5x50m, 1x25m i wypł",
-            "Sobota": "l",
+            "Sobota": null,
             "Niedziela": null
         }
     },
@@ -139,7 +91,7 @@
             "Środa": "2x50m, 1x25m i wypł",
             "Czwartek": "5x50m, 1x25m i wypł",
             "Piątek": "5x50m, 1x25m i wypł",
-            "Sobota": "n",
+            "Sobota": null,
             "Niedziela": null
         }
     },
@@ -199,7 +151,7 @@
             "Środa": "8x50m",
             "Czwartek": "8x50m",
             "Piątek": "5x50m, 1x25m i wypł",
-            "Sobota": "n",
+            "Sobota": null,
             "Niedziela": null
         }
     },
@@ -211,7 +163,7 @@
             "Środa": "8x50m",
             "Czwartek": "8x50m",
             "Piątek": "5x50m, 1x25m i wypł",
-            "Sobota": "i",
+            "Sobota": null,
             "Niedziela": null
         }
     },
@@ -223,7 +175,7 @@
             "Środa": "8x50m",
             "Czwartek": "8x50m",
             "Piątek": "5x50m, 1x25m i wypł",
-            "Sobota": "e",
+            "Sobota": null,
             "Niedziela": null
         }
     },
@@ -283,7 +235,7 @@
             "Środa": "9x50m, 1x25m i wypł",
             "Czwartek": "4x50m, 1x25m i wypł",
             "Piątek": "6x50m, 1x25m i wypł",
-            "Sobota": "n",
+            "Sobota": null,
             "Niedziela": null
         }
     },
@@ -295,7 +247,7 @@
             "Środa": "4x50m, 1x25m i wypł",
             "Czwartek": "8x50m, 1x25m i wypł",
             "Piątek": "9x50m, 1x25m i wypł",
-            "Sobota": "n",
+            "Sobota": null,
             "Niedziela": null
         }
     },
@@ -307,7 +259,7 @@
             "Środa": "4x50m, 1x25m i wypł",
             "Czwartek": "8x50m, 1x25m i wypł",
             "Piątek": "9x50m, 1x25m i wypł",
-            "Sobota": "a",
+            "Sobota": null,
             "Niedziela": null
         }
     },
