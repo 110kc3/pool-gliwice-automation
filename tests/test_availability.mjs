@@ -37,14 +37,24 @@ test('cleanCell strips carriage returns and collapses whitespace', () => {
 });
 
 // --- classifyAvailability: closed / unavailable ----------------------------
-test('niedostępna and nieczynna classify as closed (score 0)', () => {
+test('niedostępna, nieczynne, exit water and 0 classify as closed (score 0)', () => {
     assert.deepEqual(classifyAvailability('Pływalnia niedostępna'), { score: 0 });
+    assert.deepEqual(classifyAvailability('niedostępna'), { score: 0 });
     assert.deepEqual(classifyAvailability('Pływalnia nieczynna'), { score: 0 });
+    assert.deepEqual(classifyAvailability('Nieczynne'), { score: 0 });
+    assert.deepEqual(classifyAvailability('Nieczynne/ nauka pływania'), { score: 0 });
+    assert.deepEqual(classifyAvailability('Czas wyjścia z wody'), { score: 0 });
+    assert.deepEqual(classifyAvailability('Czas wyjścia z wody i sauny'), { score: 0 });
+    assert.deepEqual(classifyAvailability('Koniec pracy pływalni'), { score: 0 });
+    assert.deepEqual(classifyAvailability('Pływalnia czynna od 7.00'), { score: 0 });
+    assert.deepEqual(classifyAvailability('0'), { score: 0 });
+    assert.deepEqual(classifyAvailability('0 wolnych torów'), { score: 0 });
 });
 
 // --- classifyAvailability: open -------------------------------------------
 test('dostępna and "wolne wszystkie tory" classify as open', () => {
     assert.deepEqual(classifyAvailability('Pływalnia dostępna'), { open: true });
+    assert.deepEqual(classifyAvailability('dostępna'), { open: true });
     assert.deepEqual(classifyAvailability('wolne wszystkie tory'), { open: true });
 });
 
@@ -54,10 +64,15 @@ test('"dostępna-zajęty N tor" captures occupancy', () => {
     assert.deepEqual(classifyAvailability('Pływalnia dostępna-zajęte 2\rtory'), { open: true, occupied: 2 });
 });
 
-// --- classifyAvailability: occupied ---------------------------------------
-test('"Zajęty/Zajęte N tory" captures occupancy', () => {
+// --- classifyAvailability: occupied (Arabic and Roman numerals) -----------
+test('"Zajęty/Zajęte N tory" and Roman numerals capture occupancy', () => {
     assert.deepEqual(classifyAvailability('Zajęty 3 tory'), { occupied: 3 });
     assert.deepEqual(classifyAvailability('Zajęte 2 tory'), { occupied: 2 });
+    assert.deepEqual(classifyAvailability('I tor zajęty'), { occupied: 1 });
+    assert.deepEqual(classifyAvailability('I Tor zajęty'), { occupied: 1 });
+    assert.deepEqual(classifyAvailability('II Tory zajęte'), { occupied: 2 });
+    assert.deepEqual(classifyAvailability('II   tory zajęte'), { occupied: 2 });
+    assert.deepEqual(classifyAvailability('III Tory zajęte'), { occupied: 3 });
 });
 
 // --- classifyAvailability: lane counts ------------------------------------
@@ -70,7 +85,7 @@ test('lane-count strings sum the Nx..m groups', () => {
 // --- classifyAvailability: noise ------------------------------------------
 test('headers, dates, day names and stray letters classify as noise', () => {
     for (const junk of ['n', 'a', 'l', 'e', 'i', 'Środa', 'Wtorek', 'Ilość wolnych torów',
-                         '5 kwietnia', '30 marca', 'P\rł\ry\rw', '']) {
+                         'Ilość zajętych torów', '26.10.2026', '5 kwietnia', '30 marca', 'P\rł\ry\rw', '']) {
         assert.equal(classifyAvailability(junk).noise, true, `expected noise for "${junk}"`);
     }
 });

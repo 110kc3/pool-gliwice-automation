@@ -23,7 +23,7 @@ def parse_olimpijczyk_pdf(pdf_path):
         print("No tables found in Olimpijczyk PDF.")
         return []
 
-    time_pattern = re.compile(r"^\d{1,2}[:.]\d{2}")
+    time_pattern = re.compile(r"^\d{1,2}[:.]\d{2}(\s*-\s*\d{1,2}[:.]\d{2})?$")
     schedule = []
 
     def clean_day_val(val):
@@ -38,24 +38,27 @@ def parse_olimpijczyk_pdf(pdf_path):
 
     for df in tables:
         for _, row in df.iterrows():
-            time = row[0]
-            if pd.isna(time) or not isinstance(time, str):
+            time_col = None
+            for c in range(min(4, len(row))):
+                v = str(row.iloc[c]).strip() if not pd.isna(row.iloc[c]) else ""
+                if time_pattern.match(v) and not any(k in v.lower() for k in ("czas", "koniec", "godzina", "ilość", "data")):
+                    time_col = c
+                    break
+
+            if time_col is None:
                 continue
 
-            clean_time = time.strip()
-            if not time_pattern.match(clean_time):
-                continue
-
+            clean_time = str(row.iloc[time_col]).strip()
             day_data = {
                 "time": clean_time,
                 "days": {
-                    "Poniedziałek": clean_day_val(row[1]) if len(row) > 1 else None,
-                    "Wtorek": clean_day_val(row[2]) if len(row) > 2 else None,
-                    "Środa": clean_day_val(row[3]) if len(row) > 3 else None,
-                    "Czwartek": clean_day_val(row[4]) if len(row) > 4 else None,
-                    "Piątek": clean_day_val(row[5]) if len(row) > 5 else None,
-                    "Sobota": clean_day_val(row[6]) if len(row) > 6 else None,
-                    "Niedziela": clean_day_val(row[7]) if len(row) > 7 else None,
+                    "Poniedziałek": clean_day_val(row.iloc[time_col + 1]) if time_col + 1 < len(row) else None,
+                    "Wtorek": clean_day_val(row.iloc[time_col + 2]) if time_col + 2 < len(row) else None,
+                    "Środa": clean_day_val(row.iloc[time_col + 3]) if time_col + 3 < len(row) else None,
+                    "Czwartek": clean_day_val(row.iloc[time_col + 4]) if time_col + 4 < len(row) else None,
+                    "Piątek": clean_day_val(row.iloc[time_col + 5]) if time_col + 5 < len(row) else None,
+                    "Sobota": clean_day_val(row.iloc[time_col + 6]) if time_col + 6 < len(row) else None,
+                    "Niedziela": clean_day_val(row.iloc[time_col + 7]) if time_col + 7 < len(row) else None,
                 }
             }
             schedule.append(day_data)

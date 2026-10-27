@@ -1,114 +1,101 @@
-
-import tabula
+import glob
 import json
+import os
 import re
 import pandas as pd
+import tabula
 from pdf_utils import nan_to_none
 
 def parse_delfin_pdf(pdf_path):
-    # Extract tables from the PDF without area restriction for debugging
-    tables = tabula.read_pdf(pdf_path, pages='all', multiple_tables=True, 
-                             pandas_options={'header': None})
+    """
+    Parses Delfin swimming pool schedule PDF.
+    Handles both legacy single-table layouts and modern multi-table layouts across all pages.
+    """
+    try:
+        tables = tabula.read_pdf(pdf_path, pages="all", multiple_tables=True, lattice=True, pandas_options={"header": None})
+    except Exception:
+        tables = []
+    if not tables:
+        try:
+            tables = tabula.read_pdf(pdf_path, pages="all", multiple_tables=True, pandas_options={"header": None})
+        except Exception:
+            tables = []
 
     if not tables:
-        print("No tables found.")
+        print("No tables found in Delfin PDF.")
         return []
-    
-    for i, table in enumerate(tables):
-        print(f"--- Table {i} ---")
-        print(table.to_string())
-    
-    df = tables[0]
-    
-    # Clean up column names - the first row should be the header
-    # df.columns = df.iloc[0]
-    # df = df[1:].reset_index(drop=True)
-    
-    # Days of the week in Polish, as they appear in the PDF
-    days_of_week = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"]
-    days_map = {
-        "Poniedziałek": "Monday",
-        "Wtorek": "Tuesday",
-        "Środa": "Wednesday",
-        "Czwartek": "Thursday",
-        "Piątek": "Friday",
-        "Sobota": "Saturday",
-        "Niedziela": "Sunday"
-    }
-    # We need to map the columns to the correct days. 
-    # Based on the PDF, the first column is "Godziny" (Hours)
-    # and then the days follow.
-    
-    # Let's manually define the structure based on the PDF content
-    # The first column will be "Godziny" (Time)
-    # The subsequent 7 columns are days of the week
-    
-    # The actual column names from the PDF are in the second row for days, and first for "Godziny"
-    # So, we need to carefully extract the header information.
 
-    # Let's assume the first row contains "Godziny" and days of the week
-    # Need to find the row that contains "Godziny" and the days of the week
-    
+    days_of_week = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"]
+    time_pattern = re.compile(r"^\d{1,2}[:.]\d{2}(\s*-\s*\d{1,2}[:.]\d{2})?$")
+    pool_schedule = []
+
+    # Check if legacy single table format (e.g. single table with "Godziny" in header)
+    df0 = tables[0]
     header_row_index = -1
-    for r_idx, row in df.iterrows():
-        if "Godziny" in str(row.iloc[0]):
+    for r_idx, row in df0.iterrows():
+        cell0 = str(row.iloc[0]).lower()
+        if "godzin" in cell0:
             header_row_index = r_idx
             break
 
-    if header_row_index == -1:
-        print("Could not find header row.")
-        return []
+    if len(tables) == 1 and header_row_index != -1 and any("poniedziałek" in str(x).lower() for x in df0.iloc[header_row_index].tolist()):
+        headers = [str(x).strip() for x in df0.iloc[header_row_index].tolist()]
+        df_data = df0.iloc[header_row_index + 1:].copy()
+        df_data.columns = headers
+        time_column = headers[0]
+        for col in df_data.columns:
+            if re.match(r"\d{1,2}\.\d{2}-\s*\d{1,2}\.\d{2}", str(df_data[col].iloc[0])):
+                time_column = col
+                break
+        for _, row in df_data.iterrows():
+            time_slot = str(row[time_column]).strip()
+            if not re.match(r"\d{1,2}\.\d{2}-\s*\d{1,2}\.\d{2}", time_slot):
+                continue
+            days_data = {}
+            for day in days_of_week:
+                try:
+                    day_index = headers.index(day)
+                    raw = row.iloc[day_index]
+                    day_content = None if pd.isna(raw) else str(raw)
+                except ValueError:
+                    day_content = None
+                days_data[day] = day_content
+            pool_schedule.append({"time": time_slot, "days": days_data})
+        if pool_schedule:
+            return pool_schedule
 
-    # Extract header (days of the week and "Godziny")
-    headers = [str(x).strip() for x in df.iloc[header_row_index].tolist()]
-    
-    # The actual data starts after the header row
-    df_data = df.iloc[header_row_index + 1:].copy()
-    df_data.columns = headers
-    
-    # The "Godziny" column might be named differently or merged, let's find the one that contains time patterns
-    time_column = None
-    for col in df_data.columns:
-        if re.match(r'\d{1,2}\.\d{2}-\s*\d{1,2}\.\d{2}', str(df_data[col].iloc[0])):
-            time_column = col
-            break
-    
-    if not time_column:
-        time_column = headers[0] # Assume the first column is time if no clear pattern match
-    
-    
-    pool_schedule = []
+    # Multi-table or modernized format: dynamically find time column in each row
+    for df in tables:
+        for _, row in df.iterrows():
+            time_col = None
+            for c in range(min(4, len(row))):
+                v = str(row.iloc[c]).strip() if not pd.isna(row.iloc[c]) else ""
+                if time_pattern.match(v) and not any(k in v.lower() for k in ("czas", "koniec", "godzina", "ilość", "data")):
+                    time_col = c
+                    break
 
-    for _, row in df_data.iterrows():
-        time_slot = str(row[time_column]).strip()
-        if not re.match(r'\d{1,2}\.\d{2}-\s*\d{1,2}\.\d{2}', time_slot):
-            continue
+            if time_col is None:
+                continue
 
-        days_data = {}
-        for day in days_of_week:
-            try:
-                day_index = headers.index(day)
-                raw = row.iloc[day_index]
-                # Empty cells arrive as NaN; keep them as None rather than the
-                # literal string "nan", which would otherwise reach the frontend.
-                day_content = None if pd.isna(raw) else str(raw)
-            except ValueError:
-                day_content = None
+            time_val = str(row.iloc[time_col]).strip()
+            days_data = {}
+            for i, d in enumerate(days_of_week):
+                col_i = time_col + 1 + i
+                if col_i < len(row):
+                    val = row.iloc[col_i]
+                    days_data[d] = None if (pd.isna(val) or str(val).strip().lower() in ("nan", "none", "")) else str(val).strip()
+                else:
+                    days_data[d] = None
+            pool_schedule.append({"time": time_val, "days": days_data})
 
-            days_data[day] = day_content
-
-        pool_schedule.append({
-            'time': time_slot,
-            'days': days_data
-        })
-    
     return pool_schedule
 
-
 if __name__ == "__main__":
-    delfin_pdf_path = "delfin.pdf"
+    candidates = sorted(glob.glob("Harmonogram_Delfin_*.pdf") + glob.glob("delfin.pdf"), key=os.path.getmtime, reverse=True)
+    delfin_pdf_path = candidates[0] if candidates else "delfin.pdf"
+    print(f"Parsing Delfin schedule from {delfin_pdf_path}...")
     data = nan_to_none(parse_delfin_pdf(delfin_pdf_path))
 
-    with open('delfin_data.json', 'w', encoding='utf-8') as f:
+    with open("delfin_data.json", "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4, allow_nan=False)
-    print("Successfully saved data to delfin_data.json")
+    print(f"Successfully saved {len(data)} entries to delfin_data.json")

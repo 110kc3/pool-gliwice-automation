@@ -54,6 +54,17 @@ function cleanCell(value) {
     return value.replace(/\r/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
+function parseRomanOrArabic(val) {
+    if (!val) return null;
+    const v = val.trim().toLowerCase();
+    if (/^\d+$/.test(v)) return parseInt(v, 10);
+    const romanMap = {
+        'i': 1, 'ii': 2, 'iii': 3, 'iv': 4, 'v': 5,
+        'vi': 6, 'vii': 7, 'viii': 8, 'ix': 9, 'x': 10
+    };
+    return romanMap[v] || null;
+}
+
 // Classify a raw `availableLanes` string into a structured descriptor.
 function classifyAvailability(raw) {
     const s = cleanCell(raw);
@@ -63,27 +74,51 @@ function classifyAvailability(raw) {
     // --- Noise: day-name header rows, date rows, column headers, stray letters
     if (DAY_SET.has(s)) return { noise: true };
     if (new RegExp(`^\\d{1,2}\\s+(${MONTHS})`, 'i').test(lower)) return { noise: true };
-    if (/(ilość wolnych torów|godzina|dzień|tygodnia|harmonogram|^data$)/.test(lower)) return { noise: true };
+    if (/^\d{1,2}[./]\d{1,2}[./]\d{2,4}$/.test(s)) return { noise: true };
+    if (/(ilość wolnych torów|ilość zajętych torów|godzina|dzień|tygodnia|harmonogram|^data$)/.test(lower)) return { noise: true };
     // Stray single/short letter artifacts ("n", "a", "l", "Pływ" mangled) with no digit
     if (!/\d/.test(s) && s.replace(/[^a-zA-Ząćęłńóśźż]/gi, '').length < 5 && !/wolne/.test(lower)) {
         return { noise: true };
     }
 
-    // --- Closed / unavailable (check "niedostępna"/"nieczynna" before "dostępna", or 0 free lanes)
-    if (lower.includes('niedostępna') || lower.includes('nieczynna') || lower.includes('0 wolnych') || lower.includes('brak wolnych') || lower.startsWith('0 tor')) {
+    // --- Closed / unavailable / 0 free lanes / before opening / exit water / end of work
+    if (
+        lower === '0' ||
+        lower.includes('niedostępn') ||
+        lower.includes('nieczynn') ||
+        lower.includes('czas wyjścia') ||
+        lower.includes('koniec pracy') ||
+        lower.includes('czynna od') ||
+        lower.includes('0 wolnych') ||
+        lower.includes('brak wolnych') ||
+        lower.startsWith('0 tor')
+    ) {
         return { score: 0 };
     }
 
     // --- All lanes free
     if (lower.includes('wolne wszystkie')) return { open: true };
 
-    // --- "Pływalnia dostępna - zajęty N tor(y)"
-    let m = lower.match(/dostępna.*zaj[ęe]t[ey]\s*(\d+)\s*tor/);
-    if (m) return { open: true, occupied: parseInt(m[1], 10) };
+    // --- "Pływalnia dostępna - zajęty N tor(y)" or "dostępna - zajęte II tory"
+    let m = lower.match(/dostępna.*zaj[ęe]t[a-ząćęłńóśźż]*\s*(?:jest\s*)?([ivx]+|\d+)\s*tor/i);
+    if (m) {
+        const num = parseRomanOrArabic(m[1]);
+        if (num !== null) return { open: true, occupied: num };
+    }
 
-    // --- "Zajęty / Zajęte N tory" (N lanes occupied)
-    m = lower.match(/^zaj[ęe]t[ey]\s*(\d+)\s*tor/);
-    if (m) return { occupied: parseInt(m[1], 10) };
+    // --- "I tor zajęty", "II tory zajęte", "3 tory zajęte"
+    m = lower.match(/(?:^|\b)([ivx]+|\d+)\s*tor[a-ząćęłńóśźż]*\s*zaj[ęe]t/i);
+    if (m) {
+        const num = parseRomanOrArabic(m[1]);
+        if (num !== null) return { occupied: num };
+    }
+
+    // --- "Zajęty / Zajęte N tory", "Zajęty I tor"
+    m = lower.match(/^zaj[ęe]t[a-ząćęłńóśźż]*\s*(?:jest\s*)?([ivx]+|\d+)\s*tor/i);
+    if (m) {
+        const num = parseRomanOrArabic(m[1]);
+        if (num !== null) return { occupied: num };
+    }
 
     // --- Lane counts: "9x50m, 1x25m i wypł" or "5x25m wolne" -> sum of the "Nx..m" groups
     const laneMatches = [...lower.matchAll(/(\d+)\s*x\s*\d+\s*m/g)];
@@ -92,11 +127,14 @@ function classifyAvailability(raw) {
         return { freeLanes: lanes };
     }
 
-    // --- "N torów wolnych" / "N tor wolny"
-    const mFreeTor = lower.match(/(\d+)\s*tor[oó]w\s*woln/);
-    if (mFreeTor) return { freeLanes: parseInt(mFreeTor[1], 10) };
+    // --- Free lanes: "N torów wolnych", "II tory wolne", "I tor wolny"
+    const mFreeTor = lower.match(/([ivx]+|\d+)\s*tor[a-ząćęłńóśźż]*\s*woln/i);
+    if (mFreeTor) {
+        const num = parseRomanOrArabic(mFreeTor[1]);
+        if (num !== null) return { freeLanes: num };
+    }
 
-    // --- Generic "Pływalnia dostępna"
+    // --- Generic "Pływalnia dostępna" or "dostępna"
     if (lower.includes('dostępna')) return { open: true };
 
     // Unknown, non-empty value: treat as noise so it cannot pollute rankings.
@@ -875,10 +913,16 @@ function initApp(rawData) {
         }
     }
 
-    // Set today's name label on the today pill
+    // Set today and tomorrow name labels on the pills
     const todayPill = document.querySelector('.filter-day-pill[data-day="today"]');
     if (todayPill) {
         todayPill.innerHTML = `Dziś <span class="pill-day-sub">(${todayName})</span>`;
+    }
+    const tomorrowPill = document.querySelector('.filter-day-pill[data-day="tomorrow"]');
+    if (tomorrowPill) {
+        const currentIdx = DAYS_ORDER.indexOf(todayName);
+        const tomorrowName = currentIdx >= 0 ? DAYS_ORDER[(currentIdx + 1) % 7] : "Jutro";
+        tomorrowPill.innerHTML = `Jutro <span class="pill-day-sub">(${tomorrowName})</span>`;
     }
 
     renderInsights();

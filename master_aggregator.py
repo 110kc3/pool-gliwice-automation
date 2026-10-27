@@ -8,6 +8,7 @@ DAY_SET = set(DAYS)
 _MONTHS = ("stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|"
            "sierpnia|września|października|listopada|grudnia")
 _DATE_RE = re.compile(r"^\d{1,2}\s+(" + _MONTHS + r")", re.IGNORECASE)
+_NUMERIC_DATE_RE = re.compile(r"^\d{1,2}[./]\d{1,2}[./]\d{2,4}$")
 _LETTERS_RE = re.compile(r"[^a-zA-Ząćęłńóśźż]", re.IGNORECASE)
 
 
@@ -25,7 +26,7 @@ def is_noise_time(time_str):
         return False  # empty time is a real (if incomplete) entry, not noise
     if s == "data":
         return True
-    return any(k in s for k in ("harmonogram", "dzień", "tygodnia", "godzina"))
+    return any(k in s for k in ("harmonogram", "dzień", "tygodnia", "godzina", "ilość zajętych", "ilość wolnych"))
 
 
 def is_noise_value(value):
@@ -35,10 +36,10 @@ def is_noise_value(value):
         return True
     if s in DAY_SET:
         return True
-    if _DATE_RE.match(s):
+    if _DATE_RE.match(s) or _NUMERIC_DATE_RE.match(s):
         return True
     low = s.lower()
-    if "ilość wolnych torów" in low:
+    if "ilość wolnych torów" in low or "ilość zajętych torów" in low:
         return True
     # Stray short-letter artifacts (e.g. "n", "a", mangled "Pływ") with no digit.
     letters = _LETTERS_RE.sub("", s)

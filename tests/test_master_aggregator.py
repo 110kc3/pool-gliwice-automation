@@ -150,17 +150,17 @@ class TestDataTransformation(unittest.TestCase):
 class TestNoiseHelpers(unittest.TestCase):
 
     def test_is_noise_time(self):
-        for junk in ["Data", "Dzień\rtygodnia", "Harmonogram dostępności", "Godzina"]:
+        for junk in ["Data", "Dzień\rtygodnia", "Harmonogram dostępności", "Godzina", "Ilość zajętych torów"]:
             self.assertTrue(is_noise_time(junk), junk)
-        for real in ["7.00- 8.00", "9.00-10.00", ""]:
+        for real in ["7.00- 8.00", "9.00-10.00", "06:00", ""]:
             self.assertFalse(is_noise_time(real), real)
 
     def test_is_noise_value(self):
-        for junk in ["n", "a", "Środa", "Poniedziałek", "30 marca", "5 kwietnia",
-                     "Ilość wolnych torów", "P\rł\ry\rw", ""]:
+        for junk in ["n", "a", "Środa", "Poniedziałek", "30 marca", "5 kwietnia", "26.10.2026", "01.11.2026",
+                     "Ilość wolnych torów", "Ilość zajętych torów", "P\rł\ry\rw", ""]:
             self.assertTrue(is_noise_value(junk), junk)
         for real in ["4x50m", "Pływalnia dostępna", "wolne wszystkie tory",
-                     "Zajęty 3 tory", "Pływalnia niedostępna"]:
+                     "Zajęty 3 tory", "Pływalnia niedostępna", "0", "I tor zajęty", "II tory zajęte"]:
             self.assertFalse(is_noise_value(real), real)
 
     def test_clean_cell(self):

@@ -42,6 +42,9 @@ jobs:
           ./venv/bin/python -m pytest tests/test_master_aggregator.py
           node tests/test_availability.mjs
 
+      - name: Download latest schedules from sport.gliwice.eu
+        run: ./venv/bin/python download_schedules.py
+
       - name: Run parsers
         run: |
           ./venv/bin/python parse_mewa.py
