@@ -20,6 +20,7 @@ const {
     getPolishDayName,
     getScheduleDates,
     aggregateHourlySlots,
+    getMultiHourSlots,
     filterAndRankSlots,
     computeDataInsights
 } = require(path.join(root, 'script.js'));
@@ -317,6 +318,66 @@ test('getScheduleDates extracts dates and assigns them to aggregated slots', () 
     assert.ok(wedSlot);
     assert.equal(wedSlot.date, '28.10.2026');
     assert.equal(wedSlot.shortDate, '28.10');
+});
+
+// --- getMultiHourSlots & multi-hour filtering ------------------------------
+test('getMultiHourSlots builds contiguous multi-hour windows and handles closures', () => {
+    const slots = [
+        { poolName: 'Mewa', day: 'Środa', hour: 10, freeLanes: 6, totalLanes: 6, openness: 1.0, timeBucket: 'morning' },
+        { poolName: 'Mewa', day: 'Środa', hour: 11, freeLanes: 4, totalLanes: 6, openness: 0.67, timeBucket: 'morning' },
+        { poolName: 'Mewa', day: 'Środa', hour: 12, freeLanes: 0, totalLanes: 6, openness: 0.0, timeBucket: 'afternoon' },
+        { poolName: 'Mewa', day: 'Środa', hour: 13, freeLanes: 5, totalLanes: 6, openness: 0.83, timeBucket: 'afternoon' }
+    ];
+
+    // duration 1 returns slots as-is
+    assert.equal(getMultiHourSlots(slots, 1).length, 4);
+
+    // duration 2 produces 3 windows: 10-12, 11-13, 12-14
+    const twoHourSlots = getMultiHourSlots(slots, 2);
+    assert.equal(twoHourSlots.length, 3);
+
+    const slot10_12 = twoHourSlots.find(s => s.hour === 10);
+    assert.ok(slot10_12);
+    assert.equal(slot10_12.duration, 2);
+    assert.equal(slot10_12.timeLabel, '10:00 – 12:00 (2h)');
+    assert.equal(slot10_12.minFreeLanes, 4);
+    assert.equal(slot10_12.freeLanes, 5); // average of 6 and 4
+    assert.equal(slot10_12.status, 'medium');
+
+    // Slot 11-13 includes hour 12 which is closed (0 free lanes)
+    const slot11_13 = twoHourSlots.find(s => s.hour === 11);
+    assert.ok(slot11_13);
+    assert.equal(slot11_13.minFreeLanes, 0);
+    assert.equal(slot11_13.openness, 0);
+    assert.equal(slot11_13.status, 'closed');
+
+    // Slot 12-14 also includes hour 12 which is closed
+    const slot12_14 = twoHourSlots.find(s => s.hour === 12);
+    assert.ok(slot12_14);
+    assert.equal(slot12_14.status, 'closed');
+});
+
+test('filterAndRankSlots filters and ranks multi-hour requests accurately', () => {
+    const slots = [
+        { poolName: 'Mewa', day: 'Środa', hour: 14, freeLanes: 6, totalLanes: 6, openness: 1.0, timeBucket: 'afternoon' },
+        { poolName: 'Mewa', day: 'Środa', hour: 15, freeLanes: 5, totalLanes: 6, openness: 0.83, timeBucket: 'afternoon' },
+        { poolName: 'Delfin', day: 'Środa', hour: 14, freeLanes: 3, totalLanes: 6, openness: 0.5, timeBucket: 'afternoon' },
+        { poolName: 'Delfin', day: 'Środa', hour: 15, freeLanes: 0, totalLanes: 6, openness: 0.0, timeBucket: 'afternoon' },
+        { poolName: 'Olimpijczyk', day: 'Środa', hour: 14, freeLanes: 8, totalLanes: 10, openness: 0.8, timeBucket: 'afternoon' },
+        { poolName: 'Olimpijczyk', day: 'Środa', hour: 15, freeLanes: 8, totalLanes: 10, openness: 0.8, timeBucket: 'afternoon' }
+    ];
+
+    // Filter 2h slots: Delfin 14:00-16:00 should be excluded because 15:00 is closed
+    const ranked2h = filterAndRankSlots(slots, { duration: 2 });
+    assert.equal(ranked2h.length, 2);
+
+    // Olimpijczyk (min 8 lanes) should rank above Mewa (min 5 lanes)
+    assert.equal(ranked2h[0].poolName, 'Olimpijczyk');
+    assert.equal(ranked2h[0].minFreeLanes, 8);
+    assert.equal(ranked2h[0].freeLanes, 8);
+    assert.equal(ranked2h[1].poolName, 'Mewa');
+    assert.equal(ranked2h[1].minFreeLanes, 5);
+    assert.equal(ranked2h[1].freeLanes, 5.5);
 });
 
 console.log(`\n${passed} availability tests passed.`);

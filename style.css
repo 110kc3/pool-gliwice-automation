@@ -857,9 +857,51 @@ body {
 .matrix-header-controls {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
     margin-bottom: 20px;
     flex-wrap: wrap;
+}
+
+.matrix-controls-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.matrix-duration-pills {
+    display: inline-flex;
+    gap: 4px;
+}
+
+.btn-matrix-duration {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-matrix-duration:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-matrix-duration.active {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+}
+
+.matrix-subnote {
+    font-size: 0.74rem;
+    color: var(--text-muted);
+    margin-top: 3px;
+    font-weight: normal;
 }
 
 .styled-select {

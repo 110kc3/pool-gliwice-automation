@@ -348,6 +348,78 @@ function aggregateHourlySlots(pools) {
     return hourlySlots;
 }
 
+// Build continuous multi-hour windows (e.g. 2h, 3h) from aggregated 1-hour slots.
+function getMultiHourSlots(hourlySlots, duration = 1) {
+    if (duration <= 1) return hourlySlots;
+    const multi = [];
+    const poolDayMap = {};
+    hourlySlots.forEach(s => {
+        const key = `${s.poolName}_${s.day}`;
+        if (!poolDayMap[key]) poolDayMap[key] = {};
+        poolDayMap[key][s.hour] = s;
+    });
+
+    Object.entries(poolDayMap).forEach(([key, hourMap]) => {
+        const [poolName, day] = key.split('_');
+        const hours = Object.keys(hourMap).map(Number).sort((a, b) => a - b);
+        hours.forEach(h => {
+            const block = [];
+            for (let i = 0; i < duration; i++) {
+                if (hourMap[h + i]) block.push(hourMap[h + i]);
+            }
+            if (block.length === duration) {
+                const anyClosed = block.some(s => s.openness <= 0 || s.freeLanes <= 0);
+                const minFree = Math.min(...block.map(s => s.freeLanes));
+                const avgFree = block.reduce((sum, s) => sum + s.freeLanes, 0) / duration;
+                const avgOpenness = block.reduce((sum, s) => sum + s.openness, 0) / duration;
+                const roundedFree = Math.round(avgFree * 10) / 10;
+                const totalLanes = block[0].totalLanes;
+
+                let status = 'low';
+                if (anyClosed || avgOpenness === 0) status = 'closed';
+                else if (avgOpenness >= 0.8 && minFree >= totalLanes * 0.7) status = 'high';
+                else if (avgOpenness >= 0.4 && minFree >= 1) status = 'medium';
+
+                let laneBadge = '';
+                if (anyClosed) {
+                    laneBadge = 'Niedostępne przez cały okres';
+                } else if (minFree === totalLanes && avgOpenness === 1) {
+                    laneBadge = `${totalLanes} torów wolnych (100% przez ${duration}h)`;
+                } else if (minFree === roundedFree) {
+                    laneBadge = `${minFree} z ${totalLanes} torów (${Math.round(avgOpenness * 100)}%)`;
+                } else {
+                    laneBadge = `min. ${minFree} torów (śr. ${roundedFree} z ${totalLanes})`;
+                }
+
+                const startSlot = block[0];
+                const endHour = h + duration;
+                const hourDetails = block.map(s => `${String(s.hour).padStart(2, '0')}:00 (${s.freeLanes} torów)`).join(' ➔ ');
+
+                multi.push({
+                    poolName,
+                    day,
+                    date: startSlot.date,
+                    shortDate: startSlot.shortDate,
+                    hour: h,
+                    endHour,
+                    duration,
+                    timeLabel: `${String(h).padStart(2, '0')}:00 – ${String(endHour).padStart(2, '0')}:00 (${duration}h)`,
+                    timeBucket: startSlot.timeBucket,
+                    freeLanes: roundedFree,
+                    minFreeLanes: minFree,
+                    totalLanes,
+                    openness: anyClosed ? 0 : avgOpenness,
+                    status,
+                    laneBadge,
+                    details: hourDetails,
+                    subSlots: block
+                });
+            }
+        });
+    });
+    return multi;
+}
+
 // Filter and rank suggested slots based on user criteria.
 function filterAndRankSlots(hourlySlots, options = {}) {
     const {
@@ -357,15 +429,19 @@ function filterAndRankSlots(hourlySlots, options = {}) {
         minLanes = 0,
         minOpenness = 0,
         sortBy = 'lanes',
+        duration = 1,
         currentDay = getPolishDayName(new Date())
     } = options;
+
+    const baseSlots = duration > 1 ? getMultiHourSlots(hourlySlots, duration) : hourlySlots;
 
     const currentIdx = DAYS_ORDER.indexOf(currentDay);
     const tomorrowDay = currentIdx >= 0 ? DAYS_ORDER[(currentIdx + 1) % 7] : "Środa";
 
-    let filtered = hourlySlots.filter(s => {
+    let filtered = baseSlots.filter(s => {
         // Exclude completely closed or zero-lane slots
         if (s.openness <= 0 || s.freeLanes <= 0) return false;
+        if (typeof s.minFreeLanes === 'number' && s.minFreeLanes <= 0) return false;
 
         // Day filtering
         if (day === 'today') {
@@ -387,7 +463,8 @@ function filterAndRankSlots(hourlySlots, options = {}) {
         if (pool !== 'all' && s.poolName !== pool) return false;
 
         // Minimum thresholds
-        if (minLanes > 0 && s.freeLanes < minLanes) return false;
+        const checkLanes = typeof s.minFreeLanes === 'number' ? s.minFreeLanes : s.freeLanes;
+        if (minLanes > 0 && checkLanes < minLanes) return false;
         if (minOpenness > 0 && s.openness < minOpenness) return false;
 
         return true;
@@ -396,10 +473,16 @@ function filterAndRankSlots(hourlySlots, options = {}) {
     // Sorting
     filtered.sort((a, b) => {
         if (sortBy === 'lanes') {
+            const aMin = typeof a.minFreeLanes === 'number' ? a.minFreeLanes : a.freeLanes;
+            const bMin = typeof b.minFreeLanes === 'number' ? b.minFreeLanes : b.freeLanes;
+            if (bMin !== aMin) return bMin - aMin;
             if (b.freeLanes !== a.freeLanes) return b.freeLanes - a.freeLanes;
             if (b.openness !== a.openness) return b.openness - a.openness;
         } else if (sortBy === 'openness') {
             if (b.openness !== a.openness) return b.openness - a.openness;
+            const aMin = typeof a.minFreeLanes === 'number' ? a.minFreeLanes : a.freeLanes;
+            const bMin = typeof b.minFreeLanes === 'number' ? b.minFreeLanes : b.freeLanes;
+            if (bMin !== aMin) return bMin - aMin;
             if (b.freeLanes !== a.freeLanes) return b.freeLanes - a.freeLanes;
         }
         // Chronological order as secondary / default
@@ -546,6 +629,8 @@ function initApp(rawData) {
         day: 'all',             // 'all' | 'weekend' | 'workdays' | specific day
         timeBucket: 'all',      // 'all' | 'morning' | 'afternoon' | 'evening'
         pool: 'all',            // 'all' | poolName
+        duration: 1,            // 1 | 2 | 3 (hours to swim)
+        matrixDuration: 1,      // 1 | 2 | 3 (hours for matrix comparison)
         sortBy: 'lanes',        // 'lanes' | 'openness' | 'time'
         onlyHigh: false,        // minOpenness >= 0.8
         matrixDay: todayName,   // day selected in matrix view
@@ -605,6 +690,7 @@ function initApp(rawData) {
             day: state.day,
             timeBucket: state.timeBucket,
             pool: state.pool,
+            duration: state.duration,
             sortBy: state.sortBy,
             minOpenness: state.onlyHigh ? 0.8 : 0,
             currentDay: todayName
@@ -630,6 +716,7 @@ function initApp(rawData) {
             if (resetBtn) {
                 resetBtn.addEventListener('click', () => {
                     state.day = 'all';
+                    state.duration = 1;
                     state.timeBucket = 'all';
                     state.pool = 'all';
                     state.onlyHigh = false;
@@ -644,10 +731,14 @@ function initApp(rawData) {
         const topPick = rankedSlots[0];
         const topSpecs = POOL_SPECS[topPick.poolName] || { length: '25m', type: 'Basen sportowy', address: '' };
         const percent = Math.round(topPick.openness * 100);
+        const durationBadge = topPick.duration > 1 ? ` • ${topPick.duration}h ciągłego pływania` : '';
+        const lanesDisplay = (topPick.duration > 1 && topPick.minFreeLanes !== topPick.freeLanes)
+            ? `min. ${topPick.minFreeLanes} <span class="lanes-unit">torów (śr. ${topPick.freeLanes})</span>`
+            : `${topPick.freeLanes} <span class="lanes-unit">wolnych torów</span>`;
 
         topPickContainer.innerHTML = `
             <div class="top-pick-card">
-                <div class="top-pick-badge">🌟 Rekomendacja #1 • Najwięcej wolnego miejsca</div>
+                <div class="top-pick-badge">🌟 Rekomendacja #1 • Najwięcej wolnego miejsca${durationBadge}</div>
                 <div class="top-pick-header">
                     <div>
                         <h3 class="top-pick-pool">${escapeHtml(topPick.poolName)}</h3>
@@ -655,7 +746,7 @@ function initApp(rawData) {
                         <div class="pool-address-line">${escapeHtml(topSpecs.address)}</div>
                     </div>
                     <div class="top-pick-stats">
-                        <div class="top-pick-lanes">${topPick.freeLanes} <span class="lanes-unit">wolnych torów</span></div>
+                        <div class="top-pick-lanes">${lanesDisplay}</div>
                         <div class="top-pick-percent">${percent}% pojemności</div>
                     </div>
                 </div>
@@ -705,7 +796,7 @@ function initApp(rawData) {
                     <div class="lane-progress-bar small">
                         <div class="lane-progress-fill ${statusClass}" style="width: ${pct}%;"></div>
                     </div>
-                    ${slot.details ? `<div class="slot-subnote">${escapeHtml(slot.details)}</div>` : ''}
+                    ${slot.details ? `<div class="slot-subnote">⏱️ ${escapeHtml(slot.details)}</div>` : ''}
                 </div>
             `;
         }).join('');
@@ -717,25 +808,36 @@ function initApp(rawData) {
         if (!matrixContainer) return;
 
         const day = state.matrixDay;
-        // Group by hour (06:00 to 22:00)
+        const dur = state.matrixDuration || 1;
+        // Group by start hour (06:00 to 22:00 - dur)
+        const maxStartHour = 22 - dur;
         const hours = [];
-        for (let h = 6; h <= 21; h++) hours.push(h);
+        for (let h = 6; h <= maxStartHour; h++) hours.push(h);
 
+        const comparisonSlots = dur > 1 ? getMultiHourSlots(hourlySlots, dur) : hourlySlots;
         const poolNames = ["Olimpijczyk", "Mewa", "Delfin", "Neptun"];
 
         let rowsHtml = '';
         hours.forEach(h => {
-            const timeLabel = `${String(h).padStart(2, '0')}:00 – ${String(h + 1).padStart(2, '0')}:00`;
+            const timeLabel = dur === 1
+                ? `${String(h).padStart(2, '0')}:00 – ${String(h + 1).padStart(2, '0')}:00`
+                : `${String(h).padStart(2, '0')}:00 – ${String(h + dur).padStart(2, '0')}:00 (${dur}h)`;
+
             const cols = poolNames.map(pName => {
-                const match = hourlySlots.find(s => s.poolName === pName && s.day === day && s.hour === h);
-                if (!match || match.openness === 0) {
-                    return `<td class="matrix-cell closed"><span class="matrix-badge closed">Niedostępny</span></td>`;
+                const match = comparisonSlots.find(s => s.poolName === pName && s.day === day && s.hour === h);
+                if (!match || match.openness === 0 || match.status === 'closed') {
+                    return `<td class="matrix-cell closed"><span class="matrix-badge closed">Niedostępny</span>${dur > 1 && match && match.details ? `<div class="matrix-subnote">${escapeHtml(match.details)}</div>` : ''}</td>`;
                 }
                 const pct = Math.round(match.openness * 100);
+                const laneText = (dur > 1 && typeof match.minFreeLanes === 'number')
+                    ? `<strong>min. ${match.minFreeLanes}</strong> torów (śr. ${match.freeLanes})`
+                    : `<strong>${match.freeLanes}</strong> torów wolnych`;
+
                 return `
                     <td class="matrix-cell ${match.status}">
-                        <div class="matrix-lanes"><strong>${match.freeLanes}</strong> torów wolnych</div>
+                        <div class="matrix-lanes">${laneText}</div>
                         <div class="matrix-pct">${pct}% (${match.laneBadge})</div>
+                        ${dur > 1 && match.details ? `<div class="matrix-subnote">${escapeHtml(match.details)}</div>` : ''}
                     </td>
                 `;
             }).join('');
@@ -750,10 +852,20 @@ function initApp(rawData) {
 
         matrixContainer.innerHTML = `
             <div class="matrix-header-controls">
-                <label for="matrix-day-select"><strong>Wybierz dzień do porównania:</strong></label>
-                <select id="matrix-day-select" class="styled-select">
-                    ${DAYS_ORDER.map(d => `<option value="${escapeHtml(d)}" ${d === day ? 'selected' : ''}>${escapeHtml(d)} — ${escapeHtml(weekDates.fullDates[d] || '')}</option>`).join('')}
-                </select>
+                <div class="matrix-controls-group">
+                    <label for="matrix-day-select"><strong>Dzień:</strong></label>
+                    <select id="matrix-day-select" class="styled-select">
+                        ${DAYS_ORDER.map(d => `<option value="${escapeHtml(d)}" ${d === day ? 'selected' : ''}>${escapeHtml(d)} — ${escapeHtml(weekDates.fullDates[d] || '')}</option>`).join('')}
+                    </select>
+                </div>
+                <div class="matrix-controls-group">
+                    <strong>Czas wizyty:</strong>
+                    <div class="matrix-duration-pills">
+                        <button type="button" class="btn-matrix-duration ${dur === 1 ? 'active' : ''}" data-duration="1">1 godzina</button>
+                        <button type="button" class="btn-matrix-duration ${dur === 2 ? 'active' : ''}" data-duration="2">2 godziny</button>
+                        <button type="button" class="btn-matrix-duration ${dur === 3 ? 'active' : ''}" data-duration="3">3 godziny</button>
+                    </div>
+                </div>
                 <span class="matrix-current-date-badge">📅 Obowiązuje: <strong>${escapeHtml(weekDates.fullDates[day] || '')}</strong></span>
             </div>
             <div class="table-responsive">
@@ -781,6 +893,13 @@ function initApp(rawData) {
                 renderMatrix();
             });
         }
+
+        document.querySelectorAll('.btn-matrix-duration').forEach(btn => {
+            btn.addEventListener('click', () => {
+                state.matrixDuration = parseInt(btn.dataset.duration, 10) || 1;
+                renderMatrix();
+            });
+        });
     }
 
     // Render Full Raw Timetables View
@@ -868,6 +987,10 @@ function initApp(rawData) {
         document.querySelectorAll('.filter-day-pill').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.day === state.day);
         });
+        // Duration pills
+        document.querySelectorAll('.filter-duration-pill').forEach(btn => {
+            btn.classList.toggle('active', parseInt(btn.dataset.duration, 10) === state.duration);
+        });
         // Time pills
         document.querySelectorAll('.filter-time-pill').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.time === state.timeBucket);
@@ -909,6 +1032,15 @@ function initApp(rawData) {
         document.querySelectorAll('.filter-day-pill').forEach(btn => {
             btn.addEventListener('click', () => {
                 state.day = btn.dataset.day;
+                syncFilterButtons();
+                renderSuggester();
+            });
+        });
+
+        // Duration filters
+        document.querySelectorAll('.filter-duration-pill').forEach(btn => {
+            btn.addEventListener('click', () => {
+                state.duration = parseInt(btn.dataset.duration, 10) || 1;
                 syncFilterButtons();
                 renderSuggester();
             });
@@ -1049,6 +1181,7 @@ if (typeof module !== 'undefined' && module.exports) {
         getPolishDayName,
         getScheduleDates,
         aggregateHourlySlots,
+        getMultiHourSlots,
         filterAndRankSlots,
         computeDataInsights
     };
