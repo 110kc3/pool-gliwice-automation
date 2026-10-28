@@ -588,10 +588,12 @@ function validatePoolData(data) {
             name: pool.name,
             weekRange: pool.weekRange,
             dates: pool.dates,
+            lastUpdated: pool.lastUpdated,
+            lastUpdatedPl: pool.lastUpdatedPl,
             schedule
         });
     });
-    return { pools, warnings };
+    return { pools, warnings, lastUpdated: pools[0]?.lastUpdated, lastUpdatedPl: pools[0]?.lastUpdatedPl };
 }
 
 function escapeHtml(str) {
@@ -601,6 +603,100 @@ function escapeHtml(str) {
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
+}
+
+// ===========================================================================
+// Calendar Event Generation (.ics and Google Calendar)
+// ===========================================================================
+
+function getSlotCalendarDates(slot, defaultYear = 2026) {
+    let year = defaultYear, month = 10, day = 28;
+    if (slot.date) {
+        const parts = slot.date.split('.');
+        if (parts.length === 3) {
+            day = parseInt(parts[0], 10);
+            month = parseInt(parts[1], 10);
+            year = parseInt(parts[2], 10);
+        }
+    }
+    const startHour = slot.hour;
+    const dur = slot.duration || 1;
+    const endHour = slot.endHour || (startHour + dur);
+
+    const pad = (n) => String(n).padStart(2, '0');
+    const startIso = `${year}${pad(month)}${pad(day)}T${pad(startHour)}0000`;
+    const endIso = `${year}${pad(month)}${pad(day)}T${pad(endHour)}0000`;
+
+    return { startIso, endIso, year, month, day, startHour, endHour };
+}
+
+function buildGoogleCalendarUrl(slot) {
+    const { startIso, endIso } = getSlotCalendarDates(slot);
+    const specs = POOL_SPECS[slot.poolName] || { address: 'Gliwice' };
+    const dur = slot.duration || 1;
+    const minLanes = typeof slot.minFreeLanes === 'number' ? slot.minFreeLanes : slot.freeLanes;
+    const title = `Pływanie — Kryta Pływalnia ${slot.poolName} (${minLanes} wolnych torów)`;
+    const details = `Sesja pływania (${dur}h na basenie ${slot.poolName}).\nWolne tory: ${minLanes}/${slot.totalLanes} (śr. ${slot.freeLanes}).\nPrzebieg: ${slot.details || slot.timeLabel}\nAdres: ${specs.address}, Gliwice\nWygenerowano przez: https://110kc3.github.io/pool-gliwice-automation/`;
+    const location = `${specs.address}, Gliwice`;
+
+    const params = new URLSearchParams({
+        action: 'TEMPLATE',
+        text: title,
+        dates: `${startIso}/${endIso}`,
+        details: details,
+        location: location
+    });
+    return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
+function generateIcsFile(slot) {
+    const { startIso, endIso } = getSlotCalendarDates(slot);
+    const specs = POOL_SPECS[slot.poolName] || { address: 'Gliwice' };
+    const dur = slot.duration || 1;
+    const minLanes = typeof slot.minFreeLanes === 'number' ? slot.minFreeLanes : slot.freeLanes;
+    const title = `Pływanie — Kryta Pływalnia ${slot.poolName} (${minLanes} wolnych torów)`;
+    const description = `Sesja pływania (${dur}h na basenie ${slot.poolName}). Wolne tory: ${minLanes}/${slot.totalLanes}. ${slot.details || ''} Adres: ${specs.address}, Gliwice`;
+    const location = `${specs.address}, Gliwice`;
+    const uid = `swim-${slot.poolName.toLowerCase()}-${startIso}-${Math.random().toString(36).slice(2, 8)}@gliwice-pools`;
+    const nowIso = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+
+    return [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Gliwice Pool Automation//PL',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH',
+        'BEGIN:VEVENT',
+        `UID:${uid}`,
+        `DTSTAMP:${nowIso}`,
+        `DTSTART:${startIso}`,
+        `DTEND:${endIso}`,
+        `SUMMARY:${title.replace(/[,\n]/g, ' ')}`,
+        `DESCRIPTION:${description.replace(/\n/g, '\\n')}`,
+        `LOCATION:${location.replace(/,/g, '\\,')}`,
+        'STATUS:CONFIRMED',
+        'BEGIN:VALARM',
+        'TRIGGER:-PT1H',
+        'ACTION:DISPLAY',
+        'DESCRIPTION:Przypomnienie o wyjściu na basen',
+        'END:VALARM',
+        'END:VEVENT',
+        'END:VCALENDAR'
+    ].join('\r\n');
+}
+
+function triggerIcsDownload(slot) {
+    const icsText = generateIcsFile(slot);
+    const blob = new Blob([icsText], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const safeDate = (slot.date || slot.day).replace(/[^a-zA-Z0-9]/g, '_');
+    a.download = `plywanie_${slot.poolName.toLowerCase()}_${safeDate}_${slot.hour}h.ics`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 }
 
 // ===========================================================================
@@ -762,9 +858,22 @@ function initApp(rawData) {
                     <div class="top-pick-notes">
                         <strong>Szczegóły:</strong> ${escapeHtml(topPick.details || 'Wszystkie tory dostępne dla klientów indywidualnych')}
                     </div>
+                    <div class="calendar-actions">
+                        <a href="${buildGoogleCalendarUrl(topPick)}" target="_blank" rel="noopener noreferrer" class="btn-cal-action btn-cal-gcal">
+                            <span>📅</span> Dodaj do Kalendarza Google
+                        </a>
+                        <button type="button" class="btn-cal-action btn-cal-ics" id="btn-top-pick-ics">
+                            <span>📥</span> Pobierz .ics (Apple / Outlook)
+                        </button>
+                    </div>
                 </div>
             </div>
         `;
+
+        const topPickIcsBtn = document.getElementById('btn-top-pick-ics');
+        if (topPickIcsBtn) {
+            topPickIcsBtn.addEventListener('click', () => triggerIcsDownload(topPick));
+        }
 
         // Remaining ranked slots
         const otherSlots = rankedSlots.slice(1);
@@ -797,9 +906,26 @@ function initApp(rawData) {
                         <div class="lane-progress-fill ${statusClass}" style="width: ${pct}%;"></div>
                     </div>
                     ${slot.details ? `<div class="slot-subnote">⏱️ ${escapeHtml(slot.details)}</div>` : ''}
+                    <div class="slot-card-actions">
+                        <a href="${buildGoogleCalendarUrl(slot)}" target="_blank" rel="noopener noreferrer" class="slot-btn-cal gcal" title="Dodaj do Kalendarza Google">
+                            📅 Google
+                        </a>
+                        <button type="button" class="slot-btn-cal ics btn-slot-ics" data-index="${index}" title="Pobierz plik .ics dla kalendarza">
+                            📥 .ics
+                        </button>
+                    </div>
                 </div>
             `;
         }).join('');
+
+        resultsContainer.querySelectorAll('.btn-slot-ics').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const idx = parseInt(btn.dataset.index, 10);
+                if (otherSlots[idx]) {
+                    triggerIcsDownload(otherSlots[idx]);
+                }
+            });
+        });
     }
 
     // Render Hourly Comparison Matrix View
@@ -1108,10 +1234,58 @@ function initApp(rawData) {
         }
     }
 
-    // Set schedule week badge in header
+    // Set schedule week badge and last updated badge in header
     const weekBadge = document.getElementById('schedule-week-badge');
     if (weekBadge && weekDates.weekRange) {
         weekBadge.textContent = `📅 Harmonogram: ${weekDates.weekRange}`;
+    }
+
+    const updateText = document.getElementById('update-badge-text');
+    const lastUpdatedPl = pools[0]?.lastUpdatedPl || rawData[0]?.lastUpdatedPl;
+    if (updateText) {
+        if (lastUpdatedPl) {
+            updateText.textContent = `Zaktualizowano: ${lastUpdatedPl}`;
+        } else {
+            updateText.textContent = `Codzienna aktualizacja nocna`;
+        }
+    }
+
+    // Register Service Worker for PWA
+    if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+        navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('PWA ServiceWorker registered with scope:', reg.scope))
+            .catch(err => console.warn('PWA ServiceWorker registration failed:', err));
+    }
+
+    // PWA Install prompt and online/offline handling
+    if (typeof window !== 'undefined') {
+        window.addEventListener('online', () => {
+            const banner = document.getElementById('offline-banner');
+            if (banner) banner.style.display = 'none';
+        });
+        window.addEventListener('offline', () => {
+            const banner = document.getElementById('offline-banner');
+            if (banner) banner.style.display = 'block';
+        });
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            window.deferredInstallPrompt = e;
+            const installBtn = document.getElementById('btn-install-pwa');
+            if (installBtn) {
+                installBtn.style.display = 'inline-flex';
+                installBtn.addEventListener('click', async () => {
+                    if (window.deferredInstallPrompt) {
+                        window.deferredInstallPrompt.prompt();
+                        const choice = await window.deferredInstallPrompt.userChoice;
+                        if (choice && choice.outcome === 'accepted') {
+                            installBtn.style.display = 'none';
+                        }
+                        window.deferredInstallPrompt = null;
+                    }
+                });
+            }
+        });
     }
 
     // Update day filter pill labels with concrete calendar dates
@@ -1183,6 +1357,9 @@ if (typeof module !== 'undefined' && module.exports) {
         aggregateHourlySlots,
         getMultiHourSlots,
         filterAndRankSlots,
-        computeDataInsights
+        computeDataInsights,
+        getSlotCalendarDates,
+        buildGoogleCalendarUrl,
+        generateIcsFile
     };
 }

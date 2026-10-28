@@ -16,6 +16,19 @@
     <meta property="og:image" content="https://110kc3.github.io/pool-gliwice-automation/og-image.svg">
     <meta name="twitter:card" content="summary_large_image">
 
+    <!-- PWA Web App Manifest & Mobile Meta -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#0284c7">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Pływalnie Gliwice">
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon.png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -57,13 +70,20 @@
             </div>
             <div class="header-badges">
                 <span class="badge date-badge" id="schedule-week-badge">📅 Harmonogram na bieżący tydzień</span>
-                <span class="badge live-badge"><span class="pulse-dot"></span> Codzienna aktualizacja nocna</span>
-                <span class="badge city-badge">Gliwice (Delfin • Mewa • Olimpijczyk • Neptun)</span>
+                <span class="badge live-badge" id="schedule-update-badge" title="Automatyczna synchronizacja z portalu sport.gliwice.eu">
+                    <span class="pulse-dot"></span> <span id="update-badge-text">Zaktualizowano: sprawdzanie...</span>
+                </span>
+                <button type="button" class="badge btn-install-badge" id="btn-install-pwa" style="display: none;" title="Zainstaluj aplikację na telefonie">
+                    📲 Zainstaluj aplikację
+                </button>
             </div>
         </div>
     </header>
 
     <main class="main-content">
+        <div id="offline-banner" class="offline-banner" style="display: none;">
+            📶 <strong>Tryb offline:</strong> Brak połączenia z siecią. Wyświetlam ostatnio pobrany harmonogram basenów.
+        </div>
         <div id="error-banner" class="error-banner" style="display: none;"></div>
 
         <!-- Navigation view switcher tabs -->
@@ -312,13 +332,178 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- CENNIK BILETÓW I KARTY SPORTOWE -->
+                <div class="pricing-section" id="cennik-info">
+                    <div class="section-heading-row">
+                        <h2>💰 Cennik biletów i Karty Partnerskie</h2>
+                        <span class="section-subtext">Oficjalne stawki wejść indywidualnych (GOS / MZUK Gliwice)</span>
+                    </div>
+
+                    <div class="pricing-grid">
+                        <div class="price-card highlight">
+                            <div class="price-card-header">
+                                <span class="price-pool-name">Olimpijczyk</span>
+                                <span class="price-pool-spec">50m • Basen Olimpijski (10 torów)</span>
+                            </div>
+                            <div class="price-items">
+                                <div class="price-row">
+                                    <span class="price-type">Bilet normalny (1h)</span>
+                                    <span class="price-val">20,00 zł</span>
+                                </div>
+                                <div class="price-row">
+                                    <span class="price-type">Bilet ulgowy (1h)</span>
+                                    <span class="price-val">15,00 zł</span>
+                                </div>
+                                <div class="price-row">
+                                    <span class="price-type">Bilet OPEN (bez limitu)</span>
+                                    <span class="price-val">38,00 zł</span>
+                                </div>
+                                <div class="price-row sub">
+                                    <span class="price-type">Dopłata za minutę</span>
+                                    <span class="price-val">0,33 zł / min</span>
+                                </div>
+                            </div>
+                            <div class="price-footer-badge">Tor 50m • Widownia na 800 osób</div>
+                        </div>
+
+                        <div class="price-card">
+                            <div class="price-card-header">
+                                <span class="price-pool-name">Mewa</span>
+                                <span class="price-pool-spec">25m • Sport + Rekreacja</span>
+                            </div>
+                            <div class="price-items">
+                                <div class="price-row">
+                                    <span class="price-type">Bilet normalny (1h)</span>
+                                    <span class="price-val">18,00 zł</span>
+                                </div>
+                                <div class="price-row">
+                                    <span class="price-type">Bilet ulgowy (1h)</span>
+                                    <span class="price-val">13,00 zł</span>
+                                </div>
+                                <div class="price-row">
+                                    <span class="price-type">Bilet OPEN (bez limitu)</span>
+                                    <span class="price-val">34,00 zł</span>
+                                </div>
+                                <div class="price-row sub">
+                                    <span class="price-type">Dopłata za minutę</span>
+                                    <span class="price-val">0,30 zł / min</span>
+                                </div>
+                            </div>
+                            <div class="price-footer-badge">Brodzik rekreacyjny + Sauna</div>
+                        </div>
+
+                        <div class="price-card">
+                            <div class="price-card-header">
+                                <span class="price-pool-name">Delfin</span>
+                                <span class="price-pool-spec">25m • Śródmieście</span>
+                            </div>
+                            <div class="price-items">
+                                <div class="price-row">
+                                    <span class="price-type">Bilet normalny (1h)</span>
+                                    <span class="price-val">18,00 zł</span>
+                                </div>
+                                <div class="price-row">
+                                    <span class="price-type">Bilet ulgowy (1h)</span>
+                                    <span class="price-val">13,00 zł</span>
+                                </div>
+                                <div class="price-row">
+                                    <span class="price-type">Bilet OPEN (bez limitu)</span>
+                                    <span class="price-val">34,00 zł</span>
+                                </div>
+                                <div class="price-row sub">
+                                    <span class="price-type">Dopłata za minutę</span>
+                                    <span class="price-val">0,30 zł / min</span>
+                                </div>
+                            </div>
+                            <div class="price-footer-badge">Basen sportowy + Mały basen</div>
+                        </div>
+
+                        <div class="price-card">
+                            <div class="price-card-header">
+                                <span class="price-pool-name">Neptun</span>
+                                <span class="price-pool-spec">25m • Kompleks + Saunarium</span>
+                            </div>
+                            <div class="price-items">
+                                <div class="price-row">
+                                    <span class="price-type">Bilet normalny (1h)</span>
+                                    <span class="price-val">18,00 zł</span>
+                                </div>
+                                <div class="price-row">
+                                    <span class="price-type">Bilet ulgowy (1h)</span>
+                                    <span class="price-val">13,00 zł</span>
+                                </div>
+                                <div class="price-row">
+                                    <span class="price-type">Basen + Saunarium (1h)</span>
+                                    <span class="price-val">28,00 zł</span>
+                                </div>
+                                <div class="price-row sub">
+                                    <span class="price-type">Dopłata za minutę</span>
+                                    <span class="price-val">0,30 zł / min</span>
+                                </div>
+                            </div>
+                            <div class="price-footer-badge">Zespół saun: fińska, parowa, infrared</div>
+                        </div>
+                    </div>
+
+                    <!-- KARTY SPORTOWE -->
+                    <div class="sports-cards-section">
+                        <h3>💳 Honorowane karty sportowe i pakiety benefitowe</h3>
+                        <div class="sports-cards-grid">
+                            <div class="sports-card">
+                                <div class="sports-card-badge">MultiSport</div>
+                                <h4>MultiSport (Plus, Classic, Student, Senior)</h4>
+                                <p><strong>60 minut bezpłatnego pływania dziennie</strong> na wszystkich 4 pływalniach w Gliwicach. Po przekroczeniu 60 minut naliczana jest dopłata minutowa wg stawek obiektu.</p>
+                            </div>
+                            <div class="sports-card">
+                                <div class="sports-card-badge">Medicover</div>
+                                <h4>Medicover Sport (d. OK System)</h4>
+                                <p>Wejście bezgotówkowe na 60 minut w ramach posiadanego abonamentu. Wymagana rejestracja wizyty kodem SMS lub w aplikacji mobilnej.</p>
+                            </div>
+                            <div class="sports-card">
+                                <div class="sports-card-badge">PZU Sport</div>
+                                <h4>PZU Sport</h4>
+                                <p>60 minut sesji pływania na basenie sportowym. Rejestracja wejścia w kasie pływalni poprzez kod kreskowy / aplikację PZU.</p>
+                            </div>
+                            <div class="sports-card">
+                                <div class="sports-card-badge">FitProfit</div>
+                                <h4>FitProfit / VanityStyle</h4>
+                                <p>Jedno wejście 60-minutowe dziennie na basen sportowy. Karta imienna, wymagany dokument tożsamości przy wejściu.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ULGI I REGULAMIN WEJŚĆ -->
+                    <div class="rules-info-box">
+                        <h4>ℹ️ Praktyczne informacje dla odwiedzających:</h4>
+                        <div class="rules-columns">
+                            <div>
+                                <strong>Bilety ulgowe przysługują:</strong>
+                                <ul>
+                                    <li>Dzieciom i młodzieży szkolnej do ukończenia szkoły średniej</li>
+                                    <li>Studentom do 26. roku życia za okazaniem ważnej legitymacji</li>
+                                    <li>Emerytom, rencistom i osobom niepełnosprawnym</li>
+                                    <li><strong>Dzieci do lat 7:</strong> wstęp bezpłatny pod opieką osoby dorosłej</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong>Rozliczenie i wymogi:</strong>
+                                <ul>
+                                    <li>Czas pobytu liczony jest od przejścia przez bramkę wejściową do wyjścia</li>
+                                    <li>Obowiązkowy czepek, strój kąpielowy i obuwie basenowe (klapki)</li>
+                                    <li>Zniżki miejskie: Gliwicka Karta Mieszkańca oraz Karta Dużej Rodziny</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <footer class="app-footer">
         <div class="footer-container">
-            <p>Harmonogramy basenów w Gliwicach • Dane aktualizowane automatycznie w każdy poniedziałek o północy z oficjalnych plików PDF operatora.</p>
+            <p>Harmonogramy basenów w Gliwicach • Dane aktualizowane automatycznie codziennie w nocy (02:00 UTC) z oficjalnych plików PDF operatora portalu sport.gliwice.eu.</p>
             <p class="footer-links">
                 <a href="data.json" target="_blank">JSON Data API</a> • 
                 <a href="https://github.com/110kc3/pool-gliwice-automation" target="_blank" rel="noopener noreferrer">Repozytorium GitHub</a>

@@ -78,7 +78,7 @@ def detect_schedule_dates():
     return {days[i]: (monday + datetime.timedelta(days=i)).strftime("%d.%m.%Y") for i in range(7)}
 
 
-def transform_data(raw_data, dates_map=None):
+def transform_data(raw_data, dates_map=None, last_updated_pl=None, last_updated_iso=None):
     """
     Transforms a list of entries formatted as:
     {
@@ -98,6 +98,7 @@ def transform_data(raw_data, dates_map=None):
         ...
     ]
     Optionally enriches each schedule slot with concrete calendar dates if dates_map is provided.
+    Optionally includes last updated timestamps (last_updated_pl, last_updated_iso).
     """
     grouped = defaultdict(list)
 
@@ -155,6 +156,9 @@ def transform_data(raw_data, dates_map=None):
         if dates_map:
             pool_dict["weekRange"] = week_range
             pool_dict["dates"] = dates_map
+        if last_updated_pl:
+            pool_dict["lastUpdated"] = last_updated_iso
+            pool_dict["lastUpdatedPl"] = last_updated_pl
         result.append(pool_dict)
     return result
 
@@ -186,13 +190,22 @@ def aggregate_data(file_paths, output_path):
             print(f"Error: An unexpected error occurred while processing {file_path}: {e}")
 
     dates_map = detect_schedule_dates()
-    transformed = transform_data(all_raw_data, dates_map=dates_map)
+    now_utc = datetime.datetime.now(datetime.timezone.utc)
+    last_updated_iso = now_utc.isoformat()
+    last_updated_pl = datetime.datetime.now().strftime("%d.%m.%Y, %H:%M")
+
+    transformed = transform_data(
+        all_raw_data,
+        dates_map=dates_map,
+        last_updated_pl=last_updated_pl,
+        last_updated_iso=last_updated_iso
+    )
 
     with open(output_path, 'w', encoding='utf-8') as f:
         # allow_nan=False guarantees standards-compliant JSON: a stray NaN/Infinity
         # raises here instead of producing a file the browser's JSON.parse rejects.
         json.dump(transformed, f, ensure_ascii=False, indent=4, allow_nan=False)
-    print(f"Successfully aggregated data to {output_path} (Week range: {transformed[0].get('weekRange') if transformed else 'N/A'})")
+    print(f"Successfully aggregated data to {output_path} (Week range: {transformed[0].get('weekRange') if transformed else 'N/A'}, Updated: {last_updated_pl})")
 
 if __name__ == "__main__":
     files = {

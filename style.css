@@ -1254,3 +1254,293 @@ body {
         text-align: center;
     }
 }
+
+/* ==========================================================================
+   Offline Banner & PWA Install Button
+   ========================================================================== */
+.offline-banner {
+    background: #78350f;
+    color: #fef3c7;
+    padding: 10px 16px;
+    border-radius: var(--radius-md);
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #b45309;
+}
+
+.btn-install-badge {
+    background: #0284c7;
+    color: #ffffff;
+    border: 1px solid #38bdf8;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-install-badge:hover {
+    background: #0369a1;
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Calendar Action Buttons (.ics & Google Calendar)
+   ========================================================================== */
+.calendar-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.btn-cal-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.btn-cal-gcal {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+.btn-cal-gcal:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.btn-cal-ics {
+    background: var(--surface);
+    color: var(--text);
+    border-color: var(--border);
+}
+
+.btn-cal-ics:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.slot-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border);
+}
+
+.slot-btn-cal {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 0.74rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    background: var(--bg);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    transition: all 0.15s ease;
+}
+
+.slot-btn-cal:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+/* ==========================================================================
+   Pricing & Sports Cards Section (Cennik i Karty)
+   ========================================================================== */
+.pricing-section {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 2px solid var(--border);
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.price-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: all 0.2s ease;
+}
+
+.price-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.price-card.highlight {
+    border-color: var(--primary);
+    background: linear-gradient(180deg, var(--surface) 0%, rgba(2, 132, 199, 0.05) 100%);
+}
+
+.price-card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+}
+
+.price-pool-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.price-pool-spec {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.price-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.88rem;
+}
+
+.price-type {
+    color: var(--text-muted);
+}
+
+.price-val {
+    font-weight: 700;
+    color: var(--text);
+}
+
+.price-row.sub {
+    font-size: 0.78rem;
+    opacity: 0.8;
+}
+
+.price-footer-badge {
+    margin-top: auto;
+    font-size: 0.75rem;
+    color: var(--primary);
+    background: var(--primary-light);
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Sports Cards */
+.sports-cards-section {
+    margin-top: 36px;
+}
+
+.sports-cards-section h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text);
+}
+
+.sports-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.sports-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sports-card-badge {
+    align-self: flex-start;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: #0284c7;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sports-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0;
+}
+
+.sports-card p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+    margin: 0;
+}
+
+/* Rules box */
+.rules-info-box {
+    margin-top: 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 20px;
+}
+
+.rules-info-box h4 {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    color: var(--text);
+}
+
+.rules-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.rules-columns ul {
+    margin: 6px 0 0 18px;
+    padding: 0;
+}
+
+.rules-columns li {
+    margin-bottom: 4px;
+}

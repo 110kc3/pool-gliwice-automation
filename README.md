@@ -12,6 +12,7 @@ The municipal pools publish incompatible PDFs on their own schedules, and none o
   - Instant ranking of time slots based on the maximum number of free lanes and openness percentage across all 4 pools.
   - **Spotlight #1 Top Pick:** Prominently highlights the best available slot matching chosen filters.
   - **Contiguous multi-hour sessions:** Support for 1h, 2h, and 3h continuous swimming sessions with guaranteed minimum free lanes and step-by-step lane progression (`14:00 (6 torów) ➔ 15:00 (5 torów)`).
+  - **Calendar Export (.ics / Google Calendar):** One-click button on recommendation cards to add sessions to Google Calendar or download `.ics` files with alarm reminders.
   - **Concrete calendar dates:** Explicit week range and calendar dates (`26.10 – 01.11.2026`) dynamically extracted and displayed on filter pills and slot cards.
   - **Quick interactive filters:** Day (including dynamic "Dziś", "Jutro", "Weekend", "Dni robocze"), Swimming Duration (1h, 2h, 3h), Time of Day (Morning, Afternoon, Evening), Pool preference, and sorting criteria.
   - **Data-driven takeaways:** Key statistical insights computed dynamically across all schedules (e.g. Sunday 84% average free capacity, evenings after 17:00 with 87% free lanes, Olimpijczyk 10-lane peak capacity at 06:00).
@@ -19,6 +20,10 @@ The municipal pools publish incompatible PDFs on their own schedules, and none o
   - Side-by-side timetable comparing availability across all 4 pools hour-by-hour (06:00 – 22:00) for any selected day and duration (1h, 2h, 3h).
 - 📋 **Full Timetables ("Pełne harmonogramy"):**
   - Per-pool schedules with instant real-time text search and day filters.
+- 💰 **Pricing & Sports Cards ("Cennik biletów i Karty sportowe"):**
+  - Ticket prices (Normalny, Ulgowy, OPEN, dopłata minutowa) and benefit card rules (MultiSport 60 min, Medicover Sport, PZU Sport, FitProfit).
+- 📱 **Progressive Web App (PWA):**
+  - Installable mobile/desktop app with offline caching via Service Worker (`sw.js`), Web App Manifest, and high-res vector/PNG app icons.
 - ℹ️ **Pool Technical Specs ("O pływalniach"):**
   - Dimensions (50m Olympic 10-lane basin vs 25m 6-lane sports basins), addresses, water temperatures, and Google Maps directions links.
 
@@ -54,7 +59,7 @@ python -m http.server 8080           # then open http://localhost:8080
 # Backend data transformation & noise filtering tests (12 tests)
 pytest tests/test_master_aggregator.py -q
 
-# Frontend availability scoring, lane calculations, multi-hour windows & suggester engine (19 tests)
+# Frontend availability scoring, lane calculations, multi-hour windows & suggester engine (22 tests)
 node tests/test_availability.mjs
 ```
 

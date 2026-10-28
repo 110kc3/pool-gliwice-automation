@@ -22,7 +22,10 @@ const {
     aggregateHourlySlots,
     getMultiHourSlots,
     filterAndRankSlots,
-    computeDataInsights
+    computeDataInsights,
+    getSlotCalendarDates,
+    buildGoogleCalendarUrl,
+    generateIcsFile
 } = require(path.join(root, 'script.js'));
 
 let passed = 0;
@@ -378,6 +381,79 @@ test('filterAndRankSlots filters and ranks multi-hour requests accurately', () =
     assert.equal(ranked2h[1].poolName, 'Mewa');
     assert.equal(ranked2h[1].minFreeLanes, 5);
     assert.equal(ranked2h[1].freeLanes, 5.5);
+});
+
+// --- Calendar & PWA helpers -----------------------------------------------
+test('getSlotCalendarDates and buildGoogleCalendarUrl produce valid date ranges and URLs', () => {
+    const slot = {
+        poolName: 'Olimpijczyk',
+        day: 'Środa',
+        date: '28.10.2026',
+        hour: 14,
+        duration: 2,
+        endHour: 16,
+        freeLanes: 8,
+        minFreeLanes: 8,
+        totalLanes: 10,
+        details: '14:00 (8 torów) ➔ 15:00 (8 torów)'
+    };
+
+    const dates = getSlotCalendarDates(slot);
+    assert.equal(dates.startIso, '20261028T140000');
+    assert.equal(dates.endIso, '20261028T160000');
+    assert.equal(dates.startHour, 14);
+    assert.equal(dates.endHour, 16);
+
+    const gcal = buildGoogleCalendarUrl(slot);
+    assert.ok(gcal.startsWith('https://calendar.google.com/calendar/render?'));
+    assert.ok(gcal.includes('20261028T140000%2F20261028T160000'));
+    assert.ok(gcal.includes('Olimpijczyk'));
+    assert.ok(gcal.includes('Oriona'));
+});
+
+test('generateIcsFile generates standard RFC 5545 iCalendar content with alarms', () => {
+    const slot = {
+        poolName: 'Mewa',
+        day: 'Sobota',
+        date: '31.10.2026',
+        hour: 10,
+        duration: 1,
+        endHour: 11,
+        freeLanes: 6,
+        totalLanes: 6,
+        details: 'Wszystkie tory wolne'
+    };
+
+    const ics = generateIcsFile(slot);
+    assert.ok(ics.includes('BEGIN:VCALENDAR'));
+    assert.ok(ics.includes('VERSION:2.0'));
+    assert.ok(ics.includes('BEGIN:VEVENT'));
+    assert.ok(ics.includes('DTSTART:20261031T100000'));
+    assert.ok(ics.includes('DTEND:20261031T110000'));
+    assert.ok(ics.includes('SUMMARY:Pływanie — Kryta Pływalnia Mewa'));
+    assert.ok(ics.includes('LOCATION:ul. Mewy 36\\, Gliwice-Sośnica\\, Gliwice'));
+    assert.ok(ics.includes('BEGIN:VALARM'));
+    assert.ok(ics.includes('TRIGGER:-PT1H'));
+    assert.ok(ics.includes('END:VCALENDAR'));
+});
+
+test('validatePoolData preserves lastUpdated and lastUpdatedPl metadata', () => {
+    const raw = [
+        {
+            name: 'Delfin',
+            weekRange: '26.10.2026 – 01.11.2026',
+            lastUpdated: '2026-10-28T15:05:00+00:00',
+            lastUpdatedPl: '28.10.2026, 15:05',
+            schedule: [
+                { day: 'Poniedziałek', time: '06:00 – 07:00', availableLanes: 'Pływalnia dostępna' }
+            ]
+        }
+    ];
+
+    const res = validatePoolData(raw);
+    assert.equal(res.lastUpdatedPl, '28.10.2026, 15:05');
+    assert.equal(res.pools[0].lastUpdatedPl, '28.10.2026, 15:05');
+    assert.equal(res.pools[0].lastUpdated, '2026-10-28T15:05:00+00:00');
 });
 
 console.log(`\n${passed} availability tests passed.`);
