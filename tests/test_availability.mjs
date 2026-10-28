@@ -18,6 +18,7 @@ const {
     getFreeLanesDetail,
     getTimeBucket,
     getPolishDayName,
+    getScheduleDates,
     aggregateHourlySlots,
     filterAndRankSlots,
     computeDataInsights
@@ -276,6 +277,46 @@ test('computeDataInsights accurately finds top days and buckets', () => {
     assert.equal(ins.bestDay, 'Niedziela');
     assert.ok(ins.bestDayPercentage >= 90);
     assert.ok(ins.peakSlot.includes('Olimpijczyk'));
+});
+
+// --- getScheduleDates & slot date population ------------------------------
+test('getScheduleDates extracts dates and assigns them to aggregated slots', () => {
+    const mockPools = [
+        {
+            name: 'Mewa',
+            weekRange: '26.10.2026 – 01.11.2026',
+            dates: {
+                'Poniedziałek': '26.10.2026',
+                'Wtorek': '27.10.2026',
+                'Środa': '28.10.2026',
+                'Czwartek': '29.10.2026',
+                'Piątek': '30.10.2026',
+                'Sobota': '31.10.2026',
+                'Niedziela': '01.11.2026'
+            },
+            schedule: [
+                { day: 'Poniedziałek', time: '07:00 – 08:00', availableLanes: 'Pływalnia dostępna' },
+                { day: 'Środa', time: '14:00 – 15:00', availableLanes: 'Pływalnia dostępna' }
+            ]
+        }
+    ];
+
+    const datesInfo = getScheduleDates(mockPools);
+    assert.equal(datesInfo.weekRange, '26.10.2026 – 01.11.2026');
+    assert.equal(datesInfo.fullDates['Poniedziałek'], '26.10.2026');
+    assert.equal(datesInfo.shortDates['Poniedziałek'], '26.10');
+    assert.equal(datesInfo.shortDates['Środa'], '28.10');
+
+    const slots = aggregateHourlySlots(mockPools);
+    const monSlot = slots.find(s => s.day === 'Poniedziałek');
+    assert.ok(monSlot);
+    assert.equal(monSlot.date, '26.10.2026');
+    assert.equal(monSlot.shortDate, '26.10');
+
+    const wedSlot = slots.find(s => s.day === 'Środa');
+    assert.ok(wedSlot);
+    assert.equal(wedSlot.date, '28.10.2026');
+    assert.equal(wedSlot.shortDate, '28.10');
 });
 
 console.log(`\n${passed} availability tests passed.`);

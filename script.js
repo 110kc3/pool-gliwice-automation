@@ -236,11 +236,47 @@ function getPolishDayName(date) {
     return jsDayMap[date.getDay()];
 }
 
+// Extract or compute calendar dates for the active weekly schedule
+function getScheduleDates(pools, fallbackDate = new Date()) {
+    // 1. Check if pools provide explicit dates map from master_aggregator
+    if (Array.isArray(pools) && pools.length > 0 && pools[0].dates) {
+        const fullDates = pools[0].dates;
+        const weekRange = pools[0].weekRange || `${fullDates["Poniedziałek"]} – ${fullDates["Niedziela"]}`;
+        const shortDates = {};
+        for (const [d, dt] of Object.entries(fullDates)) {
+            shortDates[d] = String(dt).replace(/\.\d{4}$/, '');
+        }
+        return { fullDates, shortDates, weekRange };
+    }
+
+    // 2. Fallback: compute based on Monday of the fallbackDate week
+    const jsDay = fallbackDate.getDay();
+    const diffToMonday = jsDay === 0 ? -6 : 1 - jsDay;
+    const monday = new Date(fallbackDate);
+    monday.setDate(fallbackDate.getDate() + diffToMonday);
+
+    const fullDates = {};
+    const shortDates = {};
+    DAYS_ORDER.forEach((d, idx) => {
+        const cur = new Date(monday);
+        cur.setDate(monday.getDate() + idx);
+        const dd = String(cur.getDate()).padStart(2, '0');
+        const mm = String(cur.getMonth() + 1).padStart(2, '0');
+        const yyyy = cur.getFullYear();
+        fullDates[d] = `${dd}.${mm}.${yyyy}`;
+        shortDates[d] = `${dd}.${mm}`;
+    });
+    const weekRange = `${fullDates["Poniedziałek"]} – ${fullDates["Niedziela"]}`;
+    return { fullDates, shortDates, weekRange };
+}
+
 // Group raw pool schedule into consistent 1-hour slots per pool, day, and hour.
 function aggregateHourlySlots(pools) {
     const hourlySlots = [];
+    const { fullDates, shortDates } = getScheduleDates(pools);
 
     pools.forEach(pool => {
+        const poolDates = pool.dates || fullDates;
         const byDayHour = {};
         (pool.schedule || []).forEach(entry => {
             const detail = getFreeLanesDetail(pool.name, entry.availableLanes);
@@ -252,9 +288,13 @@ function aggregateHourlySlots(pools) {
             const key = `${entry.day}_${hour}`;
 
             if (!byDayHour[key]) {
+                const dateVal = entry.date || poolDates[entry.day] || fullDates[entry.day] || '';
+                const shortVal = shortDates[entry.day] || (dateVal ? dateVal.replace(/\.\d{4}$/, '') : '');
                 byDayHour[key] = {
                     poolName: pool.name,
                     day: entry.day,
+                    date: dateVal,
+                    shortDate: shortVal,
                     hour: hour,
                     timeLabel: `${String(hour).padStart(2, '0')}:00 – ${String(hour + 1).padStart(2, '0')}:00`,
                     timeBucket: getTimeBucket(hour),
@@ -290,6 +330,8 @@ function aggregateHourlySlots(pools) {
             hourlySlots.push({
                 poolName: slot.poolName,
                 day: slot.day,
+                date: slot.date,
+                shortDate: slot.shortDate,
                 hour: slot.hour,
                 timeLabel: slot.timeLabel,
                 timeBucket: slot.timeBucket,
@@ -425,12 +467,16 @@ function computeDataInsights(hourlySlots) {
     // Peak slot (slot with the most free lanes in the week)
     const peakSlot = [...openSlots].sort((a, b) => b.freeLanes - a.freeLanes || b.openness - a.openness)[0];
 
+    const bestDayDate = openSlots.find(s => s.day === bestDay)?.date;
+    const bestDayLabel = bestDayDate ? `${bestDay} (${bestDayDate})` : bestDay;
+
     return {
         bestDay,
+        bestDayLabel,
         bestDayPercentage: Math.round(maxDayAvg * 100),
         bestBucket: bucketLabels[bestBucketKey],
         bestBucketPercentage: Math.round(maxBucketAvg * 100),
-        peakSlot: peakSlot ? `${peakSlot.poolName} (${peakSlot.day} ${peakSlot.timeLabel}, ${peakSlot.freeLanes} wolnych torów)` : null,
+        peakSlot: peakSlot ? `${peakSlot.poolName} (${peakSlot.day}${peakSlot.date ? ' ' + peakSlot.date : ''} ${peakSlot.timeLabel}, ${peakSlot.freeLanes} wolnych torów)` : null,
         totalOpenSlots: openSlots.length
     };
 }
@@ -455,7 +501,12 @@ function validatePoolData(data) {
             if (!ok) warnings.push(`Skipping malformed entry ${j} in pool "${pool.name}".`);
             return ok;
         });
-        pools.push({ name: pool.name, schedule });
+        pools.push({
+            name: pool.name,
+            weekRange: pool.weekRange,
+            dates: pool.dates,
+            schedule
+        });
     });
     return { pools, warnings };
 }
@@ -484,6 +535,7 @@ function initApp(rawData) {
     }
 
     window.poolData = pools;
+    const weekDates = getScheduleDates(pools);
     const hourlySlots = aggregateHourlySlots(pools);
     const insights = computeDataInsights(hourlySlots);
     const todayName = getPolishDayName(new Date());
@@ -491,7 +543,7 @@ function initApp(rawData) {
     // Suggester interactive state
     const state = {
         activeTab: 'suggester', // 'suggester' | 'matrix' | 'schedules' | 'info'
-        day: 'all',             // 'all' | 'today' | 'tomorrow' | 'weekend' | 'workdays' | specific day
+        day: 'all',             // 'all' | 'weekend' | 'workdays' | specific day
         timeBucket: 'all',      // 'all' | 'morning' | 'afternoon' | 'evening'
         pool: 'all',            // 'all' | poolName
         sortBy: 'lanes',        // 'lanes' | 'openness' | 'time'
@@ -511,7 +563,7 @@ function initApp(rawData) {
                 <div class="insight-icon">🏆</div>
                 <div class="insight-content">
                     <span class="insight-title">Najlepszy dzień</span>
-                    <strong class="insight-value">${escapeHtml(insights.bestDay)}</strong>
+                    <strong class="insight-value">${escapeHtml(insights.bestDayLabel || insights.bestDay)}</strong>
                     <span class="insight-desc">Średnio <strong>${insights.bestDayPercentage}%</strong> wolnych torów</span>
                 </div>
             </div>
@@ -610,8 +662,8 @@ function initApp(rawData) {
 
                 <div class="top-pick-details">
                     <div class="top-pick-when">
-                        <span class="when-day">${escapeHtml(topPick.day)}</span>
-                        <span class="when-time">${escapeHtml(topPick.timeLabel)}</span>
+                        <span class="when-date">📅 <strong>${escapeHtml(topPick.date || '')}</strong> (${escapeHtml(topPick.day)})</span>
+                        <span class="when-time">⏰ ${escapeHtml(topPick.timeLabel)}</span>
                     </div>
                     <div class="lane-progress-bar">
                         <div class="lane-progress-fill high" style="width: ${percent}%;"></div>
@@ -644,8 +696,8 @@ function initApp(rawData) {
                         <span class="slot-type">${escapeHtml(slotSpecs.length)}</span>
                     </div>
                     <div class="slot-when">
-                        <strong>${escapeHtml(slot.day)}</strong>
-                        <span class="slot-time">${escapeHtml(slot.timeLabel)}</span>
+                        <div class="slot-date-badge">📅 <strong>${escapeHtml(slot.date || '')}</strong> (${escapeHtml(slot.day)})</div>
+                        <span class="slot-time">⏰ ${escapeHtml(slot.timeLabel)}</span>
                     </div>
                     <div class="slot-lanes-badge status-${statusClass}">
                         ${escapeHtml(slot.laneBadge)}
@@ -700,8 +752,9 @@ function initApp(rawData) {
             <div class="matrix-header-controls">
                 <label for="matrix-day-select"><strong>Wybierz dzień do porównania:</strong></label>
                 <select id="matrix-day-select" class="styled-select">
-                    ${DAYS_ORDER.map(d => `<option value="${escapeHtml(d)}" ${d === day ? 'selected' : ''}>${escapeHtml(d)}${d === todayName ? ' (Dziś)' : ''}</option>`).join('')}
+                    ${DAYS_ORDER.map(d => `<option value="${escapeHtml(d)}" ${d === day ? 'selected' : ''}>${escapeHtml(d)} — ${escapeHtml(weekDates.fullDates[d] || '')}</option>`).join('')}
                 </select>
+                <span class="matrix-current-date-badge">📅 Obowiązuje: <strong>${escapeHtml(weekDates.fullDates[day] || '')}</strong></span>
             </div>
             <div class="table-responsive">
                 <table class="comparison-matrix-table">
@@ -735,6 +788,15 @@ function initApp(rawData) {
         const container = document.getElementById('schedules-container');
         if (!container) return;
 
+        // Synchronize schedule-day-select options with dates if needed
+        const scheduleDaySelect = document.getElementById('schedule-day-select');
+        if (scheduleDaySelect && scheduleDaySelect.options.length <= 8) {
+            scheduleDaySelect.innerHTML = `
+                <option value="all" ${state.scheduleDay === 'all' ? 'selected' : ''}>Wszystkie dni (${escapeHtml(weekDates.weekRange)})</option>
+                ${DAYS_ORDER.map(d => `<option value="${escapeHtml(d)}" ${d === state.scheduleDay ? 'selected' : ''}>${escapeHtml(d)} — ${escapeHtml(weekDates.fullDates[d] || '')}</option>`).join('')}
+            `;
+        }
+
         container.innerHTML = '';
         pools.forEach(pool => {
             if (state.schedulePool !== 'all' && pool.name !== state.schedulePool) return;
@@ -767,7 +829,7 @@ function initApp(rawData) {
                     <table class="schedule-table">
                         <thead>
                             <tr>
-                                <th>Dzień</th>
+                                <th>Dzień i Data</th>
                                 <th>Godzina</th>
                                 <th>Dostępność</th>
                                 <th>Status</th>
@@ -778,9 +840,10 @@ function initApp(rawData) {
                                 const detail = getFreeLanesDetail(pool.name, e.availableLanes);
                                 const statusClass = detail ? detail.status : 'low';
                                 const badgeText = detail ? detail.label : cleanCell(e.availableLanes);
+                                const dateStr = e.date || weekDates.fullDates[cleanCell(e.day)] || '';
                                 return `
                                     <tr>
-                                        <td><strong>${escapeHtml(cleanCell(e.day))}</strong></td>
+                                        <td><strong>${escapeHtml(cleanCell(e.day))}</strong>${dateStr ? `<span class="cell-date">(${escapeHtml(dateStr)})</span>` : ''}</td>
                                         <td>${escapeHtml(cleanCell(e.time))}</td>
                                         <td>${escapeHtml(cleanCell(e.availableLanes))}</td>
                                         <td><span class="status-pill status-${statusClass}">${escapeHtml(badgeText)}</span></td>
@@ -913,16 +976,31 @@ function initApp(rawData) {
         }
     }
 
-    // Set today and tomorrow name labels on the pills
-    const todayPill = document.querySelector('.filter-day-pill[data-day="today"]');
-    if (todayPill) {
-        todayPill.innerHTML = `Dziś <span class="pill-day-sub">(${todayName})</span>`;
+    // Set schedule week badge in header
+    const weekBadge = document.getElementById('schedule-week-badge');
+    if (weekBadge && weekDates.weekRange) {
+        weekBadge.textContent = `📅 Harmonogram: ${weekDates.weekRange}`;
     }
-    const tomorrowPill = document.querySelector('.filter-day-pill[data-day="tomorrow"]');
-    if (tomorrowPill) {
-        const currentIdx = DAYS_ORDER.indexOf(todayName);
-        const tomorrowName = currentIdx >= 0 ? DAYS_ORDER[(currentIdx + 1) % 7] : "Jutro";
-        tomorrowPill.innerHTML = `Jutro <span class="pill-day-sub">(${tomorrowName})</span>`;
+
+    // Update day filter pill labels with concrete calendar dates
+    const allPill = document.querySelector('.filter-day-pill[data-day="all"]');
+    if (allPill && weekDates.shortDates["Poniedziałek"]) {
+        allPill.innerHTML = `Wszystkie dni <span class="pill-day-sub">(${weekDates.shortDates["Poniedziałek"]} – ${weekDates.shortDates["Niedziela"]})</span>`;
+    }
+    DAYS_ORDER.forEach(d => {
+        const pill = document.querySelector(`.filter-day-pill[data-day="${d}"]`);
+        if (pill) {
+            const shortDt = weekDates.shortDates[d] || '';
+            pill.innerHTML = `<strong>${shortDt}</strong> <span class="pill-day-sub">(${d})</span>`;
+        }
+    });
+    const workdaysPill = document.querySelector('.filter-day-pill[data-day="workdays"]');
+    if (workdaysPill && weekDates.shortDates["Poniedziałek"]) {
+        workdaysPill.innerHTML = `Dni robocze <span class="pill-day-sub">(${weekDates.shortDates["Poniedziałek"]}–${weekDates.shortDates["Piątek"]})</span>`;
+    }
+    const weekendPill = document.querySelector('.filter-day-pill[data-day="weekend"]');
+    if (weekendPill && weekDates.shortDates["Sobota"]) {
+        weekendPill.innerHTML = `Weekend <span class="pill-day-sub">(${weekDates.shortDates["Sobota"]}–${weekDates.shortDates["Niedziela"]})</span>`;
     }
 
     renderInsights();
@@ -969,6 +1047,7 @@ if (typeof module !== 'undefined' && module.exports) {
         getFreeLanesDetail,
         getTimeBucket,
         getPolishDayName,
+        getScheduleDates,
         aggregateHourlySlots,
         filterAndRankSlots,
         computeDataInsights

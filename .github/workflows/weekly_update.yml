@@ -1,9 +1,9 @@
-name: Weekly Schedule Update
+name: Daily Schedule Update
 
 on:
   schedule:
-    - cron: '0 0 * * 1' # Runs every Monday at midnight
-  workflow_dispatch: # Allows manual triggering
+    - cron: '0 2 * * *' # Runs every night at 02:00 UTC (03:00 / 04:00 CET/CEST)
+  workflow_dispatch: # Allows manual triggering from GitHub UI
 
 jobs:
   build:
@@ -13,12 +13,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          cache: 'pip' # Use pip caching for dependencies
+          cache: 'pip'
 
       - name: Set up Java (required by tabula-py)
         uses: actions/setup-java@v4
@@ -54,6 +56,18 @@ jobs:
 
       - name: Run aggregator
         run: ./venv/bin/python master_aggregator.py
+
+      - name: Commit and push changes if updated
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data.json *_data.json *.pdf
+          if ! git diff --staged --quiet; then
+            git commit -m "chore(schedule): automated daily schedule update [skip ci]"
+            git push origin master
+          else
+            echo "No schedule changes to commit."
+          fi
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

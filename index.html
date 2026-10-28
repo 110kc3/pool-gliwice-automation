@@ -56,7 +56,8 @@
                 </div>
             </div>
             <div class="header-badges">
-                <span class="badge live-badge"><span class="pulse-dot"></span> Dane cotygodniowe z PDF</span>
+                <span class="badge date-badge" id="schedule-week-badge">📅 Harmonogram na bieżący tydzień</span>
+                <span class="badge live-badge"><span class="pulse-dot"></span> Codzienna aktualizacja nocna</span>
                 <span class="badge city-badge">Gliwice (Delfin • Mewa • Olimpijczyk • Neptun)</span>
             </div>
         </div>
@@ -102,20 +103,18 @@
                 </div>
 
                 <div class="filter-group">
-                    <span class="filter-label">📅 Dzień:</span>
+                    <span class="filter-label">📅 Dzień i data:</span>
                     <div class="pill-group" id="day-pills">
                         <button type="button" class="filter-pill filter-day-pill active" data-day="all">Wszystkie dni</button>
-                        <button type="button" class="filter-pill filter-day-pill" data-day="today">Dziś</button>
-                        <button type="button" class="filter-pill filter-day-pill" data-day="tomorrow">Jutro</button>
-                        <button type="button" class="filter-pill filter-day-pill" data-day="weekend">Weekend</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Poniedziałek">Poniedziałek</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Wtorek">Wtorek</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Środa">Środa</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Czwartek">Czwartek</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Piątek">Piątek</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Sobota">Sobota</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Niedziela">Niedziela</button>
                         <button type="button" class="filter-pill filter-day-pill" data-day="workdays">Dni robocze</button>
-                        <button type="button" class="filter-pill filter-day-pill" data-day="Poniedziałek">Pn</button>
-                        <button type="button" class="filter-pill filter-day-pill" data-day="Wtorek">Wt</button>
-                        <button type="button" class="filter-pill filter-day-pill" data-day="Środa">Śr</button>
-                        <button type="button" class="filter-pill filter-day-pill" data-day="Czwartek">Czw</button>
-                        <button type="button" class="filter-pill filter-day-pill" data-day="Piątek">Pt</button>
-                        <button type="button" class="filter-pill filter-day-pill" data-day="Sobota">Sob</button>
-                        <button type="button" class="filter-pill filter-day-pill" data-day="Niedziela">Nie</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="weekend">Weekend</button>
                     </div>
                 </div>
 

@@ -1,7 +1,10 @@
+import datetime
 import json
+import os
 import re
 from collections import defaultdict
 import numpy as np
+import pandas as pd
 
 DAYS = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"]
 DAY_SET = set(DAYS)
@@ -48,7 +51,34 @@ def is_noise_value(value):
     return False
 
 
-def transform_data(raw_data):
+def detect_schedule_dates():
+    """
+    Detects the 7 calendar dates (Poniedziałek - Niedziela) for the active schedule week.
+    Tries parsing from PDFs (e.g. mewa.pdf date row), or falls back to the current week's dates.
+    """
+    days = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"]
+    try:
+        import tabula
+        for pdf in ["mewa.pdf", "neptun.pdf", "Harmonogram_Olimpijczyk_latest.pdf"]:
+            if not os.path.exists(pdf):
+                continue
+            tables = tabula.read_pdf(pdf, pages="1", multiple_tables=True, pandas_options={"header": None})
+            for t in tables:
+                for _, row in t.iterrows():
+                    r_text = " ".join(str(x) for x in row if not pd.isna(x))
+                    matches = re.findall(r"(\d{1,2}\.\d{1,2}\.\d{4})", r_text)
+                    if len(matches) == 7:
+                        return dict(zip(days, matches))
+    except Exception:
+        pass
+
+    # Fallback: compute Monday..Sunday of current week
+    today = datetime.date.today()
+    monday = today - datetime.timedelta(days=today.weekday())
+    return {days[i]: (monday + datetime.timedelta(days=i)).strftime("%d.%m.%Y") for i in range(7)}
+
+
+def transform_data(raw_data, dates_map=None):
     """
     Transforms a list of entries formatted as:
     {
@@ -67,6 +97,7 @@ def transform_data(raw_data):
         },
         ...
     ]
+    Optionally enriches each schedule slot with concrete calendar dates if dates_map is provided.
     """
     grouped = defaultdict(list)
 
@@ -102,18 +133,29 @@ def transform_data(raw_data):
             if is_noise_value(available_lanes):
                 continue
 
-            grouped[pool_name].append({
-                "day": clean_cell(day),
+            c_day = clean_cell(day)
+            slot_entry = {
+                "day": c_day,
                 "time": clean_time,
                 "availableLanes": available_lanes
-            })
+            }
+            if dates_map and c_day in dates_map:
+                slot_entry["date"] = dates_map[c_day]
+
+            grouped[pool_name].append(slot_entry)
 
     result = []
+    week_range = f"{dates_map['Poniedziałek']} – {dates_map['Niedziela']}" if dates_map and 'Poniedziałek' in dates_map and 'Niedziela' in dates_map else None
+
     for name, schedule in grouped.items():
-        result.append({
+        pool_dict = {
             "name": name,
             "schedule": schedule
-        })
+        }
+        if dates_map:
+            pool_dict["weekRange"] = week_range
+            pool_dict["dates"] = dates_map
+        result.append(pool_dict)
     return result
 
 def aggregate_data(file_paths, output_path):
@@ -143,13 +185,14 @@ def aggregate_data(file_paths, output_path):
             # Catch any other unexpected error during file processing (e.g., permissions, encoding issues)
             print(f"Error: An unexpected error occurred while processing {file_path}: {e}")
 
-    transformed = transform_data(all_raw_data)
+    dates_map = detect_schedule_dates()
+    transformed = transform_data(all_raw_data, dates_map=dates_map)
 
     with open(output_path, 'w', encoding='utf-8') as f:
         # allow_nan=False guarantees standards-compliant JSON: a stray NaN/Infinity
         # raises here instead of producing a file the browser's JSON.parse rejects.
         json.dump(transformed, f, ensure_ascii=False, indent=4, allow_nan=False)
-    print(f"Successfully aggregated data to {output_path}")
+    print(f"Successfully aggregated data to {output_path} (Week range: {transformed[0].get('weekRange') if transformed else 'N/A'})")
 
 if __name__ == "__main__":
     files = {

@@ -134,6 +134,14 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
+.date-badge {
+    background-color: #ffffff;
+    color: #0369a1;
+    font-weight: 700;
+    border: 1px solid #bae6fd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .city-badge {
     background-color: rgba(0, 0, 0, 0.2);
     color: #e0f2fe;
@@ -713,13 +721,44 @@ body {
 .slot-when {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
     margin-bottom: 6px;
+}
+
+.slot-date-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--primary-dark);
 }
 
 .slot-when strong {
     font-size: 0.95rem;
     color: var(--text);
+}
+
+.cell-date {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.matrix-current-date-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
 .slot-time {
