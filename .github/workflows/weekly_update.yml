@@ -57,6 +57,18 @@ jobs:
       - name: Run aggregator
         run: ./venv/bin/python master_aggregator.py
 
+      - name: Validate generated schedules
+        run: |
+          ./venv/bin/python -m pytest tests/test_master_aggregator.py
+          node tests/test_availability.mjs
+          node -e '
+            const { validatePoolData } = require("./script.js");
+            const data = require("./data.json");
+            const { pools, warnings } = validatePoolData(data);
+            if (!pools || pools.length < 4) throw new Error("Validation failed: expected at least 4 pools");
+            console.log("Healthcheck OK: " + pools.length + " pools validated successfully.");
+          '
+
       - name: Commit and push changes if updated
         run: |
           git config user.name "github-actions[bot]"
