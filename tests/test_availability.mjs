@@ -456,4 +456,26 @@ test('validatePoolData preserves lastUpdated and lastUpdatedPl metadata', () => 
     assert.equal(res.pools[0].lastUpdated, '2026-10-28T15:05:00+00:00');
 });
 
+test('filterAndRankSlots respects minHour for real-time upcoming slots filter', () => {
+    const slots = [
+        { poolName: 'Olimpijczyk', day: 'Środa', hour: 10, freeLanes: 8, totalLanes: 10, openness: 0.8 },
+        { poolName: 'Olimpijczyk', day: 'Środa', hour: 16, freeLanes: 6, totalLanes: 10, openness: 0.6 },
+        { poolName: 'Olimpijczyk', day: 'Środa', hour: 18, freeLanes: 8, totalLanes: 10, openness: 0.8 },
+        { poolName: 'Olimpijczyk', day: 'Środa', hour: 20, freeLanes: 10, totalLanes: 10, openness: 1.0 },
+        { poolName: 'Mewa', day: 'Czwartek', hour: 10, freeLanes: 6, totalLanes: 6, openness: 1.0 }
+    ];
+
+    // For currentDay = 'Środa', minHour = 17 should drop 10:00 and 16:00
+    const upcoming = filterAndRankSlots(slots, {
+        day: 'Środa',
+        minHour: 17,
+        currentDay: 'Środa'
+    });
+
+    assert.equal(upcoming.length, 2);
+    assert.equal(upcoming[0].hour, 20); // 10 lanes
+    assert.equal(upcoming[1].hour, 18); // 8 lanes
+    assert.ok(upcoming.every(s => s.hour >= 17));
+});
+
 console.log(`\n${passed} availability tests passed.`);

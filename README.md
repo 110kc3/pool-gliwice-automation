@@ -59,7 +59,7 @@ python -m http.server 8080           # then open http://localhost:8080
 # Backend data transformation & noise filtering tests (12 tests)
 pytest tests/test_master_aggregator.py -q
 
-# Frontend availability scoring, lane calculations, multi-hour windows & suggester engine (22 tests)
+# Frontend availability scoring, lane calculations, multi-hour windows & suggester engine (23 tests)
 node tests/test_availability.mjs
 ```
 

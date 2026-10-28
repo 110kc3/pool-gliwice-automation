@@ -1544,3 +1544,411 @@ body {
 .rules-columns li {
     margin-bottom: 4px;
 }
+
+/* ==========================================================================
+   Live "Gdzie teraz na basen?" Hero Widget & Status Radar
+   ========================================================================== */
+.live-now-container {
+    margin-bottom: 24px;
+}
+
+.live-hero-card {
+    background: linear-gradient(135deg, #0d3b66 0%, #034b75 50%, #0a2540 100%);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.25);
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.live-hero-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #38bdf8, #0284c7, #38bdf8);
+}
+
+.live-hero-card.closed-mode {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-color: #334155;
+}
+
+.live-hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.live-title-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.live-title-group h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+}
+
+.live-pulse-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(220, 38, 38, 0.25);
+    border: 1px solid rgba(239, 68, 68, 0.6);
+    color: #fca5a5;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+
+.night-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(148, 163, 184, 0.15);
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    color: #cbd5e1;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+}
+
+.live-clock-badge {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    color: #e0f2fe;
+}
+
+/* Immediate pick banner inside live hero */
+.immediate-pick-banner {
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.immediate-pick-banner.night {
+    border-color: rgba(148, 163, 184, 0.3);
+}
+
+.immediate-pick-content {
+    flex: 1;
+    min-width: 260px;
+}
+
+.immediate-pick-tag {
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #38bdf8;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.immediate-pick-name {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 4px 0;
+}
+
+.immediate-pick-sub {
+    font-size: 0.88rem;
+    color: #cbd5e1;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.immediate-pick-btns {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-hero-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    font-size: 0.86rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.btn-hero-action.gcal {
+    background: #0284c7;
+    color: #ffffff;
+    border: 1px solid #38bdf8;
+}
+
+.btn-hero-action.gcal:hover {
+    background: #0369a1;
+    transform: translateY(-1px);
+}
+
+.btn-hero-action.map {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.btn-hero-action.map:hover {
+    background: rgba(255, 255, 255, 0.22);
+    transform: translateY(-1px);
+}
+
+/* 4-Pool Status Radar */
+.radar-section-title {
+    font-size: 0.86rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #94a3b8;
+    margin-bottom: 12px;
+}
+
+.radar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 14px;
+}
+
+.radar-card {
+    background: rgba(15, 23, 42, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.2s ease;
+}
+
+.radar-card:hover {
+    border-color: rgba(56, 189, 248, 0.5);
+    transform: translateY(-2px);
+    background: rgba(15, 23, 42, 0.85);
+}
+
+.radar-card.status-high {
+    border-left: 3px solid #10b981;
+}
+
+.radar-card.status-medium {
+    border-left: 3px solid #f59e0b;
+}
+
+.radar-card.status-closed {
+    border-left: 3px solid #ef4444;
+    opacity: 0.85;
+}
+
+.radar-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.radar-pool-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+}
+
+.radar-pool-meta {
+    font-size: 0.72rem;
+    color: #94a3b8;
+}
+
+.radar-status-pill {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.radar-status-pill.status-high {
+    background: rgba(16, 185, 129, 0.2);
+    color: #6ee7b7;
+}
+
+.radar-status-pill.status-medium {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fde68a;
+}
+
+.radar-status-pill.status-closed {
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+}
+
+.radar-current-hour {
+    font-size: 0.82rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.radar-hour-label {
+    color: #94a3b8;
+    font-size: 0.74rem;
+}
+
+.radar-hour-val {
+    color: #e0f2fe;
+}
+
+.radar-hour-val .closed-tag {
+    color: #f87171;
+    font-weight: 600;
+}
+
+.radar-upcoming {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 6px 8px;
+    border-radius: var(--radius-sm);
+    line-height: 1.4;
+}
+
+.radar-upcoming-label {
+    display: block;
+    font-weight: 600;
+    color: #cbd5e1;
+    margin-bottom: 2px;
+}
+
+.radar-upcoming-val {
+    color: #e2e8f0;
+}
+
+.btn-radar-pool {
+    margin-top: auto;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #38bdf8;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 0.76rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s ease;
+}
+
+.btn-radar-pool:hover {
+    background: rgba(56, 189, 248, 0.15);
+    border-color: #38bdf8;
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   Quick 1-Tap Presets Bar
+   ========================================================================== */
+.preset-filter-row {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.preset-label {
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--primary);
+}
+
+.preset-pill {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 7px 14px;
+    border-radius: 9999px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.preset-pill:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.preset-pill.active {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+    box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+}
+
+@media (max-width: 768px) {
+    .live-hero-card {
+        padding: 16px;
+    }
+
+    .live-title-group h2 {
+        font-size: 1.15rem;
+    }
+
+    .immediate-pick-name {
+        font-size: 1.15rem;
+    }
+
+    .immediate-pick-banner {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .immediate-pick-btns {
+        width: 100%;
+    }
+
+    .btn-hero-action {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .radar-grid {
+        grid-template-columns: 1fr;
+    }
+}

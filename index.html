@@ -104,22 +104,28 @@
 
         <!-- VIEW 1: SMART SUGGESTER (PRIMARY) -->
         <section id="view-suggester" class="view-panel active">
-            <!-- Data-driven key insights summary banner -->
-            <div class="insights-section">
-                <div class="section-heading-row">
-                    <h2>Wnioski z analizy harmonogramów</h2>
-                    <span class="section-subtext">Statystyki dostępności dla wszystkich basenów</span>
-                </div>
-                <div id="insights-grid" class="insights-grid">
-                    <!-- Populated dynamically by script.js -->
-                </div>
+            <!-- LIVE NOW RADAR (INSTANT REAL-TIME ANSWER UPON OPENING) -->
+            <div id="live-now-container" class="live-now-container">
+                <!-- Populated dynamically by script.js -->
             </div>
 
             <!-- Suggester interactive control filter panel -->
             <div class="suggester-panel">
                 <div class="panel-header">
-                    <h2>Znajdź najlepszy termin</h2>
+                    <h2>Filtruj i porównuj terminy</h2>
                     <span class="results-count" id="results-count">Ładowanie...</span>
+                </div>
+
+                <!-- 1-TAP QUICK PRESETS -->
+                <div class="preset-filter-row">
+                    <span class="preset-label">⚡ Szybki wybór pory:</span>
+                    <div class="pill-group" id="preset-pills">
+                        <button type="button" class="filter-pill preset-pill active" data-preset="now">⚡ Teraz / Najbliższe godziny</button>
+                        <button type="button" class="filter-pill preset-pill" data-preset="today_evening">🌙 Dziś wieczorem</button>
+                        <button type="button" class="filter-pill preset-pill" data-preset="tomorrow_morning">☀️ Jutro rano</button>
+                        <button type="button" class="filter-pill preset-pill" data-preset="weekend">🏖️ Ten weekend</button>
+                        <button type="button" class="filter-pill preset-pill" data-preset="all">📅 Cały tydzień</button>
+                    </div>
                 </div>
 
                 <div class="filter-group">
@@ -195,6 +201,17 @@
                 <h3 class="results-title">Pozostałe rekomendowane terminy</h3>
                 <div id="suggester-results" class="slots-grid">
                     <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Data-driven key insights summary banner -->
+            <div class="insights-section">
+                <div class="section-heading-row">
+                    <h2>Wnioski z analizy całego tygodnia</h2>
+                    <span class="section-subtext">Statystyki dostępności dla wszystkich basenów miejskich</span>
+                </div>
+                <div id="insights-grid" class="insights-grid">
+                    <!-- Populated dynamically by script.js -->
                 </div>
             </div>
         </section>

@@ -430,6 +430,7 @@ function filterAndRankSlots(hourlySlots, options = {}) {
         minOpenness = 0,
         sortBy = 'lanes',
         duration = 1,
+        minHour = null,
         currentDay = getPolishDayName(new Date())
     } = options;
 
@@ -442,6 +443,11 @@ function filterAndRankSlots(hourlySlots, options = {}) {
         // Exclude completely closed or zero-lane slots
         if (s.openness <= 0 || s.freeLanes <= 0) return false;
         if (typeof s.minFreeLanes === 'number' && s.minFreeLanes <= 0) return false;
+
+        // If minHour is set and this slot is for today, skip past hours!
+        if (minHour !== null && (day === 'today' || s.day === currentDay) && s.hour < minHour) {
+            return false;
+        }
 
         // Day filtering
         if (day === 'today') {
@@ -718,12 +724,26 @@ function initApp(rawData) {
     const hourlySlots = aggregateHourlySlots(pools);
     const insights = computeDataInsights(hourlySlots);
     const todayName = getPolishDayName(new Date());
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinutes = now.getMinutes();
+    const activeStartHour = currentMinutes >= 45 ? currentHour + 1 : currentHour;
+    const isLateNight = activeStartHour >= 21 || activeStartHour < 6;
+    const currentDayIdx = DAYS_ORDER.indexOf(todayName);
+    const tomorrowName = currentDayIdx >= 0 ? DAYS_ORDER[(currentDayIdx + 1) % 7] : "Czwartek";
+
+    const defaultPreset = isLateNight ? 'tomorrow_morning' : 'now';
+    const defaultDay = isLateNight ? tomorrowName : todayName;
+    const defaultTimeBucket = isLateNight ? 'morning' : 'all';
+    const defaultMinHour = isLateNight ? null : activeStartHour;
 
     // Suggester interactive state
     const state = {
         activeTab: 'suggester', // 'suggester' | 'matrix' | 'schedules' | 'info'
-        day: 'all',             // 'all' | 'weekend' | 'workdays' | specific day
-        timeBucket: 'all',      // 'all' | 'morning' | 'afternoon' | 'evening'
+        preset: defaultPreset,  // 'now' | 'today_evening' | 'tomorrow_morning' | 'weekend' | 'all' | null
+        day: defaultDay,        // specific day or 'all' | 'weekend' | 'workdays'
+        minHour: defaultMinHour,// minimum hour filter for today
+        timeBucket: defaultTimeBucket, // 'all' | 'morning' | 'afternoon' | 'evening'
         pool: 'all',            // 'all' | poolName
         duration: 1,            // 1 | 2 | 3 (hours to swim)
         matrixDuration: 1,      // 1 | 2 | 3 (hours for matrix comparison)
@@ -734,6 +754,189 @@ function initApp(rawData) {
         scheduleDay: 'all',
         schedulePool: 'all'
     };
+
+    // Render Live "Gdzie teraz na basen?" Hero Widget & Status Radar
+    function renderLiveNow() {
+        const container = document.getElementById('live-now-container');
+        if (!container) return;
+
+        const liveNow = new Date();
+        const curHour = liveNow.getHours();
+        const curMin = liveNow.getMinutes();
+        const shortDate = weekDates.shortDates[todayName] || '';
+        const timeFormatted = `${String(curHour).padStart(2, '0')}:${String(curMin).padStart(2, '0')}`;
+        const activeHour = curMin >= 45 ? curHour + 1 : curHour;
+        const nightMode = activeHour >= 21 || activeHour < 6;
+
+        const poolNames = ["Olimpijczyk", "Mewa", "Delfin", "Neptun"];
+
+        if (!nightMode) {
+            // Find best upcoming slot today within the next 4 hours
+            const upcomingSlots = hourlySlots.filter(s =>
+                s.day === todayName &&
+                s.hour >= activeHour &&
+                s.hour <= activeHour + 3 &&
+                s.freeLanes > 0
+            );
+            upcomingSlots.sort((a, b) => {
+                const diffMin = (typeof b.minFreeLanes === 'number' ? b.minFreeLanes : b.freeLanes) -
+                                (typeof a.minFreeLanes === 'number' ? a.minFreeLanes : a.freeLanes);
+                if (diffMin !== 0) return diffMin;
+                return a.hour - b.hour;
+            });
+
+            const bestImmediate = upcomingSlots[0] ||
+                hourlySlots.filter(s => s.day === todayName && s.hour >= activeHour && s.freeLanes > 0)
+                           .sort((a, b) => b.freeLanes - a.freeLanes)[0];
+
+            // Build 4-pool live status radar
+            const poolRadarCards = poolNames.map(pName => {
+                const curSlot = hourlySlots.find(s => s.poolName === pName && s.day === todayName && s.hour === activeHour);
+                const nextSlot = hourlySlots.find(s => s.poolName === pName && s.day === todayName && s.hour === activeHour + 1);
+                const laterSlot = hourlySlots.find(s => s.poolName === pName && s.day === todayName && s.hour === activeHour + 2);
+                const specs = POOL_SPECS[pName] || { length: '25m', type: 'Basen' };
+
+                let statusBadge = '';
+                let statusClass = 'low';
+                let nowLanesHtml = '';
+
+                if (!curSlot || curSlot.openness === 0 || curSlot.freeLanes === 0) {
+                    statusClass = 'closed';
+                    statusBadge = '🔴 Zajęty / brak wolnych torów';
+                    nowLanesHtml = '<span class="closed-tag">0 wolnych torów</span>';
+                } else if (curSlot.openness >= 0.7 && curSlot.freeLanes >= 4) {
+                    statusClass = 'high';
+                    statusBadge = '🟢 Dużo wolnego miejsca';
+                    nowLanesHtml = `<strong>${curSlot.freeLanes}</strong> z ${curSlot.totalLanes} torów (${Math.round(curSlot.openness * 100)}%)`;
+                } else {
+                    statusClass = 'medium';
+                    statusBadge = '🟡 Umiarkowana dostępność';
+                    nowLanesHtml = `<strong>${curSlot.freeLanes}</strong> z ${curSlot.totalLanes} torów (${Math.round(curSlot.openness * 100)}%)`;
+                }
+
+                const upcomingPills = [];
+                if (nextSlot) {
+                    const st = nextSlot.freeLanes > 0 ? `${nextSlot.freeLanes} torów` : 'zajęty';
+                    upcomingPills.push(`<strong>${String(nextSlot.hour).padStart(2, '0')}:00</strong> (${st})`);
+                }
+                if (laterSlot) {
+                    const st = laterSlot.freeLanes > 0 ? `${laterSlot.freeLanes} torów` : 'zajęty';
+                    upcomingPills.push(`<strong>${String(laterSlot.hour).padStart(2, '0')}:00</strong> (${st})`);
+                }
+
+                return `
+                    <div class="radar-card status-${statusClass}" data-pool="${escapeHtml(pName)}">
+                        <div class="radar-card-header">
+                            <div>
+                                <h4 class="radar-pool-title">${escapeHtml(pName)}</h4>
+                                <span class="radar-pool-meta">${escapeHtml(specs.length)} • ${escapeHtml(specs.type)}</span>
+                            </div>
+                            <span class="radar-status-pill status-${statusClass}">${statusBadge}</span>
+                        </div>
+                        <div class="radar-current-hour">
+                            <span class="radar-hour-label">Godz. ${String(activeHour).padStart(2, '0')}:00:</span>
+                            <span class="radar-hour-val">${nowLanesHtml}</span>
+                        </div>
+                        ${upcomingPills.length ? `
+                            <div class="radar-upcoming">
+                                <span class="radar-upcoming-label">Kolejne godziny:</span>
+                                <span class="radar-upcoming-val">${upcomingPills.join(' ➔ ')}</span>
+                            </div>
+                        ` : ''}
+                        <button type="button" class="btn-radar-pool" data-pool="${escapeHtml(pName)}">
+                            Pokaż tylko ${escapeHtml(pName)} ➔
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = `
+                <div class="live-hero-card">
+                    <div class="live-hero-top">
+                        <div class="live-title-group">
+                            <span class="live-pulse-badge"><span class="pulse-dot"></span> NA ŻYWO</span>
+                            <h2>Gdzie na basen w najbliższych godzinach?</h2>
+                        </div>
+                        <div class="live-clock-badge">
+                            🕒 Dzisiaj, <strong>${escapeHtml(todayName)}</strong>${shortDate ? ` (${escapeHtml(shortDate)})` : ''}, godz. <strong>${timeFormatted}</strong>
+                        </div>
+                    </div>
+
+                    ${bestImmediate ? `
+                    <div class="immediate-pick-banner">
+                        <div class="immediate-pick-content">
+                            <span class="immediate-pick-tag">🏆 Najlepszy wybór na teraz / w najbliższych godzinach:</span>
+                            <h3 class="immediate-pick-name">${escapeHtml(bestImmediate.poolName)} • ${escapeHtml(bestImmediate.timeLabel)}</h3>
+                            <p class="immediate-pick-sub">Aż <strong>${bestImmediate.freeLanes} wolnych torów</strong> (${Math.round(bestImmediate.openness * 100)}% pojemności). ${escapeHtml(bestImmediate.details || '')}</p>
+                        </div>
+                        <div class="immediate-pick-btns">
+                            <a href="${buildGoogleCalendarUrl(bestImmediate)}" target="_blank" rel="noopener noreferrer" class="btn-hero-action gcal">
+                                📅 Dodaj do kalendarza
+                            </a>
+                            <a href="https://maps.google.com/?q=Kryta+Pływalnia+${encodeURIComponent(bestImmediate.poolName)}+Gliwice" target="_blank" rel="noopener noreferrer" class="btn-hero-action map">
+                                🗺️ Trasa dojazdu
+                            </a>
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    <div class="radar-section-title">
+                        <span>Stan 4 basenów w Gliwicach w kolejnych godzinach:</span>
+                    </div>
+                    <div class="radar-grid">
+                        ${poolRadarCards}
+                    </div>
+                </div>
+            `;
+        } else {
+            // Night view: pools closed
+            const morningSlots = hourlySlots.filter(s => s.day === tomorrowName && s.hour < 12 && s.freeLanes > 0);
+            morningSlots.sort((a, b) => b.freeLanes - a.freeLanes);
+            const topMorning = morningSlots[0];
+            const tomorrowDate = weekDates.shortDates[tomorrowName] || '';
+
+            container.innerHTML = `
+                <div class="live-hero-card closed-mode">
+                    <div class="live-hero-top">
+                        <div class="live-title-group">
+                            <span class="night-badge">🌙 NOC</span>
+                            <h2>Baseny są teraz zamknięte (czynne 06:00 – 22:00)</h2>
+                        </div>
+                        <div class="live-clock-badge">
+                            🕒 Godz. <strong>${timeFormatted}</strong> • Najbliższe otwarcie jutro o <strong>06:00</strong>
+                        </div>
+                    </div>
+
+                    ${topMorning ? `
+                    <div class="immediate-pick-banner night">
+                        <div class="immediate-pick-content">
+                            <span class="immediate-pick-tag">🌅 Najlepszy wybór na jutro rano (${escapeHtml(tomorrowName)}${tomorrowDate ? ' ' + escapeHtml(tomorrowDate) : ''}):</span>
+                            <h3 class="immediate-pick-name">${escapeHtml(topMorning.poolName)} • ${escapeHtml(topMorning.timeLabel)}</h3>
+                            <p class="immediate-pick-sub">Aż <strong>${topMorning.freeLanes} wolnych torów</strong> od samego rana. ${escapeHtml(topMorning.details || '')}</p>
+                        </div>
+                        <div class="immediate-pick-btns">
+                            <a href="${buildGoogleCalendarUrl(topMorning)}" target="_blank" rel="noopener noreferrer" class="btn-hero-action gcal">
+                                📅 Zapisz na rano
+                            </a>
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        container.querySelectorAll('.btn-radar-pool').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const pool = btn.dataset.pool;
+                state.pool = pool;
+                state.preset = null;
+                syncFilterButtons();
+                renderSuggester();
+                const panel = document.querySelector('.suggester-panel');
+                if (panel) panel.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    }
 
     // Render Data Insights Cards
     function renderInsights() {
@@ -787,6 +990,7 @@ function initApp(rawData) {
             timeBucket: state.timeBucket,
             pool: state.pool,
             duration: state.duration,
+            minHour: state.minHour,
             sortBy: state.sortBy,
             minOpenness: state.onlyHigh ? 0.8 : 0,
             currentDay: todayName
@@ -804,17 +1008,19 @@ function initApp(rawData) {
                 <div class="empty-state">
                     <div class="empty-icon">🔍</div>
                     <h3>Brak dostępnych terminów</h3>
-                    <p>Żaden termin nie spełnia wybranych filtrów. Zmień porę dnia lub wybierz inny basen.</p>
-                    <button type="button" class="btn-reset-filters" id="btn-reset-filters">Zresetuj filtry</button>
+                    <p>Brak wolnych torów dla wybranego filtru${state.minHour ? ' na resztę dzisiejszego dnia' : ''}. Wybierz inną porę, dzień lub zresetuj filtry.</p>
+                    <button type="button" class="btn-reset-filters" id="btn-reset-filters">Pokaż cały tydzień</button>
                 </div>
             `;
             const resetBtn = document.getElementById('btn-reset-filters');
             if (resetBtn) {
                 resetBtn.addEventListener('click', () => {
                     state.day = 'all';
-                    state.duration = 1;
+                    state.preset = 'all';
+                    state.minHour = null;
                     state.timeBucket = 'all';
                     state.pool = 'all';
+                    state.duration = 1;
                     state.onlyHigh = false;
                     syncFilterButtons();
                     renderSuggester();
@@ -1109,6 +1315,10 @@ function initApp(rawData) {
 
     // Synchronize UI active filter button states
     function syncFilterButtons() {
+        // Preset pills
+        document.querySelectorAll('.preset-pill').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.preset === state.preset);
+        });
         // Day pills
         document.querySelectorAll('.filter-day-pill').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.day === state.day);
@@ -1154,10 +1364,45 @@ function initApp(rawData) {
             });
         });
 
+        // Preset filters (1-tap quick choice)
+        document.querySelectorAll('.preset-pill').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const p = btn.dataset.preset;
+                state.preset = p;
+                if (p === 'now') {
+                    state.day = todayName;
+                    state.minHour = activeStartHour;
+                    state.timeBucket = 'all';
+                } else if (p === 'today_evening') {
+                    state.day = todayName;
+                    state.minHour = 17;
+                    state.timeBucket = 'evening';
+                } else if (p === 'tomorrow_morning') {
+                    state.day = tomorrowName;
+                    state.minHour = null;
+                    state.timeBucket = 'morning';
+                } else if (p === 'weekend') {
+                    state.day = 'weekend';
+                    state.minHour = null;
+                    state.timeBucket = 'all';
+                } else if (p === 'all') {
+                    state.day = 'all';
+                    state.minHour = null;
+                    state.timeBucket = 'all';
+                }
+                syncFilterButtons();
+                renderSuggester();
+            });
+        });
+
         // Day filters
         document.querySelectorAll('.filter-day-pill').forEach(btn => {
             btn.addEventListener('click', () => {
                 state.day = btn.dataset.day;
+                if (state.day !== todayName) {
+                    state.minHour = null;
+                }
+                state.preset = null;
                 syncFilterButtons();
                 renderSuggester();
             });
@@ -1309,6 +1554,7 @@ function initApp(rawData) {
         weekendPill.innerHTML = `Weekend <span class="pill-day-sub">(${weekDates.shortDates["Sobota"]}–${weekDates.shortDates["Niedziela"]})</span>`;
     }
 
+    renderLiveNow();
     renderInsights();
     syncFilterButtons();
     setupEventListeners();
