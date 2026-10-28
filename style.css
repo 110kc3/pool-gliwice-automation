@@ -205,6 +205,7 @@ body {
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
+    flex-shrink: 0;
     border-radius: var(--radius-sm) var(--radius-sm) 0 0;
 }
 
@@ -1776,8 +1777,9 @@ body {
 .radar-card-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     gap: 8px;
+    flex-wrap: wrap;
 }
 
 .radar-pool-title {
@@ -1785,19 +1787,29 @@ body {
     font-weight: 700;
     color: #ffffff;
     margin: 0;
+    word-break: break-word;
 }
 
 .radar-pool-meta {
     font-size: 0.72rem;
     color: #94a3b8;
+    display: block;
 }
 
 .radar-status-pill {
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     font-weight: 700;
-    padding: 2px 7px;
-    border-radius: 4px;
-    white-space: nowrap;
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    max-width: 100%;
+    word-break: break-word;
+    white-space: normal;
+    text-align: right;
+    box-sizing: border-box;
+    flex-shrink: 0;
 }
 
 .radar-status-pill.status-high {
@@ -1923,32 +1935,99 @@ body {
 
 @media (max-width: 768px) {
     .live-hero-card {
-        padding: 16px;
+        padding: 16px 14px;
+        box-sizing: border-box;
+    }
+
+    .live-hero-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .live-title-group {
+        flex-wrap: wrap;
+        gap: 8px;
     }
 
     .live-title-group h2 {
         font-size: 1.15rem;
+        word-break: break-word;
     }
 
-    .immediate-pick-name {
-        font-size: 1.15rem;
+    .live-clock-badge {
+        align-self: flex-start;
+        font-size: 0.8rem;
+        padding: 5px 12px;
     }
 
     .immediate-pick-banner {
         flex-direction: column;
         align-items: stretch;
+        padding: 14px 12px;
+        gap: 12px;
+        box-sizing: border-box;
+    }
+
+    .immediate-pick-name {
+        font-size: 1.15rem;
+        word-break: break-word;
     }
 
     .immediate-pick-btns {
         width: 100%;
+        flex-direction: column;
+        gap: 8px;
     }
 
     .btn-hero-action {
-        flex: 1;
+        width: 100%;
         justify-content: center;
+        text-align: center;
+        box-sizing: border-box;
     }
 
     .radar-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .radar-card-header {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .radar-status-pill {
+        align-self: flex-start;
+        text-align: left;
+    }
+
+    .preset-filter-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .preset-pill {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        white-space: normal;
+    }
+
+    .calendar-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-cal-action {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .pricing-grid,
+    .sports-cards-grid,
+    .rules-columns {
         grid-template-columns: 1fr;
     }
 }

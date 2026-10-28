@@ -802,15 +802,15 @@ function initApp(rawData) {
 
                 if (!curSlot || curSlot.openness === 0 || curSlot.freeLanes === 0) {
                     statusClass = 'closed';
-                    statusBadge = '🔴 Zajęty / brak wolnych torów';
+                    statusBadge = '🔴 Brak torów';
                     nowLanesHtml = '<span class="closed-tag">0 wolnych torów</span>';
                 } else if (curSlot.openness >= 0.7 && curSlot.freeLanes >= 4) {
                     statusClass = 'high';
-                    statusBadge = '🟢 Dużo wolnego miejsca';
+                    statusBadge = '🟢 Dużo miejsca';
                     nowLanesHtml = `<strong>${curSlot.freeLanes}</strong> z ${curSlot.totalLanes} torów (${Math.round(curSlot.openness * 100)}%)`;
                 } else {
                     statusClass = 'medium';
-                    statusBadge = '🟡 Umiarkowana dostępność';
+                    statusBadge = '🟡 Umiarkowanie';
                     nowLanesHtml = `<strong>${curSlot.freeLanes}</strong> z ${curSlot.totalLanes} torów (${Math.round(curSlot.openness * 100)}%)`;
                 }
 
