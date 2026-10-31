@@ -1,0 +1,1611 @@
+// ===========================================================================
+// Pure availability logic & classification (DOM-independent)
+// ===========================================================================
+
+const DAYS_ORDER = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"];
+const DAY_SET = new Set(DAYS_ORDER);
+
+// Olimpijczyk's full configuration is 9×50 m + 1×25 m = 10 lanes. We use this as
+// a floor for every pool's capacity so that pools which only report open/closed
+// status (Mewa, Delfin) are normalised on the same 0..1 scale as Olimpijczyk's
+// lane counts. See computeCapacities().
+const DEFAULT_CAPACITY = 10;
+
+// Actual physical pool configurations in Gliwice:
+// - Olimpijczyk: Olympic 50m basin configurable up to 10 lanes (9x50m + 1x25m)
+// - Mewa: 25m municipal sports basin with 6 lanes
+// - Delfin: 25m municipal sports basin with 6 lanes
+const POOL_SPECS = {
+    "Olimpijczyk": {
+        totalLanes: 10,
+        length: "50m",
+        type: "Basen olimpijski",
+        address: "ul. Oriona 120, Gliwice-Łabędy",
+        features: "Basen 50m (10 torów), trybuny na 800 osób, głębokość 2,0m"
+    },
+    "Mewa": {
+        totalLanes: 6,
+        length: "25m",
+        type: "Basen sportowy",
+        address: "ul. Mewy 36, Gliwice-Sośnica",
+        features: "Basen 25m (6 torów), basen rekreacyjny, sauna"
+    },
+    "Delfin": {
+        totalLanes: 6,
+        length: "25m",
+        type: "Basen sportowy",
+        address: "ul. Warszawska 35, Gliwice",
+        features: "Basen 25m (6 torów), mały basen do nauki pływania"
+    },
+    "Neptun": {
+        totalLanes: 6,
+        length: "25m",
+        type: "Basen sportowy + rekreacyjny",
+        address: "ul. Dzionkarzy 29, Gliwice-Sośnica",
+        features: "Basen 25m (6 torów, do 5 wolnych dla klientów), basen rekreacyjny, strefa saun"
+    }
+};
+
+const MONTHS = "stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|września|października|listopada|grudnia";
+
+// Normalise a raw cell value: strip stray carriage returns and collapse whitespace.
+function cleanCell(value) {
+    if (typeof value !== 'string') return '';
+    return value.replace(/\r/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function parseRomanOrArabic(val) {
+    if (!val) return null;
+    const v = val.trim().toLowerCase();
+    if (/^\d+$/.test(v)) return parseInt(v, 10);
+    const romanMap = {
+        'i': 1, 'ii': 2, 'iii': 3, 'iv': 4, 'v': 5,
+        'vi': 6, 'vii': 7, 'viii': 8, 'ix': 9, 'x': 10
+    };
+    return romanMap[v] || null;
+}
+
+// Classify a raw `availableLanes` string into a structured descriptor.
+function classifyAvailability(raw) {
+    const s = cleanCell(raw);
+    if (!s) return { noise: true };
+    const lower = s.toLowerCase();
+
+    // --- Noise: day-name header rows, date rows, column headers, stray letters
+    if (DAY_SET.has(s)) return { noise: true };
+    if (new RegExp(`^\\d{1,2}\\s+(${MONTHS})`, 'i').test(lower)) return { noise: true };
+    if (/^\d{1,2}[./]\d{1,2}[./]\d{2,4}$/.test(s)) return { noise: true };
+    if (/(ilość wolnych torów|ilość zajętych torów|godzina|dzień|tygodnia|harmonogram|^data$)/.test(lower)) return { noise: true };
+    // Stray single/short letter artifacts ("n", "a", "l", "Pływ" mangled) with no digit
+    if (!/\d/.test(s) && s.replace(/[^a-zA-Ząćęłńóśźż]/gi, '').length < 5 && !/wolne/.test(lower)) {
+        return { noise: true };
+    }
+
+    // --- Closed / unavailable / 0 free lanes / before opening / exit water / end of work
+    if (
+        lower === '0' ||
+        lower.includes('niedostępn') ||
+        lower.includes('nieczynn') ||
+        lower.includes('czas wyjścia') ||
+        lower.includes('koniec pracy') ||
+        lower.includes('czynna od') ||
+        lower.includes('0 wolnych') ||
+        lower.includes('brak wolnych') ||
+        lower.startsWith('0 tor')
+    ) {
+        return { score: 0 };
+    }
+
+    // --- All lanes free
+    if (lower.includes('wolne wszystkie')) return { open: true };
+
+    // --- "Pływalnia dostępna - zajęty N tor(y)" or "dostępna - zajęte II tory"
+    let m = lower.match(/dostępna.*zaj[ęe]t[a-ząćęłńóśźż]*\s*(?:jest\s*)?([ivx]+|\d+)\s*tor/i);
+    if (m) {
+        const num = parseRomanOrArabic(m[1]);
+        if (num !== null) return { open: true, occupied: num };
+    }
+
+    // --- "I tor zajęty", "II tory zajęte", "3 tory zajęte"
+    m = lower.match(/(?:^|\b)([ivx]+|\d+)\s*tor[a-ząćęłńóśźż]*\s*zaj[ęe]t/i);
+    if (m) {
+        const num = parseRomanOrArabic(m[1]);
+        if (num !== null) return { occupied: num };
+    }
+
+    // --- "Zajęty / Zajęte N tory", "Zajęty I tor"
+    m = lower.match(/^zaj[ęe]t[a-ząćęłńóśźż]*\s*(?:jest\s*)?([ivx]+|\d+)\s*tor/i);
+    if (m) {
+        const num = parseRomanOrArabic(m[1]);
+        if (num !== null) return { occupied: num };
+    }
+
+    // --- Lane counts: "9x50m, 1x25m i wypł" or "5x25m wolne" -> sum of the "Nx..m" groups
+    const laneMatches = [...lower.matchAll(/(\d+)\s*x\s*\d+\s*m/g)];
+    if (laneMatches.length) {
+        const lanes = laneMatches.reduce((sum, mm) => sum + parseInt(mm[1], 10), 0);
+        return { freeLanes: lanes };
+    }
+
+    // --- Free lanes: "N torów wolnych", "II tory wolne", "I tor wolny"
+    const mFreeTor = lower.match(/([ivx]+|\d+)\s*tor[a-ząćęłńóśźż]*\s*woln/i);
+    if (mFreeTor) {
+        const num = parseRomanOrArabic(mFreeTor[1]);
+        if (num !== null) return { freeLanes: num };
+    }
+
+    // --- Generic "Pływalnia dostępna" or "dostępna"
+    if (lower.includes('dostępna')) return { open: true };
+
+    // Unknown, non-empty value: treat as noise so it cannot pollute rankings.
+    return { noise: true };
+}
+
+// Compute a capacity (max plausible free lanes) per pool name on a shared scale.
+function computeCapacities(pools) {
+    const capacities = {};
+    pools.forEach(pool => {
+        let maxFree = 0;
+        (pool.schedule || []).forEach(entry => {
+            const info = classifyAvailability(entry.availableLanes);
+            if (typeof info.freeLanes === 'number') maxFree = Math.max(maxFree, info.freeLanes);
+        });
+        capacities[pool.name] = Math.max(maxFree, DEFAULT_CAPACITY);
+    });
+    return capacities;
+}
+
+// Map a classified descriptor to an openness score in [0, 1] given pool capacity.
+function opennessScore(info, capacity) {
+    if (info.noise) return null;
+    if (info.score === 0) return 0;
+    const cap = capacity || DEFAULT_CAPACITY;
+    if (typeof info.freeLanes === 'number') return Math.min(1, info.freeLanes / cap);
+    let occupied = typeof info.occupied === 'number' ? info.occupied : 0;
+    if (info.open) return Math.max(0, (cap - occupied) / cap);
+    if (typeof info.occupied === 'number') return Math.max(0, (cap - occupied) / cap);
+    return null;
+}
+
+// ===========================================================================
+// Smart Suggester & Lane Availability Logic
+// ===========================================================================
+
+// Detailed lane breakdown for a pool and raw availability entry.
+function getFreeLanesDetail(poolName, raw) {
+    const info = classifyAvailability(raw);
+    const specs = POOL_SPECS[poolName] || { totalLanes: 10, length: "25m" };
+    const total = specs.totalLanes;
+
+    if (!info || info.noise) return null;
+
+    if (info.score === 0) {
+        return {
+            freeLanes: 0,
+            totalLanes: total,
+            openness: 0,
+            label: "Pływalnia niedostępna / nieczynna",
+            status: "closed",
+            raw: cleanCell(raw)
+        };
+    }
+
+    let free = total;
+    if (typeof info.freeLanes === 'number') {
+        free = Math.min(total, info.freeLanes);
+    } else if (typeof info.occupied === 'number') {
+        free = Math.max(0, total - info.occupied);
+    } else if (info.open) {
+        free = total;
+    }
+
+    const openness = total > 0 ? free / total : 0;
+    let status = 'low';
+    if (openness >= 0.8) status = 'high';
+    else if (openness >= 0.4) status = 'medium';
+
+    let label = '';
+    if (openness === 1) {
+        label = `${free} torów wolnych (100%)`;
+    } else if (free > 0) {
+        label = `${free} z ${total} torów (${Math.round(openness * 100)}%)`;
+    } else {
+        label = "Brak wolnych torów";
+    }
+
+    return {
+        freeLanes: free,
+        totalLanes: total,
+        openness,
+        label,
+        status,
+        raw: cleanCell(raw)
+    };
+}
+
+// Map hour (0-23) to human-friendly time-of-day bucket.
+function getTimeBucket(hour) {
+    if (hour < 12) return 'morning';    // 06:00 - 11:59
+    if (hour < 17) return 'afternoon';  // 12:00 - 16:59
+    return 'evening';                   // 17:00 - 22:00
+}
+
+// Map JavaScript Date object to Polish day name.
+function getPolishDayName(date) {
+    const jsDayMap = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
+    return jsDayMap[date.getDay()];
+}
+
+// Extract or compute calendar dates for the active weekly schedule
+function getScheduleDates(pools, fallbackDate = new Date()) {
+    // 1. Check if pools provide explicit dates map from master_aggregator
+    if (Array.isArray(pools) && pools.length > 0 && pools[0].dates) {
+        const fullDates = pools[0].dates;
+        const weekRange = pools[0].weekRange || `${fullDates["Poniedziałek"]} – ${fullDates["Niedziela"]}`;
+        const shortDates = {};
+        for (const [d, dt] of Object.entries(fullDates)) {
+            shortDates[d] = String(dt).replace(/\.\d{4}$/, '');
+        }
+        return { fullDates, shortDates, weekRange };
+    }
+
+    // 2. Fallback: compute based on Monday of the fallbackDate week
+    const jsDay = fallbackDate.getDay();
+    const diffToMonday = jsDay === 0 ? -6 : 1 - jsDay;
+    const monday = new Date(fallbackDate);
+    monday.setDate(fallbackDate.getDate() + diffToMonday);
+
+    const fullDates = {};
+    const shortDates = {};
+    DAYS_ORDER.forEach((d, idx) => {
+        const cur = new Date(monday);
+        cur.setDate(monday.getDate() + idx);
+        const dd = String(cur.getDate()).padStart(2, '0');
+        const mm = String(cur.getMonth() + 1).padStart(2, '0');
+        const yyyy = cur.getFullYear();
+        fullDates[d] = `${dd}.${mm}.${yyyy}`;
+        shortDates[d] = `${dd}.${mm}`;
+    });
+    const weekRange = `${fullDates["Poniedziałek"]} – ${fullDates["Niedziela"]}`;
+    return { fullDates, shortDates, weekRange };
+}
+
+// Group raw pool schedule into consistent 1-hour slots per pool, day, and hour.
+function aggregateHourlySlots(pools) {
+    const hourlySlots = [];
+    const { fullDates, shortDates } = getScheduleDates(pools);
+
+    pools.forEach(pool => {
+        const poolDates = pool.dates || fullDates;
+        const byDayHour = {};
+        (pool.schedule || []).forEach(entry => {
+            const detail = getFreeLanesDetail(pool.name, entry.availableLanes);
+            if (!detail) return;
+
+            const m = entry.time.match(/(\d+)/);
+            if (!m) return;
+            const hour = parseInt(m[1], 10);
+            const key = `${entry.day}_${hour}`;
+
+            if (!byDayHour[key]) {
+                const dateVal = entry.date || poolDates[entry.day] || fullDates[entry.day] || '';
+                const shortVal = shortDates[entry.day] || (dateVal ? dateVal.replace(/\.\d{4}$/, '') : '');
+                byDayHour[key] = {
+                    poolName: pool.name,
+                    day: entry.day,
+                    date: dateVal,
+                    shortDate: shortVal,
+                    hour: hour,
+                    timeLabel: `${String(hour).padStart(2, '0')}:00 – ${String(hour + 1).padStart(2, '0')}:00`,
+                    timeBucket: getTimeBucket(hour),
+                    totalLanes: detail.totalLanes,
+                    items: []
+                };
+            }
+            byDayHour[key].items.push(detail);
+        });
+
+        Object.values(byDayHour).forEach(slot => {
+            const avgFree = slot.items.reduce((s, it) => s + it.freeLanes, 0) / slot.items.length;
+            const avgOpenness = slot.items.reduce((s, it) => s + it.openness, 0) / slot.items.length;
+            const roundedFree = Math.round(avgFree * 10) / 10;
+
+            let status = 'low';
+            if (avgOpenness >= 0.8) status = 'high';
+            else if (avgOpenness >= 0.4) status = 'medium';
+            else if (avgOpenness === 0) status = 'closed';
+
+            let laneBadge = '';
+            if (avgOpenness === 1) {
+                laneBadge = `${slot.totalLanes} torów wolnych (100%)`;
+            } else if (roundedFree > 0) {
+                laneBadge = `${roundedFree} z ${slot.totalLanes} torów (${Math.round(avgOpenness * 100)}%)`;
+            } else {
+                laneBadge = 'Nieczynna / zajęta';
+            }
+
+            // Extract distinct non-empty original cell details for informative tooltips/badges
+            const distinctRaws = [...new Set(slot.items.map(it => it.raw).filter(Boolean))];
+
+            hourlySlots.push({
+                poolName: slot.poolName,
+                day: slot.day,
+                date: slot.date,
+                shortDate: slot.shortDate,
+                hour: slot.hour,
+                timeLabel: slot.timeLabel,
+                timeBucket: slot.timeBucket,
+                freeLanes: roundedFree,
+                totalLanes: slot.totalLanes,
+                openness: avgOpenness,
+                status,
+                laneBadge,
+                details: distinctRaws.slice(0, 2).join('; ')
+            });
+        });
+    });
+
+    return hourlySlots;
+}
+
+// Build continuous multi-hour windows (e.g. 2h, 3h) from aggregated 1-hour slots.
+function getMultiHourSlots(hourlySlots, duration = 1) {
+    if (duration <= 1) return hourlySlots;
+    const multi = [];
+    const poolDayMap = {};
+    hourlySlots.forEach(s => {
+        const key = `${s.poolName}_${s.day}`;
+        if (!poolDayMap[key]) poolDayMap[key] = {};
+        poolDayMap[key][s.hour] = s;
+    });
+
+    Object.entries(poolDayMap).forEach(([key, hourMap]) => {
+        const [poolName, day] = key.split('_');
+        const hours = Object.keys(hourMap).map(Number).sort((a, b) => a - b);
+        hours.forEach(h => {
+            const block = [];
+            for (let i = 0; i < duration; i++) {
+                if (hourMap[h + i]) block.push(hourMap[h + i]);
+            }
+            if (block.length === duration) {
+                const anyClosed = block.some(s => s.openness <= 0 || s.freeLanes <= 0);
+                const minFree = Math.min(...block.map(s => s.freeLanes));
+                const avgFree = block.reduce((sum, s) => sum + s.freeLanes, 0) / duration;
+                const avgOpenness = block.reduce((sum, s) => sum + s.openness, 0) / duration;
+                const roundedFree = Math.round(avgFree * 10) / 10;
+                const totalLanes = block[0].totalLanes;
+
+                let status = 'low';
+                if (anyClosed || avgOpenness === 0) status = 'closed';
+                else if (avgOpenness >= 0.8 && minFree >= totalLanes * 0.7) status = 'high';
+                else if (avgOpenness >= 0.4 && minFree >= 1) status = 'medium';
+
+                let laneBadge = '';
+                if (anyClosed) {
+                    laneBadge = 'Niedostępne przez cały okres';
+                } else if (minFree === totalLanes && avgOpenness === 1) {
+                    laneBadge = `${totalLanes} torów wolnych (100% przez ${duration}h)`;
+                } else if (minFree === roundedFree) {
+                    laneBadge = `${minFree} z ${totalLanes} torów (${Math.round(avgOpenness * 100)}%)`;
+                } else {
+                    laneBadge = `min. ${minFree} torów (śr. ${roundedFree} z ${totalLanes})`;
+                }
+
+                const startSlot = block[0];
+                const endHour = h + duration;
+                const hourDetails = block.map(s => `${String(s.hour).padStart(2, '0')}:00 (${s.freeLanes} torów)`).join(' ➔ ');
+
+                multi.push({
+                    poolName,
+                    day,
+                    date: startSlot.date,
+                    shortDate: startSlot.shortDate,
+                    hour: h,
+                    endHour,
+                    duration,
+                    timeLabel: `${String(h).padStart(2, '0')}:00 – ${String(endHour).padStart(2, '0')}:00 (${duration}h)`,
+                    timeBucket: startSlot.timeBucket,
+                    freeLanes: roundedFree,
+                    minFreeLanes: minFree,
+                    totalLanes,
+                    openness: anyClosed ? 0 : avgOpenness,
+                    status,
+                    laneBadge,
+                    details: hourDetails,
+                    subSlots: block
+                });
+            }
+        });
+    });
+    return multi;
+}
+
+// Filter and rank suggested slots based on user criteria.
+function filterAndRankSlots(hourlySlots, options = {}) {
+    const {
+        day = 'all',
+        timeBucket = 'all',
+        pool = 'all',
+        minLanes = 0,
+        minOpenness = 0,
+        sortBy = 'lanes',
+        duration = 1,
+        minHour = null,
+        currentDay = getPolishDayName(new Date())
+    } = options;
+
+    const baseSlots = duration > 1 ? getMultiHourSlots(hourlySlots, duration) : hourlySlots;
+
+    const currentIdx = DAYS_ORDER.indexOf(currentDay);
+    const tomorrowDay = currentIdx >= 0 ? DAYS_ORDER[(currentIdx + 1) % 7] : "Środa";
+
+    let filtered = baseSlots.filter(s => {
+        // Exclude completely closed or zero-lane slots
+        if (s.openness <= 0 || s.freeLanes <= 0) return false;
+        if (typeof s.minFreeLanes === 'number' && s.minFreeLanes <= 0) return false;
+
+        // If minHour is set and this slot is for today, skip past hours!
+        if (minHour !== null && (day === 'today' || s.day === currentDay) && s.hour < minHour) {
+            return false;
+        }
+
+        // Day filtering
+        if (day === 'today') {
+            if (s.day !== currentDay) return false;
+        } else if (day === 'tomorrow') {
+            if (s.day !== tomorrowDay) return false;
+        } else if (day === 'weekend') {
+            if (s.day !== 'Sobota' && s.day !== 'Niedziela') return false;
+        } else if (day === 'workdays') {
+            if (s.day === 'Sobota' || s.day === 'Niedziela') return false;
+        } else if (day !== 'all' && s.day !== day) {
+            return false;
+        }
+
+        // Time bucket filtering
+        if (timeBucket !== 'all' && s.timeBucket !== timeBucket) return false;
+
+        // Pool filtering
+        if (pool !== 'all' && s.poolName !== pool) return false;
+
+        // Minimum thresholds
+        const checkLanes = typeof s.minFreeLanes === 'number' ? s.minFreeLanes : s.freeLanes;
+        if (minLanes > 0 && checkLanes < minLanes) return false;
+        if (minOpenness > 0 && s.openness < minOpenness) return false;
+
+        return true;
+    });
+
+    // Sorting
+    filtered.sort((a, b) => {
+        if (sortBy === 'lanes') {
+            const aMin = typeof a.minFreeLanes === 'number' ? a.minFreeLanes : a.freeLanes;
+            const bMin = typeof b.minFreeLanes === 'number' ? b.minFreeLanes : b.freeLanes;
+            if (bMin !== aMin) return bMin - aMin;
+            if (b.freeLanes !== a.freeLanes) return b.freeLanes - a.freeLanes;
+            if (b.openness !== a.openness) return b.openness - a.openness;
+        } else if (sortBy === 'openness') {
+            if (b.openness !== a.openness) return b.openness - a.openness;
+            const aMin = typeof a.minFreeLanes === 'number' ? a.minFreeLanes : a.freeLanes;
+            const bMin = typeof b.minFreeLanes === 'number' ? b.minFreeLanes : b.freeLanes;
+            if (bMin !== aMin) return bMin - aMin;
+            if (b.freeLanes !== a.freeLanes) return b.freeLanes - a.freeLanes;
+        }
+        // Chronological order as secondary / default
+        const dDiff = DAYS_ORDER.indexOf(a.day) - DAYS_ORDER.indexOf(b.day);
+        if (dDiff !== 0) return dDiff;
+        return a.hour - b.hour;
+    });
+
+    return filtered;
+}
+
+// Compute high-level statistical takeaways from the dataset.
+function computeDataInsights(hourlySlots) {
+    const openSlots = hourlySlots.filter(s => s.openness > 0);
+
+    // Day averages
+    const dayStats = {};
+    DAYS_ORDER.forEach(d => { dayStats[d] = { sum: 0, count: 0 }; });
+    hourlySlots.forEach(s => {
+        if (dayStats[s.day]) {
+            dayStats[s.day].sum += s.openness;
+            dayStats[s.day].count++;
+        }
+    });
+
+    let bestDay = "Niedziela";
+    let maxDayAvg = -1;
+    for (const d of DAYS_ORDER) {
+        const avg = dayStats[d].count ? dayStats[d].sum / dayStats[d].count : 0;
+        if (avg > maxDayAvg) {
+            maxDayAvg = avg;
+            bestDay = d;
+        }
+    }
+
+    // Time bucket averages
+    const bucketStats = {
+        morning: { sum: 0, count: 0 },
+        afternoon: { sum: 0, count: 0 },
+        evening: { sum: 0, count: 0 }
+    };
+    hourlySlots.forEach(s => {
+        if (bucketStats[s.timeBucket]) {
+            bucketStats[s.timeBucket].sum += s.openness;
+            bucketStats[s.timeBucket].count++;
+        }
+    });
+
+    const bucketLabels = {
+        morning: "Rano (06:00 – 12:00)",
+        afternoon: "Popołudnie (12:00 – 17:00)",
+        evening: "Wieczór (17:00 – 22:00)"
+    };
+
+    let bestBucketKey = "evening";
+    let maxBucketAvg = -1;
+    for (const [b, st] of Object.entries(bucketStats)) {
+        const avg = st.count ? st.sum / st.count : 0;
+        if (avg > maxBucketAvg) {
+            maxBucketAvg = avg;
+            bestBucketKey = b;
+        }
+    }
+
+    // Peak slot (slot with the most free lanes in the week)
+    const peakSlot = [...openSlots].sort((a, b) => b.freeLanes - a.freeLanes || b.openness - a.openness)[0];
+
+    const bestDayDate = openSlots.find(s => s.day === bestDay)?.date;
+    const bestDayLabel = bestDayDate ? `${bestDay} (${bestDayDate})` : bestDay;
+
+    return {
+        bestDay,
+        bestDayLabel,
+        bestDayPercentage: Math.round(maxDayAvg * 100),
+        bestBucket: bucketLabels[bestBucketKey],
+        bestBucketPercentage: Math.round(maxBucketAvg * 100),
+        peakSlot: peakSlot ? `${peakSlot.poolName} (${peakSlot.day}${peakSlot.date ? ' ' + peakSlot.date : ''} ${peakSlot.timeLabel}, ${peakSlot.freeLanes} wolnych torów)` : null,
+        totalOpenSlots: openSlots.length
+    };
+}
+
+// Validate the shape of data.json.
+function validatePoolData(data) {
+    const warnings = [];
+    if (!Array.isArray(data)) {
+        return { pools: null, warnings: ['data.json is not an array — expected a list of pools.'] };
+    }
+    const pools = [];
+    data.forEach((pool, i) => {
+        if (!pool || typeof pool !== 'object' || typeof pool.name !== 'string' || !Array.isArray(pool.schedule)) {
+            warnings.push(`Skipping malformed pool record at index ${i}.`);
+            return;
+        }
+        const schedule = pool.schedule.filter((entry, j) => {
+            const ok = entry && typeof entry === 'object' &&
+                typeof entry.day === 'string' &&
+                typeof entry.time === 'string' &&
+                typeof entry.availableLanes === 'string';
+            if (!ok) warnings.push(`Skipping malformed entry ${j} in pool "${pool.name}".`);
+            return ok;
+        });
+        pools.push({
+            name: pool.name,
+            weekRange: pool.weekRange,
+            dates: pool.dates,
+            lastUpdated: pool.lastUpdated,
+            lastUpdatedPl: pool.lastUpdatedPl,
+            schedule
+        });
+    });
+    return { pools, warnings, lastUpdated: pools[0]?.lastUpdated, lastUpdatedPl: pools[0]?.lastUpdatedPl };
+}
+
+function escapeHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+// ===========================================================================
+// Calendar Event Generation (.ics and Google Calendar)
+// ===========================================================================
+
+function getSlotCalendarDates(slot, defaultYear = 2026) {
+    let year = defaultYear, month = 10, day = 28;
+    if (slot.date) {
+        const parts = slot.date.split('.');
+        if (parts.length === 3) {
+            day = parseInt(parts[0], 10);
+            month = parseInt(parts[1], 10);
+            year = parseInt(parts[2], 10);
+        }
+    }
+    const startHour = slot.hour;
+    const dur = slot.duration || 1;
+    const endHour = slot.endHour || (startHour + dur);
+
+    const pad = (n) => String(n).padStart(2, '0');
+    const startIso = `${year}${pad(month)}${pad(day)}T${pad(startHour)}0000`;
+    const endIso = `${year}${pad(month)}${pad(day)}T${pad(endHour)}0000`;
+
+    return { startIso, endIso, year, month, day, startHour, endHour };
+}
+
+function buildGoogleCalendarUrl(slot) {
+    const { startIso, endIso } = getSlotCalendarDates(slot);
+    const specs = POOL_SPECS[slot.poolName] || { address: 'Gliwice' };
+    const dur = slot.duration || 1;
+    const minLanes = typeof slot.minFreeLanes === 'number' ? slot.minFreeLanes : slot.freeLanes;
+    const title = `Pływanie — Kryta Pływalnia ${slot.poolName} (${minLanes} wolnych torów)`;
+    const details = `Sesja pływania (${dur}h na basenie ${slot.poolName}).\nWolne tory: ${minLanes}/${slot.totalLanes} (śr. ${slot.freeLanes}).\nPrzebieg: ${slot.details || slot.timeLabel}\nAdres: ${specs.address}, Gliwice\nWygenerowano przez: https://110kc3.github.io/pool-gliwice-automation/`;
+    const location = `${specs.address}, Gliwice`;
+
+    const params = new URLSearchParams({
+        action: 'TEMPLATE',
+        text: title,
+        dates: `${startIso}/${endIso}`,
+        details: details,
+        location: location
+    });
+    return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
+function generateIcsFile(slot) {
+    const { startIso, endIso } = getSlotCalendarDates(slot);
+    const specs = POOL_SPECS[slot.poolName] || { address: 'Gliwice' };
+    const dur = slot.duration || 1;
+    const minLanes = typeof slot.minFreeLanes === 'number' ? slot.minFreeLanes : slot.freeLanes;
+    const title = `Pływanie — Kryta Pływalnia ${slot.poolName} (${minLanes} wolnych torów)`;
+    const description = `Sesja pływania (${dur}h na basenie ${slot.poolName}). Wolne tory: ${minLanes}/${slot.totalLanes}. ${slot.details || ''} Adres: ${specs.address}, Gliwice`;
+    const location = `${specs.address}, Gliwice`;
+    const uid = `swim-${slot.poolName.toLowerCase()}-${startIso}-${Math.random().toString(36).slice(2, 8)}@gliwice-pools`;
+    const nowIso = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+
+    return [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Gliwice Pool Automation//PL',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH',
+        'BEGIN:VEVENT',
+        `UID:${uid}`,
+        `DTSTAMP:${nowIso}`,
+        `DTSTART:${startIso}`,
+        `DTEND:${endIso}`,
+        `SUMMARY:${title.replace(/[,\n]/g, ' ')}`,
+        `DESCRIPTION:${description.replace(/\n/g, '\\n')}`,
+        `LOCATION:${location.replace(/,/g, '\\,')}`,
+        'STATUS:CONFIRMED',
+        'BEGIN:VALARM',
+        'TRIGGER:-PT1H',
+        'ACTION:DISPLAY',
+        'DESCRIPTION:Przypomnienie o wyjściu na basen',
+        'END:VALARM',
+        'END:VEVENT',
+        'END:VCALENDAR'
+    ].join('\r\n');
+}
+
+function triggerIcsDownload(slot) {
+    const icsText = generateIcsFile(slot);
+    const blob = new Blob([icsText], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const safeDate = (slot.date || slot.day).replace(/[^a-zA-Z0-9]/g, '_');
+    a.download = `plywanie_${slot.poolName.toLowerCase()}_${safeDate}_${slot.hour}h.ics`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+// ===========================================================================
+// Browser UI & Interactive Suggester Application
+// ===========================================================================
+
+function initApp(rawData) {
+    const { pools, warnings } = validatePoolData(rawData);
+    if (!pools) {
+        showError('Nie udało się załadować harmonogramu — niepoprawny format danych.');
+        return;
+    }
+    if (warnings.length) {
+        console.warn(`Pool data validation: ${warnings.length} issue(s).`, warnings);
+    }
+
+    window.poolData = pools;
+    const weekDates = getScheduleDates(pools);
+    const hourlySlots = aggregateHourlySlots(pools);
+    const insights = computeDataInsights(hourlySlots);
+    const todayName = getPolishDayName(new Date());
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinutes = now.getMinutes();
+    const activeStartHour = currentMinutes >= 45 ? currentHour + 1 : currentHour;
+    const isLateNight = activeStartHour >= 21 || activeStartHour < 6;
+    const currentDayIdx = DAYS_ORDER.indexOf(todayName);
+    const tomorrowName = currentDayIdx >= 0 ? DAYS_ORDER[(currentDayIdx + 1) % 7] : "Czwartek";
+
+    const defaultPreset = isLateNight ? 'tomorrow_morning' : 'now';
+    const defaultDay = isLateNight ? tomorrowName : todayName;
+    const defaultTimeBucket = isLateNight ? 'morning' : 'all';
+    const defaultMinHour = isLateNight ? null : activeStartHour;
+
+    // Suggester interactive state
+    const state = {
+        activeTab: 'suggester', // 'suggester' | 'matrix' | 'schedules' | 'info'
+        preset: defaultPreset,  // 'now' | 'today_evening' | 'tomorrow_morning' | 'weekend' | 'all' | null
+        day: defaultDay,        // specific day or 'all' | 'weekend' | 'workdays'
+        minHour: defaultMinHour,// minimum hour filter for today
+        timeBucket: defaultTimeBucket, // 'all' | 'morning' | 'afternoon' | 'evening'
+        pool: 'all',            // 'all' | poolName
+        duration: 1,            // 1 | 2 | 3 (hours to swim)
+        matrixDuration: 1,      // 1 | 2 | 3 (hours for matrix comparison)
+        sortBy: 'lanes',        // 'lanes' | 'openness' | 'time'
+        onlyHigh: false,        // minOpenness >= 0.8
+        matrixDay: todayName,   // day selected in matrix view
+        searchQuery: '',        // text filter in full schedule
+        scheduleDay: 'all',
+        schedulePool: 'all'
+    };
+
+    // Render Live "Gdzie teraz na basen?" Hero Widget & Status Radar
+    function renderLiveNow() {
+        const container = document.getElementById('live-now-container');
+        if (!container) return;
+
+        const liveNow = new Date();
+        const curHour = liveNow.getHours();
+        const curMin = liveNow.getMinutes();
+        const shortDate = weekDates.shortDates[todayName] || '';
+        const timeFormatted = `${String(curHour).padStart(2, '0')}:${String(curMin).padStart(2, '0')}`;
+        const activeHour = curMin >= 45 ? curHour + 1 : curHour;
+        const nightMode = activeHour >= 21 || activeHour < 6;
+
+        const poolNames = ["Olimpijczyk", "Mewa", "Delfin", "Neptun"];
+
+        if (!nightMode) {
+            // Find best upcoming slot today within the next 4 hours
+            const upcomingSlots = hourlySlots.filter(s =>
+                s.day === todayName &&
+                s.hour >= activeHour &&
+                s.hour <= activeHour + 3 &&
+                s.freeLanes > 0
+            );
+            upcomingSlots.sort((a, b) => {
+                const diffMin = (typeof b.minFreeLanes === 'number' ? b.minFreeLanes : b.freeLanes) -
+                                (typeof a.minFreeLanes === 'number' ? a.minFreeLanes : a.freeLanes);
+                if (diffMin !== 0) return diffMin;
+                return a.hour - b.hour;
+            });
+
+            const bestImmediate = upcomingSlots[0] ||
+                hourlySlots.filter(s => s.day === todayName && s.hour >= activeHour && s.freeLanes > 0)
+                           .sort((a, b) => b.freeLanes - a.freeLanes)[0];
+
+            // Build 4-pool live status radar
+            const poolRadarCards = poolNames.map(pName => {
+                const curSlot = hourlySlots.find(s => s.poolName === pName && s.day === todayName && s.hour === activeHour);
+                const nextSlot = hourlySlots.find(s => s.poolName === pName && s.day === todayName && s.hour === activeHour + 1);
+                const laterSlot = hourlySlots.find(s => s.poolName === pName && s.day === todayName && s.hour === activeHour + 2);
+                const specs = POOL_SPECS[pName] || { length: '25m', type: 'Basen' };
+
+                let statusBadge = '';
+                let statusClass = 'low';
+                let nowLanesHtml = '';
+
+                if (!curSlot || curSlot.openness === 0 || curSlot.freeLanes === 0) {
+                    statusClass = 'closed';
+                    statusBadge = '🔴 Brak torów';
+                    nowLanesHtml = '<span class="closed-tag">0 wolnych torów</span>';
+                } else if (curSlot.openness >= 0.7 && curSlot.freeLanes >= 4) {
+                    statusClass = 'high';
+                    statusBadge = '🟢 Dużo miejsca';
+                    nowLanesHtml = `<strong>${curSlot.freeLanes}</strong> z ${curSlot.totalLanes} torów (${Math.round(curSlot.openness * 100)}%)`;
+                } else {
+                    statusClass = 'medium';
+                    statusBadge = '🟡 Umiarkowanie';
+                    nowLanesHtml = `<strong>${curSlot.freeLanes}</strong> z ${curSlot.totalLanes} torów (${Math.round(curSlot.openness * 100)}%)`;
+                }
+
+                const upcomingPills = [];
+                if (nextSlot) {
+                    const st = nextSlot.freeLanes > 0 ? `${nextSlot.freeLanes} torów` : 'zajęty';
+                    upcomingPills.push(`<strong>${String(nextSlot.hour).padStart(2, '0')}:00</strong> (${st})`);
+                }
+                if (laterSlot) {
+                    const st = laterSlot.freeLanes > 0 ? `${laterSlot.freeLanes} torów` : 'zajęty';
+                    upcomingPills.push(`<strong>${String(laterSlot.hour).padStart(2, '0')}:00</strong> (${st})`);
+                }
+
+                return `
+                    <div class="radar-card status-${statusClass}" data-pool="${escapeHtml(pName)}">
+                        <div class="radar-card-header">
+                            <div>
+                                <h4 class="radar-pool-title">${escapeHtml(pName)}</h4>
+                                <span class="radar-pool-meta">${escapeHtml(specs.length)} • ${escapeHtml(specs.type)}</span>
+                            </div>
+                            <span class="radar-status-pill status-${statusClass}">${statusBadge}</span>
+                        </div>
+                        <div class="radar-current-hour">
+                            <span class="radar-hour-label">Godz. ${String(activeHour).padStart(2, '0')}:00:</span>
+                            <span class="radar-hour-val">${nowLanesHtml}</span>
+                        </div>
+                        ${upcomingPills.length ? `
+                            <div class="radar-upcoming">
+                                <span class="radar-upcoming-label">Kolejne godziny:</span>
+                                <span class="radar-upcoming-val">${upcomingPills.join(' ➔ ')}</span>
+                            </div>
+                        ` : ''}
+                        <button type="button" class="btn-radar-pool" data-pool="${escapeHtml(pName)}">
+                            Pokaż tylko ${escapeHtml(pName)} ➔
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = `
+                <div class="live-hero-card">
+                    <div class="live-hero-top">
+                        <div class="live-title-group">
+                            <span class="live-pulse-badge"><span class="pulse-dot"></span> NA ŻYWO</span>
+                            <h2>Gdzie na basen w najbliższych godzinach?</h2>
+                        </div>
+                        <div class="live-clock-badge">
+                            🕒 Dzisiaj, <strong>${escapeHtml(todayName)}</strong>${shortDate ? ` (${escapeHtml(shortDate)})` : ''}, godz. <strong>${timeFormatted}</strong>
+                        </div>
+                    </div>
+
+                    ${bestImmediate ? `
+                    <div class="immediate-pick-banner">
+                        <div class="immediate-pick-content">
+                            <span class="immediate-pick-tag">🏆 Najlepszy wybór na teraz / w najbliższych godzinach:</span>
+                            <h3 class="immediate-pick-name">${escapeHtml(bestImmediate.poolName)} • ${escapeHtml(bestImmediate.timeLabel)}</h3>
+                            <p class="immediate-pick-sub">Aż <strong>${bestImmediate.freeLanes} wolnych torów</strong> (${Math.round(bestImmediate.openness * 100)}% pojemności). ${escapeHtml(bestImmediate.details || '')}</p>
+                        </div>
+                        <div class="immediate-pick-btns">
+                            <a href="${buildGoogleCalendarUrl(bestImmediate)}" target="_blank" rel="noopener noreferrer" class="btn-hero-action gcal">
+                                📅 Dodaj do kalendarza
+                            </a>
+                            <a href="https://maps.google.com/?q=Kryta+Pływalnia+${encodeURIComponent(bestImmediate.poolName)}+Gliwice" target="_blank" rel="noopener noreferrer" class="btn-hero-action map">
+                                🗺️ Trasa dojazdu
+                            </a>
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    <div class="radar-section-title">
+                        <span>Stan 4 basenów w Gliwicach w kolejnych godzinach:</span>
+                    </div>
+                    <div class="radar-grid">
+                        ${poolRadarCards}
+                    </div>
+                </div>
+            `;
+        } else {
+            // Night view: pools closed
+            const morningSlots = hourlySlots.filter(s => s.day === tomorrowName && s.hour < 12 && s.freeLanes > 0);
+            morningSlots.sort((a, b) => b.freeLanes - a.freeLanes);
+            const topMorning = morningSlots[0];
+            const tomorrowDate = weekDates.shortDates[tomorrowName] || '';
+
+            container.innerHTML = `
+                <div class="live-hero-card closed-mode">
+                    <div class="live-hero-top">
+                        <div class="live-title-group">
+                            <span class="night-badge">🌙 NOC</span>
+                            <h2>Baseny są teraz zamknięte (czynne 06:00 – 22:00)</h2>
+                        </div>
+                        <div class="live-clock-badge">
+                            🕒 Godz. <strong>${timeFormatted}</strong> • Najbliższe otwarcie jutro o <strong>06:00</strong>
+                        </div>
+                    </div>
+
+                    ${topMorning ? `
+                    <div class="immediate-pick-banner night">
+                        <div class="immediate-pick-content">
+                            <span class="immediate-pick-tag">🌅 Najlepszy wybór na jutro rano (${escapeHtml(tomorrowName)}${tomorrowDate ? ' ' + escapeHtml(tomorrowDate) : ''}):</span>
+                            <h3 class="immediate-pick-name">${escapeHtml(topMorning.poolName)} • ${escapeHtml(topMorning.timeLabel)}</h3>
+                            <p class="immediate-pick-sub">Aż <strong>${topMorning.freeLanes} wolnych torów</strong> od samego rana. ${escapeHtml(topMorning.details || '')}</p>
+                        </div>
+                        <div class="immediate-pick-btns">
+                            <a href="${buildGoogleCalendarUrl(topMorning)}" target="_blank" rel="noopener noreferrer" class="btn-hero-action gcal">
+                                📅 Zapisz na rano
+                            </a>
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        container.querySelectorAll('.btn-radar-pool').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const pool = btn.dataset.pool;
+                state.pool = pool;
+                state.preset = null;
+                syncFilterButtons();
+                renderSuggester();
+                const panel = document.querySelector('.suggester-panel');
+                if (panel) panel.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    }
+
+    // Render Data Insights Cards
+    function renderInsights() {
+        const container = document.getElementById('insights-grid');
+        if (!container) return;
+        container.innerHTML = `
+            <div class="insight-card">
+                <div class="insight-icon">🏆</div>
+                <div class="insight-content">
+                    <span class="insight-title">Najlepszy dzień</span>
+                    <strong class="insight-value">${escapeHtml(insights.bestDayLabel || insights.bestDay)}</strong>
+                    <span class="insight-desc">Średnio <strong>${insights.bestDayPercentage}%</strong> wolnych torów</span>
+                </div>
+            </div>
+            <div class="insight-card">
+                <div class="insight-icon">🌙</div>
+                <div class="insight-content">
+                    <span class="insight-title">Najlepsza pora</span>
+                    <strong class="insight-value">${escapeHtml(insights.bestBucket)}</strong>
+                    <span class="insight-desc">Średnio <strong>${insights.bestBucketPercentage}%</strong> wolnych torów</span>
+                </div>
+            </div>
+            <div class="insight-card highlight">
+                <div class="insight-icon">🏊‍♂️</div>
+                <div class="insight-content">
+                    <span class="insight-title">Rekord wolnych torów</span>
+                    <strong class="insight-value">Olimpijczyk • 10 torów</strong>
+                    <span class="insight-desc">06:00 rano (9x50m + 1x25m wolne)</span>
+                </div>
+            </div>
+            <div class="insight-card">
+                <div class="insight-icon">⚠️</div>
+                <div class="insight-content">
+                    <span class="insight-title">Godziny szczytu</span>
+                    <strong class="insight-value">Pn–Pt 08:00 – 14:00</strong>
+                    <span class="insight-desc">Rezerwacje szkolne i klubowe</span>
+                </div>
+            </div>
+        `;
+    }
+
+    // Render Suggester Results
+    function renderSuggester() {
+        const resultsContainer = document.getElementById('suggester-results');
+        const topPickContainer = document.getElementById('top-pick-container');
+        const countBadge = document.getElementById('results-count');
+        if (!resultsContainer || !topPickContainer) return;
+
+        const options = {
+            day: state.day,
+            timeBucket: state.timeBucket,
+            pool: state.pool,
+            duration: state.duration,
+            minHour: state.minHour,
+            sortBy: state.sortBy,
+            minOpenness: state.onlyHigh ? 0.8 : 0,
+            currentDay: todayName
+        };
+
+        const rankedSlots = filterAndRankSlots(hourlySlots, options);
+
+        if (countBadge) {
+            countBadge.textContent = `${rankedSlots.length} znalezionych`;
+        }
+
+        if (rankedSlots.length === 0) {
+            topPickContainer.innerHTML = '';
+            resultsContainer.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">🔍</div>
+                    <h3>Brak dostępnych terminów</h3>
+                    <p>Brak wolnych torów dla wybranego filtru${state.minHour ? ' na resztę dzisiejszego dnia' : ''}. Wybierz inną porę, dzień lub zresetuj filtry.</p>
+                    <button type="button" class="btn-reset-filters" id="btn-reset-filters">Pokaż cały tydzień</button>
+                </div>
+            `;
+            const resetBtn = document.getElementById('btn-reset-filters');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    state.day = 'all';
+                    state.preset = 'all';
+                    state.minHour = null;
+                    state.timeBucket = 'all';
+                    state.pool = 'all';
+                    state.duration = 1;
+                    state.onlyHigh = false;
+                    syncFilterButtons();
+                    renderSuggester();
+                });
+            }
+            return;
+        }
+
+        // Spotlight #1 Top Pick
+        const topPick = rankedSlots[0];
+        const topSpecs = POOL_SPECS[topPick.poolName] || { length: '25m', type: 'Basen sportowy', address: '' };
+        const percent = Math.round(topPick.openness * 100);
+        const durationBadge = topPick.duration > 1 ? ` • ${topPick.duration}h ciągłego pływania` : '';
+        const lanesDisplay = (topPick.duration > 1 && topPick.minFreeLanes !== topPick.freeLanes)
+            ? `min. ${topPick.minFreeLanes} <span class="lanes-unit">torów (śr. ${topPick.freeLanes})</span>`
+            : `${topPick.freeLanes} <span class="lanes-unit">wolnych torów</span>`;
+
+        topPickContainer.innerHTML = `
+            <div class="top-pick-card">
+                <div class="top-pick-badge">🌟 Rekomendacja #1 • Najwięcej wolnego miejsca${durationBadge}</div>
+                <div class="top-pick-header">
+                    <div>
+                        <h3 class="top-pick-pool">${escapeHtml(topPick.poolName)}</h3>
+                        <span class="pool-type-tag">${escapeHtml(topSpecs.type)} • ${escapeHtml(topSpecs.length)}</span>
+                        <div class="pool-address-line">${escapeHtml(topSpecs.address)}</div>
+                    </div>
+                    <div class="top-pick-stats">
+                        <div class="top-pick-lanes">${lanesDisplay}</div>
+                        <div class="top-pick-percent">${percent}% pojemności</div>
+                    </div>
+                </div>
+
+                <div class="top-pick-details">
+                    <div class="top-pick-when">
+                        <span class="when-date">📅 <strong>${escapeHtml(topPick.date || '')}</strong> (${escapeHtml(topPick.day)})</span>
+                        <span class="when-time">⏰ ${escapeHtml(topPick.timeLabel)}</span>
+                    </div>
+                    <div class="lane-progress-bar">
+                        <div class="lane-progress-fill high" style="width: ${percent}%;"></div>
+                    </div>
+                    <div class="top-pick-notes">
+                        <strong>Szczegóły:</strong> ${escapeHtml(topPick.details || 'Wszystkie tory dostępne dla klientów indywidualnych')}
+                    </div>
+                    <div class="calendar-actions">
+                        <a href="${buildGoogleCalendarUrl(topPick)}" target="_blank" rel="noopener noreferrer" class="btn-cal-action btn-cal-gcal">
+                            <span>📅</span> Dodaj do Kalendarza Google
+                        </a>
+                        <button type="button" class="btn-cal-action btn-cal-ics" id="btn-top-pick-ics">
+                            <span>📥</span> Pobierz .ics (Apple / Outlook)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        const topPickIcsBtn = document.getElementById('btn-top-pick-ics');
+        if (topPickIcsBtn) {
+            topPickIcsBtn.addEventListener('click', () => triggerIcsDownload(topPick));
+        }
+
+        // Remaining ranked slots
+        const otherSlots = rankedSlots.slice(1);
+        if (otherSlots.length === 0) {
+            resultsContainer.innerHTML = '';
+            return;
+        }
+
+        resultsContainer.innerHTML = otherSlots.map((slot, index) => {
+            const rank = index + 2;
+            const slotSpecs = POOL_SPECS[slot.poolName] || { length: '25m', type: 'Basen' };
+            const pct = Math.round(slot.openness * 100);
+            const statusClass = slot.status;
+
+            return `
+                <div class="slot-card status-${statusClass}">
+                    <div class="slot-card-top">
+                        <span class="rank-badge">#${rank}</span>
+                        <span class="slot-pool">${escapeHtml(slot.poolName)}</span>
+                        <span class="slot-type">${escapeHtml(slotSpecs.length)}</span>
+                    </div>
+                    <div class="slot-when">
+                        <div class="slot-date-badge">📅 <strong>${escapeHtml(slot.date || '')}</strong> (${escapeHtml(slot.day)})</div>
+                        <span class="slot-time">⏰ ${escapeHtml(slot.timeLabel)}</span>
+                    </div>
+                    <div class="slot-lanes-badge status-${statusClass}">
+                        ${escapeHtml(slot.laneBadge)}
+                    </div>
+                    <div class="lane-progress-bar small">
+                        <div class="lane-progress-fill ${statusClass}" style="width: ${pct}%;"></div>
+                    </div>
+                    ${slot.details ? `<div class="slot-subnote">⏱️ ${escapeHtml(slot.details)}</div>` : ''}
+                    <div class="slot-card-actions">
+                        <a href="${buildGoogleCalendarUrl(slot)}" target="_blank" rel="noopener noreferrer" class="slot-btn-cal gcal" title="Dodaj do Kalendarza Google">
+                            📅 Google
+                        </a>
+                        <button type="button" class="slot-btn-cal ics btn-slot-ics" data-index="${index}" title="Pobierz plik .ics dla kalendarza">
+                            📥 .ics
+                        </button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        resultsContainer.querySelectorAll('.btn-slot-ics').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const idx = parseInt(btn.dataset.index, 10);
+                if (otherSlots[idx]) {
+                    triggerIcsDownload(otherSlots[idx]);
+                }
+            });
+        });
+    }
+
+    // Render Hourly Comparison Matrix View
+    function renderMatrix() {
+        const matrixContainer = document.getElementById('matrix-content');
+        if (!matrixContainer) return;
+
+        const day = state.matrixDay;
+        const dur = state.matrixDuration || 1;
+        // Group by start hour (06:00 to 22:00 - dur)
+        const maxStartHour = 22 - dur;
+        const hours = [];
+        for (let h = 6; h <= maxStartHour; h++) hours.push(h);
+
+        const comparisonSlots = dur > 1 ? getMultiHourSlots(hourlySlots, dur) : hourlySlots;
+        const poolNames = ["Olimpijczyk", "Mewa", "Delfin", "Neptun"];
+
+        let rowsHtml = '';
+        hours.forEach(h => {
+            const timeLabel = dur === 1
+                ? `${String(h).padStart(2, '0')}:00 – ${String(h + 1).padStart(2, '0')}:00`
+                : `${String(h).padStart(2, '0')}:00 – ${String(h + dur).padStart(2, '0')}:00 (${dur}h)`;
+
+            const cols = poolNames.map(pName => {
+                const match = comparisonSlots.find(s => s.poolName === pName && s.day === day && s.hour === h);
+                if (!match || match.openness === 0 || match.status === 'closed') {
+                    return `<td class="matrix-cell closed"><span class="matrix-badge closed">Niedostępny</span>${dur > 1 && match && match.details ? `<div class="matrix-subnote">${escapeHtml(match.details)}</div>` : ''}</td>`;
+                }
+                const pct = Math.round(match.openness * 100);
+                const laneText = (dur > 1 && typeof match.minFreeLanes === 'number')
+                    ? `<strong>min. ${match.minFreeLanes}</strong> torów (śr. ${match.freeLanes})`
+                    : `<strong>${match.freeLanes}</strong> torów wolnych`;
+
+                return `
+                    <td class="matrix-cell ${match.status}">
+                        <div class="matrix-lanes">${laneText}</div>
+                        <div class="matrix-pct">${pct}% (${match.laneBadge})</div>
+                        ${dur > 1 && match.details ? `<div class="matrix-subnote">${escapeHtml(match.details)}</div>` : ''}
+                    </td>
+                `;
+            }).join('');
+
+            rowsHtml += `
+                <tr>
+                    <td class="matrix-time-col"><strong>${timeLabel}</strong></td>
+                    ${cols}
+                </tr>
+            `;
+        });
+
+        matrixContainer.innerHTML = `
+            <div class="matrix-header-controls">
+                <div class="matrix-controls-group">
+                    <label for="matrix-day-select"><strong>Dzień:</strong></label>
+                    <select id="matrix-day-select" class="styled-select">
+                        ${DAYS_ORDER.map(d => `<option value="${escapeHtml(d)}" ${d === day ? 'selected' : ''}>${escapeHtml(d)} — ${escapeHtml(weekDates.fullDates[d] || '')}</option>`).join('')}
+                    </select>
+                </div>
+                <div class="matrix-controls-group">
+                    <strong>Czas wizyty:</strong>
+                    <div class="matrix-duration-pills">
+                        <button type="button" class="btn-matrix-duration ${dur === 1 ? 'active' : ''}" data-duration="1">1 godzina</button>
+                        <button type="button" class="btn-matrix-duration ${dur === 2 ? 'active' : ''}" data-duration="2">2 godziny</button>
+                        <button type="button" class="btn-matrix-duration ${dur === 3 ? 'active' : ''}" data-duration="3">3 godziny</button>
+                    </div>
+                </div>
+                <span class="matrix-current-date-badge">📅 Obowiązuje: <strong>${escapeHtml(weekDates.fullDates[day] || '')}</strong></span>
+            </div>
+            <div class="table-responsive">
+                <table class="comparison-matrix-table">
+                    <thead>
+                        <tr>
+                            <th>Godzina</th>
+                            <th>Olimpijczyk <span class="th-sub">50m • 10 torów</span></th>
+                            <th>Mewa <span class="th-sub">25m • 6 torów</span></th>
+                            <th>Delfin <span class="th-sub">25m • 6 torów</span></th>
+                            <th>Neptun <span class="th-sub">25m • 6 torów</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${rowsHtml}
+                    </tbody>
+                </table>
+            </div>
+        `;
+
+        const daySelect = document.getElementById('matrix-day-select');
+        if (daySelect) {
+            daySelect.addEventListener('change', (e) => {
+                state.matrixDay = e.target.value;
+                renderMatrix();
+            });
+        }
+
+        document.querySelectorAll('.btn-matrix-duration').forEach(btn => {
+            btn.addEventListener('click', () => {
+                state.matrixDuration = parseInt(btn.dataset.duration, 10) || 1;
+                renderMatrix();
+            });
+        });
+    }
+
+    // Render Full Raw Timetables View
+    function renderFullSchedules() {
+        const container = document.getElementById('schedules-container');
+        if (!container) return;
+
+        // Synchronize schedule-day-select options with dates if needed
+        const scheduleDaySelect = document.getElementById('schedule-day-select');
+        if (scheduleDaySelect && scheduleDaySelect.options.length <= 8) {
+            scheduleDaySelect.innerHTML = `
+                <option value="all" ${state.scheduleDay === 'all' ? 'selected' : ''}>Wszystkie dni (${escapeHtml(weekDates.weekRange)})</option>
+                ${DAYS_ORDER.map(d => `<option value="${escapeHtml(d)}" ${d === state.scheduleDay ? 'selected' : ''}>${escapeHtml(d)} — ${escapeHtml(weekDates.fullDates[d] || '')}</option>`).join('')}
+            `;
+        }
+
+        container.innerHTML = '';
+        pools.forEach(pool => {
+            if (state.schedulePool !== 'all' && pool.name !== state.schedulePool) return;
+
+            const poolSchedule = pool.schedule
+                .filter(entry => !classifyAvailability(entry.availableLanes).noise)
+                .filter(entry => state.scheduleDay === 'all' || entry.day === state.scheduleDay)
+                .filter(entry => {
+                    if (!state.searchQuery) return true;
+                    const q = state.searchQuery.toLowerCase();
+                    return entry.day.toLowerCase().includes(q) ||
+                           entry.time.toLowerCase().includes(q) ||
+                           entry.availableLanes.toLowerCase().includes(q);
+                });
+
+            if (poolSchedule.length === 0) return;
+
+            const specs = POOL_SPECS[pool.name] || { length: '25m', address: '' };
+            const card = document.createElement('div');
+            card.classList.add('pool-schedule-card');
+            card.innerHTML = `
+                <div class="schedule-card-header">
+                    <div>
+                        <h2>${escapeHtml(pool.name)}</h2>
+                        <span class="pool-address-line">${escapeHtml(specs.address)} • ${escapeHtml(specs.length)}</span>
+                    </div>
+                    <span class="count-tag">${poolSchedule.length} wpisów</span>
+                </div>
+                <div class="table-responsive">
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Dzień i Data</th>
+                                <th>Godzina</th>
+                                <th>Dostępność</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${poolSchedule.map(e => {
+                                const detail = getFreeLanesDetail(pool.name, e.availableLanes);
+                                const statusClass = detail ? detail.status : 'low';
+                                const badgeText = detail ? detail.label : cleanCell(e.availableLanes);
+                                const dateStr = e.date || weekDates.fullDates[cleanCell(e.day)] || '';
+                                return `
+                                    <tr>
+                                        <td><strong>${escapeHtml(cleanCell(e.day))}</strong>${dateStr ? `<span class="cell-date">(${escapeHtml(dateStr)})</span>` : ''}</td>
+                                        <td>${escapeHtml(cleanCell(e.time))}</td>
+                                        <td>${escapeHtml(cleanCell(e.availableLanes))}</td>
+                                        <td><span class="status-pill status-${statusClass}">${escapeHtml(badgeText)}</span></td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+
+        if (container.children.length === 0) {
+            container.innerHTML = `<p class="empty-state">Brak wyników wyszukiwania dla "${escapeHtml(state.searchQuery)}".</p>`;
+        }
+    }
+
+    // Synchronize UI active filter button states
+    function syncFilterButtons() {
+        // Preset pills
+        document.querySelectorAll('.preset-pill').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.preset === state.preset);
+        });
+        // Day pills
+        document.querySelectorAll('.filter-day-pill').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.day === state.day);
+        });
+        // Duration pills
+        document.querySelectorAll('.filter-duration-pill').forEach(btn => {
+            btn.classList.toggle('active', parseInt(btn.dataset.duration, 10) === state.duration);
+        });
+        // Time pills
+        document.querySelectorAll('.filter-time-pill').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.time === state.timeBucket);
+        });
+        // Pool pills
+        document.querySelectorAll('.filter-pool-pill').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.pool === state.pool);
+        });
+        // Sort buttons
+        document.querySelectorAll('.filter-sort-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.sort === state.sortBy);
+        });
+        // High availability toggle
+        const toggle = document.getElementById('toggle-only-high');
+        if (toggle) toggle.checked = state.onlyHigh;
+    }
+
+    // Set up interactive filter click listeners
+    function setupEventListeners() {
+        // Tab switching
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetView = tab.dataset.tab;
+                state.activeTab = targetView;
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                document.querySelectorAll('.view-panel').forEach(panel => {
+                    panel.classList.toggle('active', panel.id === `view-${targetView}`);
+                });
+
+                if (targetView === 'suggester') renderSuggester();
+                else if (targetView === 'matrix') renderMatrix();
+                else if (targetView === 'schedules') renderFullSchedules();
+            });
+        });
+
+        // Preset filters (1-tap quick choice)
+        document.querySelectorAll('.preset-pill').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const p = btn.dataset.preset;
+                state.preset = p;
+                if (p === 'now') {
+                    state.day = todayName;
+                    state.minHour = activeStartHour;
+                    state.timeBucket = 'all';
+                } else if (p === 'today_evening') {
+                    state.day = todayName;
+                    state.minHour = 17;
+                    state.timeBucket = 'evening';
+                } else if (p === 'tomorrow_morning') {
+                    state.day = tomorrowName;
+                    state.minHour = null;
+                    state.timeBucket = 'morning';
+                } else if (p === 'weekend') {
+                    state.day = 'weekend';
+                    state.minHour = null;
+                    state.timeBucket = 'all';
+                } else if (p === 'all') {
+                    state.day = 'all';
+                    state.minHour = null;
+                    state.timeBucket = 'all';
+                }
+                syncFilterButtons();
+                renderSuggester();
+            });
+        });
+
+        // Day filters
+        document.querySelectorAll('.filter-day-pill').forEach(btn => {
+            btn.addEventListener('click', () => {
+                state.day = btn.dataset.day;
+                if (state.day !== todayName) {
+                    state.minHour = null;
+                }
+                state.preset = null;
+                syncFilterButtons();
+                renderSuggester();
+            });
+        });
+
+        // Duration filters
+        document.querySelectorAll('.filter-duration-pill').forEach(btn => {
+            btn.addEventListener('click', () => {
+                state.duration = parseInt(btn.dataset.duration, 10) || 1;
+                syncFilterButtons();
+                renderSuggester();
+            });
+        });
+
+        // Time filters
+        document.querySelectorAll('.filter-time-pill').forEach(btn => {
+            btn.addEventListener('click', () => {
+                state.timeBucket = btn.dataset.time;
+                syncFilterButtons();
+                renderSuggester();
+            });
+        });
+
+        // Pool filters
+        document.querySelectorAll('.filter-pool-pill').forEach(btn => {
+            btn.addEventListener('click', () => {
+                state.pool = btn.dataset.pool;
+                syncFilterButtons();
+                renderSuggester();
+            });
+        });
+
+        // Sort buttons
+        document.querySelectorAll('.filter-sort-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                state.sortBy = btn.dataset.sort;
+                syncFilterButtons();
+                renderSuggester();
+            });
+        });
+
+        // High availability checkbox toggle
+        const toggleHigh = document.getElementById('toggle-only-high');
+        if (toggleHigh) {
+            toggleHigh.addEventListener('change', (e) => {
+                state.onlyHigh = e.target.checked;
+                renderSuggester();
+            });
+        }
+
+        // Full schedule search & filters
+        const searchInput = document.getElementById('schedule-search');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                state.searchQuery = e.target.value.trim();
+                renderFullSchedules();
+            });
+        }
+
+        const scheduleDaySelect = document.getElementById('schedule-day-select');
+        if (scheduleDaySelect) {
+            scheduleDaySelect.addEventListener('change', (e) => {
+                state.scheduleDay = e.target.value;
+                renderFullSchedules();
+            });
+        }
+
+        const schedulePoolSelect = document.getElementById('schedule-pool-select');
+        if (schedulePoolSelect) {
+            schedulePoolSelect.addEventListener('change', (e) => {
+                state.schedulePool = e.target.value;
+                renderFullSchedules();
+            });
+        }
+    }
+
+    // Set schedule week badge and last updated badge in header
+    const weekBadge = document.getElementById('schedule-week-badge');
+    if (weekBadge && weekDates.weekRange) {
+        weekBadge.textContent = `📅 Harmonogram: ${weekDates.weekRange}`;
+    }
+
+    const updateText = document.getElementById('update-badge-text');
+    const lastUpdatedPl = pools[0]?.lastUpdatedPl || rawData[0]?.lastUpdatedPl;
+    if (updateText) {
+        if (lastUpdatedPl) {
+            updateText.textContent = `Zaktualizowano: ${lastUpdatedPl}`;
+        } else {
+            updateText.textContent = `Codzienna aktualizacja nocna`;
+        }
+    }
+
+    // Register Service Worker for PWA
+    if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+        navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('PWA ServiceWorker registered with scope:', reg.scope))
+            .catch(err => console.warn('PWA ServiceWorker registration failed:', err));
+    }
+
+    // PWA Install prompt and online/offline handling
+    if (typeof window !== 'undefined') {
+        window.addEventListener('online', () => {
+            const banner = document.getElementById('offline-banner');
+            if (banner) banner.style.display = 'none';
+        });
+        window.addEventListener('offline', () => {
+            const banner = document.getElementById('offline-banner');
+            if (banner) banner.style.display = 'block';
+        });
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            window.deferredInstallPrompt = e;
+            const installBtn = document.getElementById('btn-install-pwa');
+            if (installBtn) {
+                installBtn.style.display = 'inline-flex';
+                installBtn.addEventListener('click', async () => {
+                    if (window.deferredInstallPrompt) {
+                        window.deferredInstallPrompt.prompt();
+                        const choice = await window.deferredInstallPrompt.userChoice;
+                        if (choice && choice.outcome === 'accepted') {
+                            installBtn.style.display = 'none';
+                        }
+                        window.deferredInstallPrompt = null;
+                    }
+                });
+            }
+        });
+    }
+
+    // Update day filter pill labels with concrete calendar dates
+    const allPill = document.querySelector('.filter-day-pill[data-day="all"]');
+    if (allPill && weekDates.shortDates["Poniedziałek"]) {
+        allPill.innerHTML = `Wszystkie dni <span class="pill-day-sub">(${weekDates.shortDates["Poniedziałek"]} – ${weekDates.shortDates["Niedziela"]})</span>`;
+    }
+    DAYS_ORDER.forEach(d => {
+        const pill = document.querySelector(`.filter-day-pill[data-day="${d}"]`);
+        if (pill) {
+            const shortDt = weekDates.shortDates[d] || '';
+            pill.innerHTML = `<strong>${shortDt}</strong> <span class="pill-day-sub">(${d})</span>`;
+        }
+    });
+    const workdaysPill = document.querySelector('.filter-day-pill[data-day="workdays"]');
+    if (workdaysPill && weekDates.shortDates["Poniedziałek"]) {
+        workdaysPill.innerHTML = `Dni robocze <span class="pill-day-sub">(${weekDates.shortDates["Poniedziałek"]}–${weekDates.shortDates["Piątek"]})</span>`;
+    }
+    const weekendPill = document.querySelector('.filter-day-pill[data-day="weekend"]');
+    if (weekendPill && weekDates.shortDates["Sobota"]) {
+        weekendPill.innerHTML = `Weekend <span class="pill-day-sub">(${weekDates.shortDates["Sobota"]}–${weekDates.shortDates["Niedziela"]})</span>`;
+    }
+
+    renderLiveNow();
+    renderInsights();
+    syncFilterButtons();
+    setupEventListeners();
+    renderSuggester();
+}
+
+function showError(message) {
+    const errorContainer = document.getElementById('error-banner');
+    if (errorContainer) {
+        errorContainer.textContent = message;
+        errorContainer.style.display = 'block';
+    }
+}
+
+// Initialise on DOM ready
+if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('data.json')
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                return response.json();
+            })
+            .then(initApp)
+            .catch(err => {
+                console.error('Failed to load or process data:', err);
+                showError('Nie udało się załadować harmonogramu basenów. Upewnij się, że plik data.json jest dostępny.');
+            });
+    });
+}
+
+// Exposed for Node-based unit tests
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        cleanCell,
+        classifyAvailability,
+        computeCapacities,
+        opennessScore,
+        validatePoolData,
+        DEFAULT_CAPACITY,
+        DAYS_ORDER,
+        POOL_SPECS,
+        getFreeLanesDetail,
+        getTimeBucket,
+        getPolishDayName,
+        getScheduleDates,
+        aggregateHourlySlots,
+        getMultiHourSlots,
+        filterAndRankSlots,
+        computeDataInsights,
+        getSlotCalendarDates,
+        buildGoogleCalendarUrl,
+        generateIcsFile
+    };
+}

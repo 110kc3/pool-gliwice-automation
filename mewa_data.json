@@ -1,0 +1,782 @@
+[
+    {
+        "time": "06:00",
+        "days": {
+            "Poniedziałek": "Pływalnia czynna od 7.00",
+            "Wtorek": null,
+            "Środa": null,
+            "Czwartek": null,
+            "Piątek": null,
+            "Sobota": null,
+            "Niedziela": null
+        }
+    },
+    {
+        "time": "06:15",
+        "days": {
+            "Poniedziałek": null,
+            "Wtorek": null,
+            "Środa": null,
+            "Czwartek": null,
+            "Piątek": null,
+            "Sobota": null,
+            "Niedziela": null
+        }
+    },
+    {
+        "time": "06:30",
+        "days": {
+            "Poniedziałek": null,
+            "Wtorek": null,
+            "Środa": null,
+            "Czwartek": null,
+            "Piątek": null,
+            "Sobota": null,
+            "Niedziela": null
+        }
+    },
+    {
+        "time": "06:45",
+        "days": {
+            "Poniedziałek": null,
+            "Wtorek": null,
+            "Środa": null,
+            "Czwartek": null,
+            "Piątek": null,
+            "Sobota": null,
+            "Niedziela": null
+        }
+    },
+    {
+        "time": "07:00",
+        "days": {
+            "Poniedziałek": "dostępna",
+            "Wtorek": "dostępna",
+            "Środa": "dostępna",
+            "Czwartek": "dostępna",
+            "Piątek": "dostępna",
+            "Sobota": null,
+            "Niedziela": null
+        }
+    },
+    {
+        "time": "07:15",
+        "days": {
+            "Poniedziałek": "dostępna",
+            "Wtorek": "dostępna",
+            "Środa": "dostępna",
+            "Czwartek": "dostępna",
+            "Piątek": "dostępna",
+            "Sobota": null,
+            "Niedziela": null
+        }
+    },
+    {
+        "time": "07:30",
+        "days": {
+            "Poniedziałek": "dostępna",
+            "Wtorek": "dostępna",
+            "Środa": "dostępna",
+            "Czwartek": "dostępna",
+            "Piątek": "dostępna",
+            "Sobota": null,
+            "Niedziela": null
+        }
+    },
+    {
+        "time": "07:45",
+        "days": {
+            "Poniedziałek": "dostępna",
+            "Wtorek": "dostępna",
+            "Środa": "dostępna",
+            "Czwartek": "dostępna",
+            "Piątek": "dostępna",
+            "Sobota": null,
+            "Niedziela": null
+        }
+    },
+    {
+        "time": "08:00",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
+            "Sobota": null,
+            "Niedziela": null
+        }
+    },
+    {
+        "time": "08:15",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
+            "Sobota": null,
+            "Niedziela": null
+        }
+    },
+    {
+        "time": "08:30",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
+            "Sobota": null,
+            "Niedziela": null
+        }
+    },
+    {
+        "time": "08:45",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
+            "Sobota": null,
+            "Niedziela": null
+        }
+    },
+    {
+        "time": "09:00",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": null,
+            "Niedziela": null
+        }
+    },
+    {
+        "time": "09:15",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": null,
+            "Niedziela": null
+        }
+    },
+    {
+        "time": "09:30",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": null,
+            "Niedziela": null
+        }
+    },
+    {
+        "time": "09:45",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": null,
+            "Niedziela": null
+        }
+    },
+    {
+        "time": "10:00",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "10:15",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "10:30",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "10:45",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "11:00",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "11:15",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "11:30",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "11:45",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "12:00",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "12:15",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "12:30",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "12:45",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "13:00",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "13:15",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "13:30",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "13:45",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "14:00",
+        "days": {
+            "Poniedziałek": "dostępna",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "14:15",
+        "days": {
+            "Poniedziałek": "dostępna",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "14:30",
+        "days": {
+            "Poniedziałek": "dostępna",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "14:45",
+        "days": {
+            "Poniedziałek": "dostępna",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "Nieczynne/ nauka pływania",
+            "Czwartek": "Nieczynne/ nauka pływania",
+            "Piątek": "Nieczynne/ nauka pływania",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "15:00",
+        "days": {
+            "Poniedziałek": "I Tor zajęty",
+            "Wtorek": "I Tor zajęty",
+            "Środa": "I Tor zajęty",
+            "Czwartek": "I Tor zajęty",
+            "Piątek": "I Tor zajęty",
+            "Sobota": "III Tory zajęte",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "15:15",
+        "days": {
+            "Poniedziałek": "I Tor zajęty",
+            "Wtorek": "I Tor zajęty",
+            "Środa": "I Tor zajęty",
+            "Czwartek": "I Tor zajęty",
+            "Piątek": "I Tor zajęty",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "15:30",
+        "days": {
+            "Poniedziałek": "I Tor zajęty",
+            "Wtorek": "I Tor zajęty",
+            "Środa": "I Tor zajęty",
+            "Czwartek": "I Tor zajęty",
+            "Piątek": "I Tor zajęty",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "15:45",
+        "days": {
+            "Poniedziałek": "I Tor zajęty",
+            "Wtorek": "I Tor zajęty",
+            "Środa": "I Tor zajęty",
+            "Czwartek": "I Tor zajęty",
+            "Piątek": "I Tor zajęty",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "16:00",
+        "days": {
+            "Poniedziałek": "I Tor zajęty",
+            "Wtorek": "II Tory zajęte",
+            "Środa": "III Tory zajęte",
+            "Czwartek": "III Tory zajęte",
+            "Piątek": "III Tory zajęte",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "16:15",
+        "days": {
+            "Poniedziałek": "I Tor zajęty",
+            "Wtorek": "II Tory zajęte",
+            "Środa": "III Tory zajęte",
+            "Czwartek": "III Tory zajęte",
+            "Piątek": "III Tory zajęte",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "16:30",
+        "days": {
+            "Poniedziałek": "I Tor zajęty",
+            "Wtorek": "II Tory zajęte",
+            "Środa": "III Tory zajęte",
+            "Czwartek": "III Tory zajęte",
+            "Piątek": "III Tory zajęte",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "16:45",
+        "days": {
+            "Poniedziałek": "I Tor zajęty",
+            "Wtorek": "II Tory zajęte",
+            "Środa": "III Tory zajęte",
+            "Czwartek": "III Tory zajęte",
+            "Piątek": "III Tory zajęte",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "17:00",
+        "days": {
+            "Poniedziałek": "II Tory zajęte",
+            "Wtorek": "II Tory zajęte",
+            "Środa": "II Tory zajęte",
+            "Czwartek": "II Tory zajęte",
+            "Piątek": "II Tory zajęte",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "17:15",
+        "days": {
+            "Poniedziałek": "II Tory zajęte",
+            "Wtorek": "II Tory zajęte",
+            "Środa": "II Tory zajęte",
+            "Czwartek": "II Tory zajęte",
+            "Piątek": "II Tory zajęte",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "17:30",
+        "days": {
+            "Poniedziałek": "II Tory zajęte",
+            "Wtorek": "II Tory zajęte",
+            "Środa": "II Tory zajęte",
+            "Czwartek": "II Tory zajęte",
+            "Piątek": "II Tory zajęte",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "17:45",
+        "days": {
+            "Poniedziałek": "II Tory zajęte",
+            "Wtorek": "II Tory zajęte",
+            "Środa": "II Tory zajęte",
+            "Czwartek": "II Tory zajęte",
+            "Piątek": "II Tory zajęte",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "18:00",
+        "days": {
+            "Poniedziałek": "II Tory zajęte",
+            "Wtorek": "II Tory zajęte",
+            "Środa": "II Tory zajęte",
+            "Czwartek": "II Tory zajęte",
+            "Piątek": "II Tory zajęte",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "18:15",
+        "days": {
+            "Poniedziałek": "II Tory zajęte",
+            "Wtorek": "II Tory zajęte",
+            "Środa": "II Tory zajęte",
+            "Czwartek": "II Tory zajęte",
+            "Piątek": "II Tory zajęte",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "18:30",
+        "days": {
+            "Poniedziałek": "III Tory zajęte",
+            "Wtorek": "II Tory zajęte",
+            "Środa": "II Tory zajęte",
+            "Czwartek": "II Tory zajęte",
+            "Piątek": "II Tory zajęte",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "18:45",
+        "days": {
+            "Poniedziałek": "III Tory zajęte",
+            "Wtorek": "II Tory zajęte",
+            "Środa": "II Tory zajęte",
+            "Czwartek": "II Tory zajęte",
+            "Piątek": "II Tory zajęte",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "19:00",
+        "days": {
+            "Poniedziałek": "II Tory zajęte",
+            "Wtorek": "III Tory zajęte",
+            "Środa": "III Tory zajęte",
+            "Czwartek": "III Tory zajęte",
+            "Piątek": "III Tory zajęte",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "19:15",
+        "days": {
+            "Poniedziałek": "II Tory zajęte",
+            "Wtorek": "III Tory zajęte",
+            "Środa": "III Tory zajęte",
+            "Czwartek": "III Tory zajęte",
+            "Piątek": "III Tory zajęte",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "19:30",
+        "days": {
+            "Poniedziałek": "II Tory zajęte",
+            "Wtorek": "III Tory zajęte",
+            "Środa": "III Tory zajęte",
+            "Czwartek": "III Tory zajęte",
+            "Piątek": "III Tory zajęte",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "19:45",
+        "days": {
+            "Poniedziałek": "II Tory zajęte",
+            "Wtorek": "III Tory zajęte",
+            "Środa": "III Tory zajęte",
+            "Czwartek": "III Tory zajęte",
+            "Piątek": "III Tory zajęte",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "20:00",
+        "days": {
+            "Poniedziałek": "III Tory zajęte",
+            "Wtorek": "III Tory zajęte",
+            "Środa": "III Tory zajęte",
+            "Czwartek": "III Tory zajęte",
+            "Piątek": "I Tor zajęty",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "20:15",
+        "days": {
+            "Poniedziałek": "III Tory zajęte",
+            "Wtorek": "III Tory zajęte",
+            "Środa": "III Tory zajęte",
+            "Czwartek": "III Tory zajęte",
+            "Piątek": "I Tor zajęty",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "20:30",
+        "days": {
+            "Poniedziałek": "III Tory zajęte",
+            "Wtorek": "III Tory zajęte",
+            "Środa": "III Tory zajęte",
+            "Czwartek": "III Tory zajęte",
+            "Piątek": "I Tor zajęty",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "20:45",
+        "days": {
+            "Poniedziałek": "III Tory zajęte",
+            "Wtorek": "III Tory zajęte",
+            "Środa": "III Tory zajęte",
+            "Czwartek": "III Tory zajęte",
+            "Piątek": "I Tor zajęty",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "21:00",
+        "days": {
+            "Poniedziałek": "III Tory zajęte",
+            "Wtorek": "III Tory zajęte",
+            "Środa": "III Tory zajęte",
+            "Czwartek": "III Tory zajęte",
+            "Piątek": "I Tor zajęty",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "21:15",
+        "days": {
+            "Poniedziałek": "dostępna",
+            "Wtorek": "dostępna",
+            "Środa": "dostępna",
+            "Czwartek": "dostępna",
+            "Piątek": "dostępna",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "21:30",
+        "days": {
+            "Poniedziałek": "dostępna",
+            "Wtorek": "dostępna",
+            "Środa": "dostępna",
+            "Czwartek": "dostępna",
+            "Piątek": "dostępna",
+            "Sobota": "dostępna",
+            "Niedziela": "Nieczynne"
+        }
+    },
+    {
+        "time": "21:45",
+        "days": {
+            "Poniedziałek": "Czas wyjścia z wody",
+            "Wtorek": null,
+            "Środa": null,
+            "Czwartek": null,
+            "Piątek": null,
+            "Sobota": null,
+            "Niedziela": null
+        }
+    },
+    {
+        "time": "22:00",
+        "days": {
+            "Poniedziałek": "Nieczynne/ nauka pływania",
+            "Wtorek": null,
+            "Środa": null,
+            "Czwartek": null,
+            "Piątek": null,
+            "Sobota": null,
+            "Niedziela": null
+        }
+    }
+]
