@@ -4,7 +4,7 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "dostępna",
-            "Środa": "dostępna",
+            "Środa": "niedostępna",
             "Czwartek": "dostępna",
             "Piątek": "dostępna",
             "Sobota": "Pływalnia czynna od 8:00",
@@ -16,7 +16,7 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "dostępna",
-            "Środa": "dostępna",
+            "Środa": "niedostępna",
             "Czwartek": "dostępna",
             "Piątek": "dostępna",
             "Sobota": null,
@@ -28,7 +28,7 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "dostępna",
-            "Środa": "dostępna",
+            "Środa": "niedostępna",
             "Czwartek": "dostępna",
             "Piątek": "dostępna",
             "Sobota": null,
@@ -40,7 +40,7 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "dostępna",
-            "Środa": "dostępna",
+            "Środa": "niedostępna",
             "Czwartek": "dostępna",
             "Piątek": "dostępna",
             "Sobota": null,
@@ -52,7 +52,7 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "dostępna",
-            "Środa": "I tor zajęty",
+            "Środa": "niedostępna",
             "Czwartek": "dostępna",
             "Piątek": "dostępna",
             "Sobota": null,
@@ -64,7 +64,7 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "dostępna",
-            "Środa": "I tor zajęty",
+            "Środa": "niedostępna",
             "Czwartek": "dostępna",
             "Piątek": "dostępna",
             "Sobota": null,
@@ -76,7 +76,7 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "dostępna",
-            "Środa": "I tor zajęty",
+            "Środa": "niedostępna",
             "Czwartek": "dostępna",
             "Piątek": "dostępna",
             "Sobota": null,
@@ -88,7 +88,7 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "dostępna",
-            "Środa": "I tor zajęty",
+            "Środa": "niedostępna",
             "Czwartek": "dostępna",
             "Piątek": "dostępna",
             "Sobota": null,
@@ -388,7 +388,7 @@
         "days": {
             "Poniedziałek": "niedostępna",
             "Wtorek": "niedostępna",
-            "Środa": "dostępna",
+            "Środa": "niedostępna",
             "Czwartek": "I tor zajęty",
             "Piątek": "dostępna",
             "Sobota": "I tor zajęty",
@@ -400,7 +400,7 @@
         "days": {
             "Poniedziałek": "niedostępna",
             "Wtorek": "niedostępna",
-            "Środa": "dostępna",
+            "Środa": "niedostępna",
             "Czwartek": "I tor zajęty",
             "Piątek": "dostępna",
             "Sobota": "I tor zajęty",
@@ -412,7 +412,7 @@
         "days": {
             "Poniedziałek": "niedostępna",
             "Wtorek": "niedostępna",
-            "Środa": "dostępna",
+            "Środa": "niedostępna",
             "Czwartek": "I tor zajęty",
             "Piątek": "dostępna",
             "Sobota": "I tor zajęty",
@@ -424,7 +424,7 @@
         "days": {
             "Poniedziałek": "niedostępna",
             "Wtorek": "niedostępna",
-            "Środa": "dostępna",
+            "Środa": "niedostępna",
             "Czwartek": "I tor zajęty",
             "Piątek": "dostępna",
             "Sobota": "I tor zajęty",
@@ -436,7 +436,7 @@
         "days": {
             "Poniedziałek": "niedostępna",
             "Wtorek": "niedostępna",
-            "Środa": "dostępna",
+            "Środa": "niedostępna",
             "Czwartek": "I tor zajęty",
             "Piątek": "dostępna",
             "Sobota": "I tor zajęty",
@@ -448,7 +448,7 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "dostępna",
-            "Środa": "dostępna",
+            "Środa": "niedostępna",
             "Czwartek": "I tor zajęty",
             "Piątek": "dostępna",
             "Sobota": "I tor zajęty",
@@ -460,7 +460,7 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "II   tory zajęte",
-            "Środa": "dostępna",
+            "Środa": "niedostępna",
             "Czwartek": "I tor zajęty",
             "Piątek": "dostępna",
             "Sobota": "I tor zajęty",
@@ -472,7 +472,7 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "II   tory zajęte",
-            "Środa": "dostępna",
+            "Środa": "niedostępna",
             "Czwartek": "I tor zajęty",
             "Piątek": "dostępna",
             "Sobota": "I tor zajęty",
@@ -484,7 +484,7 @@
         "days": {
             "Poniedziałek": "I tor zajęty",
             "Wtorek": "II   tory zajęte",
-            "Środa": "II   tory zajęte",
+            "Środa": "niedostępna",
             "Czwartek": "I tor zajęty",
             "Piątek": "I tor zajęty",
             "Sobota": "I tor zajęty",
@@ -496,7 +496,7 @@
         "days": {
             "Poniedziałek": "I tor zajęty",
             "Wtorek": "II   tory zajęte",
-            "Środa": "II   tory zajęte",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "I tor zajęty",
             "Sobota": "I tor zajęty",
@@ -508,7 +508,7 @@
         "days": {
             "Poniedziałek": "I tor zajęty",
             "Wtorek": "II   tory zajęte",
-            "Środa": "II   tory zajęte",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "I tor zajęty",
             "Sobota": "I tor zajęty",
@@ -520,7 +520,7 @@
         "days": {
             "Poniedziałek": "I tor zajęty",
             "Wtorek": "II   tory zajęte",
-            "Środa": "II   tory zajęte",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "I tor zajęty",
             "Sobota": "I tor zajęty",
@@ -532,7 +532,7 @@
         "days": {
             "Poniedziałek": "I tor zajęty",
             "Wtorek": "II   tory zajęte",
-            "Środa": "I tor zajęty",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "I tor zajęty",
             "Sobota": "I tor zajęty",
@@ -544,7 +544,7 @@
         "days": {
             "Poniedziałek": "I tor zajęty",
             "Wtorek": "II   tory zajęte",
-            "Środa": "I tor zajęty",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "I tor zajęty",
             "Sobota": "I tor zajęty",
@@ -556,7 +556,7 @@
         "days": {
             "Poniedziałek": "I tor zajęty",
             "Wtorek": "II   tory zajęte",
-            "Środa": "I tor zajęty",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "I tor zajęty",
             "Sobota": "I tor zajęty",
@@ -568,7 +568,7 @@
         "days": {
             "Poniedziałek": "I tor zajęty",
             "Wtorek": "II   tory zajęte",
-            "Środa": "I tor zajęty",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "I tor zajęty",
             "Sobota": "I tor zajęty",
@@ -580,7 +580,7 @@
         "days": {
             "Poniedziałek": "I tor zajęty",
             "Wtorek": "II   tory zajęte",
-            "Środa": "I tor zajęty",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "I tor zajęty",
             "Sobota": "I tor zajęty",
@@ -592,7 +592,7 @@
         "days": {
             "Poniedziałek": "I tor zajęty",
             "Wtorek": "II   tory zajęte",
-            "Środa": "I tor zajęty",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "I tor zajęty",
             "Sobota": "I tor zajęty",
@@ -604,7 +604,7 @@
         "days": {
             "Poniedziałek": "I tor zajęty",
             "Wtorek": "II   tory zajęte",
-            "Środa": "I tor zajęty",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "I tor zajęty",
             "Sobota": "I tor zajęty",
@@ -616,7 +616,7 @@
         "days": {
             "Poniedziałek": "I tor zajęty",
             "Wtorek": "II   tory zajęte",
-            "Środa": "I tor zajęty",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "I tor zajęty",
             "Sobota": "I tor zajęty",
@@ -628,7 +628,7 @@
         "days": {
             "Poniedziałek": "I tor zajęty",
             "Wtorek": "II   tory zajęte",
-            "Środa": "I tor zajęty",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "I tor zajęty",
             "Sobota": "I tor zajęty",
@@ -640,7 +640,7 @@
         "days": {
             "Poniedziałek": "I tor zajęty",
             "Wtorek": "II   tory zajęte",
-            "Środa": "I tor zajęty",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "I tor zajęty",
             "Sobota": "I tor zajęty",
@@ -652,7 +652,7 @@
         "days": {
             "Poniedziałek": "I tor zajęty",
             "Wtorek": "II   tory zajęte",
-            "Środa": "I tor zajęty",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "I tor zajęty",
             "Sobota": "I tor zajęty",
@@ -664,7 +664,7 @@
         "days": {
             "Poniedziałek": "I tor zajęty",
             "Wtorek": "II   tory zajęte",
-            "Środa": "I tor zajęty",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "dostępna",
             "Sobota": "I tor zajęty",
@@ -676,7 +676,7 @@
         "days": {
             "Poniedziałek": "I tor zajęty",
             "Wtorek": "II   tory zajęte",
-            "Środa": "II   tory zajęte",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "dostępna",
             "Sobota": "dostępna",
@@ -688,7 +688,7 @@
         "days": {
             "Poniedziałek": "II   tory zajęte",
             "Wtorek": "II   tory zajęte",
-            "Środa": "II   tory zajęte",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "dostępna",
             "Sobota": "dostępna",
@@ -700,7 +700,7 @@
         "days": {
             "Poniedziałek": "II   tory zajęte",
             "Wtorek": "II   tory zajęte",
-            "Środa": "II   tory zajęte",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "dostępna",
             "Sobota": "dostępna",
@@ -712,7 +712,7 @@
         "days": {
             "Poniedziałek": "II   tory zajęte",
             "Wtorek": "II   tory zajęte",
-            "Środa": "II   tory zajęte",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "dostępna",
             "Sobota": "dostępna",
@@ -724,7 +724,7 @@
         "days": {
             "Poniedziałek": "II   tory zajęte",
             "Wtorek": "II   tory zajęte",
-            "Środa": "dostępna",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "dostępna",
             "Sobota": "dostępna",
@@ -736,7 +736,7 @@
         "days": {
             "Poniedziałek": "II   tory zajęte",
             "Wtorek": "II   tory zajęte",
-            "Środa": "dostępna",
+            "Środa": "niedostępna",
             "Czwartek": "II   tory zajęte",
             "Piątek": "dostępna",
             "Sobota": "dostępna",
@@ -748,7 +748,7 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "II   tory zajęte",
-            "Środa": "dostępna",
+            "Środa": "niedostępna",
             "Czwartek": "dostępna",
             "Piątek": "dostępna",
             "Sobota": "dostępna",
