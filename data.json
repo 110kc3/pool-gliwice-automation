@@ -2365,8 +2365,8 @@
             "Sobota": "07.11.2026",
             "Niedziela": "08.11.2026"
         },
-        "lastUpdated": "2026-11-08T08:42:16.328819+00:00",
-        "lastUpdatedPl": "08.11.2026, 08:42"
+        "lastUpdated": "2026-11-09T09:19:37.130610+00:00",
+        "lastUpdatedPl": "09.11.2026, 09:19"
     },
     {
         "name": "Delfin",
@@ -4950,8 +4950,8 @@
             "Sobota": "07.11.2026",
             "Niedziela": "08.11.2026"
         },
-        "lastUpdated": "2026-11-08T08:42:16.328819+00:00",
-        "lastUpdatedPl": "08.11.2026, 08:42"
+        "lastUpdated": "2026-11-09T09:19:37.130610+00:00",
+        "lastUpdatedPl": "09.11.2026, 09:19"
     },
     {
         "name": "Olimpijczyk",
@@ -7493,8 +7493,8 @@
             "Sobota": "07.11.2026",
             "Niedziela": "08.11.2026"
         },
-        "lastUpdated": "2026-11-08T08:42:16.328819+00:00",
-        "lastUpdatedPl": "08.11.2026, 08:42"
+        "lastUpdated": "2026-11-09T09:19:37.130610+00:00",
+        "lastUpdatedPl": "09.11.2026, 09:19"
     },
     {
         "name": "Neptun",
@@ -7512,12 +7512,6 @@
                 "date": "03.11.2026"
             },
             {
-                "day": "Środa",
-                "time": "7:00",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "04.11.2026"
-            },
-            {
                 "day": "Czwartek",
                 "time": "7:00",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
@@ -7542,12 +7536,6 @@
                 "date": "03.11.2026"
             },
             {
-                "day": "Środa",
-                "time": "7:15",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "04.11.2026"
-            },
-            {
                 "day": "Czwartek",
                 "time": "7:15",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
@@ -7572,12 +7560,6 @@
                 "date": "03.11.2026"
             },
             {
-                "day": "Środa",
-                "time": "7:30",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "04.11.2026"
-            },
-            {
                 "day": "Czwartek",
                 "time": "7:30",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
@@ -7602,12 +7584,6 @@
                 "date": "03.11.2026"
             },
             {
-                "day": "Środa",
-                "time": "7:45",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "04.11.2026"
-            },
-            {
                 "day": "Czwartek",
                 "time": "7:45",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
@@ -7632,12 +7608,6 @@
                 "date": "03.11.2026"
             },
             {
-                "day": "Środa",
-                "time": "8:00",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "04.11.2026"
-            },
-            {
                 "day": "Czwartek",
                 "time": "8:00",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
@@ -7672,12 +7642,6 @@
                 "time": "8:15",
                 "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
                 "date": "03.11.2026"
-            },
-            {
-                "day": "Środa",
-                "time": "8:15",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "04.11.2026"
             },
             {
                 "day": "Czwartek",
@@ -7716,15 +7680,9 @@
                 "date": "03.11.2026"
             },
             {
-                "day": "Środa",
-                "time": "8:30",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "04.11.2026"
-            },
-            {
                 "day": "Czwartek",
                 "time": "8:30",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "05.11.2026"
             },
             {
@@ -7758,15 +7716,9 @@
                 "date": "03.11.2026"
             },
             {
-                "day": "Środa",
-                "time": "8:45",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "04.11.2026"
-            },
-            {
                 "day": "Czwartek",
                 "time": "8:45",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "05.11.2026"
             },
             {
@@ -7813,21 +7765,15 @@
             },
             {
                 "day": "Piątek",
-                "time": "9:00",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
-                "date": "06.11.2026"
-            },
-            {
-                "day": "Sobota",
                 "time": "9:00",
                 "availableLanes": "1x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "07.11.2026"
+                "date": "06.11.2026"
             },
             {
-                "day": "Niedziela",
+                "day": "Sobota",
                 "time": "9:00",
                 "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "08.11.2026"
+                "date": "07.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -7855,21 +7801,15 @@
             },
             {
                 "day": "Piątek",
-                "time": "9:15",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
-                "date": "06.11.2026"
-            },
-            {
-                "day": "Sobota",
                 "time": "9:15",
                 "availableLanes": "1x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "07.11.2026"
+                "date": "06.11.2026"
             },
             {
-                "day": "Niedziela",
+                "day": "Sobota",
                 "time": "9:15",
                 "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "08.11.2026"
+                "date": "07.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -7886,7 +7826,7 @@
             {
                 "day": "Środa",
                 "time": "9:30",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "04.11.2026"
             },
             {
@@ -7897,21 +7837,15 @@
             },
             {
                 "day": "Piątek",
-                "time": "9:30",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
-                "date": "06.11.2026"
-            },
-            {
-                "day": "Sobota",
                 "time": "9:30",
                 "availableLanes": "1x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "07.11.2026"
+                "date": "06.11.2026"
             },
             {
-                "day": "Niedziela",
+                "day": "Sobota",
                 "time": "9:30",
                 "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "08.11.2026"
+                "date": "07.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -7928,7 +7862,7 @@
             {
                 "day": "Środa",
                 "time": "9:45",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "04.11.2026"
             },
             {
@@ -7939,21 +7873,15 @@
             },
             {
                 "day": "Piątek",
-                "time": "9:45",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
-                "date": "06.11.2026"
-            },
-            {
-                "day": "Sobota",
                 "time": "9:45",
                 "availableLanes": "1x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "07.11.2026"
+                "date": "06.11.2026"
             },
             {
-                "day": "Niedziela",
+                "day": "Sobota",
                 "time": "9:45",
                 "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "08.11.2026"
+                "date": "07.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -7970,7 +7898,7 @@
             {
                 "day": "Środa",
                 "time": "10:00",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "04.11.2026"
             },
             {
@@ -7982,7 +7910,7 @@
             {
                 "day": "Piątek",
                 "time": "10:00",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "06.11.2026"
             },
             {
@@ -7990,12 +7918,6 @@
                 "time": "10:00",
                 "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "10:00",
-                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8012,7 +7934,7 @@
             {
                 "day": "Środa",
                 "time": "10:15",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "04.11.2026"
             },
             {
@@ -8024,7 +7946,7 @@
             {
                 "day": "Piątek",
                 "time": "10:15",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "06.11.2026"
             },
             {
@@ -8032,12 +7954,6 @@
                 "time": "10:15",
                 "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "10:15",
-                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8054,19 +7970,19 @@
             {
                 "day": "Środa",
                 "time": "10:30",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "04.11.2026"
             },
             {
                 "day": "Czwartek",
                 "time": "10:30",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
                 "date": "05.11.2026"
             },
             {
                 "day": "Piątek",
                 "time": "10:30",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "06.11.2026"
             },
             {
@@ -8074,12 +7990,6 @@
                 "time": "10:30",
                 "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "10:30",
-                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8096,19 +8006,19 @@
             {
                 "day": "Środa",
                 "time": "10:45",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "04.11.2026"
             },
             {
                 "day": "Czwartek",
                 "time": "10:45",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
                 "date": "05.11.2026"
             },
             {
                 "day": "Piątek",
                 "time": "10:45",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "06.11.2026"
             },
             {
@@ -8116,12 +8026,6 @@
                 "time": "10:45",
                 "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "10:45",
-                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8138,32 +8042,26 @@
             {
                 "day": "Środa",
                 "time": "11:00",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "04.11.2026"
             },
             {
                 "day": "Czwartek",
                 "time": "11:00",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
                 "date": "05.11.2026"
             },
             {
                 "day": "Piątek",
                 "time": "11:00",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "06.11.2026"
             },
             {
                 "day": "Sobota",
-                "time": "11:00",
-                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
                 "time": "11:00",
                 "availableLanes": "4x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "08.11.2026"
+                "date": "07.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8180,32 +8078,26 @@
             {
                 "day": "Środa",
                 "time": "11:15",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "04.11.2026"
             },
             {
                 "day": "Czwartek",
                 "time": "11:15",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
                 "date": "05.11.2026"
             },
             {
                 "day": "Piątek",
-                "time": "11:15",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
-                "date": "06.11.2026"
-            },
-            {
-                "day": "Sobota",
                 "time": "11:15",
                 "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "07.11.2026"
+                "date": "06.11.2026"
             },
             {
-                "day": "Niedziela",
+                "day": "Sobota",
                 "time": "11:15",
                 "availableLanes": "4x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "08.11.2026"
+                "date": "07.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8228,26 +8120,20 @@
             {
                 "day": "Czwartek",
                 "time": "11:30",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
                 "date": "05.11.2026"
             },
             {
                 "day": "Piątek",
-                "time": "11:30",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
-                "date": "06.11.2026"
-            },
-            {
-                "day": "Sobota",
                 "time": "11:30",
                 "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "07.11.2026"
+                "date": "06.11.2026"
             },
             {
-                "day": "Niedziela",
+                "day": "Sobota",
                 "time": "11:30",
                 "availableLanes": "4x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "08.11.2026"
+                "date": "07.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8270,26 +8156,20 @@
             {
                 "day": "Czwartek",
                 "time": "11:45",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
                 "date": "05.11.2026"
             },
             {
                 "day": "Piątek",
-                "time": "11:45",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
-                "date": "06.11.2026"
-            },
-            {
-                "day": "Sobota",
                 "time": "11:45",
                 "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "07.11.2026"
+                "date": "06.11.2026"
             },
             {
-                "day": "Niedziela",
+                "day": "Sobota",
                 "time": "11:45",
                 "availableLanes": "4x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "08.11.2026"
+                "date": "07.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8306,32 +8186,26 @@
             {
                 "day": "Środa",
                 "time": "12:00",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "5x25m wolne",
                 "date": "04.11.2026"
             },
             {
                 "day": "Czwartek",
                 "time": "12:00",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "0 wolnych torów (rekreacyjny: wolny)",
                 "date": "05.11.2026"
             },
             {
                 "day": "Piątek",
                 "time": "12:00",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "3x25m wolne (rekreacyjny: zajęty)",
                 "date": "06.11.2026"
             },
             {
                 "day": "Sobota",
                 "time": "12:00",
-                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "12:00",
                 "availableLanes": "4x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "08.11.2026"
+                "date": "07.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8354,26 +8228,20 @@
             {
                 "day": "Czwartek",
                 "time": "12:15",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
                 "date": "05.11.2026"
             },
             {
                 "day": "Piątek",
-                "time": "12:15",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
-                "date": "06.11.2026"
-            },
-            {
-                "day": "Sobota",
                 "time": "12:15",
                 "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "07.11.2026"
+                "date": "06.11.2026"
             },
             {
-                "day": "Niedziela",
+                "day": "Sobota",
                 "time": "12:15",
                 "availableLanes": "4x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "08.11.2026"
+                "date": "07.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8396,26 +8264,20 @@
             {
                 "day": "Czwartek",
                 "time": "12:30",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
                 "date": "05.11.2026"
             },
             {
                 "day": "Piątek",
                 "time": "12:30",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "06.11.2026"
             },
             {
                 "day": "Sobota",
                 "time": "12:30",
-                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "12:30",
                 "availableLanes": "4x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "08.11.2026"
+                "date": "07.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8438,26 +8300,20 @@
             {
                 "day": "Czwartek",
                 "time": "12:45",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
                 "date": "05.11.2026"
             },
             {
                 "day": "Piątek",
                 "time": "12:45",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "06.11.2026"
             },
             {
                 "day": "Sobota",
                 "time": "12:45",
-                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "12:45",
                 "availableLanes": "4x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "08.11.2026"
+                "date": "07.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8474,7 +8330,7 @@
             {
                 "day": "Środa",
                 "time": "13:00",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "5x25m wolne",
                 "date": "04.11.2026"
             },
             {
@@ -8494,12 +8350,6 @@
                 "time": "13:00",
                 "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "13:00",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8528,20 +8378,14 @@
             {
                 "day": "Piątek",
                 "time": "13:15",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "06.11.2026"
             },
             {
                 "day": "Sobota",
                 "time": "13:15",
-                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "13:15",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
+                "date": "07.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8570,20 +8414,14 @@
             {
                 "day": "Piątek",
                 "time": "13:30",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "06.11.2026"
             },
             {
                 "day": "Sobota",
                 "time": "13:30",
-                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "13:30",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
+                "date": "07.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8612,20 +8450,14 @@
             {
                 "day": "Piątek",
                 "time": "13:45",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "06.11.2026"
             },
             {
                 "day": "Sobota",
                 "time": "13:45",
-                "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "13:45",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
+                "date": "07.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8642,7 +8474,7 @@
             {
                 "day": "Środa",
                 "time": "14:15",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "5x25m wolne (rekreacyjny: YWA)",
                 "date": "04.11.2026"
             },
             {
@@ -8664,12 +8496,6 @@
                 "date": "07.11.2026"
             },
             {
-                "day": "Niedziela",
-                "time": "14:15",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
-            },
-            {
                 "day": "Poniedziałek",
                 "time": "14:30",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
@@ -8684,7 +8510,7 @@
             {
                 "day": "Środa",
                 "time": "14:30",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "04.11.2026"
             },
             {
@@ -8695,21 +8521,15 @@
             },
             {
                 "day": "Piątek",
-                "time": "14:30",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "06.11.2026"
-            },
-            {
-                "day": "Sobota",
                 "time": "14:30",
                 "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "07.11.2026"
+                "date": "06.11.2026"
             },
             {
-                "day": "Niedziela",
+                "day": "Sobota",
                 "time": "14:30",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
+                "date": "07.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8726,7 +8546,7 @@
             {
                 "day": "Środa",
                 "time": "14:45",
-                "availableLanes": "0 wolnych torów (rekreacyjny: zajęty)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "04.11.2026"
             },
             {
@@ -8737,21 +8557,15 @@
             },
             {
                 "day": "Piątek",
-                "time": "14:45",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "06.11.2026"
-            },
-            {
-                "day": "Sobota",
                 "time": "14:45",
                 "availableLanes": "5x25m wolne (rekreacyjny: 1/3 wolna)",
-                "date": "07.11.2026"
+                "date": "06.11.2026"
             },
             {
-                "day": "Niedziela",
+                "day": "Sobota",
                 "time": "14:45",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
+                "date": "07.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8773,14 +8587,14 @@
             },
             {
                 "day": "Czwartek",
-                "time": "15:00",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "05.11.2026"
-            },
-            {
-                "day": "Piątek",
                 "time": "15:00",
                 "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+                "date": "05.11.2026"
+            },
+            {
+                "day": "Piątek",
+                "time": "15:00",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -8790,12 +8604,6 @@
                 "date": "07.11.2026"
             },
             {
-                "day": "Niedziela",
-                "time": "15:00",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
-            },
-            {
                 "day": "Poniedziałek",
                 "time": "15:15",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
@@ -8815,14 +8623,14 @@
             },
             {
                 "day": "Czwartek",
-                "time": "15:15",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "05.11.2026"
-            },
-            {
-                "day": "Piątek",
                 "time": "15:15",
                 "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+                "date": "05.11.2026"
+            },
+            {
+                "day": "Piątek",
+                "time": "15:15",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -8832,12 +8640,6 @@
                 "date": "07.11.2026"
             },
             {
-                "day": "Niedziela",
-                "time": "15:15",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
-            },
-            {
                 "day": "Poniedziałek",
                 "time": "15:30",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
@@ -8857,14 +8659,14 @@
             },
             {
                 "day": "Czwartek",
-                "time": "15:30",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "05.11.2026"
-            },
-            {
-                "day": "Piątek",
                 "time": "15:30",
                 "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+                "date": "05.11.2026"
+            },
+            {
+                "day": "Piątek",
+                "time": "15:30",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -8872,12 +8674,6 @@
                 "time": "15:30",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "15:30",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8899,14 +8695,14 @@
             },
             {
                 "day": "Czwartek",
-                "time": "15:45",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "05.11.2026"
-            },
-            {
-                "day": "Piątek",
                 "time": "15:45",
                 "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+                "date": "05.11.2026"
+            },
+            {
+                "day": "Piątek",
+                "time": "15:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -8916,12 +8712,6 @@
                 "date": "07.11.2026"
             },
             {
-                "day": "Niedziela",
-                "time": "15:45",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
-            },
-            {
                 "day": "Poniedziałek",
                 "time": "16:00",
                 "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
@@ -8942,13 +8732,13 @@
             {
                 "day": "Czwartek",
                 "time": "16:00",
-                "availableLanes": "3x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "05.11.2026"
             },
             {
                 "day": "Piątek",
                 "time": "16:00",
-                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -8956,12 +8746,6 @@
                 "time": "16:00",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "16:00",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -8984,13 +8768,13 @@
             {
                 "day": "Czwartek",
                 "time": "16:15",
-                "availableLanes": "3x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "05.11.2026"
             },
             {
                 "day": "Piątek",
                 "time": "16:15",
-                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -8998,12 +8782,6 @@
                 "time": "16:15",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "16:15",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -9026,13 +8804,13 @@
             {
                 "day": "Czwartek",
                 "time": "16:30",
-                "availableLanes": "3x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "05.11.2026"
             },
             {
                 "day": "Piątek",
                 "time": "16:30",
-                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -9040,12 +8818,6 @@
                 "time": "16:30",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "16:30",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -9068,13 +8840,13 @@
             {
                 "day": "Czwartek",
                 "time": "16:45",
-                "availableLanes": "3x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "05.11.2026"
             },
             {
                 "day": "Piątek",
                 "time": "16:45",
-                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -9082,12 +8854,6 @@
                 "time": "16:45",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "16:45",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -9116,7 +8882,7 @@
             {
                 "day": "Piątek",
                 "time": "17:00",
-                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -9126,12 +8892,6 @@
                 "date": "07.11.2026"
             },
             {
-                "day": "Niedziela",
-                "time": "17:00",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
-            },
-            {
                 "day": "Poniedziałek",
                 "time": "17:15",
                 "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
@@ -9158,7 +8918,7 @@
             {
                 "day": "Piątek",
                 "time": "17:15",
-                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -9166,12 +8926,6 @@
                 "time": "17:15",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "17:15",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -9200,7 +8954,7 @@
             {
                 "day": "Piątek",
                 "time": "17:30",
-                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -9208,12 +8962,6 @@
                 "time": "17:30",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "17:30",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -9242,7 +8990,7 @@
             {
                 "day": "Piątek",
                 "time": "17:45",
-                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -9252,12 +9000,6 @@
                 "date": "07.11.2026"
             },
             {
-                "day": "Niedziela",
-                "time": "17:45",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
-            },
-            {
                 "day": "Poniedziałek",
                 "time": "18:00",
                 "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
@@ -9284,7 +9026,7 @@
             {
                 "day": "Piątek",
                 "time": "18:00",
-                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -9292,12 +9034,6 @@
                 "time": "18:00",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "18:00",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -9326,7 +9062,7 @@
             {
                 "day": "Piątek",
                 "time": "18:15",
-                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -9336,12 +9072,6 @@
                 "date": "07.11.2026"
             },
             {
-                "day": "Niedziela",
-                "time": "18:15",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
-            },
-            {
                 "day": "Poniedziałek",
                 "time": "18:30",
                 "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
@@ -9368,7 +9098,7 @@
             {
                 "day": "Piątek",
                 "time": "18:30",
-                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -9376,12 +9106,6 @@
                 "time": "18:30",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "18:30",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -9410,7 +9134,7 @@
             {
                 "day": "Piątek",
                 "time": "18:45",
-                "availableLanes": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -9420,12 +9144,6 @@
                 "date": "07.11.2026"
             },
             {
-                "day": "Niedziela",
-                "time": "18:45",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
-            },
-            {
                 "day": "Poniedziałek",
                 "time": "19:00",
                 "availableLanes": "2x25m wolne (rekreacyjny: wolny)",
@@ -9440,7 +9158,7 @@
             {
                 "day": "Środa",
                 "time": "19:00",
-                "availableLanes": "2x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "04.11.2026"
             },
             {
@@ -9452,7 +9170,7 @@
             {
                 "day": "Piątek",
                 "time": "19:00",
-                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -9460,12 +9178,6 @@
                 "time": "19:00",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "19:00",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -9482,7 +9194,7 @@
             {
                 "day": "Środa",
                 "time": "19:15",
-                "availableLanes": "2x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "04.11.2026"
             },
             {
@@ -9494,7 +9206,7 @@
             {
                 "day": "Piątek",
                 "time": "19:15",
-                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -9502,12 +9214,6 @@
                 "time": "19:15",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "19:15",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -9524,7 +9230,7 @@
             {
                 "day": "Środa",
                 "time": "19:30",
-                "availableLanes": "2x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "04.11.2026"
             },
             {
@@ -9536,7 +9242,7 @@
             {
                 "day": "Piątek",
                 "time": "19:30",
-                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -9544,12 +9250,6 @@
                 "time": "19:30",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "19:30",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -9566,7 +9266,7 @@
             {
                 "day": "Środa",
                 "time": "19:45",
-                "availableLanes": "2x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
                 "date": "04.11.2026"
             },
             {
@@ -9578,7 +9278,7 @@
             {
                 "day": "Piątek",
                 "time": "19:45",
-                "availableLanes": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -9586,12 +9286,6 @@
                 "time": "19:45",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "19:45",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -9608,19 +9302,19 @@
             {
                 "day": "Środa",
                 "time": "20:00",
-                "availableLanes": "2x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "04.11.2026"
             },
             {
                 "day": "Czwartek",
                 "time": "20:00",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)",
                 "date": "05.11.2026"
             },
             {
                 "day": "Piątek",
                 "time": "20:00",
-                "availableLanes": "3x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -9628,12 +9322,6 @@
                 "time": "20:00",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "20:00",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -9650,19 +9338,19 @@
             {
                 "day": "Środa",
                 "time": "20:15",
-                "availableLanes": "2x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "04.11.2026"
             },
             {
                 "day": "Czwartek",
                 "time": "20:15",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)",
                 "date": "05.11.2026"
             },
             {
                 "day": "Piątek",
                 "time": "20:15",
-                "availableLanes": "3x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -9670,12 +9358,6 @@
                 "time": "20:15",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "20:15",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -9692,19 +9374,19 @@
             {
                 "day": "Środa",
                 "time": "20:30",
-                "availableLanes": "2x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "04.11.2026"
             },
             {
                 "day": "Czwartek",
                 "time": "20:30",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "3x25m wolne (rekreacyjny: wolny)",
                 "date": "05.11.2026"
             },
             {
                 "day": "Piątek",
                 "time": "20:30",
-                "availableLanes": "3x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -9712,12 +9394,6 @@
                 "time": "20:30",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "20:30",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -9734,19 +9410,19 @@
             {
                 "day": "Środa",
                 "time": "20:45",
-                "availableLanes": "2x25m wolne (rekreacyjny: wolny)",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "04.11.2026"
             },
             {
                 "day": "Czwartek",
-                "time": "20:45",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "05.11.2026"
-            },
-            {
-                "day": "Piątek",
                 "time": "20:45",
                 "availableLanes": "3x25m wolne (rekreacyjny: wolny)",
+                "date": "05.11.2026"
+            },
+            {
+                "day": "Piątek",
+                "time": "20:45",
+                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "06.11.2026"
             },
             {
@@ -9756,12 +9432,6 @@
                 "date": "07.11.2026"
             },
             {
-                "day": "Niedziela",
-                "time": "20:45",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
-            },
-            {
                 "day": "Poniedziałek",
                 "time": "21:00",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
@@ -9796,12 +9466,6 @@
                 "time": "21:00",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "21:00",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
             },
             {
                 "day": "Poniedziałek",
@@ -9840,12 +9504,6 @@
                 "date": "07.11.2026"
             },
             {
-                "day": "Niedziela",
-                "time": "21:15",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
-            },
-            {
                 "day": "Poniedziałek",
                 "time": "21:30",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
@@ -9880,12 +9538,6 @@
                 "time": "21:30",
                 "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
                 "date": "07.11.2026"
-            },
-            {
-                "day": "Niedziela",
-                "time": "21:30",
-                "availableLanes": "5x25m wolne (rekreacyjny: wolny)",
-                "date": "08.11.2026"
             }
         ],
         "weekRange": "02.11.2026 – 08.11.2026",
@@ -9898,7 +9550,7 @@
             "Sobota": "07.11.2026",
             "Niedziela": "08.11.2026"
         },
-        "lastUpdated": "2026-11-08T08:42:16.328819+00:00",
-        "lastUpdatedPl": "08.11.2026, 08:42"
+        "lastUpdated": "2026-11-09T09:19:37.130610+00:00",
+        "lastUpdatedPl": "09.11.2026, 09:19"
     }
 ]
