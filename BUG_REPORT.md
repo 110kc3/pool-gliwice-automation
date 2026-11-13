@@ -1,5 +1,7 @@
 # BUG_REPORT.md
 
+Historical initial review. The six findings from the 2026-11-12 follow-up and their fixes are recorded in [the current progress summary](PROJECT_PROGRESS_SUMMARY.md#current-work--2026-11-13).
+
 This report details potential bugs, weaknesses, and areas for improvement across the application based on a review of the source code, data pipeline, and CI/CD workflow. **No changes have been made to the codebase.**
 
 ---

@@ -80,7 +80,7 @@ def parse_neptun_pdf(pdf_path):
 
 if __name__ == "__main__":
     neptun_candidates = sorted(glob.glob("Harmonogram_Neptun_*.pdf") + glob.glob("neptun.pdf"), key=os.path.getmtime, reverse=True)
-    neptun_pdf_path = neptun_candidates[0] if neptun_candidates else "neptun.pdf"
+    neptun_pdf_path = "neptun.pdf" if os.path.exists("neptun.pdf") else neptun_candidates[0] if neptun_candidates else "neptun.pdf"
     print(f"Parsing Neptun schedule from {neptun_pdf_path}...")
     data = nan_to_none(parse_neptun_pdf(neptun_pdf_path))
 

@@ -3,6 +3,7 @@
 tabula-py==2.10.0
 pandas==2.3.3
 numpy==2.2.6
+pypdf==7.0.1
 
 # Testing
 pytest==9.0.3

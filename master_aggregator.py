@@ -4,7 +4,9 @@ import os
 import re
 from collections import defaultdict
 import numpy as np
-import pandas as pd
+from zoneinfo import ZoneInfo
+from pathlib import Path
+from schedule_metadata import read_metadata, source_pdf, lane_configuration
 
 DAYS = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"]
 DAY_SET = set(DAYS)
@@ -49,33 +51,6 @@ def is_noise_value(value):
     if not any(ch.isdigit() for ch in s) and len(letters) < 5 and "wolne" not in low:
         return True
     return False
-
-
-def detect_schedule_dates():
-    """
-    Detects the 7 calendar dates (Poniedziałek - Niedziela) for the active schedule week.
-    Tries parsing from PDFs (e.g. mewa.pdf date row), or falls back to the current week's dates.
-    """
-    days = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"]
-    try:
-        import tabula
-        for pdf in ["mewa.pdf", "neptun.pdf", "Harmonogram_Olimpijczyk_latest.pdf"]:
-            if not os.path.exists(pdf):
-                continue
-            tables = tabula.read_pdf(pdf, pages="1", multiple_tables=True, pandas_options={"header": None})
-            for t in tables:
-                for _, row in t.iterrows():
-                    r_text = " ".join(str(x) for x in row if not pd.isna(x))
-                    matches = re.findall(r"(\d{1,2}\.\d{1,2}\.\d{4})", r_text)
-                    if len(matches) == 7:
-                        return dict(zip(days, matches))
-    except Exception:
-        pass
-
-    # Fallback: compute Monday..Sunday of current week
-    today = datetime.date.today()
-    monday = today - datetime.timedelta(days=today.weekday())
-    return {days[i]: (monday + datetime.timedelta(days=i)).strftime("%d.%m.%Y") for i in range(7)}
 
 
 def transform_data(raw_data, dates_map=None, last_updated_pl=None, last_updated_iso=None):
@@ -163,49 +138,39 @@ def transform_data(raw_data, dates_map=None, last_updated_pl=None, last_updated_
     return result
 
 def aggregate_data(file_paths, output_path):
-    all_raw_data = []
-
-    for pool_name, file_path in file_paths.items():
-        try:
-            with open(file_path, 'r', encoding='utf-8') as f:
-                data = json.load(f)
-                if isinstance(data, list):
-                    for entry in data:
-                        if not isinstance(entry, dict):
-                            print(f"Warning: Skipping non-dictionary item in {file_path}.")
-                            continue
-                        if "name" not in entry:
-                            entry["name"] = pool_name.capitalize()
-                        all_raw_data.append(entry)
-                elif isinstance(data, dict):
-                    if "name" not in data:
-                        data["name"] = pool_name.capitalize()
-                    all_raw_data.append(data)
-        except json.JSONDecodeError as e:
-            print(f"Error: Failed to decode JSON from {file_path} due to JSON error: {e}")
-        except FileNotFoundError:
-            print(f"Warning: File not found at {file_path}. Skipping.")
-        except Exception as e:
-            # Catch any other unexpected error during file processing (e.g., permissions, encoding issues)
-            print(f"Error: An unexpected error occurred while processing {file_path}: {e}")
-
-    dates_map = detect_schedule_dates()
+    transformed = []
     now_utc = datetime.datetime.now(datetime.timezone.utc)
     last_updated_iso = now_utc.isoformat()
-    last_updated_pl = datetime.datetime.now().strftime("%d.%m.%Y, %H:%M")
+    last_updated_pl = now_utc.astimezone(ZoneInfo("Europe/Warsaw")).strftime("%d.%m.%Y, %H:%M")
 
-    transformed = transform_data(
-        all_raw_data,
-        dates_map=dates_map,
-        last_updated_pl=last_updated_pl,
-        last_updated_iso=last_updated_iso
-    )
+    for pool_name, file_path in file_paths.items():
+        with open(file_path, encoding="utf-8") as f:
+            raw = json.load(f)
+        entries = raw if isinstance(raw, list) else [raw]
+        entries = [dict(entry, name=pool_name.capitalize()) for entry in entries if isinstance(entry, dict)]
+        pdf = source_pdf(pool_name, Path(file_path).parent)
+        dates, configurations = read_metadata(pdf)
+        pools = transform_data(entries, dates, last_updated_pl, last_updated_iso)
+        for pool in pools:
+            pool["dates"] = dates
+            values = sorted(set(dates.values()), key=lambda v: datetime.datetime.strptime(v, "%d.%m.%Y"))
+            pool["weekRange"] = f"{values[0]} – {values[-1]}" if values else None
+            pool["sourcePdf"] = pdf.name
+            if pool_name.lower() == "olimpijczyk":
+                for entry in pool["schedule"]:
+                    config = configurations.get(entry["day"])
+                    if config:
+                        entry.update(lane_configuration(entry["availableLanes"], config))
+            print(f"{pool['name']}: {pool['weekRange'] or 'unknown dates'}")
+        transformed.extend(pools)
 
-    with open(output_path, 'w', encoding='utf-8') as f:
-        # allow_nan=False guarantees standards-compliant JSON: a stray NaN/Infinity
-        # raises here instead of producing a file the browser's JSON.parse rejects.
-        json.dump(transformed, f, ensure_ascii=False, indent=4, allow_nan=False)
-    print(f"Successfully aggregated data to {output_path} (Week range: {transformed[0].get('weekRange') if transformed else 'N/A'}, Updated: {last_updated_pl})")
+    # Prepare the complete output before replacing the previous usable dataset.
+    payload = json.dumps(transformed, ensure_ascii=False, indent=4, allow_nan=False)
+    destination = Path(output_path)
+    temporary = destination.with_suffix(destination.suffix + ".tmp")
+    temporary.write_text(payload, encoding="utf-8")
+    os.replace(temporary, destination)
+    print(f"Successfully aggregated {len(transformed)} pools to {output_path} (Updated: {last_updated_pl})")
 
 if __name__ == "__main__":
     files = {

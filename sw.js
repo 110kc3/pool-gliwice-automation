@@ -1,78 +1,53 @@
-// Service Worker for Gliwice Pool Automation PWA
-const CACHE_NAME = 'gliwice-pools-v1';
+// Refresh cached application code and schedules on every online request.
+const CACHE_NAME = 'gliwice-pools-v2';
 const CORE_ASSETS = [
-    './',
-    'index.html',
-    'style.css',
-    'script.js',
-    'manifest.webmanifest',
-    'favicon.svg',
-    'favicon.ico',
-    'icons/icon-192.png',
-    'icons/icon-512.png',
-    'icons/icon.svg',
-    'icons/apple-touch-icon.png'
+    './', 'index.html', 'style.css', 'script.js', 'manifest.webmanifest',
+    'favicon.svg', 'favicon.ico', 'icons/icon-192.png', 'icons/icon-512.png',
+    'icons/icon.svg', 'icons/apple-touch-icon.png'
 ];
 
-// Install: Cache core static assets
-self.addEventListener('install', (event) => {
-    event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => {
-            return cache.addAll(CORE_ASSETS);
-        }).then(() => self.skipWaiting())
-    );
+self.addEventListener('install', event => {
+    event.waitUntil(caches.open(CACHE_NAME)
+        .then(cache => cache.addAll(CORE_ASSETS))
+        .then(() => self.skipWaiting()));
 });
 
-// Activate: Clean up old cache versions & take immediate control
-self.addEventListener('activate', (event) => {
-    event.waitUntil(
-        caches.keys().then((keys) => {
-            return Promise.all(
-                keys.map((key) => {
-                    if (key !== CACHE_NAME) {
-                        return caches.delete(key);
-                    }
-                })
-            );
-        }).then(() => self.clients.claim())
-    );
+self.addEventListener('activate', event => {
+    event.waitUntil(caches.keys().then(keys => Promise.all(keys
+        .filter(key => key.startsWith('gliwice-pools-') && key !== CACHE_NAME)
+        .map(key => caches.delete(key))))
+        .then(() => self.clients.claim()));
 });
 
-// Fetch: Network-first with cache fallback for data.json, Cache-first for static assets
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', event => {
     const url = new URL(event.request.url);
+    if (event.request.method !== 'GET' || !url.href.startsWith(self.registration.scope)) return;
 
-    // Dynamic schedule data: Network-First (always prefer fresh data, fallback to cache when offline)
-    if (url.pathname.endsWith('data.json')) {
-        event.respondWith(
-            fetch(event.request)
-                .then((networkResponse) => {
-                    if (networkResponse && networkResponse.status === 200) {
-                        const copy = networkResponse.clone();
-                        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
-                    }
-                    return networkResponse;
-                })
-                .catch(() => {
-                    return caches.match(event.request);
-                })
-        );
-        return;
-    }
-
-    // Static Assets: Cache-First with Network fallback
-    event.respondWith(
-        caches.match(event.request).then((cachedResponse) => {
-            if (cachedResponse) {
-                return cachedResponse;
-            }
-            return fetch(event.request).then((networkResponse) => {
-                if (networkResponse && networkResponse.status === 200 && event.request.method === 'GET') {
-                    const copy = networkResponse.clone();
-                    caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+    const response = (async () => {
+        try {
+            const fresh = await fetch(event.request, { cache: 'no-cache' });
+            if (fresh.ok) {
+                try {
+                    const cache = await caches.open(CACHE_NAME);
+                    await cache.put(event.request, fresh.clone());
+                } catch (error) {
+                    // Storage exhaustion must not discard a valid online response.
+                    console.warn('Offline cache unavailable:', error);
                 }
-                return networkResponse;
-            });
-        })
-    );
+                return fresh;
+            }
+            const cached = await caches.match(event.request);
+            return cached || fresh;
+        } catch (error) {
+            const cached = await caches.match(event.request);
+            if (cached) return cached;
+            if (event.request.mode === 'navigate') {
+                const shell = await caches.match(new URL('index.html', self.registration.scope));
+                if (shell) return shell;
+            }
+            return Response.error();
+        }
+    })();
+    event.respondWith(response);
+    event.waitUntil(response.then(() => undefined));
 });

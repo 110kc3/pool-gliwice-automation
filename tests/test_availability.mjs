@@ -21,12 +21,19 @@ const {
     getScheduleDates,
     aggregateHourlySlots,
     getMultiHourSlots,
-    filterAndRankSlots,
+    filterAndRankSlots: rankSlots,
+    getLiveSummary,
+    getPoolClock,
     computeDataInsights,
     getSlotCalendarDates,
     buildGoogleCalendarUrl,
     generateIcsFile
 } = require(path.join(root, 'script.js'));
+
+// Fixed viewing week makes date-sensitive tests independent of the runner clock.
+const NOW = new Date('2026-10-26T00:00:00+01:00');
+const TEST_DATES = getScheduleDates([], NOW).fullDates;
+const filterAndRankSlots = (slots, options = {}) => rankSlots(slots, { now: NOW, ...options });
 
 let passed = 0;
 function test(name, fn) {
@@ -211,10 +218,10 @@ test('getPolishDayName maps Date to Polish day names', () => {
 });
 
 // --- aggregateHourlySlots & filterAndRankSlots -----------------------------
-test('aggregateHourlySlots groups and computes averages correctly', () => {
+test('aggregateHourlySlots groups fully covered hours and computes lane counts correctly', () => {
     const mockPools = [
         {
-            name: 'Olimpijczyk',
+            name: 'Olimpijczyk', dates: TEST_DATES,
             schedule: [
                 { day: 'Poniedziałek', time: '06:00', availableLanes: '9x50m, 1x25m i wypł' },
                 { day: 'Poniedziałek', time: '06:15', availableLanes: '9x50m, 1x25m i wypł' },
@@ -223,7 +230,7 @@ test('aggregateHourlySlots groups and computes averages correctly', () => {
             ]
         },
         {
-            name: 'Mewa',
+            name: 'Mewa', dates: TEST_DATES,
             schedule: [
                 { day: 'Poniedziałek', time: '7.00- 8.00', availableLanes: 'Pływalnia dostępna' },
                 { day: 'Niedziela', time: '12.00- 13.00', availableLanes: 'wolne wszystkie tory' }
@@ -326,10 +333,10 @@ test('getScheduleDates extracts dates and assigns them to aggregated slots', () 
 // --- getMultiHourSlots & multi-hour filtering ------------------------------
 test('getMultiHourSlots builds contiguous multi-hour windows and handles closures', () => {
     const slots = [
-        { poolName: 'Mewa', day: 'Środa', hour: 10, freeLanes: 6, totalLanes: 6, openness: 1.0, timeBucket: 'morning' },
-        { poolName: 'Mewa', day: 'Środa', hour: 11, freeLanes: 4, totalLanes: 6, openness: 0.67, timeBucket: 'morning' },
-        { poolName: 'Mewa', day: 'Środa', hour: 12, freeLanes: 0, totalLanes: 6, openness: 0.0, timeBucket: 'afternoon' },
-        { poolName: 'Mewa', day: 'Środa', hour: 13, freeLanes: 5, totalLanes: 6, openness: 0.83, timeBucket: 'afternoon' }
+        { poolName: 'Mewa', day: 'Środa', date: '28.10.2026', hour: 10, freeLanes: 6, totalLanes: 6, openness: 1.0, timeBucket: 'morning' },
+        { poolName: 'Mewa', day: 'Środa', date: '28.10.2026', hour: 11, freeLanes: 4, totalLanes: 6, openness: 0.67, timeBucket: 'morning' },
+        { poolName: 'Mewa', day: 'Środa', date: '28.10.2026', hour: 12, freeLanes: 0, totalLanes: 6, openness: 0.0, timeBucket: 'afternoon' },
+        { poolName: 'Mewa', day: 'Środa', date: '28.10.2026', hour: 13, freeLanes: 5, totalLanes: 6, openness: 0.83, timeBucket: 'afternoon' }
     ];
 
     // duration 1 returns slots as-is
@@ -344,7 +351,8 @@ test('getMultiHourSlots builds contiguous multi-hour windows and handles closure
     assert.equal(slot10_12.duration, 2);
     assert.equal(slot10_12.timeLabel, '10:00 – 12:00 (2h)');
     assert.equal(slot10_12.minFreeLanes, 4);
-    assert.equal(slot10_12.freeLanes, 5); // average of 6 and 4
+    assert.equal(slot10_12.freeLanes, 4); // guaranteed minimum, not the average
+    assert.equal(slot10_12.averageFreeLanes, 5);
     assert.equal(slot10_12.status, 'medium');
 
     // Slot 11-13 includes hour 12 which is closed (0 free lanes)
@@ -362,12 +370,12 @@ test('getMultiHourSlots builds contiguous multi-hour windows and handles closure
 
 test('filterAndRankSlots filters and ranks multi-hour requests accurately', () => {
     const slots = [
-        { poolName: 'Mewa', day: 'Środa', hour: 14, freeLanes: 6, totalLanes: 6, openness: 1.0, timeBucket: 'afternoon' },
-        { poolName: 'Mewa', day: 'Środa', hour: 15, freeLanes: 5, totalLanes: 6, openness: 0.83, timeBucket: 'afternoon' },
-        { poolName: 'Delfin', day: 'Środa', hour: 14, freeLanes: 3, totalLanes: 6, openness: 0.5, timeBucket: 'afternoon' },
-        { poolName: 'Delfin', day: 'Środa', hour: 15, freeLanes: 0, totalLanes: 6, openness: 0.0, timeBucket: 'afternoon' },
-        { poolName: 'Olimpijczyk', day: 'Środa', hour: 14, freeLanes: 8, totalLanes: 10, openness: 0.8, timeBucket: 'afternoon' },
-        { poolName: 'Olimpijczyk', day: 'Środa', hour: 15, freeLanes: 8, totalLanes: 10, openness: 0.8, timeBucket: 'afternoon' }
+        { poolName: 'Mewa', day: 'Środa', date: '28.10.2026', hour: 14, freeLanes: 6, totalLanes: 6, openness: 1.0, timeBucket: 'afternoon' },
+        { poolName: 'Mewa', day: 'Środa', date: '28.10.2026', hour: 15, freeLanes: 5, totalLanes: 6, openness: 0.83, timeBucket: 'afternoon' },
+        { poolName: 'Delfin', day: 'Środa', date: '28.10.2026', hour: 14, freeLanes: 3, totalLanes: 6, openness: 0.5, timeBucket: 'afternoon' },
+        { poolName: 'Delfin', day: 'Środa', date: '28.10.2026', hour: 15, freeLanes: 0, totalLanes: 6, openness: 0.0, timeBucket: 'afternoon' },
+        { poolName: 'Olimpijczyk', day: 'Środa', date: '28.10.2026', hour: 14, freeLanes: 8, totalLanes: 10, openness: 0.8, timeBucket: 'afternoon' },
+        { poolName: 'Olimpijczyk', day: 'Środa', date: '28.10.2026', hour: 15, freeLanes: 8, totalLanes: 10, openness: 0.8, timeBucket: 'afternoon' }
     ];
 
     // Filter 2h slots: Delfin 14:00-16:00 should be excluded because 15:00 is closed
@@ -380,7 +388,8 @@ test('filterAndRankSlots filters and ranks multi-hour requests accurately', () =
     assert.equal(ranked2h[0].freeLanes, 8);
     assert.equal(ranked2h[1].poolName, 'Mewa');
     assert.equal(ranked2h[1].minFreeLanes, 5);
-    assert.equal(ranked2h[1].freeLanes, 5.5);
+    assert.equal(ranked2h[1].freeLanes, 5);
+    assert.equal(ranked2h[1].averageFreeLanes, 5.5);
 });
 
 // --- Calendar & PWA helpers -----------------------------------------------
@@ -428,8 +437,8 @@ test('generateIcsFile generates standard RFC 5545 iCalendar content with alarms'
     assert.ok(ics.includes('BEGIN:VCALENDAR'));
     assert.ok(ics.includes('VERSION:2.0'));
     assert.ok(ics.includes('BEGIN:VEVENT'));
-    assert.ok(ics.includes('DTSTART:20261031T100000'));
-    assert.ok(ics.includes('DTEND:20261031T110000'));
+    assert.ok(ics.includes('DTSTART;TZID=Europe/Warsaw:20261031T100000'));
+    assert.ok(ics.includes('DTEND;TZID=Europe/Warsaw:20261031T110000'));
     assert.ok(ics.includes('SUMMARY:Pływanie — Kryta Pływalnia Mewa'));
     assert.ok(ics.includes('LOCATION:ul. Mewy 36\\, Gliwice-Sośnica\\, Gliwice'));
     assert.ok(ics.includes('BEGIN:VALARM'));
@@ -458,18 +467,18 @@ test('validatePoolData preserves lastUpdated and lastUpdatedPl metadata', () => 
 
 test('filterAndRankSlots respects minHour for real-time upcoming slots filter', () => {
     const slots = [
-        { poolName: 'Olimpijczyk', day: 'Środa', hour: 10, freeLanes: 8, totalLanes: 10, openness: 0.8 },
-        { poolName: 'Olimpijczyk', day: 'Środa', hour: 16, freeLanes: 6, totalLanes: 10, openness: 0.6 },
-        { poolName: 'Olimpijczyk', day: 'Środa', hour: 18, freeLanes: 8, totalLanes: 10, openness: 0.8 },
-        { poolName: 'Olimpijczyk', day: 'Środa', hour: 20, freeLanes: 10, totalLanes: 10, openness: 1.0 },
-        { poolName: 'Mewa', day: 'Czwartek', hour: 10, freeLanes: 6, totalLanes: 6, openness: 1.0 }
+        { poolName: 'Olimpijczyk', day: 'Środa', date: '28.10.2026', hour: 10, freeLanes: 8, totalLanes: 10, openness: 0.8 },
+        { poolName: 'Olimpijczyk', day: 'Środa', date: '28.10.2026', hour: 16, freeLanes: 6, totalLanes: 10, openness: 0.6 },
+        { poolName: 'Olimpijczyk', day: 'Środa', date: '28.10.2026', hour: 18, freeLanes: 8, totalLanes: 10, openness: 0.8 },
+        { poolName: 'Olimpijczyk', day: 'Środa', date: '28.10.2026', hour: 20, freeLanes: 10, totalLanes: 10, openness: 1.0 },
+        { poolName: 'Mewa', day: 'Czwartek', date: '29.10.2026', hour: 10, freeLanes: 6, totalLanes: 6, openness: 1.0 }
     ];
 
     // For currentDay = 'Środa', minHour = 17 should drop 10:00 and 16:00
     const upcoming = filterAndRankSlots(slots, {
         day: 'Środa',
         minHour: 17,
-        currentDay: 'Środa'
+        now: new Date('2026-10-28T12:00:00+01:00')
     });
 
     assert.equal(upcoming.length, 2);

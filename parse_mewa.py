@@ -79,7 +79,7 @@ def parse_mewa_pdf(pdf_path):
 
 if __name__ == "__main__":
     candidates = sorted(glob.glob("Harmonogram_Mewa_*.pdf") + glob.glob("mewa.pdf"), key=os.path.getmtime, reverse=True)
-    mewa_pdf_path = candidates[0] if candidates else "mewa.pdf"
+    mewa_pdf_path = "mewa.pdf" if os.path.exists("mewa.pdf") else candidates[0] if candidates else "mewa.pdf"
     print(f"Parsing Mewa schedule from {mewa_pdf_path}...")
     data = nan_to_none(parse_mewa_pdf(mewa_pdf_path))
 

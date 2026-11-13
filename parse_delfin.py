@@ -92,7 +92,7 @@ def parse_delfin_pdf(pdf_path):
 
 if __name__ == "__main__":
     candidates = sorted(glob.glob("Harmonogram_Delfin_*.pdf") + glob.glob("delfin.pdf"), key=os.path.getmtime, reverse=True)
-    delfin_pdf_path = candidates[0] if candidates else "delfin.pdf"
+    delfin_pdf_path = "delfin.pdf" if os.path.exists("delfin.pdf") else candidates[0] if candidates else "delfin.pdf"
     print(f"Parsing Delfin schedule from {delfin_pdf_path}...")
     data = nan_to_none(parse_delfin_pdf(delfin_pdf_path))
 

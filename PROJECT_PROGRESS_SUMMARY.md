@@ -1,6 +1,25 @@
 # Project Implementation & Review Summary
 
-**Overall Status:** Complete. All architectural weaknesses, source data noise issues, CI/CD pipeline gaps, and user requirements for a simple modern UI, intelligent lane suggester, full 4-pool support (including **Neptun**), and complete multi-table parsing for **Olimpijczyk** have been fully addressed and verified with comprehensive unit testing.
+## Current work — 2026-11-13
+
+Accepted scope: fix the six findings from the 2026-11-12 review and push the completed changes.
+
+1. Per-pool dates now come from the same canonical PDF as availability. No build-week or other-pool fallback; unknown/expired data is labelled and excluded from recommendations.
+2. Hourly and multi-hour visits require complete interval coverage. Lane counts and openness describe the minimum throughout the visit; closures, gaps, and unknown cells cannot be averaged away.
+3. Today/tomorrow use full calendar dates in Europe/Warsaw, including Sunday rollover. Windows cannot combine different weeks. Calendar exports require confirmed dates.
+4. The service worker refreshes cached assets and schedules online, preserves offline fallback, and removes only obsolete pool caches.
+5. The live panel uses current source intervals, with no fixed night cutoff or invented opening time. Before dawn it finds the next visit on the actual applicable date.
+6. Olimpijczyk configurations are read per day; split 25m sessions use 20-lane capacity, preserving 17/20 instead of clamping to 10/10.
+
+Verification: 27 Python tests and 41 JavaScript tests pass. All four parsers and the aggregator were run against the committed PDFs. Chromium checks passed at 390px and 1440px, including Warsaw dates with a US browser timezone, filters, matrix, source timetables, and real online cache refresh/offline reload.
+
+Source snapshot: PDFs at `13315ca` have Mewa dated 2–8 November and the other pools dated 9–15 November. Regenerated `data.json` preserves that distinction. Missing quarter-hour cells remain unknown rather than being forward-filled.
+
+Next accepted implementation task: none. Push verification is pending for the commit containing this section; check its [Actions run](https://github.com/110kc3/pool-gliwice-automation/actions?query=branch%3Amaster) once at the next session. The scheduled publication workflow remains unchanged in its triggers; the new push/PR workflow runs tests only.
+
+## Historical implementation notes
+
+The notes below describe the October implementation, not additional accepted work or a claim that every possible weakness has been resolved.
 
 ---
 

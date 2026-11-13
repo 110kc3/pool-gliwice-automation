@@ -67,7 +67,7 @@ def parse_olimpijczyk_pdf(pdf_path):
 
 if __name__ == "__main__":
     candidates = sorted(glob.glob("Harmonogram_Olimpijczyk_*.pdf") + glob.glob("olimpijczyk.pdf"), key=os.path.getmtime, reverse=True)
-    olimpijczyk_pdf_path = candidates[0] if candidates else "Harmonogram_Olimpijczyk_26.10.2026_-_01.11.2026.pdf"
+    olimpijczyk_pdf_path = "Harmonogram_Olimpijczyk_latest.pdf" if os.path.exists("Harmonogram_Olimpijczyk_latest.pdf") else candidates[0] if candidates else "Harmonogram_Olimpijczyk_26.10.2026_-_01.11.2026.pdf"
     print(f"Parsing Olimpijczyk schedule from {olimpijczyk_pdf_path}...")
     data = nan_to_none(parse_olimpijczyk_pdf(olimpijczyk_pdf_path))
 

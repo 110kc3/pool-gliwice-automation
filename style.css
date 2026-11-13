@@ -2031,3 +2031,7 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* Source dates remain visible when one pool publishes a different week. */
+.data-freshness-banner { margin: 1rem 0; padding: 1rem; border: 1px solid currentColor; border-radius: .75rem; line-height: 1.6; overflow-wrap: anywhere; }
+.status-unknown { opacity: .8; }

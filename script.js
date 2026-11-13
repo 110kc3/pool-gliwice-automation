@@ -172,16 +172,21 @@ function opennessScore(info, capacity) {
 // ===========================================================================
 
 // Detailed lane breakdown for a pool and raw availability entry.
-function getFreeLanesDetail(poolName, raw) {
+function getFreeLanesDetail(poolName, raw, metadata = {}) {
     const info = classifyAvailability(raw);
     const specs = POOL_SPECS[poolName] || { totalLanes: 10, length: "25m" };
-    const total = specs.totalLanes;
+    // Olimpijczyk can split its Olympic basin into twenty 25m lanes.
+    const split = poolName === 'Olimpijczyk' && info.freeLanes > 10 && !/x\s*50\s*m/i.test(raw);
+    const total = Number.isInteger(metadata.totalLanes) && metadata.totalLanes > 0
+        ? metadata.totalLanes : (split ? 20 : specs.totalLanes);
+    const laneLength = metadata.laneLength || (split ? '25m' : specs.length);
 
     if (!info || info.noise) return null;
 
     if (info.score === 0) {
         return {
             freeLanes: 0,
+            laneLength,
             totalLanes: total,
             openness: 0,
             label: "Pływalnia niedostępna / nieczynna",
@@ -215,6 +220,7 @@ function getFreeLanesDetail(poolName, raw) {
 
     return {
         freeLanes: free,
+        laneLength,
         totalLanes: total,
         openness,
         label,
@@ -230,274 +236,179 @@ function getTimeBucket(hour) {
     return 'evening';                   // 17:00 - 22:00
 }
 
-// Map JavaScript Date object to Polish day name.
+// All relative dates and clocks refer to the pools' timezone, wherever the user is.
+function parseScheduleDate(value) {
+    const m = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(value || '');
+    if (!m) return null;
+    const d = new Date(Date.UTC(+m[3], +m[2] - 1, +m[1]));
+    if (d.getUTCFullYear() !== +m[3] || d.getUTCMonth() !== +m[2] - 1 || d.getUTCDate() !== +m[1]) return null;
+    return d.toISOString().slice(0, 10);
+}
+
+function polishDate(iso) {
+    return iso.split('-').reverse().join('.');
+}
+
+function getPoolClock(now = new Date()) {
+    const parts = Object.fromEntries(new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Europe/Warsaw', year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+    }).formatToParts(now).map(p => [p.type, p.value]));
+    const iso = `${parts.year}-${parts.month}-${parts.day}`;
+    const date = new Date(`${iso}T00:00:00Z`);
+    const day = DAYS_ORDER[(date.getUTCDay() + 6) % 7];
+    date.setUTCDate(date.getUTCDate() + 1);
+    return { iso, date: polishDate(iso), tomorrow: polishDate(date.toISOString().slice(0, 10)),
+        day, hour: +parts.hour, minute: +parts.minute, minutes: +parts.hour * 60 + +parts.minute };
+}
+
 function getPolishDayName(date) {
-    const jsDayMap = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
-    return jsDayMap[date.getDay()];
+    return getPoolClock(date).day;
 }
 
-// Extract or compute calendar dates for the active weekly schedule
+// Calendar labels may fall back to the viewing week; schedule records never do.
 function getScheduleDates(pools, fallbackDate = new Date()) {
-    // 1. Check if pools provide explicit dates map from master_aggregator
-    if (Array.isArray(pools) && pools.length > 0 && pools[0].dates) {
-        const fullDates = pools[0].dates;
-        const weekRange = pools[0].weekRange || `${fullDates["Poniedziałek"]} – ${fullDates["Niedziela"]}`;
-        const shortDates = {};
-        for (const [d, dt] of Object.entries(fullDates)) {
-            shortDates[d] = String(dt).replace(/\.\d{4}$/, '');
-        }
-        return { fullDates, shortDates, weekRange };
+    const maps = pools.map(p => p.dates).filter(d => d && Object.keys(d).length);
+    let fullDates;
+    if (maps.length && maps.every(d => JSON.stringify(d) === JSON.stringify(maps[0]))) {
+        fullDates = maps[0];
+    } else {
+        const monday = new Date(`${getPoolClock(fallbackDate).iso}T00:00:00Z`);
+        monday.setUTCDate(monday.getUTCDate() - (monday.getUTCDay() + 6) % 7);
+        fullDates = Object.fromEntries(DAYS_ORDER.map((day, i) => {
+            const date = new Date(monday);
+            date.setUTCDate(date.getUTCDate() + i);
+            return [day, polishDate(date.toISOString().slice(0, 10))];
+        }));
     }
-
-    // 2. Fallback: compute based on Monday of the fallbackDate week
-    const jsDay = fallbackDate.getDay();
-    const diffToMonday = jsDay === 0 ? -6 : 1 - jsDay;
-    const monday = new Date(fallbackDate);
-    monday.setDate(fallbackDate.getDate() + diffToMonday);
-
-    const fullDates = {};
-    const shortDates = {};
-    DAYS_ORDER.forEach((d, idx) => {
-        const cur = new Date(monday);
-        cur.setDate(monday.getDate() + idx);
-        const dd = String(cur.getDate()).padStart(2, '0');
-        const mm = String(cur.getMonth() + 1).padStart(2, '0');
-        const yyyy = cur.getFullYear();
-        fullDates[d] = `${dd}.${mm}.${yyyy}`;
-        shortDates[d] = `${dd}.${mm}`;
-    });
-    const weekRange = `${fullDates["Poniedziałek"]} – ${fullDates["Niedziela"]}`;
-    return { fullDates, shortDates, weekRange };
+    const shortDates = Object.fromEntries(Object.entries(fullDates).map(([d, v]) => [d, v.replace(/\.\d{4}$/, '')]));
+    const values = Object.values(fullDates).filter(parseScheduleDate).sort((a, b) => parseScheduleDate(a).localeCompare(parseScheduleDate(b)));
+    return { fullDates, shortDates, weekRange: values.length ? `${values[0]} – ${values.at(-1)}` : '' };
 }
 
-// Group raw pool schedule into consistent 1-hour slots per pool, day, and hour.
+function parseTimeInterval(value) {
+    const m = /^\s*(\d{1,2})[:.](\d{2})(?:\s*[-–—]\s*(\d{1,2})[:.](\d{2}))?\s*$/.exec(value || '');
+    if (!m || +m[1] > 23 || +m[2] > 59 || (m[3] && (+m[3] > 24 || +m[4] > 59 || (+m[3] === 24 && +m[4] !== 0)))) return null;
+    const start = +m[1] * 60 + +m[2];
+    // Modern PDFs use quarter-hour point rows; legacy PDFs supply explicit ranges.
+    const end = m[3] ? +m[3] * 60 + +m[4] : start + 15;
+    return end > start && end <= 1440 ? { start, end } : null;
+}
+
+function entryDate(pool, entry) {
+    return entry.date || pool.dates?.[entry.day] || '';
+}
+
+// Require coverage of every minute. Missing/unknown cells cannot imply free lanes.
 function aggregateHourlySlots(pools) {
-    const hourlySlots = [];
-    const { fullDates, shortDates } = getScheduleDates(pools);
-
-    pools.forEach(pool => {
-        const poolDates = pool.dates || fullDates;
-        const byDayHour = {};
-        (pool.schedule || []).forEach(entry => {
-            const detail = getFreeLanesDetail(pool.name, entry.availableLanes);
-            if (!detail) return;
-
-            const m = entry.time.match(/(\d+)/);
-            if (!m) return;
-            const hour = parseInt(m[1], 10);
-            const key = `${entry.day}_${hour}`;
-
-            if (!byDayHour[key]) {
-                const dateVal = entry.date || poolDates[entry.day] || fullDates[entry.day] || '';
-                const shortVal = shortDates[entry.day] || (dateVal ? dateVal.replace(/\.\d{4}$/, '') : '');
-                byDayHour[key] = {
-                    poolName: pool.name,
-                    day: entry.day,
-                    date: dateVal,
-                    shortDate: shortVal,
-                    hour: hour,
-                    timeLabel: `${String(hour).padStart(2, '0')}:00 – ${String(hour + 1).padStart(2, '0')}:00`,
-                    timeBucket: getTimeBucket(hour),
-                    totalLanes: detail.totalLanes,
-                    items: []
-                };
-            }
-            byDayHour[key].items.push(detail);
-        });
-
-        Object.values(byDayHour).forEach(slot => {
-            const avgFree = slot.items.reduce((s, it) => s + it.freeLanes, 0) / slot.items.length;
-            const avgOpenness = slot.items.reduce((s, it) => s + it.openness, 0) / slot.items.length;
-            const roundedFree = Math.round(avgFree * 10) / 10;
-
-            let status = 'low';
-            if (avgOpenness >= 0.8) status = 'high';
-            else if (avgOpenness >= 0.4) status = 'medium';
-            else if (avgOpenness === 0) status = 'closed';
-
-            let laneBadge = '';
-            if (avgOpenness === 1) {
-                laneBadge = `${slot.totalLanes} torów wolnych (100%)`;
-            } else if (roundedFree > 0) {
-                laneBadge = `${roundedFree} z ${slot.totalLanes} torów (${Math.round(avgOpenness * 100)}%)`;
-            } else {
-                laneBadge = 'Nieczynna / zajęta';
-            }
-
-            // Extract distinct non-empty original cell details for informative tooltips/badges
-            const distinctRaws = [...new Set(slot.items.map(it => it.raw).filter(Boolean))];
-
-            hourlySlots.push({
-                poolName: slot.poolName,
-                day: slot.day,
-                date: slot.date,
-                shortDate: slot.shortDate,
-                hour: slot.hour,
-                timeLabel: slot.timeLabel,
-                timeBucket: slot.timeBucket,
-                freeLanes: roundedFree,
-                totalLanes: slot.totalLanes,
-                openness: avgOpenness,
-                status,
-                laneBadge,
-                details: distinctRaws.slice(0, 2).join('; ')
-            });
-        });
+    const groups = new Map();
+    pools.forEach(pool => (pool.schedule || []).forEach(entry => {
+        const interval = parseTimeInterval(entry.time);
+        if (!interval) return;
+        const detail = getFreeLanesDetail(pool.name, entry.availableLanes, entry);
+        const date = entryDate(pool, entry);
+        for (let minute = interval.start; minute < interval.end; minute++) {
+            const hour = Math.floor(minute / 60);
+            const key = JSON.stringify([pool.name, date, entry.day, hour]);
+            if (!groups.has(key)) groups.set(key, { poolName: pool.name, date, day: entry.day, hour,
+                minutes: Array.from({ length: 60 }, () => []), raws: new Set() });
+            const group = groups.get(key);
+            group.minutes[minute % 60].push(detail);
+            group.raws.add(cleanCell(entry.availableLanes));
+        }
+    }));
+    return [...groups.values()].map(group => {
+        const complete = group.minutes.every(items => items.length && items.every(Boolean));
+        const details = group.minutes.flat().filter(Boolean);
+        const total = Math.max(...details.map(d => d.totalLanes), POOL_SPECS[group.poolName]?.totalLanes || 0);
+        const counts = group.minutes.map(items => items.length && items.every(Boolean) ? Math.min(...items.map(d => d.freeLanes)) : 0);
+        const free = Math.min(...counts);
+        const average = Math.round(counts.reduce((a, b) => a + b, 0) / 60 * 10) / 10;
+        const openness = total ? free / total : 0;
+        const status = !complete ? 'unknown' : free === 0 ? 'closed' : openness >= 0.8 ? 'high' : openness >= 0.4 ? 'medium' : 'low';
+        return { poolName: group.poolName, day: group.day, date: group.date,
+            shortDate: group.date.replace(/\.\d{4}$/, ''), hour: group.hour, endHour: group.hour + 1,
+            timeLabel: `${String(group.hour).padStart(2, '0')}:00 – ${String(group.hour + 1).padStart(2, '0')}:00`,
+            timeBucket: getTimeBucket(group.hour), freeLanes: free, minFreeLanes: free, averageFreeLanes: average,
+            totalLanes: total, openness, status, complete,
+            laneLength: [...new Set(details.map(d => d.laneLength))].join(' / '),
+            laneBadge: !complete ? 'Brak pełnych danych' : free === 0 ? 'Brak ciągłej dostępności' : `min. ${free} z ${total} torów (${Math.round(openness * 100)}%)`,
+            details: [...group.raws].filter(Boolean).join('; ') };
     });
-
-    return hourlySlots;
 }
 
-// Build continuous multi-hour windows (e.g. 2h, 3h) from aggregated 1-hour slots.
 function getMultiHourSlots(hourlySlots, duration = 1) {
     if (duration <= 1) return hourlySlots;
-    const multi = [];
-    const poolDayMap = {};
-    hourlySlots.forEach(s => {
-        const key = `${s.poolName}_${s.day}`;
-        if (!poolDayMap[key]) poolDayMap[key] = {};
-        poolDayMap[key][s.hour] = s;
+    const groups = new Map();
+    hourlySlots.forEach(slot => {
+        const key = JSON.stringify([slot.poolName, slot.date, slot.day]);
+        if (!groups.has(key)) groups.set(key, new Map());
+        groups.get(key).set(slot.hour, slot);
     });
-
-    Object.entries(poolDayMap).forEach(([key, hourMap]) => {
-        const [poolName, day] = key.split('_');
-        const hours = Object.keys(hourMap).map(Number).sort((a, b) => a - b);
-        hours.forEach(h => {
-            const block = [];
-            for (let i = 0; i < duration; i++) {
-                if (hourMap[h + i]) block.push(hourMap[h + i]);
-            }
-            if (block.length === duration) {
-                const anyClosed = block.some(s => s.openness <= 0 || s.freeLanes <= 0);
-                const minFree = Math.min(...block.map(s => s.freeLanes));
-                const avgFree = block.reduce((sum, s) => sum + s.freeLanes, 0) / duration;
-                const avgOpenness = block.reduce((sum, s) => sum + s.openness, 0) / duration;
-                const roundedFree = Math.round(avgFree * 10) / 10;
-                const totalLanes = block[0].totalLanes;
-
-                let status = 'low';
-                if (anyClosed || avgOpenness === 0) status = 'closed';
-                else if (avgOpenness >= 0.8 && minFree >= totalLanes * 0.7) status = 'high';
-                else if (avgOpenness >= 0.4 && minFree >= 1) status = 'medium';
-
-                let laneBadge = '';
-                if (anyClosed) {
-                    laneBadge = 'Niedostępne przez cały okres';
-                } else if (minFree === totalLanes && avgOpenness === 1) {
-                    laneBadge = `${totalLanes} torów wolnych (100% przez ${duration}h)`;
-                } else if (minFree === roundedFree) {
-                    laneBadge = `${minFree} z ${totalLanes} torów (${Math.round(avgOpenness * 100)}%)`;
-                } else {
-                    laneBadge = `min. ${minFree} torów (śr. ${roundedFree} z ${totalLanes})`;
-                }
-
-                const startSlot = block[0];
-                const endHour = h + duration;
-                const hourDetails = block.map(s => `${String(s.hour).padStart(2, '0')}:00 (${s.freeLanes} torów)`).join(' ➔ ');
-
-                multi.push({
-                    poolName,
-                    day,
-                    date: startSlot.date,
-                    shortDate: startSlot.shortDate,
-                    hour: h,
-                    endHour,
-                    duration,
-                    timeLabel: `${String(h).padStart(2, '0')}:00 – ${String(endHour).padStart(2, '0')}:00 (${duration}h)`,
-                    timeBucket: startSlot.timeBucket,
-                    freeLanes: roundedFree,
-                    minFreeLanes: minFree,
-                    totalLanes,
-                    openness: anyClosed ? 0 : avgOpenness,
-                    status,
-                    laneBadge,
-                    details: hourDetails,
-                    subSlots: block
-                });
-            }
-        });
-    });
-    return multi;
+    const result = [];
+    for (const hours of groups.values()) {
+        for (const start of hours.values()) {
+            const block = Array.from({ length: duration }, (_, i) => hours.get(start.hour + i));
+            if (block.some(s => !s)) continue;
+            const complete = block.every(s => s.complete !== false);
+            const free = complete ? Math.min(...block.map(s => s.minFreeLanes ?? s.freeLanes)) : 0;
+            const total = Math.max(...block.map(s => s.totalLanes));
+            const openness = free / total;
+            const average = Math.round(block.reduce((sum, s) => sum + (s.averageFreeLanes ?? s.freeLanes), 0) / duration * 10) / 10;
+            result.push({ ...start, duration, endHour: start.hour + duration, complete,
+                timeLabel: `${String(start.hour).padStart(2, '0')}:00 – ${String(start.hour + duration).padStart(2, '0')}:00 (${duration}h)`,
+                freeLanes: free, minFreeLanes: free, averageFreeLanes: average, totalLanes: total, openness,
+                laneLength: [...new Set(block.map(s => s.laneLength).filter(Boolean))].join(' / '),
+                status: !complete ? 'unknown' : free === 0 ? 'closed' : openness >= 0.8 ? 'high' : openness >= 0.4 ? 'medium' : 'low',
+                laneBadge: free > 0 ? `min. ${free} z ${total} torów przez ${duration}h` : 'Brak ciągłej dostępności',
+                details: block.map(s => `${String(s.hour).padStart(2, '0')}:00 (min. ${s.minFreeLanes ?? s.freeLanes} torów)`).join(' ➔ '), subSlots: block });
+        }
+    }
+    return result;
 }
 
-// Filter and rank suggested slots based on user criteria.
 function filterAndRankSlots(hourlySlots, options = {}) {
-    const {
-        day = 'all',
-        timeBucket = 'all',
-        pool = 'all',
-        minLanes = 0,
-        minOpenness = 0,
-        sortBy = 'lanes',
-        duration = 1,
-        minHour = null,
-        currentDay = getPolishDayName(new Date())
-    } = options;
-
-    const baseSlots = duration > 1 ? getMultiHourSlots(hourlySlots, duration) : hourlySlots;
-
-    const currentIdx = DAYS_ORDER.indexOf(currentDay);
-    const tomorrowDay = currentIdx >= 0 ? DAYS_ORDER[(currentIdx + 1) % 7] : "Środa";
-
-    let filtered = baseSlots.filter(s => {
-        // Exclude completely closed or zero-lane slots
-        if (s.openness <= 0 || s.freeLanes <= 0) return false;
-        if (typeof s.minFreeLanes === 'number' && s.minFreeLanes <= 0) return false;
-
-        // If minHour is set and this slot is for today, skip past hours!
-        if (minHour !== null && (day === 'today' || s.day === currentDay) && s.hour < minHour) {
-            return false;
-        }
-
-        // Day filtering
-        if (day === 'today') {
-            if (s.day !== currentDay) return false;
-        } else if (day === 'tomorrow') {
-            if (s.day !== tomorrowDay) return false;
-        } else if (day === 'weekend') {
-            if (s.day !== 'Sobota' && s.day !== 'Niedziela') return false;
-        } else if (day === 'workdays') {
-            if (s.day === 'Sobota' || s.day === 'Niedziela') return false;
-        } else if (day !== 'all' && s.day !== day) {
-            return false;
-        }
-
-        // Time bucket filtering
-        if (timeBucket !== 'all' && s.timeBucket !== timeBucket) return false;
-
-        // Pool filtering
-        if (pool !== 'all' && s.poolName !== pool) return false;
-
-        // Minimum thresholds
-        const checkLanes = typeof s.minFreeLanes === 'number' ? s.minFreeLanes : s.freeLanes;
-        if (minLanes > 0 && checkLanes < minLanes) return false;
-        if (minOpenness > 0 && s.openness < minOpenness) return false;
-
-        return true;
+    const { day = 'all', timeBucket = 'all', pool = 'all', minLanes = 0, minOpenness = 0,
+        sortBy = 'lanes', duration = 1, minHour = null, date = null, now = new Date() } = options;
+    const clock = getPoolClock(now);
+    const filtered = getMultiHourSlots(hourlySlots, duration).filter(s => {
+        const iso = parseScheduleDate(s.date);
+        if (!iso || iso < clock.iso || s.complete === false || s.openness <= 0 || (s.minFreeLanes ?? s.freeLanes) <= 0) return false;
+        const weekday = DAYS_ORDER[(new Date(`${iso}T00:00:00Z`).getUTCDay() + 6) % 7];
+        if (weekday !== s.day || (date && iso !== parseScheduleDate(date))) return false;
+        if (iso === clock.iso && (s.hour * 60 < clock.minutes || (minHour !== null && s.hour < minHour))) return false;
+        if (day === 'today' && iso !== clock.iso) return false;
+        if (day === 'tomorrow' && iso !== parseScheduleDate(clock.tomorrow)) return false;
+        if (day === 'weekend' && !['Sobota', 'Niedziela'].includes(s.day)) return false;
+        if (day === 'workdays' && ['Sobota', 'Niedziela'].includes(s.day)) return false;
+        if (!['all', 'today', 'tomorrow', 'weekend', 'workdays'].includes(day) && s.day !== day) return false;
+        return (timeBucket === 'all' || s.timeBucket === timeBucket) && (pool === 'all' || s.poolName === pool)
+            && (s.minFreeLanes ?? s.freeLanes) >= minLanes && s.openness >= minOpenness;
     });
-
-    // Sorting
     filtered.sort((a, b) => {
-        if (sortBy === 'lanes') {
-            const aMin = typeof a.minFreeLanes === 'number' ? a.minFreeLanes : a.freeLanes;
-            const bMin = typeof b.minFreeLanes === 'number' ? b.minFreeLanes : b.freeLanes;
-            if (bMin !== aMin) return bMin - aMin;
-            if (b.freeLanes !== a.freeLanes) return b.freeLanes - a.freeLanes;
-            if (b.openness !== a.openness) return b.openness - a.openness;
-        } else if (sortBy === 'openness') {
-            if (b.openness !== a.openness) return b.openness - a.openness;
-            const aMin = typeof a.minFreeLanes === 'number' ? a.minFreeLanes : a.freeLanes;
-            const bMin = typeof b.minFreeLanes === 'number' ? b.minFreeLanes : b.freeLanes;
-            if (bMin !== aMin) return bMin - aMin;
-            if (b.freeLanes !== a.freeLanes) return b.freeLanes - a.freeLanes;
-        }
-        // Chronological order as secondary / default
-        const dDiff = DAYS_ORDER.indexOf(a.day) - DAYS_ORDER.indexOf(b.day);
-        if (dDiff !== 0) return dDiff;
-        return a.hour - b.hour;
+        if (sortBy === 'lanes' && a.freeLanes !== b.freeLanes) return b.freeLanes - a.freeLanes;
+        if (sortBy !== 'time' && a.openness !== b.openness) return b.openness - a.openness;
+        if (sortBy === 'openness' && a.freeLanes !== b.freeLanes) return b.freeLanes - a.freeLanes;
+        return parseScheduleDate(a.date).localeCompare(parseScheduleDate(b.date)) || a.hour - b.hour;
     });
-
     return filtered;
+}
+
+function getLiveSummary(pools, hourlySlots, now = new Date()) {
+    const clock = getPoolClock(now);
+    const statuses = pools.map(pool => {
+        const entries = pool.schedule.filter(entry => {
+            const interval = parseTimeInterval(entry.time);
+            return parseScheduleDate(entryDate(pool, entry)) === clock.iso && interval && interval.start <= clock.minutes && clock.minutes < interval.end;
+        });
+        const details = entries.map(entry => getFreeLanesDetail(pool.name, entry.availableLanes, entry));
+        if (!details.length || details.some(d => !d)) return { poolName: pool.name, status: 'unknown' };
+        const freeLanes = Math.min(...details.map(d => d.freeLanes));
+        return { poolName: pool.name, freeLanes, totalLanes: Math.max(...details.map(d => d.totalLanes)),
+            status: freeLanes > 0 ? 'high' : 'closed' };
+    });
+    const upcoming = filterAndRankSlots(hourlySlots, { now, sortBy: 'time' });
+    return { clock, statuses, nextSlot: upcoming[0] || null };
 }
 
 // Compute high-level statistical takeaways from the dataset.
@@ -594,6 +505,7 @@ function validatePoolData(data) {
             name: pool.name,
             weekRange: pool.weekRange,
             dates: pool.dates,
+            sourcePdf: pool.sourcePdf,
             lastUpdated: pool.lastUpdated,
             lastUpdatedPl: pool.lastUpdatedPl,
             schedule
@@ -615,16 +527,10 @@ function escapeHtml(str) {
 // Calendar Event Generation (.ics and Google Calendar)
 // ===========================================================================
 
-function getSlotCalendarDates(slot, defaultYear = 2026) {
-    let year = defaultYear, month = 10, day = 28;
-    if (slot.date) {
-        const parts = slot.date.split('.');
-        if (parts.length === 3) {
-            day = parseInt(parts[0], 10);
-            month = parseInt(parts[1], 10);
-            year = parseInt(parts[2], 10);
-        }
-    }
+function getSlotCalendarDates(slot) {
+    const iso = parseScheduleDate(slot.date);
+    if (!iso) throw new Error('Cannot export a slot without a confirmed date');
+    const [year, month, day] = iso.split('-').map(Number);
     const startHour = slot.hour;
     const dur = slot.duration || 1;
     const endHour = slot.endHour || (startHour + dur);
@@ -642,7 +548,7 @@ function buildGoogleCalendarUrl(slot) {
     const dur = slot.duration || 1;
     const minLanes = typeof slot.minFreeLanes === 'number' ? slot.minFreeLanes : slot.freeLanes;
     const title = `Pływanie — Kryta Pływalnia ${slot.poolName} (${minLanes} wolnych torów)`;
-    const details = `Sesja pływania (${dur}h na basenie ${slot.poolName}).\nWolne tory: ${minLanes}/${slot.totalLanes} (śr. ${slot.freeLanes}).\nPrzebieg: ${slot.details || slot.timeLabel}\nAdres: ${specs.address}, Gliwice\nWygenerowano przez: https://110kc3.github.io/pool-gliwice-automation/`;
+    const details = `Sesja pływania (${dur}h na basenie ${slot.poolName}).\nWolne tory: ${minLanes}/${slot.totalLanes} (śr. ${slot.averageFreeLanes ?? slot.freeLanes}).\nPrzebieg: ${slot.details || slot.timeLabel}\nAdres: ${specs.address}, Gliwice\nWygenerowano przez: https://110kc3.github.io/pool-gliwice-automation/`;
     const location = `${specs.address}, Gliwice`;
 
     const params = new URLSearchParams({
@@ -650,7 +556,8 @@ function buildGoogleCalendarUrl(slot) {
         text: title,
         dates: `${startIso}/${endIso}`,
         details: details,
-        location: location
+        location: location,
+        ctz: 'Europe/Warsaw'
     });
     return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
@@ -675,8 +582,8 @@ function generateIcsFile(slot) {
         'BEGIN:VEVENT',
         `UID:${uid}`,
         `DTSTAMP:${nowIso}`,
-        `DTSTART:${startIso}`,
-        `DTEND:${endIso}`,
+        `DTSTART;TZID=Europe/Warsaw:${startIso}`,
+        `DTEND;TZID=Europe/Warsaw:${endIso}`,
         `SUMMARY:${title.replace(/[,\n]/g, ' ')}`,
         `DESCRIPTION:${description.replace(/\n/g, '\\n')}`,
         `LOCATION:${location.replace(/,/g, '\\,')}`,
@@ -720,30 +627,17 @@ function initApp(rawData) {
     }
 
     window.poolData = pools;
-    const weekDates = getScheduleDates(pools);
+    const weekDates = getScheduleDates([], new Date());
     const hourlySlots = aggregateHourlySlots(pools);
-    const insights = computeDataInsights(hourlySlots);
-    const todayName = getPolishDayName(new Date());
-    const now = new Date();
-    const currentHour = now.getHours();
-    const currentMinutes = now.getMinutes();
-    const activeStartHour = currentMinutes >= 45 ? currentHour + 1 : currentHour;
-    const isLateNight = activeStartHour >= 21 || activeStartHour < 6;
-    const currentDayIdx = DAYS_ORDER.indexOf(todayName);
-    const tomorrowName = currentDayIdx >= 0 ? DAYS_ORDER[(currentDayIdx + 1) % 7] : "Czwartek";
-
-    const defaultPreset = isLateNight ? 'tomorrow_morning' : 'now';
-    const defaultDay = isLateNight ? tomorrowName : todayName;
-    const defaultTimeBucket = isLateNight ? 'morning' : 'all';
-    const defaultMinHour = isLateNight ? null : activeStartHour;
+    const todayName = getPoolClock().day;
 
     // Suggester interactive state
     const state = {
         activeTab: 'suggester', // 'suggester' | 'matrix' | 'schedules' | 'info'
-        preset: defaultPreset,  // 'now' | 'today_evening' | 'tomorrow_morning' | 'weekend' | 'all' | null
-        day: defaultDay,        // specific day or 'all' | 'weekend' | 'workdays'
-        minHour: defaultMinHour,// minimum hour filter for today
-        timeBucket: defaultTimeBucket, // 'all' | 'morning' | 'afternoon' | 'evening'
+        preset: 'now',  // 'now' | 'today_evening' | 'tomorrow_morning' | 'weekend' | 'all' | null
+        day: 'today',        // specific day or 'all' | 'weekend' | 'workdays'
+        minHour: null,// minimum hour filter for today
+        timeBucket: 'all', // 'all' | 'morning' | 'afternoon' | 'evening'
         pool: 'all',            // 'all' | poolName
         duration: 1,            // 1 | 2 | 3 (hours to swim)
         matrixDuration: 1,      // 1 | 2 | 3 (hours for matrix comparison)
@@ -755,191 +649,65 @@ function initApp(rawData) {
         schedulePool: 'all'
     };
 
-    // Render Live "Gdzie teraz na basen?" Hero Widget & Status Radar
+    // Current quarter-hour status and the next confirmed full visit are distinct.
     function renderLiveNow() {
         const container = document.getElementById('live-now-container');
         if (!container) return;
-
-        const liveNow = new Date();
-        const curHour = liveNow.getHours();
-        const curMin = liveNow.getMinutes();
-        const shortDate = weekDates.shortDates[todayName] || '';
-        const timeFormatted = `${String(curHour).padStart(2, '0')}:${String(curMin).padStart(2, '0')}`;
-        const activeHour = curMin >= 45 ? curHour + 1 : curHour;
-        const nightMode = activeHour >= 21 || activeHour < 6;
-
-        const poolNames = ["Olimpijczyk", "Mewa", "Delfin", "Neptun"];
-
-        if (!nightMode) {
-            // Find best upcoming slot today within the next 4 hours
-            const upcomingSlots = hourlySlots.filter(s =>
-                s.day === todayName &&
-                s.hour >= activeHour &&
-                s.hour <= activeHour + 3 &&
-                s.freeLanes > 0
-            );
-            upcomingSlots.sort((a, b) => {
-                const diffMin = (typeof b.minFreeLanes === 'number' ? b.minFreeLanes : b.freeLanes) -
-                                (typeof a.minFreeLanes === 'number' ? a.minFreeLanes : a.freeLanes);
-                if (diffMin !== 0) return diffMin;
-                return a.hour - b.hour;
-            });
-
-            const bestImmediate = upcomingSlots[0] ||
-                hourlySlots.filter(s => s.day === todayName && s.hour >= activeHour && s.freeLanes > 0)
-                           .sort((a, b) => b.freeLanes - a.freeLanes)[0];
-
-            // Build 4-pool live status radar
-            const poolRadarCards = poolNames.map(pName => {
-                const curSlot = hourlySlots.find(s => s.poolName === pName && s.day === todayName && s.hour === activeHour);
-                const nextSlot = hourlySlots.find(s => s.poolName === pName && s.day === todayName && s.hour === activeHour + 1);
-                const laterSlot = hourlySlots.find(s => s.poolName === pName && s.day === todayName && s.hour === activeHour + 2);
-                const specs = POOL_SPECS[pName] || { length: '25m', type: 'Basen' };
-
-                let statusBadge = '';
-                let statusClass = 'low';
-                let nowLanesHtml = '';
-
-                if (!curSlot || curSlot.openness === 0 || curSlot.freeLanes === 0) {
-                    statusClass = 'closed';
-                    statusBadge = '🔴 Brak torów';
-                    nowLanesHtml = '<span class="closed-tag">0 wolnych torów</span>';
-                } else if (curSlot.openness >= 0.7 && curSlot.freeLanes >= 4) {
-                    statusClass = 'high';
-                    statusBadge = '🟢 Dużo miejsca';
-                    nowLanesHtml = `<strong>${curSlot.freeLanes}</strong> z ${curSlot.totalLanes} torów (${Math.round(curSlot.openness * 100)}%)`;
-                } else {
-                    statusClass = 'medium';
-                    statusBadge = '🟡 Umiarkowanie';
-                    nowLanesHtml = `<strong>${curSlot.freeLanes}</strong> z ${curSlot.totalLanes} torów (${Math.round(curSlot.openness * 100)}%)`;
-                }
-
-                const upcomingPills = [];
-                if (nextSlot) {
-                    const st = nextSlot.freeLanes > 0 ? `${nextSlot.freeLanes} torów` : 'zajęty';
-                    upcomingPills.push(`<strong>${String(nextSlot.hour).padStart(2, '0')}:00</strong> (${st})`);
-                }
-                if (laterSlot) {
-                    const st = laterSlot.freeLanes > 0 ? `${laterSlot.freeLanes} torów` : 'zajęty';
-                    upcomingPills.push(`<strong>${String(laterSlot.hour).padStart(2, '0')}:00</strong> (${st})`);
-                }
-
-                return `
-                    <div class="radar-card status-${statusClass}" data-pool="${escapeHtml(pName)}">
-                        <div class="radar-card-header">
-                            <div>
-                                <h4 class="radar-pool-title">${escapeHtml(pName)}</h4>
-                                <span class="radar-pool-meta">${escapeHtml(specs.length)} • ${escapeHtml(specs.type)}</span>
-                            </div>
-                            <span class="radar-status-pill status-${statusClass}">${statusBadge}</span>
-                        </div>
-                        <div class="radar-current-hour">
-                            <span class="radar-hour-label">Godz. ${String(activeHour).padStart(2, '0')}:00:</span>
-                            <span class="radar-hour-val">${nowLanesHtml}</span>
-                        </div>
-                        ${upcomingPills.length ? `
-                            <div class="radar-upcoming">
-                                <span class="radar-upcoming-label">Kolejne godziny:</span>
-                                <span class="radar-upcoming-val">${upcomingPills.join(' ➔ ')}</span>
-                            </div>
-                        ` : ''}
-                        <button type="button" class="btn-radar-pool" data-pool="${escapeHtml(pName)}">
-                            Pokaż tylko ${escapeHtml(pName)} ➔
-                        </button>
-                    </div>
-                `;
-            }).join('');
-
-            container.innerHTML = `
-                <div class="live-hero-card">
-                    <div class="live-hero-top">
-                        <div class="live-title-group">
-                            <span class="live-pulse-badge"><span class="pulse-dot"></span> NA ŻYWO</span>
-                            <h2>Gdzie na basen w najbliższych godzinach?</h2>
-                        </div>
-                        <div class="live-clock-badge">
-                            🕒 Dzisiaj, <strong>${escapeHtml(todayName)}</strong>${shortDate ? ` (${escapeHtml(shortDate)})` : ''}, godz. <strong>${timeFormatted}</strong>
-                        </div>
-                    </div>
-
-                    ${bestImmediate ? `
-                    <div class="immediate-pick-banner">
-                        <div class="immediate-pick-content">
-                            <span class="immediate-pick-tag">🏆 Najlepszy wybór na teraz / w najbliższych godzinach:</span>
-                            <h3 class="immediate-pick-name">${escapeHtml(bestImmediate.poolName)} • ${escapeHtml(bestImmediate.timeLabel)}</h3>
-                            <p class="immediate-pick-sub">Aż <strong>${bestImmediate.freeLanes} wolnych torów</strong> (${Math.round(bestImmediate.openness * 100)}% pojemności). ${escapeHtml(bestImmediate.details || '')}</p>
-                        </div>
-                        <div class="immediate-pick-btns">
-                            <a href="${buildGoogleCalendarUrl(bestImmediate)}" target="_blank" rel="noopener noreferrer" class="btn-hero-action gcal">
-                                📅 Dodaj do kalendarza
-                            </a>
-                            <a href="https://maps.google.com/?q=Kryta+Pływalnia+${encodeURIComponent(bestImmediate.poolName)}+Gliwice" target="_blank" rel="noopener noreferrer" class="btn-hero-action map">
-                                🗺️ Trasa dojazdu
-                            </a>
-                        </div>
-                    </div>
-                    ` : ''}
-
-                    <div class="radar-section-title">
-                        <span>Stan 4 basenów w Gliwicach w kolejnych godzinach:</span>
-                    </div>
-                    <div class="radar-grid">
-                        ${poolRadarCards}
-                    </div>
-                </div>
-            `;
-        } else {
-            // Night view: pools closed
-            const morningSlots = hourlySlots.filter(s => s.day === tomorrowName && s.hour < 12 && s.freeLanes > 0);
-            morningSlots.sort((a, b) => b.freeLanes - a.freeLanes);
-            const topMorning = morningSlots[0];
-            const tomorrowDate = weekDates.shortDates[tomorrowName] || '';
-
-            container.innerHTML = `
-                <div class="live-hero-card closed-mode">
-                    <div class="live-hero-top">
-                        <div class="live-title-group">
-                            <span class="night-badge">🌙 NOC</span>
-                            <h2>Baseny są teraz zamknięte (czynne 06:00 – 22:00)</h2>
-                        </div>
-                        <div class="live-clock-badge">
-                            🕒 Godz. <strong>${timeFormatted}</strong> • Najbliższe otwarcie jutro o <strong>06:00</strong>
-                        </div>
-                    </div>
-
-                    ${topMorning ? `
-                    <div class="immediate-pick-banner night">
-                        <div class="immediate-pick-content">
-                            <span class="immediate-pick-tag">🌅 Najlepszy wybór na jutro rano (${escapeHtml(tomorrowName)}${tomorrowDate ? ' ' + escapeHtml(tomorrowDate) : ''}):</span>
-                            <h3 class="immediate-pick-name">${escapeHtml(topMorning.poolName)} • ${escapeHtml(topMorning.timeLabel)}</h3>
-                            <p class="immediate-pick-sub">Aż <strong>${topMorning.freeLanes} wolnych torów</strong> od samego rana. ${escapeHtml(topMorning.details || '')}</p>
-                        </div>
-                        <div class="immediate-pick-btns">
-                            <a href="${buildGoogleCalendarUrl(topMorning)}" target="_blank" rel="noopener noreferrer" class="btn-hero-action gcal">
-                                📅 Zapisz na rano
-                            </a>
-                        </div>
-                    </div>
-                    ` : ''}
-                </div>
-            `;
-        }
-
+        const { clock, statuses, nextSlot } = getLiveSummary(pools, hourlySlots);
+        const anyOpen = statuses.some(s => s.freeLanes > 0);
+        const cards = statuses.map(status => {
+            const specs = POOL_SPECS[status.poolName] || {};
+            const label = status.status === 'unknown' ? 'Brak aktualnych danych'
+                : status.freeLanes > 0 ? `${status.freeLanes} z ${status.totalLanes} torów wolnych` : 'Brak wolnych torów';
+            return `<div class="radar-card status-${status.status}">
+                <div class="radar-card-header"><div><h4 class="radar-pool-title">${escapeHtml(status.poolName)}</h4>
+                <span class="radar-pool-meta">${escapeHtml(specs.type || '')}</span></div></div>
+                <div class="radar-current-hour"><span class="radar-hour-val">${escapeHtml(label)}</span></div>
+                <button type="button" class="btn-radar-pool" data-pool="${escapeHtml(status.poolName)}">Pokaż terminy ➔</button>
+            </div>`;
+        }).join('');
+        container.innerHTML = `<div class="live-hero-card">
+            <div class="live-hero-top"><div class="live-title-group">
+                <span class="live-pulse-badge"><span class="pulse-dot"></span> TERAZ W HARMONOGRAMIE</span>
+                <h2>${anyOpen ? 'Wolne tory w tej chwili' : 'Brak potwierdzonych wolnych torów w tej chwili'}</h2>
+            </div><div class="live-clock-badge">${escapeHtml(clock.day)} ${clock.date}, ${String(clock.hour).padStart(2, '0')}:${String(clock.minute).padStart(2, '0')} (Gliwice)</div></div>
+            ${nextSlot ? `<div class="immediate-pick-banner"><div class="immediate-pick-content">
+                <span class="immediate-pick-tag">Najbliższy potwierdzony termin na pełną godzinę:</span>
+                <h3 class="immediate-pick-name">${escapeHtml(nextSlot.poolName)} • ${escapeHtml(nextSlot.date)} • ${escapeHtml(nextSlot.timeLabel)}</h3>
+                <p class="immediate-pick-sub">Co najmniej <strong>${nextSlot.freeLanes} wolnych torów</strong> przez całą godzinę.</p>
+                </div><div class="immediate-pick-btns"><a href="${buildGoogleCalendarUrl(nextSlot)}" target="_blank" rel="noopener noreferrer" class="btn-hero-action gcal">📅 Dodaj do kalendarza</a></div></div>`
+                : '<p>Brak potwierdzonych nadchodzących terminów. Sprawdź daty harmonogramów poniżej.</p>'}
+            <div class="radar-grid">${cards}</div></div>`;
         container.querySelectorAll('.btn-radar-pool').forEach(btn => {
             btn.addEventListener('click', () => {
-                const pool = btn.dataset.pool;
-                state.pool = pool;
+                state.pool = btn.dataset.pool;
+                state.day = 'all';
                 state.preset = null;
                 syncFilterButtons();
                 renderSuggester();
-                const panel = document.querySelector('.suggester-panel');
-                if (panel) panel.scrollIntoView({ behavior: 'smooth' });
             });
         });
     }
 
+    function renderFreshness() {
+        const banner = document.getElementById('data-freshness-banner');
+        if (!banner) return;
+        const clock = getPoolClock();
+        banner.textContent = pools.map(pool => {
+            const dates = Object.values(pool.dates || {}).map(parseScheduleDate).filter(Boolean).sort();
+            const status = !dates.length ? 'brak potwierdzonych dat'
+                : dates.at(-1) < clock.iso ? 'nieaktualny' : dates[0] > clock.iso ? 'na przyszły termin' : 'aktualny';
+            return `${pool.name}: ${pool.weekRange || 'brak dat'} (${status})`;
+        }).join(' • ');
+    }
+
     // Render Data Insights Cards
     function renderInsights() {
+        const clock = getPoolClock();
+        const insights = computeDataInsights(hourlySlots.filter(s => {
+            const date = parseScheduleDate(s.date);
+            return s.complete && date && date >= clock.iso && (date !== clock.iso || s.hour * 60 >= clock.minutes);
+        }));
         const container = document.getElementById('insights-grid');
         if (!container) return;
         container.innerHTML = `
@@ -963,8 +731,8 @@ function initApp(rawData) {
                 <div class="insight-icon">🏊‍♂️</div>
                 <div class="insight-content">
                     <span class="insight-title">Rekord wolnych torów</span>
-                    <strong class="insight-value">Olimpijczyk • 10 torów</strong>
-                    <span class="insight-desc">06:00 rano (9x50m + 1x25m wolne)</span>
+                    <strong class="insight-value">${escapeHtml(insights.peakSlot || 'Brak potwierdzonych terminów')}</strong>
+                    <span class="insight-desc">W nadchodzących potwierdzonych terminach</span>
                 </div>
             </div>
             <div class="insight-card">
@@ -987,13 +755,14 @@ function initApp(rawData) {
 
         const options = {
             day: state.day,
+            date: DAYS_ORDER.includes(state.day) ? weekDates.fullDates[state.day] : null,
             timeBucket: state.timeBucket,
             pool: state.pool,
             duration: state.duration,
             minHour: state.minHour,
             sortBy: state.sortBy,
             minOpenness: state.onlyHigh ? 0.8 : 0,
-            currentDay: todayName
+            now: new Date()
         };
 
         const rankedSlots = filterAndRankSlots(hourlySlots, options);
@@ -1044,7 +813,7 @@ function initApp(rawData) {
                 <div class="top-pick-header">
                     <div>
                         <h3 class="top-pick-pool">${escapeHtml(topPick.poolName)}</h3>
-                        <span class="pool-type-tag">${escapeHtml(topSpecs.type)} • ${escapeHtml(topSpecs.length)}</span>
+                        <span class="pool-type-tag">${escapeHtml(topSpecs.type)} • ${escapeHtml(topPick.laneLength || topSpecs.length)}</span>
                         <div class="pool-address-line">${escapeHtml(topSpecs.address)}</div>
                     </div>
                     <div class="top-pick-stats">
@@ -1099,7 +868,7 @@ function initApp(rawData) {
                     <div class="slot-card-top">
                         <span class="rank-badge">#${rank}</span>
                         <span class="slot-pool">${escapeHtml(slot.poolName)}</span>
-                        <span class="slot-type">${escapeHtml(slotSpecs.length)}</span>
+                        <span class="slot-type">${escapeHtml(slot.laneLength || slotSpecs.length)}</span>
                     </div>
                     <div class="slot-when">
                         <div class="slot-date-badge">📅 <strong>${escapeHtml(slot.date || '')}</strong> (${escapeHtml(slot.day)})</div>
@@ -1146,7 +915,8 @@ function initApp(rawData) {
         const hours = [];
         for (let h = 6; h <= maxStartHour; h++) hours.push(h);
 
-        const comparisonSlots = dur > 1 ? getMultiHourSlots(hourlySlots, dur) : hourlySlots;
+        const comparisonSlots = getMultiHourSlots(hourlySlots, dur).filter(s =>
+            s.date === weekDates.fullDates[day]);
         const poolNames = ["Olimpijczyk", "Mewa", "Delfin", "Neptun"];
 
         let rowsHtml = '';
@@ -1158,11 +928,11 @@ function initApp(rawData) {
             const cols = poolNames.map(pName => {
                 const match = comparisonSlots.find(s => s.poolName === pName && s.day === day && s.hour === h);
                 if (!match || match.openness === 0 || match.status === 'closed') {
-                    return `<td class="matrix-cell closed"><span class="matrix-badge closed">Niedostępny</span>${dur > 1 && match && match.details ? `<div class="matrix-subnote">${escapeHtml(match.details)}</div>` : ''}</td>`;
+                    return `<td class="matrix-cell closed"><span class="matrix-badge closed">${!match || match.status === 'unknown' ? 'Brak pełnych danych' : 'Brak ciągłej dostępności'}</span>${dur > 1 && match && match.details ? `<div class="matrix-subnote">${escapeHtml(match.details)}</div>` : ''}</td>`;
                 }
                 const pct = Math.round(match.openness * 100);
                 const laneText = (dur > 1 && typeof match.minFreeLanes === 'number')
-                    ? `<strong>min. ${match.minFreeLanes}</strong> torów (śr. ${match.freeLanes})`
+                    ? `<strong>min. ${match.minFreeLanes}</strong> torów (śr. ${match.averageFreeLanes ?? match.freeLanes})`
                     : `<strong>${match.freeLanes}</strong> torów wolnych`;
 
                 return `
@@ -1205,7 +975,7 @@ function initApp(rawData) {
                     <thead>
                         <tr>
                             <th>Godzina</th>
-                            <th>Olimpijczyk <span class="th-sub">50m • 10 torów</span></th>
+                            <th>Olimpijczyk <span class="th-sub">25/50m • według konfiguracji</span></th>
                             <th>Mewa <span class="th-sub">25m • 6 torów</span></th>
                             <th>Delfin <span class="th-sub">25m • 6 torów</span></th>
                             <th>Neptun <span class="th-sub">25m • 6 torów</span></th>
@@ -1243,8 +1013,8 @@ function initApp(rawData) {
         const scheduleDaySelect = document.getElementById('schedule-day-select');
         if (scheduleDaySelect && scheduleDaySelect.options.length <= 8) {
             scheduleDaySelect.innerHTML = `
-                <option value="all" ${state.scheduleDay === 'all' ? 'selected' : ''}>Wszystkie dni (${escapeHtml(weekDates.weekRange)})</option>
-                ${DAYS_ORDER.map(d => `<option value="${escapeHtml(d)}" ${d === state.scheduleDay ? 'selected' : ''}>${escapeHtml(d)} — ${escapeHtml(weekDates.fullDates[d] || '')}</option>`).join('')}
+                <option value="all" ${state.scheduleDay === 'all' ? 'selected' : ''}>Wszystkie dni źródłowych harmonogramów</option>
+                ${DAYS_ORDER.map(d => `<option value="${escapeHtml(d)}" ${d === state.scheduleDay ? 'selected' : ''}>${escapeHtml(d)}</option>`).join('')}
             `;
         }
 
@@ -1272,7 +1042,7 @@ function initApp(rawData) {
                 <div class="schedule-card-header">
                     <div>
                         <h2>${escapeHtml(pool.name)}</h2>
-                        <span class="pool-address-line">${escapeHtml(specs.address)} • ${escapeHtml(specs.length)}</span>
+                        <span class="pool-address-line">${escapeHtml(specs.address)} • ${escapeHtml(specs.length)} • ${escapeHtml(pool.weekRange || 'Daty niepotwierdzone')}</span>
                     </div>
                     <span class="count-tag">${poolSchedule.length} wpisów</span>
                 </div>
@@ -1288,10 +1058,10 @@ function initApp(rawData) {
                         </thead>
                         <tbody>
                             ${poolSchedule.map(e => {
-                                const detail = getFreeLanesDetail(pool.name, e.availableLanes);
+                                const detail = getFreeLanesDetail(pool.name, e.availableLanes, e);
                                 const statusClass = detail ? detail.status : 'low';
                                 const badgeText = detail ? detail.label : cleanCell(e.availableLanes);
-                                const dateStr = e.date || weekDates.fullDates[cleanCell(e.day)] || '';
+                                const dateStr = entryDate(pool, e);
                                 return `
                                     <tr>
                                         <td><strong>${escapeHtml(cleanCell(e.day))}</strong>${dateStr ? `<span class="cell-date">(${escapeHtml(dateStr)})</span>` : ''}</td>
@@ -1370,15 +1140,15 @@ function initApp(rawData) {
                 const p = btn.dataset.preset;
                 state.preset = p;
                 if (p === 'now') {
-                    state.day = todayName;
-                    state.minHour = activeStartHour;
+                    state.day = 'today';
+                    state.minHour = null;
                     state.timeBucket = 'all';
                 } else if (p === 'today_evening') {
-                    state.day = todayName;
+                    state.day = 'today';
                     state.minHour = 17;
                     state.timeBucket = 'evening';
                 } else if (p === 'tomorrow_morning') {
-                    state.day = tomorrowName;
+                    state.day = 'tomorrow';
                     state.minHour = null;
                     state.timeBucket = 'morning';
                 } else if (p === 'weekend') {
@@ -1399,7 +1169,7 @@ function initApp(rawData) {
         document.querySelectorAll('.filter-day-pill').forEach(btn => {
             btn.addEventListener('click', () => {
                 state.day = btn.dataset.day;
-                if (state.day !== todayName) {
+                if (state.day !== 'today') {
                     state.minHour = null;
                 }
                 state.preset = null;
@@ -1479,12 +1249,6 @@ function initApp(rawData) {
         }
     }
 
-    // Set schedule week badge and last updated badge in header
-    const weekBadge = document.getElementById('schedule-week-badge');
-    if (weekBadge && weekDates.weekRange) {
-        weekBadge.textContent = `📅 Harmonogram: ${weekDates.weekRange}`;
-    }
-
     const updateText = document.getElementById('update-badge-text');
     const lastUpdatedPl = pools[0]?.lastUpdatedPl || rawData[0]?.lastUpdatedPl;
     if (updateText) {
@@ -1504,6 +1268,8 @@ function initApp(rawData) {
 
     // PWA Install prompt and online/offline handling
     if (typeof window !== 'undefined') {
+        const offlineBanner = document.getElementById('offline-banner');
+        if (offlineBanner && typeof navigator !== 'undefined') offlineBanner.style.display = navigator.onLine ? 'none' : 'block';
         window.addEventListener('online', () => {
             const banner = document.getElementById('offline-banner');
             if (banner) banner.style.display = 'none';
@@ -1533,28 +1299,47 @@ function initApp(rawData) {
         });
     }
 
-    // Update day filter pill labels with concrete calendar dates
-    const allPill = document.querySelector('.filter-day-pill[data-day="all"]');
-    if (allPill && weekDates.shortDates["Poniedziałek"]) {
-        allPill.innerHTML = `Wszystkie dni <span class="pill-day-sub">(${weekDates.shortDates["Poniedziałek"]} – ${weekDates.shortDates["Niedziela"]})</span>`;
-    }
-    DAYS_ORDER.forEach(d => {
-        const pill = document.querySelector(`.filter-day-pill[data-day="${d}"]`);
-        if (pill) {
-            const shortDt = weekDates.shortDates[d] || '';
-            pill.innerHTML = `<strong>${shortDt}</strong> <span class="pill-day-sub">(${d})</span>`;
+    function renderDateLabels() {
+        const weekBadge = document.getElementById('schedule-week-badge');
+        if (weekBadge) weekBadge.textContent = `📅 Ten tydzień: ${weekDates.weekRange}`;
+        // Update day filter pill labels with concrete calendar dates
+        const allPill = document.querySelector('.filter-day-pill[data-day="all"]');
+        if (allPill && weekDates.shortDates["Poniedziałek"]) {
+            allPill.innerHTML = `Wszystkie nadchodzące dni`;
         }
-    });
-    const workdaysPill = document.querySelector('.filter-day-pill[data-day="workdays"]');
-    if (workdaysPill && weekDates.shortDates["Poniedziałek"]) {
-        workdaysPill.innerHTML = `Dni robocze <span class="pill-day-sub">(${weekDates.shortDates["Poniedziałek"]}–${weekDates.shortDates["Piątek"]})</span>`;
+        DAYS_ORDER.forEach(d => {
+            const pill = document.querySelector(`.filter-day-pill[data-day="${d}"]`);
+            if (pill) {
+                const shortDt = weekDates.shortDates[d] || '';
+                pill.innerHTML = `<strong>${shortDt}</strong> <span class="pill-day-sub">(${d})</span>`;
+            }
+        });
+        const workdaysPill = document.querySelector('.filter-day-pill[data-day="workdays"]');
+        if (workdaysPill && weekDates.shortDates["Poniedziałek"]) {
+            workdaysPill.innerHTML = `Dni robocze`;
+        }
+        const weekendPill = document.querySelector('.filter-day-pill[data-day="weekend"]');
+        if (weekendPill && weekDates.shortDates["Sobota"]) {
+            weekendPill.innerHTML = `Weekendy`;
+        }
+
     }
-    const weekendPill = document.querySelector('.filter-day-pill[data-day="weekend"]');
-    if (weekendPill && weekDates.shortDates["Sobota"]) {
-        weekendPill.innerHTML = `Weekend <span class="pill-day-sub">(${weekDates.shortDates["Sobota"]}–${weekDates.shortDates["Niedziela"]})</span>`;
-    }
+    renderDateLabels();
 
     renderLiveNow();
+    renderFreshness();
+    // Refresh after midnight and when a suspended mobile tab becomes visible.
+    const refresh = () => {
+        Object.assign(weekDates, getScheduleDates([], new Date()));
+        renderDateLabels();
+        renderLiveNow();
+        renderFreshness();
+        renderInsights();
+        renderSuggester();
+        if (state.activeTab === 'matrix') renderMatrix();
+    };
+    if (typeof window.setInterval === 'function') window.setInterval(refresh, 60000);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) refresh(); });
     renderInsights();
     syncFilterButtons();
     setupEventListeners();
@@ -1597,6 +1382,10 @@ if (typeof module !== 'undefined' && module.exports) {
         DAYS_ORDER,
         POOL_SPECS,
         getFreeLanesDetail,
+        getPoolClock,
+        parseScheduleDate,
+        parseTimeInterval,
+        getLiveSummary,
         getTimeBucket,
         getPolishDayName,
         getScheduleDates,

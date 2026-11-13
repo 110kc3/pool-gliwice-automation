@@ -41,8 +41,9 @@ jobs:
 
       - name: Run tests
         run: |
-          ./venv/bin/python -m pytest tests/test_master_aggregator.py
+          ./venv/bin/python -m pytest tests -q
           node tests/test_availability.mjs
+          node --test --test-reporter=dot tests/test_schedule_regressions.mjs tests/test_service_worker.mjs
 
       - name: Download latest schedules from sport.gliwice.eu
         run: ./venv/bin/python download_schedules.py
@@ -59,8 +60,9 @@ jobs:
 
       - name: Validate generated schedules
         run: |
-          ./venv/bin/python -m pytest tests/test_master_aggregator.py
+          ./venv/bin/python -m pytest tests -q
           node tests/test_availability.mjs
+          node --test --test-reporter=dot tests/test_schedule_regressions.mjs tests/test_service_worker.mjs
           node -e '
             const { validatePoolData } = require("./script.js");
             const data = require("./data.json");
