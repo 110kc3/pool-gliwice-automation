@@ -52,7 +52,7 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "dostępna",
-            "Środa": "dostępna",
+            "Środa": "niedostepny",
             "Czwartek": "dostępna",
             "Piątek": "dostępna",
             "Sobota": null,
@@ -64,7 +64,7 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "dostępna",
-            "Środa": "dostępna",
+            "Środa": "niedostepny",
             "Czwartek": "dostępna",
             "Piątek": "dostępna",
             "Sobota": null,
@@ -76,7 +76,7 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "dostępna",
-            "Środa": "dostępna",
+            "Środa": "niedostepny",
             "Czwartek": "dostępna",
             "Piątek": "dostępna",
             "Sobota": null,
@@ -88,7 +88,7 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "dostępna",
-            "Środa": "dostępna",
+            "Środa": "niedostepny",
             "Czwartek": "dostępna",
             "Piątek": "dostępna",
             "Sobota": null,
@@ -100,8 +100,8 @@
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
-            "Czwartek": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
+            "Czwartek": "dostępna",
             "Piątek": "dostępna",
             "Sobota": null,
             "Niedziela": null
@@ -112,8 +112,8 @@
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
-            "Czwartek": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
+            "Czwartek": "dostępna",
             "Piątek": "dostępna",
             "Sobota": null,
             "Niedziela": null
@@ -124,8 +124,8 @@
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
-            "Czwartek": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
+            "Czwartek": "dostępna",
             "Piątek": "dostępna",
             "Sobota": null,
             "Niedziela": null
@@ -136,8 +136,8 @@
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
-            "Czwartek": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
+            "Czwartek": "dostępna",
             "Piątek": "dostępna",
             "Sobota": null,
             "Niedziela": null
@@ -148,7 +148,7 @@
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
             "Piątek": "Nieczynne/ nauka pływania",
             "Sobota": null,
@@ -160,7 +160,7 @@
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
             "Piątek": "Nieczynne/ nauka pływania",
             "Sobota": null,
@@ -172,7 +172,7 @@
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
             "Piątek": "Nieczynne/ nauka pływania",
             "Sobota": null,
@@ -184,7 +184,7 @@
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
             "Piątek": "Nieczynne/ nauka pływania",
             "Sobota": null,
@@ -196,7 +196,7 @@
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
             "Piątek": "Nieczynne/ nauka pływania",
             "Sobota": "III Tory zajęte",
@@ -208,7 +208,7 @@
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
             "Piątek": "Nieczynne/ nauka pływania",
             "Sobota": "III Tory zajęte",
@@ -220,7 +220,7 @@
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
             "Piątek": "Nieczynne/ nauka pływania",
             "Sobota": "III Tory zajęte",
@@ -232,7 +232,7 @@
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
             "Piątek": "Nieczynne/ nauka pływania",
             "Sobota": "III Tory zajęte",
@@ -244,8 +244,8 @@
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
-            "Czwartek": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
+            "Czwartek": "dostępna",
             "Piątek": "Nieczynne/ nauka pływania",
             "Sobota": "III Tory zajęte",
             "Niedziela": "dostępna"
@@ -256,8 +256,8 @@
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
-            "Czwartek": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
+            "Czwartek": "dostępna",
             "Piątek": "Nieczynne/ nauka pływania",
             "Sobota": "III Tory zajęte",
             "Niedziela": "dostępna"
@@ -268,8 +268,8 @@
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
-            "Czwartek": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
+            "Czwartek": "dostępna",
             "Piątek": "Nieczynne/ nauka pływania",
             "Sobota": "III Tory zajęte",
             "Niedziela": "dostępna"
@@ -280,8 +280,8 @@
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
-            "Czwartek": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
+            "Czwartek": "dostępna",
             "Piątek": "Nieczynne/ nauka pływania",
             "Sobota": "III Tory zajęte",
             "Niedziela": "dostępna"
@@ -291,10 +291,10 @@
         "time": "12:00",
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
-            "Wtorek": "dostępna",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
-            "Piątek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
             "Sobota": "III Tory zajęte",
             "Niedziela": "dostępna"
         }
@@ -303,10 +303,10 @@
         "time": "12:15",
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
-            "Wtorek": "dostępna",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
-            "Piątek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
             "Sobota": "III Tory zajęte",
             "Niedziela": "dostępna"
         }
@@ -315,10 +315,10 @@
         "time": "12:30",
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
-            "Wtorek": "dostępna",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
-            "Piątek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
             "Sobota": "III Tory zajęte",
             "Niedziela": "dostępna"
         }
@@ -327,10 +327,10 @@
         "time": "12:45",
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
-            "Wtorek": "dostępna",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Wtorek": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
-            "Piątek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
             "Sobota": "III Tory zajęte",
             "Niedziela": "dostępna"
         }
@@ -339,10 +339,10 @@
         "time": "13:00",
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
-            "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Wtorek": "dostępna",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
-            "Piątek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
             "Sobota": "III Tory zajęte",
             "Niedziela": "dostępna"
         }
@@ -351,10 +351,10 @@
         "time": "13:15",
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
-            "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Wtorek": "dostępna",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
-            "Piątek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
             "Sobota": "III Tory zajęte",
             "Niedziela": "dostępna"
         }
@@ -363,10 +363,10 @@
         "time": "13:30",
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
-            "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Wtorek": "dostępna",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
-            "Piątek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
             "Sobota": "III Tory zajęte",
             "Niedziela": "dostępna"
         }
@@ -375,10 +375,10 @@
         "time": "13:45",
         "days": {
             "Poniedziałek": "Nieczynne/ nauka pływania",
-            "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Wtorek": "dostępna",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
-            "Piątek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
             "Sobota": "III Tory zajęte",
             "Niedziela": "dostępna"
         }
@@ -388,9 +388,9 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
-            "Piątek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
             "Sobota": "III Tory zajęte",
             "Niedziela": "dostępna"
         }
@@ -400,9 +400,9 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
-            "Piątek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
             "Sobota": "III Tory zajęte",
             "Niedziela": "dostępna"
         }
@@ -412,9 +412,9 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
-            "Piątek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
             "Sobota": "III Tory zajęte",
             "Niedziela": "dostępna"
         }
@@ -424,9 +424,9 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "Nieczynne/ nauka pływania",
-            "Środa": "Nieczynne/ nauka pływania",
+            "Środa": "niedostepny",
             "Czwartek": "Nieczynne/ nauka pływania",
-            "Piątek": "Nieczynne/ nauka pływania",
+            "Piątek": "dostępna",
             "Sobota": "III Tory zajęte",
             "Niedziela": "dostępna"
         }
@@ -436,7 +436,7 @@
         "days": {
             "Poniedziałek": "I Tor zajęty",
             "Wtorek": "I Tor zajęty",
-            "Środa": "I Tor zajęty",
+            "Środa": "niedostepny",
             "Czwartek": "I Tor zajęty",
             "Piątek": "I Tor zajęty",
             "Sobota": "III Tory zajęte",
@@ -448,7 +448,7 @@
         "days": {
             "Poniedziałek": "I Tor zajęty",
             "Wtorek": "I Tor zajęty",
-            "Środa": "I Tor zajęty",
+            "Środa": "niedostepny",
             "Czwartek": "I Tor zajęty",
             "Piątek": "I Tor zajęty",
             "Sobota": "dostępna",
@@ -460,7 +460,7 @@
         "days": {
             "Poniedziałek": "I Tor zajęty",
             "Wtorek": "I Tor zajęty",
-            "Środa": "I Tor zajęty",
+            "Środa": "niedostepny",
             "Czwartek": "I Tor zajęty",
             "Piątek": "I Tor zajęty",
             "Sobota": "dostępna",
@@ -472,7 +472,7 @@
         "days": {
             "Poniedziałek": "I Tor zajęty",
             "Wtorek": "I Tor zajęty",
-            "Środa": "I Tor zajęty",
+            "Środa": "niedostepny",
             "Czwartek": "I Tor zajęty",
             "Piątek": "I Tor zajęty",
             "Sobota": "dostępna",
@@ -484,7 +484,7 @@
         "days": {
             "Poniedziałek": "I Tor zajęty",
             "Wtorek": "II Tory zajęte",
-            "Środa": "III Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "III Tory zajęte",
             "Piątek": "III Tory zajęte",
             "Sobota": "dostępna",
@@ -496,7 +496,7 @@
         "days": {
             "Poniedziałek": "I Tor zajęty",
             "Wtorek": "II Tory zajęte",
-            "Środa": "III Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "III Tory zajęte",
             "Piątek": "III Tory zajęte",
             "Sobota": "dostępna",
@@ -508,7 +508,7 @@
         "days": {
             "Poniedziałek": "I Tor zajęty",
             "Wtorek": "II Tory zajęte",
-            "Środa": "III Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "III Tory zajęte",
             "Piątek": "III Tory zajęte",
             "Sobota": "dostępna",
@@ -520,7 +520,7 @@
         "days": {
             "Poniedziałek": "I Tor zajęty",
             "Wtorek": "II Tory zajęte",
-            "Środa": "III Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "III Tory zajęte",
             "Piątek": "III Tory zajęte",
             "Sobota": "dostępna",
@@ -532,7 +532,7 @@
         "days": {
             "Poniedziałek": "II Tory zajęte",
             "Wtorek": "II Tory zajęte",
-            "Środa": "II Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "II Tory zajęte",
             "Piątek": "II Tory zajęte",
             "Sobota": "dostępna",
@@ -544,7 +544,7 @@
         "days": {
             "Poniedziałek": "II Tory zajęte",
             "Wtorek": "II Tory zajęte",
-            "Środa": "II Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "II Tory zajęte",
             "Piątek": "II Tory zajęte",
             "Sobota": "dostępna",
@@ -556,7 +556,7 @@
         "days": {
             "Poniedziałek": "II Tory zajęte",
             "Wtorek": "II Tory zajęte",
-            "Środa": "II Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "II Tory zajęte",
             "Piątek": "II Tory zajęte",
             "Sobota": "dostępna",
@@ -568,7 +568,7 @@
         "days": {
             "Poniedziałek": "II Tory zajęte",
             "Wtorek": "II Tory zajęte",
-            "Środa": "II Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "II Tory zajęte",
             "Piątek": "II Tory zajęte",
             "Sobota": "dostępna",
@@ -580,7 +580,7 @@
         "days": {
             "Poniedziałek": "II Tory zajęte",
             "Wtorek": "II Tory zajęte",
-            "Środa": "II Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "II Tory zajęte",
             "Piątek": "II Tory zajęte",
             "Sobota": "dostępna",
@@ -592,7 +592,7 @@
         "days": {
             "Poniedziałek": "II Tory zajęte",
             "Wtorek": "II Tory zajęte",
-            "Środa": "II Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "II Tory zajęte",
             "Piątek": "II Tory zajęte",
             "Sobota": "dostępna",
@@ -604,7 +604,7 @@
         "days": {
             "Poniedziałek": "III Tory zajęte",
             "Wtorek": "II Tory zajęte",
-            "Środa": "II Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "II Tory zajęte",
             "Piątek": "II Tory zajęte",
             "Sobota": "dostępna",
@@ -616,7 +616,7 @@
         "days": {
             "Poniedziałek": "III Tory zajęte",
             "Wtorek": "II Tory zajęte",
-            "Środa": "II Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "II Tory zajęte",
             "Piątek": "II Tory zajęte",
             "Sobota": "dostępna",
@@ -628,7 +628,7 @@
         "days": {
             "Poniedziałek": "II Tory zajęte",
             "Wtorek": "III Tory zajęte",
-            "Środa": "III Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "III Tory zajęte",
             "Piątek": "III Tory zajęte",
             "Sobota": "dostępna",
@@ -640,7 +640,7 @@
         "days": {
             "Poniedziałek": "II Tory zajęte",
             "Wtorek": "III Tory zajęte",
-            "Środa": "III Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "III Tory zajęte",
             "Piątek": "III Tory zajęte",
             "Sobota": "dostępna",
@@ -652,7 +652,7 @@
         "days": {
             "Poniedziałek": "II Tory zajęte",
             "Wtorek": "III Tory zajęte",
-            "Środa": "III Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "III Tory zajęte",
             "Piątek": "III Tory zajęte",
             "Sobota": "dostępna",
@@ -664,7 +664,7 @@
         "days": {
             "Poniedziałek": "II Tory zajęte",
             "Wtorek": "III Tory zajęte",
-            "Środa": "III Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "III Tory zajęte",
             "Piątek": "III Tory zajęte",
             "Sobota": "dostępna",
@@ -676,7 +676,7 @@
         "days": {
             "Poniedziałek": "III Tory zajęte",
             "Wtorek": "III Tory zajęte",
-            "Środa": "III Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "III Tory zajęte",
             "Piątek": "I Tor zajęty",
             "Sobota": "dostępna",
@@ -688,7 +688,7 @@
         "days": {
             "Poniedziałek": "III Tory zajęte",
             "Wtorek": "III Tory zajęte",
-            "Środa": "III Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "III Tory zajęte",
             "Piątek": "I Tor zajęty",
             "Sobota": "dostępna",
@@ -700,7 +700,7 @@
         "days": {
             "Poniedziałek": "III Tory zajęte",
             "Wtorek": "III Tory zajęte",
-            "Środa": "III Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "III Tory zajęte",
             "Piątek": "I Tor zajęty",
             "Sobota": "dostępna",
@@ -712,7 +712,7 @@
         "days": {
             "Poniedziałek": "III Tory zajęte",
             "Wtorek": "III Tory zajęte",
-            "Środa": "III Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "III Tory zajęte",
             "Piątek": "I Tor zajęty",
             "Sobota": "dostępna",
@@ -724,7 +724,7 @@
         "days": {
             "Poniedziałek": "III Tory zajęte",
             "Wtorek": "III Tory zajęte",
-            "Środa": "III Tory zajęte",
+            "Środa": "niedostepny",
             "Czwartek": "III Tory zajęte",
             "Piątek": "I Tor zajęty",
             "Sobota": "dostępna",
@@ -736,7 +736,7 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "dostępna",
-            "Środa": "dostępna",
+            "Środa": "niedostepny",
             "Czwartek": "dostępna",
             "Piątek": "dostępna",
             "Sobota": "dostępna",
@@ -748,7 +748,7 @@
         "days": {
             "Poniedziałek": "dostępna",
             "Wtorek": "dostępna",
-            "Środa": "dostępna",
+            "Środa": "niedostepny",
             "Czwartek": "dostępna",
             "Piątek": "dostępna",
             "Sobota": "dostępna",
