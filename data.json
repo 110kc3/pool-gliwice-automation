@@ -2365,8 +2365,8 @@
             "Sobota": "14.11.2026",
             "Niedziela": "15.11.2026"
         },
-        "lastUpdated": "2026-11-13T09:13:17.320531+00:00",
-        "lastUpdatedPl": "13.11.2026, 10:13",
+        "lastUpdated": "2026-11-14T08:42:42.632407+00:00",
+        "lastUpdatedPl": "14.11.2026, 09:42",
         "sourcePdf": "mewa.pdf"
     },
     {
@@ -4757,8 +4757,8 @@
             "Sobota": "14.11.2026",
             "Niedziela": "15.11.2026"
         },
-        "lastUpdated": "2026-11-13T09:13:17.320531+00:00",
-        "lastUpdatedPl": "13.11.2026, 10:13",
+        "lastUpdated": "2026-11-14T08:42:42.632407+00:00",
+        "lastUpdatedPl": "14.11.2026, 09:42",
         "sourcePdf": "delfin.pdf"
     },
     {
@@ -4768,202 +4768,191 @@
                 "day": "Poniedziałek",
                 "time": "06:00",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "06:00",
-                "availableLanes": "0",
+                "availableLanes": "8x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Środa",
                 "time": "06:00",
-                "availableLanes": "9x50m, 1x25m i wypł",
+                "availableLanes": "Pływalnia czynna od 8:00",
+                "date": "11.11.2026",
                 "totalLanes": 10,
-                "laneLength": "25m / 50m"
+                "laneLength": "50m"
             },
             {
                 "day": "Czwartek",
                 "time": "06:00",
                 "availableLanes": "7x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Piątek",
                 "time": "06:00",
-                "availableLanes": "8x50m, 1x25m i wypł",
-                "totalLanes": 10,
-                "laneLength": "25m / 50m"
+                "availableLanes": "17x25m i wypł",
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "06:00",
                 "availableLanes": "Pływalnia czynna od 8:00",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "06:15",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "06:15",
-                "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
-            },
-            {
-                "day": "Środa",
-                "time": "06:15",
-                "availableLanes": "9x50m, 1x25m i wypł",
+                "availableLanes": "8x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
-                "day": "Czwartek",
+                "day": "Środa",
                 "time": "06:15",
                 "availableLanes": "7x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
-                "day": "Piątek",
+                "day": "Czwartek",
                 "time": "06:15",
-                "availableLanes": "8x50m, 1x25m i wypł",
+                "availableLanes": "17x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
-                "laneLength": "25m / 50m"
+                "laneLength": "50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "06:30",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "06:30",
-                "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
-            },
-            {
-                "day": "Środa",
-                "time": "06:30",
-                "availableLanes": "9x50m, 1x25m i wypł",
+                "availableLanes": "8x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
-                "day": "Czwartek",
+                "day": "Środa",
                 "time": "06:30",
                 "availableLanes": "7x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
-                "day": "Piątek",
+                "day": "Czwartek",
                 "time": "06:30",
-                "availableLanes": "8x50m, 1x25m i wypł",
+                "availableLanes": "17x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
-                "laneLength": "25m / 50m"
+                "laneLength": "50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "06:45",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "06:45",
-                "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
-            },
-            {
-                "day": "Środa",
-                "time": "06:45",
-                "availableLanes": "9x50m, 1x25m i wypł",
+                "availableLanes": "8x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
-                "day": "Czwartek",
+                "day": "Środa",
                 "time": "06:45",
                 "availableLanes": "7x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
-                "day": "Piątek",
+                "day": "Czwartek",
                 "time": "06:45",
-                "availableLanes": "8x50m, 1x25m i wypł",
+                "availableLanes": "17x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
-                "laneLength": "25m / 50m"
+                "laneLength": "50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "07:00",
                 "availableLanes": "4x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "07:00",
-                "availableLanes": "0",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Środa",
                 "time": "07:00",
                 "availableLanes": "4x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "07:00",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "9x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
-                "laneLength": "25m / 50m"
-            },
-            {
-                "day": "Piątek",
-                "time": "07:00",
-                "availableLanes": "4x50m, 1x25m i wypł",
-                "totalLanes": 10,
-                "laneLength": "25m / 50m"
+                "laneLength": "50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "07:15",
                 "availableLanes": "4x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "07:15",
-                "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
-            },
-            {
-                "day": "Środa",
-                "time": "07:15",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -4971,34 +4960,31 @@
                 "day": "Czwartek",
                 "time": "07:15",
                 "availableLanes": "4x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Piątek",
                 "time": "07:15",
-                "availableLanes": "4x50m, 1x25m i wypł",
-                "totalLanes": 10,
-                "laneLength": "25m / 50m"
+                "availableLanes": "9x25m i wypł",
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "07:30",
                 "availableLanes": "4x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "07:30",
-                "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
-            },
-            {
-                "day": "Środa",
-                "time": "07:30",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5006,34 +4992,31 @@
                 "day": "Czwartek",
                 "time": "07:30",
                 "availableLanes": "4x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Piątek",
                 "time": "07:30",
-                "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "availableLanes": "9x25m i wypł",
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "07:45",
                 "availableLanes": "4x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "07:45",
-                "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
-            },
-            {
-                "day": "Środa",
-                "time": "07:45",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5041,34 +5024,39 @@
                 "day": "Czwartek",
                 "time": "07:45",
                 "availableLanes": "4x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Piątek",
                 "time": "07:45",
-                "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "availableLanes": "9x25m i wypł",
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "08:00",
                 "availableLanes": "4x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "08:00",
-                "availableLanes": "0",
+                "availableLanes": "4x50m",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "08:00",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5076,6 +5064,7 @@
                 "day": "Czwartek",
                 "time": "08:00",
                 "availableLanes": "4x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5083,41 +5072,47 @@
                 "day": "Piątek",
                 "time": "08:00",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "08:00",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "08:00",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "08:15",
                 "availableLanes": "4x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "08:15",
-                "availableLanes": "0",
+                "availableLanes": "4x50m",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "08:15",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5125,6 +5120,7 @@
                 "day": "Czwartek",
                 "time": "08:15",
                 "availableLanes": "4x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5132,41 +5128,47 @@
                 "day": "Piątek",
                 "time": "08:15",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "08:15",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "08:15",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "08:30",
                 "availableLanes": "4x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "08:30",
-                "availableLanes": "0",
+                "availableLanes": "4x50m",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "08:30",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5174,6 +5176,7 @@
                 "day": "Czwartek",
                 "time": "08:30",
                 "availableLanes": "4x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5181,41 +5184,47 @@
                 "day": "Piątek",
                 "time": "08:30",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "08:30",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "08:30",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "08:45",
                 "availableLanes": "4x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "08:45",
-                "availableLanes": "0",
+                "availableLanes": "4x50m",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "08:45",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5223,6 +5232,7 @@
                 "day": "Czwartek",
                 "time": "08:45",
                 "availableLanes": "4x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5230,48 +5240,55 @@
                 "day": "Piątek",
                 "time": "08:45",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "08:45",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "08:45",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "09:00",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "09:00",
-                "availableLanes": "0",
+                "availableLanes": "4x50m",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "09:00",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "09:00",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5279,48 +5296,55 @@
                 "day": "Piątek",
                 "time": "09:00",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "09:00",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "09:00",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "09:15",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "09:15",
-                "availableLanes": "0",
+                "availableLanes": "4x50m",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "09:15",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "09:15",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5328,48 +5352,55 @@
                 "day": "Piątek",
                 "time": "09:15",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "09:15",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "09:15",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "09:30",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "09:30",
-                "availableLanes": "0",
+                "availableLanes": "4x50m",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "09:30",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "09:30",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5377,48 +5408,55 @@
                 "day": "Piątek",
                 "time": "09:30",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "09:30",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "09:30",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "09:45",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "09:45",
-                "availableLanes": "0",
+                "availableLanes": "4x50m",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "09:45",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "09:45",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5426,41 +5464,47 @@
                 "day": "Piątek",
                 "time": "09:45",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "09:45",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "09:45",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "10:00",
-                "availableLanes": "2x50m, 1x25m",
+                "availableLanes": "1x50m, 1x25m",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "10:00",
-                "availableLanes": "0",
+                "availableLanes": "1x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Środa",
                 "time": "10:00",
-                "availableLanes": "2x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5468,6 +5512,7 @@
                 "day": "Czwartek",
                 "time": "10:00",
                 "availableLanes": "1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
@@ -5475,41 +5520,47 @@
                 "day": "Piątek",
                 "time": "10:00",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "10:00",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "10:00",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "10:15",
-                "availableLanes": "2x50m, 1x25m",
+                "availableLanes": "1x50m, 1x25m",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "10:15",
-                "availableLanes": "0",
+                "availableLanes": "1x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Środa",
                 "time": "10:15",
-                "availableLanes": "2x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5517,6 +5568,7 @@
                 "day": "Czwartek",
                 "time": "10:15",
                 "availableLanes": "1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
@@ -5524,41 +5576,47 @@
                 "day": "Piątek",
                 "time": "10:15",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "10:15",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "10:15",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "10:30",
-                "availableLanes": "2x50m, 1x25m",
+                "availableLanes": "1x50m, 1x25m",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "10:30",
-                "availableLanes": "0",
+                "availableLanes": "1x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Środa",
                 "time": "10:30",
-                "availableLanes": "2x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5566,6 +5624,7 @@
                 "day": "Czwartek",
                 "time": "10:30",
                 "availableLanes": "1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
@@ -5573,41 +5632,47 @@
                 "day": "Piątek",
                 "time": "10:30",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "10:30",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "10:30",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "10:45",
-                "availableLanes": "2x50m, 1x25m",
+                "availableLanes": "1x50m, 1x25m",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "10:45",
-                "availableLanes": "0",
+                "availableLanes": "1x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Środa",
                 "time": "10:45",
-                "availableLanes": "2x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5615,6 +5680,7 @@
                 "day": "Czwartek",
                 "time": "10:45",
                 "availableLanes": "1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
@@ -5622,27 +5688,31 @@
                 "day": "Piątek",
                 "time": "10:45",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "10:45",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "10:45",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "11:00",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5650,13 +5720,15 @@
                 "day": "Wtorek",
                 "time": "11:00",
                 "availableLanes": "4x50m",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "11:00",
-                "availableLanes": "5x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5664,6 +5736,7 @@
                 "day": "Czwartek",
                 "time": "11:00",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5671,27 +5744,31 @@
                 "day": "Piątek",
                 "time": "11:00",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "11:00",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "11:00",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "11:15",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5699,13 +5776,15 @@
                 "day": "Wtorek",
                 "time": "11:15",
                 "availableLanes": "4x50m",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "11:15",
-                "availableLanes": "5x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5713,6 +5792,7 @@
                 "day": "Czwartek",
                 "time": "11:15",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5720,27 +5800,31 @@
                 "day": "Piątek",
                 "time": "11:15",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "11:15",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "11:15",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "11:30",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5748,13 +5832,15 @@
                 "day": "Wtorek",
                 "time": "11:30",
                 "availableLanes": "4x50m",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "11:30",
-                "availableLanes": "5x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5762,6 +5848,7 @@
                 "day": "Czwartek",
                 "time": "11:30",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5769,27 +5856,31 @@
                 "day": "Piątek",
                 "time": "11:30",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "11:30",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "11:30",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "11:45",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5797,13 +5888,15 @@
                 "day": "Wtorek",
                 "time": "11:45",
                 "availableLanes": "4x50m",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "11:45",
-                "availableLanes": "5x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5811,6 +5904,7 @@
                 "day": "Czwartek",
                 "time": "11:45",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5818,27 +5912,31 @@
                 "day": "Piątek",
                 "time": "11:45",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "11:45",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "11:45",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "12:00",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5846,6 +5944,7 @@
                 "day": "Wtorek",
                 "time": "12:00",
                 "availableLanes": "8x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5853,6 +5952,7 @@
                 "day": "Środa",
                 "time": "12:00",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5860,6 +5960,7 @@
                 "day": "Czwartek",
                 "time": "12:00",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5867,27 +5968,31 @@
                 "day": "Piątek",
                 "time": "12:00",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "12:00",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "12:00",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "12:15",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5895,6 +6000,7 @@
                 "day": "Wtorek",
                 "time": "12:15",
                 "availableLanes": "8x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5902,6 +6008,7 @@
                 "day": "Środa",
                 "time": "12:15",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5909,6 +6016,7 @@
                 "day": "Czwartek",
                 "time": "12:15",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5916,27 +6024,31 @@
                 "day": "Piątek",
                 "time": "12:15",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "12:15",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "12:15",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "12:30",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5944,6 +6056,7 @@
                 "day": "Wtorek",
                 "time": "12:30",
                 "availableLanes": "8x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5951,6 +6064,7 @@
                 "day": "Środa",
                 "time": "12:30",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5958,6 +6072,7 @@
                 "day": "Czwartek",
                 "time": "12:30",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5965,27 +6080,31 @@
                 "day": "Piątek",
                 "time": "12:30",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "12:30",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "12:30",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "12:45",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -5993,6 +6112,7 @@
                 "day": "Wtorek",
                 "time": "12:45",
                 "availableLanes": "8x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6000,6 +6120,7 @@
                 "day": "Środa",
                 "time": "12:45",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6007,6 +6128,7 @@
                 "day": "Czwartek",
                 "time": "12:45",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6014,27 +6136,31 @@
                 "day": "Piątek",
                 "time": "12:45",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "12:45",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "12:45",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "13:00",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6042,13 +6168,15 @@
                 "day": "Wtorek",
                 "time": "13:00",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Środa",
                 "time": "13:00",
-                "availableLanes": "3x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6056,6 +6184,7 @@
                 "day": "Czwartek",
                 "time": "13:00",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6063,48 +6192,55 @@
                 "day": "Piątek",
                 "time": "13:00",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "13:00",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "13:00",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "13:15",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
-                "time": "13:15",
-                "availableLanes": "5x50m, 1x25m i wypł",
-                "totalLanes": 10,
-                "laneLength": "25m / 50m"
-            },
-            {
-                "day": "Środa",
-                "time": "13:15",
-                "availableLanes": "3x50m, 1x25m i wypł",
-                "totalLanes": 10,
-                "laneLength": "25m / 50m"
-            },
-            {
-                "day": "Czwartek",
                 "time": "13:15",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "10.11.2026",
+                "totalLanes": 10,
+                "laneLength": "25m / 50m"
+            },
+            {
+                "day": "Środa",
+                "time": "13:15",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
+                "totalLanes": 10,
+                "laneLength": "25m / 50m"
+            },
+            {
+                "day": "Czwartek",
+                "time": "13:15",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6112,48 +6248,55 @@
                 "day": "Piątek",
                 "time": "13:15",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "13:15",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "13:15",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "13:30",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
-                "time": "13:30",
-                "availableLanes": "5x50m, 1x25m i wypł",
-                "totalLanes": 10,
-                "laneLength": "25m / 50m"
-            },
-            {
-                "day": "Środa",
-                "time": "13:30",
-                "availableLanes": "3x50m, 1x25m i wypł",
-                "totalLanes": 10,
-                "laneLength": "25m / 50m"
-            },
-            {
-                "day": "Czwartek",
                 "time": "13:30",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "10.11.2026",
+                "totalLanes": 10,
+                "laneLength": "25m / 50m"
+            },
+            {
+                "day": "Środa",
+                "time": "13:30",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
+                "totalLanes": 10,
+                "laneLength": "25m / 50m"
+            },
+            {
+                "day": "Czwartek",
+                "time": "13:30",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6161,27 +6304,31 @@
                 "day": "Piątek",
                 "time": "13:30",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "13:30",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "13:30",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "13:45",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6189,13 +6336,15 @@
                 "day": "Wtorek",
                 "time": "13:45",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Środa",
                 "time": "13:45",
-                "availableLanes": "3x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6203,6 +6352,7 @@
                 "day": "Czwartek",
                 "time": "13:45",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6210,27 +6360,31 @@
                 "day": "Piątek",
                 "time": "13:45",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "13:45",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "13:45",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "14:00",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6238,13 +6392,15 @@
                 "day": "Wtorek",
                 "time": "14:00",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Środa",
                 "time": "14:00",
-                "availableLanes": "3x50m, 1x25m",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6252,6 +6408,7 @@
                 "day": "Czwartek",
                 "time": "14:00",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6259,27 +6416,31 @@
                 "day": "Piątek",
                 "time": "14:00",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "14:00",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "14:00",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "14:15",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6287,13 +6448,15 @@
                 "day": "Wtorek",
                 "time": "14:15",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Środa",
                 "time": "14:15",
-                "availableLanes": "3x50m, 1x25m",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6301,6 +6464,7 @@
                 "day": "Czwartek",
                 "time": "14:15",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6308,48 +6472,55 @@
                 "day": "Piątek",
                 "time": "14:15",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "14:15",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "14:15",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "14:30",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "2x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "14:30",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
-                "laneLength": "25m / 50m"
+                "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "14:30",
-                "availableLanes": "3x50m, 1x25m",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "14:30",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "2x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6357,48 +6528,55 @@
                 "day": "Piątek",
                 "time": "14:30",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "14:30",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "14:30",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "14:45",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "2x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "14:45",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
-                "laneLength": "25m / 50m"
+                "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "14:45",
-                "availableLanes": "3x50m, 1x25m",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "14:45",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "2x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6406,48 +6584,55 @@
                 "day": "Piątek",
                 "time": "14:45",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "14:45",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "14:45",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "15:00",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "2x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "15:00",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
-                "laneLength": "25m / 50m"
+                "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "15:00",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "15:00",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "2x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6455,48 +6640,55 @@
                 "day": "Piątek",
                 "time": "15:00",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "15:00",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "15:00",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "15:15",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "2x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "15:15",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
-                "laneLength": "25m / 50m"
+                "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "15:15",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "15:15",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "2x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6504,48 +6696,55 @@
                 "day": "Piątek",
                 "time": "15:15",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "15:15",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "15:15",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "15:30",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "2x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "15:30",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
-                "laneLength": "25m / 50m"
+                "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "15:30",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "15:30",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "2x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6553,48 +6752,55 @@
                 "day": "Piątek",
                 "time": "15:30",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "15:30",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "15:30",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "15:45",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "2x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Wtorek",
                 "time": "15:45",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
-                "laneLength": "25m / 50m"
+                "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "15:45",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "15:45",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "2x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6602,27 +6808,31 @@
                 "day": "Piątek",
                 "time": "15:45",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "15:45",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "14.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Niedziela",
                 "time": "15:45",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "16:00",
                 "availableLanes": "6x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6630,13 +6840,15 @@
                 "day": "Wtorek",
                 "time": "16:00",
                 "availableLanes": "4x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Środa",
                 "time": "16:00",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6644,6 +6856,7 @@
                 "day": "Czwartek",
                 "time": "16:00",
                 "availableLanes": "6x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6651,27 +6864,31 @@
                 "day": "Piątek",
                 "time": "16:00",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "16:00",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "16:00",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "16:15",
                 "availableLanes": "2x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6679,13 +6896,15 @@
                 "day": "Wtorek",
                 "time": "16:15",
                 "availableLanes": "4x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Środa",
                 "time": "16:15",
-                "availableLanes": "2x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6693,6 +6912,7 @@
                 "day": "Czwartek",
                 "time": "16:15",
                 "availableLanes": "2x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6700,27 +6920,31 @@
                 "day": "Piątek",
                 "time": "16:15",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "16:15",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "16:15",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "16:30",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6728,13 +6952,15 @@
                 "day": "Wtorek",
                 "time": "16:30",
                 "availableLanes": "6x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Środa",
                 "time": "16:30",
-                "availableLanes": "5x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6742,6 +6968,7 @@
                 "day": "Czwartek",
                 "time": "16:30",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6749,27 +6976,31 @@
                 "day": "Piątek",
                 "time": "16:30",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "16:30",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "16:30",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "16:45",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6777,13 +7008,15 @@
                 "day": "Wtorek",
                 "time": "16:45",
                 "availableLanes": "6x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Środa",
                 "time": "16:45",
-                "availableLanes": "5x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6791,6 +7024,7 @@
                 "day": "Czwartek",
                 "time": "16:45",
                 "availableLanes": "5x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -6798,27 +7032,31 @@
                 "day": "Piątek",
                 "time": "16:45",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "16:45",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "16:45",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "17:00",
                 "availableLanes": "2x50m",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
@@ -6826,20 +7064,23 @@
                 "day": "Wtorek",
                 "time": "17:00",
                 "availableLanes": "3x50m",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "17:00",
-                "availableLanes": "4x50m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "17:00",
                 "availableLanes": "3x50m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
@@ -6847,27 +7088,31 @@
                 "day": "Piątek",
                 "time": "17:00",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "17:00",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "17:00",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "17:15",
                 "availableLanes": "2x50m",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
@@ -6875,20 +7120,23 @@
                 "day": "Wtorek",
                 "time": "17:15",
                 "availableLanes": "3x50m",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "17:15",
-                "availableLanes": "4x50m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "17:15",
                 "availableLanes": "3x50m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
@@ -6896,27 +7144,31 @@
                 "day": "Piątek",
                 "time": "17:15",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "17:15",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "17:15",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "17:30",
                 "availableLanes": "3x50m",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
@@ -6924,20 +7176,23 @@
                 "day": "Wtorek",
                 "time": "17:30",
                 "availableLanes": "3x50m",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "17:30",
-                "availableLanes": "8x50m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "17:30",
                 "availableLanes": "6x50m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
@@ -6945,27 +7200,31 @@
                 "day": "Piątek",
                 "time": "17:30",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "17:30",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "17:30",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "17:45",
                 "availableLanes": "3x50m",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
@@ -6973,20 +7232,23 @@
                 "day": "Wtorek",
                 "time": "17:45",
                 "availableLanes": "3x50m",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "17:45",
-                "availableLanes": "8x50m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "17:45",
                 "availableLanes": "6x50m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
@@ -6994,27 +7256,31 @@
                 "day": "Piątek",
                 "time": "17:45",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "17:45",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "17:45",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "18:00",
                 "availableLanes": "4x50m",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
@@ -7022,20 +7288,23 @@
                 "day": "Wtorek",
                 "time": "18:00",
                 "availableLanes": "6x50m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "18:00",
-                "availableLanes": "4x50m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "18:00",
                 "availableLanes": "8x50m, 1x25m",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7043,27 +7312,31 @@
                 "day": "Piątek",
                 "time": "18:00",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "18:00",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "18:00",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "18:15",
                 "availableLanes": "4x50m",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
@@ -7071,20 +7344,23 @@
                 "day": "Wtorek",
                 "time": "18:15",
                 "availableLanes": "6x50m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "18:15",
-                "availableLanes": "4x50m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "18:15",
                 "availableLanes": "8x50m, 1x25m",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7092,27 +7368,31 @@
                 "day": "Piątek",
                 "time": "18:15",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "18:15",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "18:15",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "18:30",
                 "availableLanes": "4x50m",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
@@ -7120,20 +7400,23 @@
                 "day": "Wtorek",
                 "time": "18:30",
                 "availableLanes": "6x50m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "18:30",
-                "availableLanes": "4x50m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "18:30",
                 "availableLanes": "8x50m, 1x25m",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7141,27 +7424,31 @@
                 "day": "Piątek",
                 "time": "18:30",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "18:30",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "18:30",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "18:45",
                 "availableLanes": "4x50m",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
@@ -7169,20 +7456,23 @@
                 "day": "Wtorek",
                 "time": "18:45",
                 "availableLanes": "6x50m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "18:45",
-                "availableLanes": "4x50m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "18:45",
                 "availableLanes": "8x50m, 1x25m",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7190,27 +7480,31 @@
                 "day": "Piątek",
                 "time": "18:45",
                 "availableLanes": "0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "18:45",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "18:45",
-                "availableLanes": "0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "19:00",
                 "availableLanes": "3x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7218,20 +7512,23 @@
                 "day": "Wtorek",
                 "time": "19:00",
                 "availableLanes": "9x50m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "19:00",
-                "availableLanes": "3x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "19:00",
-                "availableLanes": "2x50m, 1x25m i wypł",
+                "availableLanes": "7x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7239,27 +7536,31 @@
                 "day": "Piątek",
                 "time": "19:00",
                 "availableLanes": "0.0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "19:00",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "19:00",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "19:15",
                 "availableLanes": "3x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7267,20 +7568,23 @@
                 "day": "Wtorek",
                 "time": "19:15",
                 "availableLanes": "9x50m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "19:15",
-                "availableLanes": "3x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "19:15",
-                "availableLanes": "2x50m, 1x25m i wypł",
+                "availableLanes": "7x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7288,27 +7592,31 @@
                 "day": "Piątek",
                 "time": "19:15",
                 "availableLanes": "0.0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "19:15",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "19:15",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "19:30",
                 "availableLanes": "3x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7316,20 +7624,23 @@
                 "day": "Wtorek",
                 "time": "19:30",
                 "availableLanes": "9x50m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "19:30",
-                "availableLanes": "3x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "19:30",
-                "availableLanes": "2x50m, 1x25m i wypł",
+                "availableLanes": "7x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7337,27 +7648,31 @@
                 "day": "Piątek",
                 "time": "19:30",
                 "availableLanes": "0.0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "19:30",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "19:30",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "19:45",
                 "availableLanes": "3x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7365,20 +7680,23 @@
                 "day": "Wtorek",
                 "time": "19:45",
                 "availableLanes": "9x50m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
             {
                 "day": "Środa",
                 "time": "19:45",
-                "availableLanes": "3x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "19:45",
-                "availableLanes": "2x50m, 1x25m i wypł",
+                "availableLanes": "7x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7386,48 +7704,55 @@
                 "day": "Piątek",
                 "time": "19:45",
                 "availableLanes": "0.0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "19:45",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "19:45",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
-                "time": "20:00",
-                "availableLanes": "5x50m, 1x25m i wypł",
-                "totalLanes": 10,
-                "laneLength": "25m / 50m"
-            },
-            {
-                "day": "Wtorek",
-                "time": "20:00",
-                "availableLanes": "9x50m, 1x25m i wypł",
-                "totalLanes": 10,
-                "laneLength": "25m / 50m"
-            },
-            {
-                "day": "Środa",
                 "time": "20:00",
                 "availableLanes": "8x50m, 1x25m i wypł",
+                "date": "09.11.2026",
+                "totalLanes": 10,
+                "laneLength": "25m / 50m"
+            },
+            {
+                "day": "Wtorek",
+                "time": "20:00",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "10.11.2026",
+                "totalLanes": 10,
+                "laneLength": "25m / 50m"
+            },
+            {
+                "day": "Środa",
+                "time": "20:00",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "20:00",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7435,48 +7760,55 @@
                 "day": "Piątek",
                 "time": "20:00",
                 "availableLanes": "0.0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "20:00",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "20:00",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
-                "time": "20:15",
-                "availableLanes": "5x50m, 1x25m i wypł",
-                "totalLanes": 10,
-                "laneLength": "25m / 50m"
-            },
-            {
-                "day": "Wtorek",
-                "time": "20:15",
-                "availableLanes": "9x50m, 1x25m i wypł",
-                "totalLanes": 10,
-                "laneLength": "25m / 50m"
-            },
-            {
-                "day": "Środa",
                 "time": "20:15",
                 "availableLanes": "8x50m, 1x25m i wypł",
+                "date": "09.11.2026",
+                "totalLanes": 10,
+                "laneLength": "25m / 50m"
+            },
+            {
+                "day": "Wtorek",
+                "time": "20:15",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "10.11.2026",
+                "totalLanes": 10,
+                "laneLength": "25m / 50m"
+            },
+            {
+                "day": "Środa",
+                "time": "20:15",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "20:15",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7484,48 +7816,55 @@
                 "day": "Piątek",
                 "time": "20:15",
                 "availableLanes": "0.0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "20:15",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "20:15",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
-                "time": "20:30",
-                "availableLanes": "5x50m, 1x25m i wypł",
-                "totalLanes": 10,
-                "laneLength": "25m / 50m"
-            },
-            {
-                "day": "Wtorek",
-                "time": "20:30",
-                "availableLanes": "9x50m, 1x25m i wypł",
-                "totalLanes": 10,
-                "laneLength": "25m / 50m"
-            },
-            {
-                "day": "Środa",
                 "time": "20:30",
                 "availableLanes": "8x50m, 1x25m i wypł",
+                "date": "09.11.2026",
+                "totalLanes": 10,
+                "laneLength": "25m / 50m"
+            },
+            {
+                "day": "Wtorek",
+                "time": "20:30",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "10.11.2026",
+                "totalLanes": 10,
+                "laneLength": "25m / 50m"
+            },
+            {
+                "day": "Środa",
+                "time": "20:30",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "20:30",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7533,48 +7872,55 @@
                 "day": "Piątek",
                 "time": "20:30",
                 "availableLanes": "0.0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "20:30",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "20:30",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
-                "time": "20:45",
-                "availableLanes": "5x50m, 1x25m i wypł",
-                "totalLanes": 10,
-                "laneLength": "25m / 50m"
-            },
-            {
-                "day": "Wtorek",
-                "time": "20:45",
-                "availableLanes": "9x50m, 1x25m i wypł",
-                "totalLanes": 10,
-                "laneLength": "25m / 50m"
-            },
-            {
-                "day": "Środa",
                 "time": "20:45",
                 "availableLanes": "8x50m, 1x25m i wypł",
+                "date": "09.11.2026",
+                "totalLanes": 10,
+                "laneLength": "25m / 50m"
+            },
+            {
+                "day": "Wtorek",
+                "time": "20:45",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "10.11.2026",
+                "totalLanes": 10,
+                "laneLength": "25m / 50m"
+            },
+            {
+                "day": "Środa",
+                "time": "20:45",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "20:45",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "12.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7582,27 +7928,31 @@
                 "day": "Piątek",
                 "time": "20:45",
                 "availableLanes": "0.0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "20:45",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "20:45",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "21:00",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7610,6 +7960,7 @@
                 "day": "Wtorek",
                 "time": "21:00",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7617,41 +7968,47 @@
                 "day": "Środa",
                 "time": "21:00",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "21:00",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "0",
+                "date": "12.11.2026",
                 "totalLanes": 10,
-                "laneLength": "25m / 50m"
+                "laneLength": "50m"
             },
             {
                 "day": "Piątek",
                 "time": "21:00",
                 "availableLanes": "0.0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "21:00",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "21:00",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "21:15",
-                "availableLanes": "6x50m, 1x25m i wypł",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7659,6 +8016,7 @@
                 "day": "Wtorek",
                 "time": "21:15",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7666,41 +8024,47 @@
                 "day": "Środa",
                 "time": "21:15",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "21:15",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "0",
+                "date": "12.11.2026",
                 "totalLanes": 10,
-                "laneLength": "25m / 50m"
+                "laneLength": "50m"
             },
             {
                 "day": "Piątek",
                 "time": "21:15",
                 "availableLanes": "0.0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "21:15",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "21:15",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "21:30",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7708,6 +8072,7 @@
                 "day": "Wtorek",
                 "time": "21:30",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "10.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
@@ -7715,41 +8080,47 @@
                 "day": "Środa",
                 "time": "21:30",
                 "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "11.11.2026",
                 "totalLanes": 10,
                 "laneLength": "25m / 50m"
             },
             {
                 "day": "Czwartek",
                 "time": "21:30",
-                "availableLanes": "4x50m, 1x25m i wypł",
+                "availableLanes": "0",
+                "date": "12.11.2026",
                 "totalLanes": 10,
-                "laneLength": "25m / 50m"
+                "laneLength": "50m"
             },
             {
                 "day": "Piątek",
                 "time": "21:30",
                 "availableLanes": "0.0",
-                "totalLanes": 10,
-                "laneLength": "50m"
+                "date": "13.11.2026",
+                "totalLanes": 20,
+                "laneLength": "25m"
             },
             {
                 "day": "Sobota",
                 "time": "21:30",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "14.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Niedziela",
                 "time": "21:30",
-                "availableLanes": "0.0",
+                "availableLanes": "9x50m, 1x25m i wypł",
+                "date": "15.11.2026",
                 "totalLanes": 10,
-                "laneLength": "50m"
+                "laneLength": "25m / 50m"
             },
             {
                 "day": "Poniedziałek",
                 "time": "21:45",
                 "availableLanes": "Czas wyjścia z wody i sauny",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             },
@@ -7757,14 +8128,23 @@
                 "day": "Poniedziałek",
                 "time": "22:00",
                 "availableLanes": "Koniec pracy pływalni",
+                "date": "09.11.2026",
                 "totalLanes": 10,
                 "laneLength": "50m"
             }
         ],
-        "lastUpdated": "2026-11-13T09:13:17.320531+00:00",
-        "lastUpdatedPl": "13.11.2026, 10:13",
-        "dates": {},
-        "weekRange": null,
+        "weekRange": "09.11.2026 – 15.11.2026",
+        "dates": {
+            "Poniedziałek": "09.11.2026",
+            "Wtorek": "10.11.2026",
+            "Środa": "11.11.2026",
+            "Czwartek": "12.11.2026",
+            "Piątek": "13.11.2026",
+            "Sobota": "14.11.2026",
+            "Niedziela": "15.11.2026"
+        },
+        "lastUpdated": "2026-11-14T08:42:42.632407+00:00",
+        "lastUpdatedPl": "14.11.2026, 09:42",
         "sourcePdf": "Harmonogram_Olimpijczyk_latest.pdf"
     },
     {
@@ -9821,8 +10201,8 @@
             "Sobota": "14.11.2026",
             "Niedziela": "15.11.2026"
         },
-        "lastUpdated": "2026-11-13T09:13:17.320531+00:00",
-        "lastUpdatedPl": "13.11.2026, 10:13",
+        "lastUpdated": "2026-11-14T08:42:42.632407+00:00",
+        "lastUpdatedPl": "14.11.2026, 09:42",
         "sourcePdf": "neptun.pdf"
     }
 ]
