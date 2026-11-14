@@ -37,3 +37,9 @@ The system is a classic three-tier structure:
 - Relative dates use Europe/Warsaw. Expired and undated records remain visible only in source timetables, not recommendations.
 - Olimpijczyk can use 20 lanes in its split 25m configuration; preserve per-entry `totalLanes` and `laneLength`.
 - The push/PR test workflow does not deploy. The daily update workflow runs all suites before publication.
+
+## Code style
+
+- Do not add comments to code. Make code self-explanatory through descriptive
+  names, small focused functions and clear control flow. Put rationale and usage
+  explanations in Markdown documentation.

@@ -29,10 +29,8 @@ def parse_mewa_pdf(pdf_path):
     time_pattern = re.compile(r"^\d{1,2}[:.]\d{2}(\s*-\s*\d{1,2}[:.]\d{2})?$")
     schedule = []
 
-    # Check if legacy single table format (e.g. 8 columns with "Godziny" in header row)
     df0 = tables[0]
     if len(tables) == 1 and df0.shape[1] == 8:
-        # Check if row 0 is header
         first_row_str = " ".join(str(x).lower() for x in df0.iloc[0].tolist())
         if "godzin" in first_row_str:
             df0_data = df0.iloc[1:].copy()
@@ -51,7 +49,6 @@ def parse_mewa_pdf(pdf_path):
         if schedule:
             return schedule
 
-    # Multi-table or modernized format: dynamically find time column in each row
     for df in tables:
         for _, row in df.iterrows():
             time_col = None

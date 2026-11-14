@@ -30,7 +30,6 @@ def parse_olimpijczyk_pdf(pdf_path):
         if pd.isna(val) or val is None:
             return None
         s = str(val).strip()
-        # Filter out short stray letter artifacts (e.g. "n", "a", "l", "P\rł\ry\rw") with no digits
         letters = re.sub(r"[^a-zA-Ząćęłńóśźż]", "", s)
         if not any(ch.isdigit() for ch in s) and len(letters) < 5 and "wolne" not in s.lower() and "dostępna" not in s.lower():
             return None

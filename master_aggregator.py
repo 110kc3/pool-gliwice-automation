@@ -16,23 +16,20 @@ _DATE_RE = re.compile(r"^\d{1,2}\s+(" + _MONTHS + r")", re.IGNORECASE)
 _NUMERIC_DATE_RE = re.compile(r"^\d{1,2}[./]\d{1,2}[./]\d{2,4}$")
 _LETTERS_RE = re.compile(r"[^a-zA-Ząćęłńóśźż]", re.IGNORECASE)
 
-
 def clean_cell(value):
     """Strip stray carriage returns left by the PDF parser and collapse whitespace."""
     if not isinstance(value, str):
         return ""
     return re.sub(r"\s+", " ", value.replace("\r", " ")).strip()
 
-
 def is_noise_time(time_str):
     """A time slot that is actually a header/date row rather than a real time range."""
     s = clean_cell(time_str).lower()
     if not s:
-        return False  # empty time is a real (if incomplete) entry, not noise
+        return False
     if s == "data":
         return True
     return any(k in s for k in ("harmonogram", "dzień", "tygodnia", "godzina", "ilość zajętych", "ilość wolnych"))
-
 
 def is_noise_value(value):
     """An availability cell that is parser junk: a header, a date, a day name, or a stray letter."""
@@ -46,12 +43,10 @@ def is_noise_value(value):
     low = s.lower()
     if "ilość wolnych torów" in low or "ilość zajętych torów" in low:
         return True
-    # Stray short-letter artifacts (e.g. "n", "a", mangled "Pływ") with no digit.
     letters = _LETTERS_RE.sub("", s)
     if not any(ch.isdigit() for ch in s) and len(letters) < 5 and "wolne" not in low:
         return True
     return False
-
 
 def transform_data(raw_data, dates_map=None, last_updated_pl=None, last_updated_iso=None):
     """
@@ -78,8 +73,6 @@ def transform_data(raw_data, dates_map=None, last_updated_pl=None, last_updated_
     grouped = defaultdict(list)
 
     for entry in raw_data:
-        # Skip entries that are not dictionaries (e.g., None, strings) to avoid
-        # AttributeError when accessing keys. Raw data may contain malformed items.
         if not isinstance(entry, dict):
             continue
 
@@ -88,24 +81,19 @@ def transform_data(raw_data, dates_map=None, last_updated_pl=None, last_updated_
         days_data = entry.get("days", {})
 
         if not days_data:
-            # Skip entries that do not contain any day schedule data.
             continue
 
-        # Skip header/date rows masquerading as a time slot (e.g. "Data", "Dzień tygodnia").
         if is_noise_time(time_slot):
             continue
 
         clean_time = clean_cell(time_slot)
 
         for day, lanes in days_data.items():
-            # Drop missing values: NaN floats and None carry no availability information.
             if lanes is None or (isinstance(lanes, float) and np.isnan(lanes)):
                 continue
 
             available_lanes = clean_cell(str(lanes))
 
-            # Drop parser junk (headers, dates, day names, stray letters) so data.json
-            # is clean at rest rather than relying on the frontend to filter it.
             if is_noise_value(available_lanes):
                 continue
 
@@ -164,7 +152,6 @@ def aggregate_data(file_paths, output_path):
             print(f"{pool['name']}: {pool['weekRange'] or 'unknown dates'}")
         transformed.extend(pools)
 
-    # Prepare the complete output before replacing the previous usable dataset.
     payload = json.dumps(transformed, ensure_ascii=False, indent=4, allow_nan=False)
     destination = Path(output_path)
     temporary = destination.with_suffix(destination.suffix + ".tmp")

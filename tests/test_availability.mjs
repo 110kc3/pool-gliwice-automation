@@ -1,5 +1,3 @@
-// Unit tests for the frontend availability logic in script.js.
-// Run with:  node tests/test_availability.mjs
 import { createRequire } from 'node:module';
 import assert from 'node:assert/strict';
 import path from 'node:path';
@@ -30,7 +28,6 @@ const {
     generateIcsFile
 } = require(path.join(root, 'script.js'));
 
-// Fixed viewing week makes date-sensitive tests independent of the runner clock.
 const NOW = new Date('2026-10-26T00:00:00+01:00');
 const TEST_DATES = getScheduleDates([], NOW).fullDates;
 const filterAndRankSlots = (slots, options = {}) => rankSlots(slots, { now: NOW, ...options });
@@ -42,13 +39,11 @@ function test(name, fn) {
     console.log(`  ok - ${name}`);
 }
 
-// --- cleanCell -------------------------------------------------------------
 test('cleanCell strips carriage returns and collapses whitespace', () => {
     assert.equal(cleanCell('Pływalnia dostępna-zajęte 2\rtory'), 'Pływalnia dostępna-zajęte 2 tory');
     assert.equal(cleanCell(null), '');
 });
 
-// --- classifyAvailability: closed / unavailable ----------------------------
 test('niedostępna, nieczynne, exit water and 0 classify as closed (score 0)', () => {
     assert.deepEqual(classifyAvailability('Pływalnia niedostępna'), { score: 0 });
     assert.deepEqual(classifyAvailability('niedostępna'), { score: 0 });
@@ -63,20 +58,17 @@ test('niedostępna, nieczynne, exit water and 0 classify as closed (score 0)', (
     assert.deepEqual(classifyAvailability('0 wolnych torów'), { score: 0 });
 });
 
-// --- classifyAvailability: open -------------------------------------------
 test('dostępna and "wolne wszystkie tory" classify as open', () => {
     assert.deepEqual(classifyAvailability('Pływalnia dostępna'), { open: true });
     assert.deepEqual(classifyAvailability('dostępna'), { open: true });
     assert.deepEqual(classifyAvailability('wolne wszystkie tory'), { open: true });
 });
 
-// --- classifyAvailability: open but occupied ------------------------------
 test('"dostępna-zajęty N tor" captures occupancy', () => {
     assert.deepEqual(classifyAvailability('Pływalnia dostępna-zajęty 1 tor'), { open: true, occupied: 1 });
     assert.deepEqual(classifyAvailability('Pływalnia dostępna-zajęte 2\rtory'), { open: true, occupied: 2 });
 });
 
-// --- classifyAvailability: occupied (Arabic and Roman numerals) -----------
 test('"Zajęty/Zajęte N tory" and Roman numerals capture occupancy', () => {
     assert.deepEqual(classifyAvailability('Zajęty 3 tory'), { occupied: 3 });
     assert.deepEqual(classifyAvailability('Zajęte 2 tory'), { occupied: 2 });
@@ -87,14 +79,12 @@ test('"Zajęty/Zajęte N tory" and Roman numerals capture occupancy', () => {
     assert.deepEqual(classifyAvailability('III Tory zajęte'), { occupied: 3 });
 });
 
-// --- classifyAvailability: lane counts ------------------------------------
 test('lane-count strings sum the Nx..m groups', () => {
     assert.deepEqual(classifyAvailability('9x50m, 1x25m i wypł'), { freeLanes: 10 });
     assert.deepEqual(classifyAvailability('4x50m'), { freeLanes: 4 });
     assert.deepEqual(classifyAvailability('8x50m i wypł'), { freeLanes: 8 });
 });
 
-// --- classifyAvailability: noise ------------------------------------------
 test('headers, dates, day names and stray letters classify as noise', () => {
     for (const junk of ['n', 'a', 'l', 'e', 'i', 'Środa', 'Wtorek', 'Ilość wolnych torów',
                          'Ilość zajętych torów', '26.10.2026', '5 kwietnia', '30 marca', 'P\rł\ry\rw', '']) {
@@ -102,7 +92,6 @@ test('headers, dates, day names and stray letters classify as noise', () => {
     }
 });
 
-// --- opennessScore + capacity ---------------------------------------------
 test('opennessScore normalises to [0,1] on a shared scale', () => {
     const pools = [
         { name: 'Olimpijczyk', schedule: [{ day: 'Poniedziałek', time: '7', availableLanes: '9x50m, 1x25m i wypł' }] },
@@ -110,7 +99,7 @@ test('opennessScore normalises to [0,1] on a shared scale', () => {
     ];
     const caps = computeCapacities(pools);
     assert.equal(caps.Olimpijczyk, 10);
-    assert.equal(caps.Mewa, DEFAULT_CAPACITY); // floor applied for status-only pool
+    assert.equal(caps.Mewa, DEFAULT_CAPACITY);
 
     assert.equal(opennessScore(classifyAvailability('Pływalnia dostępna'), caps.Mewa), 1);
     assert.equal(opennessScore(classifyAvailability('Pływalnia niedostępna'), caps.Mewa), 0);
@@ -120,7 +109,6 @@ test('opennessScore normalises to [0,1] on a shared scale', () => {
     assert.equal(opennessScore(classifyAvailability('n'), caps.Mewa), null);
 });
 
-// --- validatePoolData ------------------------------------------------------
 test('validatePoolData rejects non-arrays', () => {
     const { pools, warnings } = validatePoolData({ not: 'an array' });
     assert.equal(pools, null);
@@ -142,9 +130,7 @@ test('validatePoolData drops malformed records and entries', () => {
     assert.ok(warnings.length >= 3);
 });
 
-// --- getFreeLanesDetail ----------------------------------------------------
 test('getFreeLanesDetail returns correct lane counts and labels', () => {
-    // Olimpijczyk 10 lanes
     const oli10 = getFreeLanesDetail('Olimpijczyk', '9x50m, 1x25m i wypł');
     assert.equal(oli10.freeLanes, 10);
     assert.equal(oli10.totalLanes, 10);
@@ -157,7 +143,6 @@ test('getFreeLanesDetail returns correct lane counts and labels', () => {
     assert.equal(oli4.openness, 0.4);
     assert.equal(oli4.status, 'medium');
 
-    // Mewa 6 lanes
     const mewaOpen = getFreeLanesDetail('Mewa', 'wolne wszystkie tory');
     assert.equal(mewaOpen.freeLanes, 6);
     assert.equal(mewaOpen.totalLanes, 6);
@@ -168,7 +153,6 @@ test('getFreeLanesDetail returns correct lane counts and labels', () => {
     assert.equal(mewaOcc2.totalLanes, 6);
     assert.equal(mewaOcc2.openness, 4 / 6);
 
-    // Delfin 6 lanes
     const delfinOcc1 = getFreeLanesDetail('Delfin', 'Pływalnia dostępna-zajęty 1 tor');
     assert.equal(delfinOcc1.freeLanes, 5);
     assert.equal(delfinOcc1.totalLanes, 6);
@@ -179,7 +163,6 @@ test('getFreeLanesDetail returns correct lane counts and labels', () => {
     assert.equal(closed.openness, 0);
     assert.equal(closed.status, 'closed');
 
-    // Neptun 6 lanes
     const neptun5 = getFreeLanesDetail('Neptun', '5x25m wolne (rekreacyjny: wolny)');
     assert.equal(neptun5.freeLanes, 5);
     assert.equal(neptun5.totalLanes, 6);
@@ -201,7 +184,6 @@ test('POOL_SPECS includes all 4 municipal pools', () => {
     assert.equal(POOL_SPECS.Neptun.length, '25m');
 });
 
-// --- getTimeBucket & getPolishDayName --------------------------------------
 test('getTimeBucket partitions hours into morning, afternoon, evening', () => {
     assert.equal(getTimeBucket(6), 'morning');
     assert.equal(getTimeBucket(11), 'morning');
@@ -212,12 +194,10 @@ test('getTimeBucket partitions hours into morning, afternoon, evening', () => {
 });
 
 test('getPolishDayName maps Date to Polish day names', () => {
-    // 2026-10-27 is Tuesday (Wtorek)
     const tuesday = new Date('2026-10-27T12:00:00Z');
     assert.equal(getPolishDayName(tuesday), 'Wtorek');
 });
 
-// --- aggregateHourlySlots & filterAndRankSlots -----------------------------
 test('aggregateHourlySlots groups fully covered hours and computes lane counts correctly', () => {
     const mockPools = [
         {
@@ -247,35 +227,28 @@ test('aggregateHourlySlots groups fully covered hours and computes lane counts c
     assert.equal(oli6.openness, 1.0);
     assert.equal(oli6.timeBucket, 'morning');
 
-    // Test filterAndRankSlots by lanes
     const rankedByLanes = filterAndRankSlots(slots, { sortBy: 'lanes' });
     assert.equal(rankedByLanes[0].poolName, 'Olimpijczyk');
     assert.equal(rankedByLanes[0].freeLanes, 10);
 
-    // Test filter by day
     const sundayOnly = filterAndRankSlots(slots, { day: 'Niedziela' });
     assert.equal(sundayOnly.length, 1);
     assert.equal(sundayOnly[0].day, 'Niedziela');
 
-    // Test filter by weekend
     const weekendOnly = filterAndRankSlots(slots, { day: 'weekend' });
     assert.equal(weekendOnly.length, 1);
     assert.equal(weekendOnly[0].day, 'Niedziela');
 
-    // Test filter by workdays
     const workdaysOnly = filterAndRankSlots(slots, { day: 'workdays' });
     assert.equal(workdaysOnly.length, 2);
 
-    // Test filter by time bucket
     const morningOnly = filterAndRankSlots(slots, { timeBucket: 'morning' });
     assert.equal(morningOnly.length, 2);
 
-    // Test filter by pool
     const mewaOnly = filterAndRankSlots(slots, { pool: 'Mewa' });
     assert.equal(mewaOnly.length, 2);
 });
 
-// --- computeDataInsights ---------------------------------------------------
 test('computeDataInsights accurately finds top days and buckets', () => {
     const slots = [
         { poolName: 'Mewa', day: 'Niedziela', hour: 10, timeBucket: 'morning', freeLanes: 6, openness: 1.0 },
@@ -290,7 +263,6 @@ test('computeDataInsights accurately finds top days and buckets', () => {
     assert.ok(ins.peakSlot.includes('Olimpijczyk'));
 });
 
-// --- getScheduleDates & slot date population ------------------------------
 test('getScheduleDates extracts dates and assigns them to aggregated slots', () => {
     const mockPools = [
         {
@@ -330,7 +302,6 @@ test('getScheduleDates extracts dates and assigns them to aggregated slots', () 
     assert.equal(wedSlot.shortDate, '28.10');
 });
 
-// --- getMultiHourSlots & multi-hour filtering ------------------------------
 test('getMultiHourSlots builds contiguous multi-hour windows and handles closures', () => {
     const slots = [
         { poolName: 'Mewa', day: 'Środa', date: '28.10.2026', hour: 10, freeLanes: 6, totalLanes: 6, openness: 1.0, timeBucket: 'morning' },
@@ -339,10 +310,8 @@ test('getMultiHourSlots builds contiguous multi-hour windows and handles closure
         { poolName: 'Mewa', day: 'Środa', date: '28.10.2026', hour: 13, freeLanes: 5, totalLanes: 6, openness: 0.83, timeBucket: 'afternoon' }
     ];
 
-    // duration 1 returns slots as-is
     assert.equal(getMultiHourSlots(slots, 1).length, 4);
 
-    // duration 2 produces 3 windows: 10-12, 11-13, 12-14
     const twoHourSlots = getMultiHourSlots(slots, 2);
     assert.equal(twoHourSlots.length, 3);
 
@@ -351,18 +320,16 @@ test('getMultiHourSlots builds contiguous multi-hour windows and handles closure
     assert.equal(slot10_12.duration, 2);
     assert.equal(slot10_12.timeLabel, '10:00 – 12:00 (2h)');
     assert.equal(slot10_12.minFreeLanes, 4);
-    assert.equal(slot10_12.freeLanes, 4); // guaranteed minimum, not the average
+    assert.equal(slot10_12.freeLanes, 4);
     assert.equal(slot10_12.averageFreeLanes, 5);
     assert.equal(slot10_12.status, 'medium');
 
-    // Slot 11-13 includes hour 12 which is closed (0 free lanes)
     const slot11_13 = twoHourSlots.find(s => s.hour === 11);
     assert.ok(slot11_13);
     assert.equal(slot11_13.minFreeLanes, 0);
     assert.equal(slot11_13.openness, 0);
     assert.equal(slot11_13.status, 'closed');
 
-    // Slot 12-14 also includes hour 12 which is closed
     const slot12_14 = twoHourSlots.find(s => s.hour === 12);
     assert.ok(slot12_14);
     assert.equal(slot12_14.status, 'closed');
@@ -378,11 +345,9 @@ test('filterAndRankSlots filters and ranks multi-hour requests accurately', () =
         { poolName: 'Olimpijczyk', day: 'Środa', date: '28.10.2026', hour: 15, freeLanes: 8, totalLanes: 10, openness: 0.8, timeBucket: 'afternoon' }
     ];
 
-    // Filter 2h slots: Delfin 14:00-16:00 should be excluded because 15:00 is closed
     const ranked2h = filterAndRankSlots(slots, { duration: 2 });
     assert.equal(ranked2h.length, 2);
 
-    // Olimpijczyk (min 8 lanes) should rank above Mewa (min 5 lanes)
     assert.equal(ranked2h[0].poolName, 'Olimpijczyk');
     assert.equal(ranked2h[0].minFreeLanes, 8);
     assert.equal(ranked2h[0].freeLanes, 8);
@@ -392,7 +357,6 @@ test('filterAndRankSlots filters and ranks multi-hour requests accurately', () =
     assert.equal(ranked2h[1].averageFreeLanes, 5.5);
 });
 
-// --- Calendar & PWA helpers -----------------------------------------------
 test('getSlotCalendarDates and buildGoogleCalendarUrl produce valid date ranges and URLs', () => {
     const slot = {
         poolName: 'Olimpijczyk',
@@ -474,7 +438,6 @@ test('filterAndRankSlots respects minHour for real-time upcoming slots filter', 
         { poolName: 'Mewa', day: 'Czwartek', date: '29.10.2026', hour: 10, freeLanes: 6, totalLanes: 6, openness: 1.0 }
     ];
 
-    // For currentDay = 'Środa', minHour = 17 should drop 10:00 and 16:00
     const upcoming = filterAndRankSlots(slots, {
         day: 'Środa',
         minHour: 17,
@@ -482,8 +445,8 @@ test('filterAndRankSlots respects minHour for real-time upcoming slots filter', 
     });
 
     assert.equal(upcoming.length, 2);
-    assert.equal(upcoming[0].hour, 20); // 10 lanes
-    assert.equal(upcoming[1].hour, 18); // 8 lanes
+    assert.equal(upcoming[0].hour, 20);
+    assert.equal(upcoming[1].hour, 18);
     assert.ok(upcoming.every(s => s.hour >= 17));
 });
 

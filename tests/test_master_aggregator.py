@@ -4,7 +4,6 @@ from master_aggregator import transform_data, is_noise_time, is_noise_value, cle
 class TestDataTransformation(unittest.TestCase):
 
     def test_basic_transformation(self):
-        # Test case simulating data from one successful pool
         raw_data = [
             {
                 "time": "7.00- 8.00",
@@ -24,7 +23,6 @@ class TestDataTransformation(unittest.TestCase):
         self.assertEqual(transform_data(raw_data), expected)
 
     def test_multiple_pools(self):
-        # Test case simulating data from multiple distinct pools including Neptun
         raw_data = [
             {"time": "9.00-10.00", "days": {"Poniedziałek": "10"}, "name": "Delfin"},
             {"time": "14.00-15.00", "days": {"Środa": "5"}, "name": "Olimpijczyk"},
@@ -38,7 +36,6 @@ class TestDataTransformation(unittest.TestCase):
         self.assertEqual(transform_data(raw_data), expected)
 
     def test_handling_nan_values(self):
-        # Test case simulating a NaN value for lanes
         raw_data = [
             {
                 "time": "10.00-11.00",
@@ -46,8 +43,6 @@ class TestDataTransformation(unittest.TestCase):
                 "name": "Mewa"
             }
         ]
-        # NaN represents missing data: the implementation skips those slots rather
-        # than emitting a literal "nan" string, which the frontend would render verbatim.
         expected = [
             {"name": "Mewa", "schedule": [
                 {"day": "Piątek", "time": "10.00-11.00", "availableLanes": "1"}
@@ -56,7 +51,6 @@ class TestDataTransformation(unittest.TestCase):
         self.assertEqual(transform_data(raw_data), expected)
 
     def test_skipping_non_dictionary_elements(self):
-        # Test case for entries in raw_data that are not dictionaries (e.g., nulls, strings)
         raw_data = [
             {"time": "10.00-11.00", "days": {"Poniedziałek": "1"}, "name": "Mewa"},
             None,
@@ -72,7 +66,6 @@ class TestDataTransformation(unittest.TestCase):
         self.assertEqual(transform_data(raw_data), expected)
 
     def test_missing_time_key(self):
-        # Test case where an entry is missing the 'time' key
         raw_data = [
             {
                 "time": "7.00- 8.00",
@@ -80,7 +73,6 @@ class TestDataTransformation(unittest.TestCase):
                 "name": "Mewa"
             },
             {
-                # Missing 'time' key
                 "days": {"Wtorek": "15"},
                 "name": "Mewa"
             }
@@ -88,14 +80,12 @@ class TestDataTransformation(unittest.TestCase):
         expected = [
             {"name": "Mewa", "schedule": [
                 {"day": "Poniedziałek", "time": "7.00- 8.00", "availableLanes": "20"},
-                {"day": "Wtorek", "time": "", "availableLanes": "15"} # Should default to empty time string
+                {"day": "Wtorek", "time": "", "availableLanes": "15"}
             ]}
         ]
         self.assertEqual(transform_data(raw_data), expected)
 
     def test_skips_header_and_date_rows(self):
-        # Noise rows that the Olimpijczyk PDF emits: a title row, a "day of week"
-        # header row, and a date row. None should survive into the output.
         raw_data = [
             {"time": "Harmonogram dostępności niecki basenowej", "days": {"Poniedziałek": float('nan')}, "name": "Olimpijczyk"},
             {"time": "Dzień\rtygodnia", "days": {"Poniedziałek": "Poniedziałek"}, "name": "Olimpijczyk"},
@@ -110,8 +100,6 @@ class TestDataTransformation(unittest.TestCase):
         self.assertEqual(transform_data(raw_data), expected)
 
     def test_skips_noise_values_within_valid_rows(self):
-        # A genuine time slot whose individual cells are junk (stray letter, column
-        # header) should drop those cells but keep the real ones.
         raw_data = [
             {"time": "7.00- 8.00",
              "days": {"Poniedziałek": "n", "Wtorek": "Ilość wolnych torów", "Środa": "8x50m"},
@@ -146,7 +134,6 @@ class TestDataTransformation(unittest.TestCase):
         ]
         self.assertEqual(transform_data(raw_data), expected)
 
-
 class TestNoiseHelpers(unittest.TestCase):
 
     def test_is_noise_time(self):
@@ -166,7 +153,6 @@ class TestNoiseHelpers(unittest.TestCase):
     def test_clean_cell(self):
         self.assertEqual(clean_cell("a\rb  c"), "a b c")
         self.assertEqual(clean_cell(None), "")
-
 
 if __name__ == '__main__':
     unittest.main()

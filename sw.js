@@ -1,4 +1,3 @@
-// Refresh cached application code and schedules on every online request.
 const CACHE_NAME = 'gliwice-pools-v2';
 const CORE_ASSETS = [
     './', 'index.html', 'style.css', 'script.js', 'manifest.webmanifest',
@@ -31,7 +30,6 @@ self.addEventListener('fetch', event => {
                     const cache = await caches.open(CACHE_NAME);
                     await cache.put(event.request, fresh.clone());
                 } catch (error) {
-                    // Storage exhaustion must not discard a valid online response.
                     console.warn('Offline cache unavailable:', error);
                 }
                 return fresh;

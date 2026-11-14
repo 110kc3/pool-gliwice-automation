@@ -20,26 +20,22 @@ MONTHS = {name: i + 1 for i, name in enumerate([
 ])}
 MONTH_PATTERN = "(?:" + "|".join(MONTHS) + ")"
 
-
 def week_dates(anchor, valid_from=None):
     monday = anchor - dt.timedelta(days=anchor.weekday())
     return {day: date.strftime("%d.%m.%Y") for i, day in enumerate(DAYS)
             if (date := monday + dt.timedelta(days=i)) >= (valid_from or monday)}
 
-
 def dates_from_text(text):
     text = re.sub(r"\s+", " ", text.lower())
     try:
-        # Numeric date rows, including Delfin's dated holiday column (11.11.26).
         numeric = [dt.date(2000 + int(y) if len(y) == 2 else int(y), int(m), int(d))
                    for d, m, y in re.findall(r"\b(\d{1,2})[./](\d{1,2})[./](\d{4}|\d{2})\b", text)]
         if numeric:
             weeks = {date - dt.timedelta(days=date.weekday()) for date in numeric}
             if len(weeks) == 1:
                 return week_dates(numeric[0])
-            return {}  # Conflicting dates must not be silently relabelled.
+            return {}
 
-        # Polish titles: "od 9 do 15 listopada 2026", including month/year rollover.
         pattern = (rf"\bod\s+(\d{{1,2}})(?:\s+({MONTH_PATTERN}))?(?:\s+(\d{{4}}))?"
                    rf"\s*(?:do|[-–—])\s*(\d{{1,2}})\s+({MONTH_PATTERN})\s+(\d{{4}})")
         match = re.search(pattern, text)
@@ -53,8 +49,6 @@ def dates_from_text(text):
                 return week_dates(start)
             return {}
 
-        # An open-ended "od" title confirms only its first partial week. Do not
-        # perpetually roll it forward: it may contain dated holiday exceptions.
         match = re.search(rf"\bod\s+(\d{{1,2}})\s+({MONTH_PATTERN})\s+(\d{{4}})", text)
         if match:
             d, m, y = match.groups()
@@ -64,7 +58,6 @@ def dates_from_text(text):
         pass
     return {}
 
-
 def configurations_from_text(text):
     """Read Olimpijczyk's seven day-column configurations in layout order."""
     for line in text.splitlines():
@@ -72,7 +65,6 @@ def configurations_from_text(text):
         if len(values) == 7:
             return dict(zip(DAYS, values))
     return {}
-
 
 def read_metadata(pdf_path):
     try:
@@ -82,11 +74,9 @@ def read_metadata(pdf_path):
         print(f"Warning: Cannot determine schedule metadata from {pdf_path}: {exc}")
         return {}, {}
 
-
 def source_pdf(pool_name, directory="."):
     """Use the downloader's canonical file, never archived files' checkout mtimes."""
     return Path(directory) / PDF_FILES[pool_name.lower()]
-
 
 def lane_configuration(raw, configuration):
     has_50m = bool(re.search(r"\d+\s*x\s*50\s*m", raw, re.I))

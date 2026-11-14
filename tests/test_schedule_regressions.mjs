@@ -84,7 +84,7 @@ test('before dawn the next confirmed opening is this morning, not tomorrow', () 
     const pools = [pool([row('07:00 – 08:00', 'dostępna', 'Czwartek'), row('06:00 – 07:00', 'dostępna', 'Piątek')])];
     const live = getLiveSummary(pools, aggregateHourlySlots(pools), new Date('2026-11-12T02:00:00+01:00'));
     assert.equal(live.nextSlot.date, '12.11.2026');
-    assert.equal(live.nextSlot.hour, 7); // actual source opening, not a fixed 06:00
+    assert.equal(live.nextSlot.hour, 7);
     assert.equal(live.statuses[0].status, 'unknown');
 });
 

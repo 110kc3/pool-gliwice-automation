@@ -1,20 +1,9 @@
-// ===========================================================================
-// Pure availability logic & classification (DOM-independent)
-// ===========================================================================
 
 const DAYS_ORDER = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"];
 const DAY_SET = new Set(DAYS_ORDER);
 
-// Olimpijczyk's full configuration is 9×50 m + 1×25 m = 10 lanes. We use this as
-// a floor for every pool's capacity so that pools which only report open/closed
-// status (Mewa, Delfin) are normalised on the same 0..1 scale as Olimpijczyk's
-// lane counts. See computeCapacities().
 const DEFAULT_CAPACITY = 10;
 
-// Actual physical pool configurations in Gliwice:
-// - Olimpijczyk: Olympic 50m basin configurable up to 10 lanes (9x50m + 1x25m)
-// - Mewa: 25m municipal sports basin with 6 lanes
-// - Delfin: 25m municipal sports basin with 6 lanes
 const POOL_SPECS = {
     "Olimpijczyk": {
         totalLanes: 10,
@@ -48,7 +37,6 @@ const POOL_SPECS = {
 
 const MONTHS = "stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|września|października|listopada|grudnia";
 
-// Normalise a raw cell value: strip stray carriage returns and collapse whitespace.
 function cleanCell(value) {
     if (typeof value !== 'string') return '';
     return value.replace(/\r/g, ' ').replace(/\s+/g, ' ').trim();
@@ -65,23 +53,19 @@ function parseRomanOrArabic(val) {
     return romanMap[v] || null;
 }
 
-// Classify a raw `availableLanes` string into a structured descriptor.
 function classifyAvailability(raw) {
     const s = cleanCell(raw);
     if (!s) return { noise: true };
     const lower = s.toLowerCase();
 
-    // --- Noise: day-name header rows, date rows, column headers, stray letters
     if (DAY_SET.has(s)) return { noise: true };
     if (new RegExp(`^\\d{1,2}\\s+(${MONTHS})`, 'i').test(lower)) return { noise: true };
     if (/^\d{1,2}[./]\d{1,2}[./]\d{2,4}$/.test(s)) return { noise: true };
     if (/(ilość wolnych torów|ilość zajętych torów|godzina|dzień|tygodnia|harmonogram|^data$)/.test(lower)) return { noise: true };
-    // Stray single/short letter artifacts ("n", "a", "l", "Pływ" mangled) with no digit
     if (!/\d/.test(s) && s.replace(/[^a-zA-Ząćęłńóśźż]/gi, '').length < 5 && !/wolne/.test(lower)) {
         return { noise: true };
     }
 
-    // --- Closed / unavailable / 0 free lanes / before opening / exit water / end of work
     if (
         lower === '0' ||
         lower.includes('niedostępn') ||
@@ -96,52 +80,43 @@ function classifyAvailability(raw) {
         return { score: 0 };
     }
 
-    // --- All lanes free
     if (lower.includes('wolne wszystkie')) return { open: true };
 
-    // --- "Pływalnia dostępna - zajęty N tor(y)" or "dostępna - zajęte II tory"
     let m = lower.match(/dostępna.*zaj[ęe]t[a-ząćęłńóśźż]*\s*(?:jest\s*)?([ivx]+|\d+)\s*tor/i);
     if (m) {
         const num = parseRomanOrArabic(m[1]);
         if (num !== null) return { open: true, occupied: num };
     }
 
-    // --- "I tor zajęty", "II tory zajęte", "3 tory zajęte"
     m = lower.match(/(?:^|\b)([ivx]+|\d+)\s*tor[a-ząćęłńóśźż]*\s*zaj[ęe]t/i);
     if (m) {
         const num = parseRomanOrArabic(m[1]);
         if (num !== null) return { occupied: num };
     }
 
-    // --- "Zajęty / Zajęte N tory", "Zajęty I tor"
     m = lower.match(/^zaj[ęe]t[a-ząćęłńóśźż]*\s*(?:jest\s*)?([ivx]+|\d+)\s*tor/i);
     if (m) {
         const num = parseRomanOrArabic(m[1]);
         if (num !== null) return { occupied: num };
     }
 
-    // --- Lane counts: "9x50m, 1x25m i wypł" or "5x25m wolne" -> sum of the "Nx..m" groups
     const laneMatches = [...lower.matchAll(/(\d+)\s*x\s*\d+\s*m/g)];
     if (laneMatches.length) {
         const lanes = laneMatches.reduce((sum, mm) => sum + parseInt(mm[1], 10), 0);
         return { freeLanes: lanes };
     }
 
-    // --- Free lanes: "N torów wolnych", "II tory wolne", "I tor wolny"
     const mFreeTor = lower.match(/([ivx]+|\d+)\s*tor[a-ząćęłńóśźż]*\s*woln/i);
     if (mFreeTor) {
         const num = parseRomanOrArabic(mFreeTor[1]);
         if (num !== null) return { freeLanes: num };
     }
 
-    // --- Generic "Pływalnia dostępna" or "dostępna"
     if (lower.includes('dostępna')) return { open: true };
 
-    // Unknown, non-empty value: treat as noise so it cannot pollute rankings.
     return { noise: true };
 }
 
-// Compute a capacity (max plausible free lanes) per pool name on a shared scale.
 function computeCapacities(pools) {
     const capacities = {};
     pools.forEach(pool => {
@@ -155,7 +130,6 @@ function computeCapacities(pools) {
     return capacities;
 }
 
-// Map a classified descriptor to an openness score in [0, 1] given pool capacity.
 function opennessScore(info, capacity) {
     if (info.noise) return null;
     if (info.score === 0) return 0;
@@ -167,15 +141,10 @@ function opennessScore(info, capacity) {
     return null;
 }
 
-// ===========================================================================
-// Smart Suggester & Lane Availability Logic
-// ===========================================================================
 
-// Detailed lane breakdown for a pool and raw availability entry.
 function getFreeLanesDetail(poolName, raw, metadata = {}) {
     const info = classifyAvailability(raw);
     const specs = POOL_SPECS[poolName] || { totalLanes: 10, length: "25m" };
-    // Olimpijczyk can split its Olympic basin into twenty 25m lanes.
     const split = poolName === 'Olimpijczyk' && info.freeLanes > 10 && !/x\s*50\s*m/i.test(raw);
     const total = Number.isInteger(metadata.totalLanes) && metadata.totalLanes > 0
         ? metadata.totalLanes : (split ? 20 : specs.totalLanes);
@@ -229,14 +198,12 @@ function getFreeLanesDetail(poolName, raw, metadata = {}) {
     };
 }
 
-// Map hour (0-23) to human-friendly time-of-day bucket.
 function getTimeBucket(hour) {
-    if (hour < 12) return 'morning';    // 06:00 - 11:59
-    if (hour < 17) return 'afternoon';  // 12:00 - 16:59
-    return 'evening';                   // 17:00 - 22:00
+    if (hour < 12) return 'morning';
+    if (hour < 17) return 'afternoon';
+    return 'evening';
 }
 
-// All relative dates and clocks refer to the pools' timezone, wherever the user is.
 function parseScheduleDate(value) {
     const m = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(value || '');
     if (!m) return null;
@@ -266,7 +233,6 @@ function getPolishDayName(date) {
     return getPoolClock(date).day;
 }
 
-// Calendar labels may fall back to the viewing week; schedule records never do.
 function getScheduleDates(pools, fallbackDate = new Date()) {
     const maps = pools.map(p => p.dates).filter(d => d && Object.keys(d).length);
     let fullDates;
@@ -290,7 +256,6 @@ function parseTimeInterval(value) {
     const m = /^\s*(\d{1,2})[:.](\d{2})(?:\s*[-–—]\s*(\d{1,2})[:.](\d{2}))?\s*$/.exec(value || '');
     if (!m || +m[1] > 23 || +m[2] > 59 || (m[3] && (+m[3] > 24 || +m[4] > 59 || (+m[3] === 24 && +m[4] !== 0)))) return null;
     const start = +m[1] * 60 + +m[2];
-    // Modern PDFs use quarter-hour point rows; legacy PDFs supply explicit ranges.
     const end = m[3] ? +m[3] * 60 + +m[4] : start + 15;
     return end > start && end <= 1440 ? { start, end } : null;
 }
@@ -299,7 +264,6 @@ function entryDate(pool, entry) {
     return entry.date || pool.dates?.[entry.day] || '';
 }
 
-// Require coverage of every minute. Missing/unknown cells cannot imply free lanes.
 function aggregateHourlySlots(pools) {
     const groups = new Map();
     pools.forEach(pool => (pool.schedule || []).forEach(entry => {
@@ -411,11 +375,9 @@ function getLiveSummary(pools, hourlySlots, now = new Date()) {
     return { clock, statuses, nextSlot: upcoming[0] || null };
 }
 
-// Compute high-level statistical takeaways from the dataset.
 function computeDataInsights(hourlySlots) {
     const openSlots = hourlySlots.filter(s => s.openness > 0);
 
-    // Day averages
     const dayStats = {};
     DAYS_ORDER.forEach(d => { dayStats[d] = { sum: 0, count: 0 }; });
     hourlySlots.forEach(s => {
@@ -435,7 +397,6 @@ function computeDataInsights(hourlySlots) {
         }
     }
 
-    // Time bucket averages
     const bucketStats = {
         morning: { sum: 0, count: 0 },
         afternoon: { sum: 0, count: 0 },
@@ -464,7 +425,6 @@ function computeDataInsights(hourlySlots) {
         }
     }
 
-    // Peak slot (slot with the most free lanes in the week)
     const peakSlot = [...openSlots].sort((a, b) => b.freeLanes - a.freeLanes || b.openness - a.openness)[0];
 
     const bestDayDate = openSlots.find(s => s.day === bestDay)?.date;
@@ -481,7 +441,6 @@ function computeDataInsights(hourlySlots) {
     };
 }
 
-// Validate the shape of data.json.
 function validatePoolData(data) {
     const warnings = [];
     if (!Array.isArray(data)) {
@@ -523,9 +482,6 @@ function escapeHtml(str) {
         .replace(/'/g, '&#39;');
 }
 
-// ===========================================================================
-// Calendar Event Generation (.ics and Google Calendar)
-// ===========================================================================
 
 function getSlotCalendarDates(slot) {
     const iso = parseScheduleDate(slot.date);
@@ -612,9 +568,6 @@ function triggerIcsDownload(slot) {
     URL.revokeObjectURL(url);
 }
 
-// ===========================================================================
-// Browser UI & Interactive Suggester Application
-// ===========================================================================
 
 function initApp(rawData) {
     const { pools, warnings } = validatePoolData(rawData);
@@ -631,7 +584,6 @@ function initApp(rawData) {
     const hourlySlots = aggregateHourlySlots(pools);
     const todayName = getPoolClock().day;
 
-    // Suggester interactive state
     const state = {
         activeTab: 'suggester', // 'suggester' | 'matrix' | 'schedules' | 'info'
         preset: 'now',  // 'now' | 'today_evening' | 'tomorrow_morning' | 'weekend' | 'all' | null
@@ -649,7 +601,6 @@ function initApp(rawData) {
         schedulePool: 'all'
     };
 
-    // Current quarter-hour status and the next confirmed full visit are distinct.
     function renderLiveNow() {
         const container = document.getElementById('live-now-container');
         if (!container) return;
@@ -701,7 +652,6 @@ function initApp(rawData) {
         }).join(' • ');
     }
 
-    // Render Data Insights Cards
     function renderInsights() {
         const clock = getPoolClock();
         const insights = computeDataInsights(hourlySlots.filter(s => {
@@ -746,7 +696,6 @@ function initApp(rawData) {
         `;
     }
 
-    // Render Suggester Results
     function renderSuggester() {
         const resultsContainer = document.getElementById('suggester-results');
         const topPickContainer = document.getElementById('top-pick-container');
@@ -798,7 +747,6 @@ function initApp(rawData) {
             return;
         }
 
-        // Spotlight #1 Top Pick
         const topPick = rankedSlots[0];
         const topSpecs = POOL_SPECS[topPick.poolName] || { length: '25m', type: 'Basen sportowy', address: '' };
         const percent = Math.round(topPick.openness * 100);
@@ -850,7 +798,6 @@ function initApp(rawData) {
             topPickIcsBtn.addEventListener('click', () => triggerIcsDownload(topPick));
         }
 
-        // Remaining ranked slots
         const otherSlots = rankedSlots.slice(1);
         if (otherSlots.length === 0) {
             resultsContainer.innerHTML = '';
@@ -903,14 +850,12 @@ function initApp(rawData) {
         });
     }
 
-    // Render Hourly Comparison Matrix View
     function renderMatrix() {
         const matrixContainer = document.getElementById('matrix-content');
         if (!matrixContainer) return;
 
         const day = state.matrixDay;
         const dur = state.matrixDuration || 1;
-        // Group by start hour (06:00 to 22:00 - dur)
         const maxStartHour = 22 - dur;
         const hours = [];
         for (let h = 6; h <= maxStartHour; h++) hours.push(h);
@@ -1004,12 +949,10 @@ function initApp(rawData) {
         });
     }
 
-    // Render Full Raw Timetables View
     function renderFullSchedules() {
         const container = document.getElementById('schedules-container');
         if (!container) return;
 
-        // Synchronize schedule-day-select options with dates if needed
         const scheduleDaySelect = document.getElementById('schedule-day-select');
         if (scheduleDaySelect && scheduleDaySelect.options.length <= 8) {
             scheduleDaySelect.innerHTML = `
@@ -1083,40 +1026,30 @@ function initApp(rawData) {
         }
     }
 
-    // Synchronize UI active filter button states
     function syncFilterButtons() {
-        // Preset pills
         document.querySelectorAll('.preset-pill').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.preset === state.preset);
         });
-        // Day pills
         document.querySelectorAll('.filter-day-pill').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.day === state.day);
         });
-        // Duration pills
         document.querySelectorAll('.filter-duration-pill').forEach(btn => {
             btn.classList.toggle('active', parseInt(btn.dataset.duration, 10) === state.duration);
         });
-        // Time pills
         document.querySelectorAll('.filter-time-pill').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.time === state.timeBucket);
         });
-        // Pool pills
         document.querySelectorAll('.filter-pool-pill').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.pool === state.pool);
         });
-        // Sort buttons
         document.querySelectorAll('.filter-sort-btn').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.sort === state.sortBy);
         });
-        // High availability toggle
         const toggle = document.getElementById('toggle-only-high');
         if (toggle) toggle.checked = state.onlyHigh;
     }
 
-    // Set up interactive filter click listeners
     function setupEventListeners() {
-        // Tab switching
         document.querySelectorAll('.nav-tab').forEach(tab => {
             tab.addEventListener('click', () => {
                 const targetView = tab.dataset.tab;
@@ -1134,7 +1067,6 @@ function initApp(rawData) {
             });
         });
 
-        // Preset filters (1-tap quick choice)
         document.querySelectorAll('.preset-pill').forEach(btn => {
             btn.addEventListener('click', () => {
                 const p = btn.dataset.preset;
@@ -1165,7 +1097,6 @@ function initApp(rawData) {
             });
         });
 
-        // Day filters
         document.querySelectorAll('.filter-day-pill').forEach(btn => {
             btn.addEventListener('click', () => {
                 state.day = btn.dataset.day;
@@ -1178,7 +1109,6 @@ function initApp(rawData) {
             });
         });
 
-        // Duration filters
         document.querySelectorAll('.filter-duration-pill').forEach(btn => {
             btn.addEventListener('click', () => {
                 state.duration = parseInt(btn.dataset.duration, 10) || 1;
@@ -1187,7 +1117,6 @@ function initApp(rawData) {
             });
         });
 
-        // Time filters
         document.querySelectorAll('.filter-time-pill').forEach(btn => {
             btn.addEventListener('click', () => {
                 state.timeBucket = btn.dataset.time;
@@ -1196,7 +1125,6 @@ function initApp(rawData) {
             });
         });
 
-        // Pool filters
         document.querySelectorAll('.filter-pool-pill').forEach(btn => {
             btn.addEventListener('click', () => {
                 state.pool = btn.dataset.pool;
@@ -1205,7 +1133,6 @@ function initApp(rawData) {
             });
         });
 
-        // Sort buttons
         document.querySelectorAll('.filter-sort-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 state.sortBy = btn.dataset.sort;
@@ -1214,7 +1141,6 @@ function initApp(rawData) {
             });
         });
 
-        // High availability checkbox toggle
         const toggleHigh = document.getElementById('toggle-only-high');
         if (toggleHigh) {
             toggleHigh.addEventListener('change', (e) => {
@@ -1223,7 +1149,6 @@ function initApp(rawData) {
             });
         }
 
-        // Full schedule search & filters
         const searchInput = document.getElementById('schedule-search');
         if (searchInput) {
             searchInput.addEventListener('input', (e) => {
@@ -1259,14 +1184,12 @@ function initApp(rawData) {
         }
     }
 
-    // Register Service Worker for PWA
     if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
         navigator.serviceWorker.register('sw.js')
             .then(reg => console.log('PWA ServiceWorker registered with scope:', reg.scope))
             .catch(err => console.warn('PWA ServiceWorker registration failed:', err));
     }
 
-    // PWA Install prompt and online/offline handling
     if (typeof window !== 'undefined') {
         const offlineBanner = document.getElementById('offline-banner');
         if (offlineBanner && typeof navigator !== 'undefined') offlineBanner.style.display = navigator.onLine ? 'none' : 'block';
@@ -1302,7 +1225,6 @@ function initApp(rawData) {
     function renderDateLabels() {
         const weekBadge = document.getElementById('schedule-week-badge');
         if (weekBadge) weekBadge.textContent = `📅 Ten tydzień: ${weekDates.weekRange}`;
-        // Update day filter pill labels with concrete calendar dates
         const allPill = document.querySelector('.filter-day-pill[data-day="all"]');
         if (allPill && weekDates.shortDates["Poniedziałek"]) {
             allPill.innerHTML = `Wszystkie nadchodzące dni`;
@@ -1328,7 +1250,6 @@ function initApp(rawData) {
 
     renderLiveNow();
     renderFreshness();
-    // Refresh after midnight and when a suspended mobile tab becomes visible.
     const refresh = () => {
         Object.assign(weekDates, getScheduleDates([], new Date()));
         renderDateLabels();
@@ -1354,7 +1275,6 @@ function showError(message) {
     }
 }
 
-// Initialise on DOM ready
 if (typeof document !== 'undefined') {
     document.addEventListener('DOMContentLoaded', () => {
         fetch('data.json')
@@ -1370,7 +1290,6 @@ if (typeof document !== 'undefined') {
     });
 }
 
-// Exposed for Node-based unit tests
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         cleanCell,

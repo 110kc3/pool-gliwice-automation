@@ -70,7 +70,6 @@ def download_schedules():
             with urllib.request.urlopen(req, timeout=15) as resp:
                 html = resp.read().decode("utf-8", errors="ignore")
 
-            # Look for links to Harmonogram*.pdf
             matches = re.findall(r"href=[\"\x27]([^\x27\"]*Harmonogram[^\x27\"]*\.pdf)[\"\x27]", html, re.IGNORECASE)
             if not matches:
                 print(f"[{pool.upper()}] No schedule PDF link found on {page_url}. Using existing local file if available.")

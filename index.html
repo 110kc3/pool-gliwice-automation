@@ -16,7 +16,6 @@
     <meta property="og:image" content="https://110kc3.github.io/pool-gliwice-automation/og-image.svg">
     <meta name="twitter:card" content="summary_large_image">
 
-    <!-- PWA Web App Manifest & Mobile Meta -->
     <link rel="manifest" href="manifest.webmanifest">
     <meta name="theme-color" content="#0284c7">
     <meta name="mobile-web-app-capable" content="yes">
@@ -24,7 +23,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Pływalnie Gliwice">
 
-    <!-- Icons -->
     <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon.png">
     <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -87,7 +85,6 @@
         <p id="data-freshness-banner" class="data-freshness-banner" role="status"></p>
         <div id="error-banner" class="error-banner" style="display: none;"></div>
 
-        <!-- Navigation view switcher tabs -->
         <nav class="nav-tabs" aria-label="Nawigacja po widokach">
             <button type="button" class="nav-tab active" data-tab="suggester">
                 <span class="tab-icon">🎯</span> Sugester wolnych torów
@@ -103,21 +100,18 @@
             </button>
         </nav>
 
-        <!-- VIEW 1: SMART SUGGESTER (PRIMARY) -->
         <section id="view-suggester" class="view-panel active">
-            <!-- LIVE NOW RADAR (INSTANT REAL-TIME ANSWER UPON OPENING) -->
+            
             <div id="live-now-container" class="live-now-container">
-                <!-- Populated dynamically by script.js -->
+                
             </div>
 
-            <!-- Suggester interactive control filter panel -->
             <div class="suggester-panel">
                 <div class="panel-header">
                     <h2>Filtruj i porównuj terminy</h2>
                     <span class="results-count" id="results-count">Ładowanie...</span>
                 </div>
 
-                <!-- 1-TAP QUICK PRESETS -->
                 <div class="preset-filter-row">
                     <span class="preset-label">⚡ Szybki wybór pory:</span>
                     <div class="pill-group" id="preset-pills">
@@ -192,32 +186,28 @@
                 </div>
             </div>
 
-            <!-- Spotlight Top Pick Card -->
             <div id="top-pick-container">
-                <!-- Populated dynamically -->
+                
             </div>
 
-            <!-- Grid of remaining recommendations -->
             <div class="results-section">
                 <h3 class="results-title">Pozostałe rekomendowane terminy</h3>
                 <div id="suggester-results" class="slots-grid">
-                    <!-- Populated dynamically -->
+                    
                 </div>
             </div>
 
-            <!-- Data-driven key insights summary banner -->
             <div class="insights-section">
                 <div class="section-heading-row">
                     <h2>Wnioski z nadchodzących terminów</h2>
                     <span class="section-subtext">Statystyki dostępności dla wszystkich basenów miejskich</span>
                 </div>
                 <div id="insights-grid" class="insights-grid">
-                    <!-- Populated dynamically by script.js -->
+                    
                 </div>
             </div>
         </section>
 
-        <!-- VIEW 2: HOURLY MATRIX COMPARISON -->
         <section id="view-matrix" class="view-panel">
             <div class="matrix-card">
                 <div class="section-heading-row">
@@ -225,12 +215,11 @@
                     <span class="section-subtext">Sprawdź gdzie pójść o konkretnej godzinie w wybranym dniu</span>
                 </div>
                 <div id="matrix-content">
-                    <!-- Populated dynamically by script.js -->
+                    
                 </div>
             </div>
         </section>
 
-        <!-- VIEW 3: FULL RAW TIMETABLES -->
         <section id="view-schedules" class="view-panel">
             <div class="schedules-filter-bar">
                 <div class="search-box">
@@ -258,11 +247,10 @@
                 </div>
             </div>
             <div id="schedules-container" class="schedules-stack">
-                <!-- Populated dynamically -->
+                
             </div>
         </section>
 
-        <!-- VIEW 4: POOL INFORMATION & SPECS -->
         <section id="view-info" class="view-panel">
             <div class="info-section">
                 <div class="section-heading-row">
@@ -351,7 +339,6 @@
                     </div>
                 </div>
 
-                <!-- CENNIK BILETÓW I KARTY SPORTOWE -->
                 <div class="pricing-section" id="cennik-info">
                     <div class="section-heading-row">
                         <h2>💰 Cennik biletów i Karty Partnerskie</h2>
@@ -464,7 +451,6 @@
                         </div>
                     </div>
 
-                    <!-- KARTY SPORTOWE -->
                     <div class="sports-cards-section">
                         <h3>💳 Honorowane karty sportowe i pakiety benefitowe</h3>
                         <div class="sports-cards-grid">
@@ -491,7 +477,6 @@
                         </div>
                     </div>
 
-                    <!-- ULGI I REGULAMIN WEJŚĆ -->
                     <div class="rules-info-box">
                         <h4>ℹ️ Praktyczne informacje dla odwiedzających:</h4>
                         <div class="rules-columns">

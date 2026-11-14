@@ -1,6 +1,4 @@
-/* ==========================================================================
-   Gliwice Pool Availability — Modern Stylesheet
-   ========================================================================== */
+
 
 :root {
     --primary: #0284c7;
@@ -48,7 +46,6 @@
     --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* Base reset & typography */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -66,7 +63,6 @@ body {
     flex-direction: column;
 }
 
-/* Header */
 .app-header {
     background: linear-gradient(135deg, #075985 0%, #0369a1 50%, #0284c7 100%);
     color: #ffffff;
@@ -162,7 +158,6 @@ body {
     100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
 }
 
-/* Main Layout */
 .main-content {
     max-width: 1140px;
     margin: 0 auto;
@@ -181,7 +176,6 @@ body {
     font-weight: 500;
 }
 
-/* Navigation Tabs */
 .nav-tabs {
     display: flex;
     gap: 8px;
@@ -224,7 +218,6 @@ body {
     font-size: 1.1rem;
 }
 
-/* View Panels */
 .view-panel {
     display: none;
 }
@@ -239,7 +232,6 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Insights Section */
 .insights-section {
     margin-bottom: 28px;
 }
@@ -324,7 +316,6 @@ body {
     color: var(--text-muted);
 }
 
-/* Suggester Control Filter Panel */
 .suggester-panel {
     background-color: var(--card-bg);
     border: 1px solid var(--border);
@@ -467,7 +458,6 @@ body {
     color: #ffffff;
 }
 
-/* Checkbox */
 .checkbox-container {
     display: inline-flex;
     align-items: center;
@@ -486,7 +476,6 @@ body {
     cursor: pointer;
 }
 
-/* Top Pick Spotlight Card */
 .top-pick-card {
     background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
     color: #ffffff;
@@ -607,7 +596,6 @@ body {
     margin-top: 8px;
 }
 
-/* Progress bar */
 .lane-progress-bar {
     width: 100%;
     height: 8px;
@@ -640,7 +628,6 @@ body {
     background: linear-gradient(90deg, #f87171, #ef4444);
 }
 
-/* Slots Results Grid */
 .results-section {
     margin-top: 24px;
 }
@@ -802,7 +789,6 @@ body {
     line-height: 1.3;
 }
 
-/* Empty State */
 .empty-state {
     text-align: center;
     padding: 48px 20px;
@@ -846,7 +832,6 @@ body {
     background-color: var(--primary-hover);
 }
 
-/* Comparison Matrix */
 .matrix-card {
     background-color: var(--card-bg);
     border: 1px solid var(--border);
@@ -991,7 +976,6 @@ body {
     color: var(--text-light);
 }
 
-/* Full Schedules View */
 .schedules-filter-bar {
     display: flex;
     justify-content: space-between;
@@ -1111,7 +1095,6 @@ body {
     color: var(--text-muted);
 }
 
-/* Pool Information Cards */
 .pools-info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1189,7 +1172,6 @@ body {
     border-color: var(--primary);
 }
 
-/* Footer */
 .app-footer {
     background-color: #0f172a;
     color: #94a3b8;
@@ -1216,7 +1198,6 @@ body {
     text-decoration: underline;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .header-container {
         flex-direction: column;
@@ -1256,9 +1237,6 @@ body {
     }
 }
 
-/* ==========================================================================
-   Offline Banner & PWA Install Button
-   ========================================================================== */
 .offline-banner {
     background: #78350f;
     color: #fef3c7;
@@ -1286,9 +1264,6 @@ body {
     transform: translateY(-1px);
 }
 
-/* ==========================================================================
-   Calendar Action Buttons (.ics & Google Calendar)
-   ========================================================================== */
 .calendar-actions {
     display: flex;
     align-items: center;
@@ -1364,9 +1339,6 @@ body {
     border-color: var(--primary);
 }
 
-/* ==========================================================================
-   Pricing & Sports Cards Section (Cennik i Karty)
-   ========================================================================== */
 .pricing-section {
     margin-top: 40px;
     padding-top: 32px;
@@ -1459,7 +1431,6 @@ body {
     font-weight: 600;
 }
 
-/* Sports Cards */
 .sports-cards-section {
     margin-top: 36px;
 }
@@ -1513,7 +1484,6 @@ body {
     margin: 0;
 }
 
-/* Rules box */
 .rules-info-box {
     margin-top: 28px;
     background: var(--surface);
@@ -1546,9 +1516,6 @@ body {
     margin-bottom: 4px;
 }
 
-/* ==========================================================================
-   Live "Gdzie teraz na basen?" Hero Widget & Status Radar
-   ========================================================================== */
 .live-now-container {
     margin-bottom: 24px;
 }
@@ -1639,7 +1606,6 @@ body {
     color: #e0f2fe;
 }
 
-/* Immediate pick banner inside live hero */
 .immediate-pick-banner {
     background: rgba(15, 23, 42, 0.55);
     backdrop-filter: blur(8px);
@@ -1728,7 +1694,6 @@ body {
     transform: translateY(-1px);
 }
 
-/* 4-Pool Status Radar */
 .radar-section-title {
     font-size: 0.86rem;
     font-weight: 700;
@@ -1888,9 +1853,6 @@ body {
     color: #ffffff;
 }
 
-/* ==========================================================================
-   Quick 1-Tap Presets Bar
-   ========================================================================== */
 .preset-filter-row {
     margin-bottom: 16px;
     padding-bottom: 16px;
@@ -2032,6 +1994,5 @@ body {
     }
 }
 
-/* Source dates remain visible when one pool publishes a different week. */
 .data-freshness-banner { margin: 1rem 0; padding: 1rem; border: 1px solid currentColor; border-radius: .75rem; line-height: 1.6; overflow-wrap: anywhere; }
 .status-unknown { opacity: .8; }

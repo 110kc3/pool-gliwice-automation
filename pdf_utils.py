@@ -1,11 +1,7 @@
 """Shared helpers for the PDF parsers."""
 
-
 def _is_nan(value):
-    # NaN is the only value that is not equal to itself; this catches both Python
-    # floats and numpy/pandas NaN without importing pandas here.
     return isinstance(value, float) and value != value
-
 
 def nan_to_none(value):
     """Recursively replace NaN floats with None so the result serialises to valid JSON.

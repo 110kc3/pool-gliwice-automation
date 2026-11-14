@@ -29,7 +29,6 @@ def parse_delfin_pdf(pdf_path):
     time_pattern = re.compile(r"^\d{1,2}[:.]\d{2}(\s*-\s*\d{1,2}[:.]\d{2})?$")
     pool_schedule = []
 
-    # Check if legacy single table format (e.g. single table with "Godziny" in header)
     df0 = tables[0]
     header_row_index = -1
     for r_idx, row in df0.iterrows():
@@ -64,7 +63,6 @@ def parse_delfin_pdf(pdf_path):
         if pool_schedule:
             return pool_schedule
 
-    # Multi-table or modernized format: dynamically find time column in each row
     for df in tables:
         for _, row in df.iterrows():
             time_col = None
