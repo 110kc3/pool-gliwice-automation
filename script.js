@@ -1,4 +1,3 @@
-
 const DAYS_ORDER = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"];
 const DAY_SET = new Set(DAYS_ORDER);
 
@@ -140,7 +139,6 @@ function opennessScore(info, capacity) {
     if (typeof info.occupied === 'number') return Math.max(0, (cap - occupied) / cap);
     return null;
 }
-
 
 function getFreeLanesDetail(poolName, raw, metadata = {}) {
     const info = classifyAvailability(raw);
@@ -482,7 +480,6 @@ function escapeHtml(str) {
         .replace(/'/g, '&#39;');
 }
 
-
 function getSlotCalendarDates(slot) {
     const iso = parseScheduleDate(slot.date);
     if (!iso) throw new Error('Cannot export a slot without a confirmed date');
@@ -568,7 +565,6 @@ function triggerIcsDownload(slot) {
     URL.revokeObjectURL(url);
 }
 
-
 function initApp(rawData) {
     const { pools, warnings } = validatePoolData(rawData);
     if (!pools) {
@@ -585,18 +581,18 @@ function initApp(rawData) {
     const todayName = getPoolClock().day;
 
     const state = {
-        activeTab: 'suggester', // 'suggester' | 'matrix' | 'schedules' | 'info'
-        preset: 'now',  // 'now' | 'today_evening' | 'tomorrow_morning' | 'weekend' | 'all' | null
-        day: 'today',        // specific day or 'all' | 'weekend' | 'workdays'
-        minHour: null,// minimum hour filter for today
-        timeBucket: 'all', // 'all' | 'morning' | 'afternoon' | 'evening'
-        pool: 'all',            // 'all' | poolName
-        duration: 1,            // 1 | 2 | 3 (hours to swim)
-        matrixDuration: 1,      // 1 | 2 | 3 (hours for matrix comparison)
-        sortBy: 'lanes',        // 'lanes' | 'openness' | 'time'
-        onlyHigh: false,        // minOpenness >= 0.8
-        matrixDay: todayName,   // day selected in matrix view
-        searchQuery: '',        // text filter in full schedule
+        activeTab: 'suggester',
+        preset: 'now',
+        day: 'today',
+        minHour: null,
+        timeBucket: 'all',
+        pool: 'all',
+        duration: 1,
+        matrixDuration: 1,
+        sortBy: 'lanes',
+        onlyHigh: false,
+        matrixDay: todayName,
+        searchQuery: '',
         scheduleDay: 'all',
         schedulePool: 'all'
     };

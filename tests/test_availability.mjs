@@ -119,10 +119,10 @@ test('validatePoolData drops malformed records and entries', () => {
     const { pools, warnings } = validatePoolData([
         { name: 'Mewa', schedule: [
             { day: 'Poniedziałek', time: '7', availableLanes: '4x50m' },
-            { day: 'Wtorek', time: 7, availableLanes: '4x50m' }, // bad time type
+            { day: 'Wtorek', time: 7, availableLanes: '4x50m' },
             null
         ]},
-        { name: 123, schedule: [] }, // bad name
+        { name: 123, schedule: [] },
         'garbage'
     ]);
     assert.equal(pools.length, 1);

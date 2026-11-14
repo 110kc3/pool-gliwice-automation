@@ -12,6 +12,8 @@ Live Application: https://110kc3.github.io/pool-gliwice-automation/
 - **Installable PWA:** Offline-capable Progressive Web App with service worker caching and Warsaw-timezone date awareness
 - **Pricing & Facility Specs:** Accurate admission pricing, benefit sports card rules (MultiSport, Medicover), pool dimensions, and water temperatures
 
+Each pool keeps the dates printed in its own PDF. Missing dates stay unknown, and expired timetables remain readable but are excluded from recommendations.
+
 ## Quick Start
 
 ```bash
@@ -19,17 +21,20 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 python download_schedules.py
+python parse_delfin.py && python parse_mewa.py && python parse_olimpijczyk.py && python parse_neptun.py
 python master_aggregator.py
+python -m http.server 8080
 ```
 
 Run test suite:
 
 ```bash
-pytest -q tests
-node --test tests/test_availability.mjs
+python -m pytest tests -q
+node tests/test_availability.mjs
+node --test --test-reporter=dot tests/test_schedule_regressions.mjs tests/test_service_worker.mjs
 ```
 
 ## Documentation
 
 - [Project Progress Summary](PROJECT_PROGRESS_SUMMARY.md)
-- [Bug Reporting & Known Limits](BUG_REPORT.md)
+- [Original architectural review](BUG_REPORT.md)
