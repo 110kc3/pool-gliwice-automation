@@ -1,35 +1,8 @@
 import re
-import tabula
-from pdf_utils import run_parser
+from pdf_utils import day_columns, read_table_rows, row_labels, run_parser, values_by_day
+from schedule_metadata import DAYS
 
-DAYS = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"]
 TIME_RE = re.compile(r"^\d{1,2}[:.]\d{2}")
-COLUMN_TOLERANCE = 5
-
-def read_table_rows(pdf_path):
-    try:
-        tables = tabula.read_pdf(pdf_path, pages="all", multiple_tables=True, lattice=True, output_format="json")
-    except Exception:
-        tables = []
-    return [positioned_cells(row) for table in tables for row in table["data"]]
-
-def positioned_cells(row):
-    return [{"left": cell["left"], "right": cell["left"] + cell["width"],
-             "text": re.sub(r"\s+", " ", cell["text"]).strip()}
-            for cell in row if cell["width"] > 0]
-
-def day_columns(cells):
-    return {cell["text"]: (cell["left"], cell["right"]) for cell in cells if cell["text"] in DAYS}
-
-def values_by_day(cells, columns):
-    values = {}
-    for cell in cells:
-        if not cell["text"]:
-            continue
-        for day, (left, right) in columns.items():
-            if cell["left"] < right - COLUMN_TOLERANCE and cell["right"] > left + COLUMN_TOLERANCE:
-                values[day] = cell["text"]
-    return values
 
 def lane_text(sport_value, recreational_value):
     if not sport_value.isdigit():
@@ -53,8 +26,7 @@ def parse_neptun_pdf(pdf_path):
         columns = day_columns(cells) or columns
         if not columns or not cells:
             continue
-        first_day_left = min(left for left, _ in columns.values())
-        labels = [cell["text"] for cell in cells if cell["left"] < first_day_left - COLUMN_TOLERANCE]
+        labels = row_labels(cells, columns)
         times = [label for label in labels if TIME_RE.match(label)]
         if times:
             current_time = times[0]

@@ -1,8 +1,13 @@
 """Shared helpers for the PDF parsers."""
 import json
+import re
 from pathlib import Path
 
-from schedule_metadata import source_pdf, upcoming_pdf
+import tabula
+
+from schedule_metadata import DAYS, source_pdf, upcoming_pdf
+
+COLUMN_TOLERANCE = 5
 
 def _is_nan(value):
     return isinstance(value, float) and value != value
@@ -42,3 +47,32 @@ def run_parser(pool_name, parse_pdf, directory="."):
     directory = Path(directory)
     write_schedule(parse_pdf, source_pdf(pool_name, directory), directory / f"{pool_name}_data.json")
     write_upcoming_schedule(parse_pdf, upcoming_pdf(pool_name, directory), directory / f"{pool_name}_next_data.json")
+
+def positioned_cells(row):
+    return [{"left": cell["left"], "right": cell["left"] + cell["width"],
+             "text": re.sub(r"\s+", " ", cell["text"]).strip()}
+            for cell in row if cell["width"] > 0]
+
+def read_table_rows(pdf_path):
+    try:
+        tables = tabula.read_pdf(pdf_path, pages="all", multiple_tables=True, lattice=True, output_format="json")
+    except Exception:
+        tables = []
+    return [positioned_cells(row) for table in tables for row in table["data"]]
+
+def day_columns(cells):
+    return {cell["text"]: (cell["left"], cell["right"]) for cell in cells if cell["text"] in DAYS}
+
+def row_labels(cells, columns):
+    first_day_left = min(left for left, _ in columns.values())
+    return [cell["text"] for cell in cells if cell["left"] < first_day_left - COLUMN_TOLERANCE]
+
+def values_by_day(cells, columns):
+    values = {}
+    for cell in cells:
+        if not cell["text"]:
+            continue
+        for day, (left, right) in columns.items():
+            if cell["left"] < right - COLUMN_TOLERANCE and cell["right"] > left + COLUMN_TOLERANCE:
+                values[day] = cell["text"]
+    return values

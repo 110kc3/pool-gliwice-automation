@@ -8,7 +8,7 @@
             "Czwartek": "7x50m, 1x25m i wypł",
             "Piątek": "8x50m, 1x25m i wypł",
             "Sobota": "Pływalnia czynna od 8:00",
-            "Niedziela": null
+            "Niedziela": "Pływalnia czynna od 8:00"
         }
     },
     {
@@ -630,9 +630,9 @@
             "Wtorek": "9x50m i wypł",
             "Środa": "3x50m, 1x25m i wypł",
             "Czwartek": "2x50m, 1x25m i wypł",
-            "Piątek": "0.0",
-            "Sobota": "0.0",
-            "Niedziela": "0.0"
+            "Piątek": "0",
+            "Sobota": "0",
+            "Niedziela": "0"
         }
     },
     {
@@ -642,9 +642,9 @@
             "Wtorek": "9x50m i wypł",
             "Środa": "3x50m, 1x25m i wypł",
             "Czwartek": "2x50m, 1x25m i wypł",
-            "Piątek": "0.0",
-            "Sobota": "0.0",
-            "Niedziela": "0.0"
+            "Piątek": "0",
+            "Sobota": "0",
+            "Niedziela": "0"
         }
     },
     {
@@ -654,9 +654,9 @@
             "Wtorek": "9x50m i wypł",
             "Środa": "3x50m, 1x25m i wypł",
             "Czwartek": "2x50m, 1x25m i wypł",
-            "Piątek": "0.0",
-            "Sobota": "0.0",
-            "Niedziela": "0.0"
+            "Piątek": "0",
+            "Sobota": "0",
+            "Niedziela": "0"
         }
     },
     {
@@ -666,9 +666,9 @@
             "Wtorek": "9x50m i wypł",
             "Środa": "3x50m, 1x25m i wypł",
             "Czwartek": "2x50m, 1x25m i wypł",
-            "Piątek": "0.0",
-            "Sobota": "0.0",
-            "Niedziela": "0.0"
+            "Piątek": "0",
+            "Sobota": "0",
+            "Niedziela": "0"
         }
     },
     {
@@ -678,9 +678,9 @@
             "Wtorek": "9x50m, 1x25m i wypł",
             "Środa": "8x50m, 1x25m i wypł",
             "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0.0",
-            "Sobota": "0.0",
-            "Niedziela": "0.0"
+            "Piątek": "0",
+            "Sobota": "0",
+            "Niedziela": "0"
         }
     },
     {
@@ -690,9 +690,9 @@
             "Wtorek": "9x50m, 1x25m i wypł",
             "Środa": "8x50m, 1x25m i wypł",
             "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0.0",
-            "Sobota": "0.0",
-            "Niedziela": "0.0"
+            "Piątek": "0",
+            "Sobota": "0",
+            "Niedziela": "0"
         }
     },
     {
@@ -702,9 +702,9 @@
             "Wtorek": "9x50m, 1x25m i wypł",
             "Środa": "8x50m, 1x25m i wypł",
             "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0.0",
-            "Sobota": "0.0",
-            "Niedziela": "0.0"
+            "Piątek": "0",
+            "Sobota": "0",
+            "Niedziela": "0"
         }
     },
     {
@@ -714,9 +714,9 @@
             "Wtorek": "9x50m, 1x25m i wypł",
             "Środa": "8x50m, 1x25m i wypł",
             "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0.0",
-            "Sobota": "0.0",
-            "Niedziela": "0.0"
+            "Piątek": "0",
+            "Sobota": "0",
+            "Niedziela": "0"
         }
     },
     {
@@ -726,9 +726,9 @@
             "Wtorek": "9x50m, 1x25m i wypł",
             "Środa": "9x50m, 1x25m i wypł",
             "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0.0",
-            "Sobota": "0.0",
-            "Niedziela": "0.0"
+            "Piątek": "0",
+            "Sobota": "0",
+            "Niedziela": "0"
         }
     },
     {
@@ -738,9 +738,9 @@
             "Wtorek": "9x50m, 1x25m i wypł",
             "Środa": "9x50m, 1x25m i wypł",
             "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0.0",
-            "Sobota": "0.0",
-            "Niedziela": "0.0"
+            "Piątek": "0",
+            "Sobota": "0",
+            "Niedziela": "0"
         }
     },
     {
@@ -750,33 +750,33 @@
             "Wtorek": "9x50m, 1x25m i wypł",
             "Środa": "9x50m, 1x25m i wypł",
             "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0.0",
-            "Sobota": "0.0",
-            "Niedziela": "0.0"
+            "Piątek": "0",
+            "Sobota": "0",
+            "Niedziela": "0"
         }
     },
     {
         "time": "21:45",
         "days": {
             "Poniedziałek": "Czas wyjścia z wody i sauny",
-            "Wtorek": null,
-            "Środa": null,
-            "Czwartek": null,
-            "Piątek": null,
-            "Sobota": null,
-            "Niedziela": null
+            "Wtorek": "Czas wyjścia z wody i sauny",
+            "Środa": "Czas wyjścia z wody i sauny",
+            "Czwartek": "Czas wyjścia z wody i sauny",
+            "Piątek": "Czas wyjścia z wody i sauny",
+            "Sobota": "Czas wyjścia z wody i sauny",
+            "Niedziela": "Czas wyjścia z wody i sauny"
         }
     },
     {
         "time": "22:00",
         "days": {
             "Poniedziałek": "Koniec pracy pływalni",
-            "Wtorek": null,
-            "Środa": null,
-            "Czwartek": null,
-            "Piątek": null,
-            "Sobota": null,
-            "Niedziela": null
+            "Wtorek": "Koniec pracy pływalni",
+            "Środa": "Koniec pracy pływalni",
+            "Czwartek": "Koniec pracy pływalni",
+            "Piątek": "Koniec pracy pływalni",
+            "Sobota": "Koniec pracy pływalni",
+            "Niedziela": "Koniec pracy pływalni"
         }
     }
 ]

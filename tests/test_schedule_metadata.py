@@ -189,9 +189,26 @@ def test_neptun_cells_are_assigned_by_position_when_a_merged_cell_removes_a_colu
     rows = [header,
             [cell(29, '14:00', 59), cell(88, 'B. rekreacyjny', 53)] + [cell(left, 'wolny') for left in without_wednesday],
             [cell(88, 'B. sportowy', 53)] + [cell(left, str(n)) for n, left in enumerate(without_wednesday)]]
-    with patch('parse_neptun.tabula.read_pdf', return_value=[{'data': rows}]):
+    with patch('pdf_utils.tabula.read_pdf', return_value=[{'data': rows}]):
         entry = parse_neptun_pdf('neptun.pdf')[0]
     assert entry['time'] == '14:00'
     assert entry['days']['Środa'] is None
     assert entry['days']['Niedziela'] == '5x25m wolne (rekreacyjny: wolny)'
     assert entry['days']['Poniedziałek'] == '0 wolnych torów (rekreacyjny: wolny)'
+
+
+def test_olimpijczyk_cells_keep_their_day_when_a_merged_cell_spans_rows():
+    from parse_olimpijczyk import parse_olimpijczyk_pdf
+    def cell(left, text, width=96):
+        return {'left': left, 'width': width, 'top': 0, 'height': 10, 'text': text}
+    lefts = [86, 181, 277, 373, 468, 564, 660]
+    days = ['Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota', 'Niedziela']
+    rows = [[cell(32, 'Dzień tygodnia', 53)] + [cell(left, day) for left, day in zip(lefts, days)],
+            [cell(32, '06:00', 53), cell(86, '9x50m'), cell(181, '8x50m'), cell(277, 'Pływalnia czynna od 8:00'),
+             cell(373, '7x50m'), cell(468, '17x25m'), cell(564, 'Pływalnia czynna od 8:00', 191)],
+            [cell(32, '06:15', 53), cell(86, '9x50m'), cell(181, '8x50m'), cell(373, '7x50m'), cell(468, '17x25m')]]
+    with patch('pdf_utils.tabula.read_pdf', return_value=[{'data': rows}]):
+        first, second = parse_olimpijczyk_pdf('olimpijczyk.pdf')
+    assert first['days']['Sobota'] == first['days']['Niedziela'] == 'Pływalnia czynna od 8:00'
+    assert second['time'] == '06:15'
+    assert (second['days']['Środa'], second['days']['Czwartek'], second['days']['Piątek']) == (None, '7x50m', '17x25m')

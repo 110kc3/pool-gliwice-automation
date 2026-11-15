@@ -1,63 +1,33 @@
 import re
-import pandas as pd
-import tabula
-from pdf_utils import run_parser
+from pdf_utils import day_columns, read_table_rows, row_labels, run_parser, values_by_day
+from schedule_metadata import DAYS
+
+TIME_RE = re.compile(r"^\d{1,2}[:.]\d{2}(\s*-\s*\d{1,2}[:.]\d{2})?$")
+LETTERS_RE = re.compile(r"[^a-zA-Ząćęłńóśźż]")
+
+def is_availability(value):
+    lowered = value.lower()
+    return (any(character.isdigit() for character in value) or len(LETTERS_RE.sub("", value)) >= 5
+            or "wolne" in lowered or "dostępna" in lowered)
 
 def parse_olimpijczyk_pdf(pdf_path):
-    """
-    Extracts schedule data from all pages/tables of the Olimpijczyk PDF timetable.
-    Iterates through all extracted tables to capture the complete day (06:00 - 22:00),
-    not just the morning table.
-    """
-    try:
-        tables = tabula.read_pdf(pdf_path, pages="all", multiple_tables=True, lattice=True, pandas_options={"header": None})
-    except Exception:
-        tables = []
-    if not tables:
-        tables = tabula.read_pdf(pdf_path, pages="all", multiple_tables=True, pandas_options={"header": None})
-
-    if not tables:
+    rows = read_table_rows(pdf_path)
+    if not rows:
         print("No tables found in Olimpijczyk PDF.")
         return []
 
-    time_pattern = re.compile(r"^\d{1,2}[:.]\d{2}(\s*-\s*\d{1,2}[:.]\d{2})?$")
     schedule = []
-
-    def clean_day_val(val):
-        if pd.isna(val) or val is None:
-            return None
-        s = str(val).strip()
-        letters = re.sub(r"[^a-zA-Ząćęłńóśźż]", "", s)
-        if not any(ch.isdigit() for ch in s) and len(letters) < 5 and "wolne" not in s.lower() and "dostępna" not in s.lower():
-            return None
-        return s
-
-    for df in tables:
-        for _, row in df.iterrows():
-            time_col = None
-            for c in range(min(4, len(row))):
-                v = str(row.iloc[c]).strip() if not pd.isna(row.iloc[c]) else ""
-                if time_pattern.match(v) and not any(k in v.lower() for k in ("czas", "koniec", "godzina", "ilość", "data")):
-                    time_col = c
-                    break
-
-            if time_col is None:
-                continue
-
-            clean_time = str(row.iloc[time_col]).strip()
-            day_data = {
-                "time": clean_time,
-                "days": {
-                    "Poniedziałek": clean_day_val(row.iloc[time_col + 1]) if time_col + 1 < len(row) else None,
-                    "Wtorek": clean_day_val(row.iloc[time_col + 2]) if time_col + 2 < len(row) else None,
-                    "Środa": clean_day_val(row.iloc[time_col + 3]) if time_col + 3 < len(row) else None,
-                    "Czwartek": clean_day_val(row.iloc[time_col + 4]) if time_col + 4 < len(row) else None,
-                    "Piątek": clean_day_val(row.iloc[time_col + 5]) if time_col + 5 < len(row) else None,
-                    "Sobota": clean_day_val(row.iloc[time_col + 6]) if time_col + 6 < len(row) else None,
-                    "Niedziela": clean_day_val(row.iloc[time_col + 7]) if time_col + 7 < len(row) else None,
-                }
-            }
-            schedule.append(day_data)
+    columns = {}
+    for cells in rows:
+        columns = day_columns(cells) or columns
+        if not columns or not cells:
+            continue
+        times = [label for label in row_labels(cells, columns) if TIME_RE.match(label)]
+        if not times:
+            continue
+        values = values_by_day(cells, columns)
+        schedule.append({"time": times[0], "days": {
+            day: values[day] if day in values and is_availability(values[day]) else None for day in DAYS}})
 
     return schedule
 

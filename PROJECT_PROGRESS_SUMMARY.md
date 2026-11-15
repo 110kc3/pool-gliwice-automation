@@ -10,9 +10,9 @@ Accepted scope: find out why no new schedules appeared, trim the amount of text 
 4. Page text: rolling seven-day pills from today, eight results per page with "Pokaż więcej", source timetables merged from about 2,300 quarter-hour rows to about 320 ranges, matrix cells reduced to `free / total`, freshness banner shown only for pools without a current timetable, shorter labels, and the info tab without descriptive paragraphs. Rendered text on the default tab went from 3,952 to 2,177 characters, across all tabs from 8,151 to 4,208.
 5. Owner decision later on 15 November: an open-ended timetable (Delfin's `od 12 listopada 2026`) is now a standing schedule, repeated through the current and following week until a replacement is published. Timetables with an end date or printed dates are still never repeated. Mewa shows "brak nowego harmonogramu" until the operator publishes a new PDF.
 6. Neptun parser: a merged holiday cell removed one cell per row, so every later day was read one column to the left (Sunday's values landed on Saturday, Sunday was empty), and the 14:00 row was dropped every week because its time cell sits on the previous page row. Cells are now placed by x-position.
-7. Not done: the 9–15 November Olimpijczyk PDF has four rows with the same missing-cell pattern; that parser still reads columns by position.
+7. Olimpijczyk parser converted to the same position-based reading: the 9–15 November PDF had four rows (06:15–07:00) shifted one day left behind a merged Wednesday cell. Cells merged across Saturday and Sunday now apply to both days, and `0` is no longer emitted as `0.0`. Mewa and Delfin PDFs showed no missing cells and keep their parsers.
 
-Verification: 38 Python tests and 45 JavaScript tests pass; the full pipeline ran against the live site on 15 November; the page was rendered in headless Chromium at 390px and 1440px.
+Verification: 39 Python tests and 45 JavaScript tests pass; the full pipeline ran against the live site on 15 November; the page was rendered in headless Chromium at 390px and 1440px.
 
 ## Previous work — 2026-11-13
 
