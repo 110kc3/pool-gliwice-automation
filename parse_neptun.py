@@ -1,10 +1,7 @@
-import glob
-import json
-import os
 import re
 import pandas as pd
 import tabula
-from pdf_utils import nan_to_none
+from pdf_utils import run_parser
 
 def parse_neptun_pdf(pdf_path):
     """
@@ -79,11 +76,4 @@ def parse_neptun_pdf(pdf_path):
     return schedule
 
 if __name__ == "__main__":
-    neptun_candidates = sorted(glob.glob("Harmonogram_Neptun_*.pdf") + glob.glob("neptun.pdf"), key=os.path.getmtime, reverse=True)
-    neptun_pdf_path = "neptun.pdf" if os.path.exists("neptun.pdf") else neptun_candidates[0] if neptun_candidates else "neptun.pdf"
-    print(f"Parsing Neptun schedule from {neptun_pdf_path}...")
-    data = nan_to_none(parse_neptun_pdf(neptun_pdf_path))
-
-    with open("neptun_data.json", "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4, allow_nan=False)
-    print(f"Successfully saved {len(data)} entries to neptun_data.json")
+    run_parser("neptun", parse_neptun_pdf)

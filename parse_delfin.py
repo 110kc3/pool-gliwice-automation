@@ -1,10 +1,7 @@
-import glob
-import json
-import os
 import re
 import pandas as pd
 import tabula
-from pdf_utils import nan_to_none
+from pdf_utils import run_parser
 
 def parse_delfin_pdf(pdf_path):
     """
@@ -89,11 +86,4 @@ def parse_delfin_pdf(pdf_path):
     return pool_schedule
 
 if __name__ == "__main__":
-    candidates = sorted(glob.glob("Harmonogram_Delfin_*.pdf") + glob.glob("delfin.pdf"), key=os.path.getmtime, reverse=True)
-    delfin_pdf_path = "delfin.pdf" if os.path.exists("delfin.pdf") else candidates[0] if candidates else "delfin.pdf"
-    print(f"Parsing Delfin schedule from {delfin_pdf_path}...")
-    data = nan_to_none(parse_delfin_pdf(delfin_pdf_path))
-
-    with open("delfin_data.json", "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4, allow_nan=False)
-    print(f"Successfully saved {len(data)} entries to delfin_data.json")
+    run_parser("delfin", parse_delfin_pdf)

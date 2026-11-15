@@ -6,7 +6,7 @@ from collections import defaultdict
 import numpy as np
 from zoneinfo import ZoneInfo
 from pathlib import Path
-from schedule_metadata import read_metadata, source_pdf, lane_configuration
+from schedule_metadata import read_metadata, source_pdf, upcoming_pdf, lane_configuration
 
 DAYS = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"]
 DAY_SET = set(DAYS)
@@ -125,6 +125,45 @@ def transform_data(raw_data, dates_map=None, last_updated_pl=None, last_updated_
         result.append(pool_dict)
     return result
 
+def parse_date(value):
+    return datetime.datetime.strptime(value, "%d.%m.%Y")
+
+def week_range(dates):
+    values = sorted(set(dates.values()), key=parse_date)
+    return f"{values[0]} – {values[-1]}" if values else None
+
+def build_pools(pool_name, file_path, pdf, last_updated_pl, last_updated_iso):
+    with open(file_path, encoding="utf-8") as f:
+        raw = json.load(f)
+    entries = raw if isinstance(raw, list) else [raw]
+    entries = [dict(entry, name=pool_name.capitalize()) for entry in entries if isinstance(entry, dict)]
+    dates, configurations = read_metadata(pdf)
+    pools = transform_data(entries, dates, last_updated_pl, last_updated_iso)
+    for pool in pools:
+        pool["dates"] = dates
+        pool["weekRange"] = week_range(dates)
+        pool["sourcePdf"] = pdf.name
+        if pool_name.lower() == "olimpijczyk":
+            for entry in pool["schedule"]:
+                config = configurations.get(entry["day"])
+                if config:
+                    entry.update(lane_configuration(entry["availableLanes"], config))
+    return pools
+
+def starts_after(upcoming_dates, current_dates):
+    if not upcoming_dates:
+        return False
+    if not current_dates:
+        return True
+    return min(map(parse_date, upcoming_dates.values())) > max(map(parse_date, current_dates.values()))
+
+def append_upcoming_week(pool, upcoming):
+    if not starts_after(upcoming["dates"], pool["dates"]):
+        return
+    pool["schedule"].extend(entry for entry in upcoming["schedule"] if "date" in entry)
+    pool["upcomingWeekRange"] = upcoming["weekRange"]
+    pool["upcomingSourcePdf"] = upcoming["sourcePdf"]
+
 def aggregate_data(file_paths, output_path):
     transformed = []
     now_utc = datetime.datetime.now(datetime.timezone.utc)
@@ -132,27 +171,20 @@ def aggregate_data(file_paths, output_path):
     last_updated_pl = now_utc.astimezone(ZoneInfo("Europe/Warsaw")).strftime("%d.%m.%Y, %H:%M")
 
     for pool_name, file_path in file_paths.items():
-        with open(file_path, encoding="utf-8") as f:
-            raw = json.load(f)
-        entries = raw if isinstance(raw, list) else [raw]
-        entries = [dict(entry, name=pool_name.capitalize()) for entry in entries if isinstance(entry, dict)]
-        pdf = source_pdf(pool_name, Path(file_path).parent)
-        dates, configurations = read_metadata(pdf)
-        pools = transform_data(entries, dates, last_updated_pl, last_updated_iso)
+        directory = Path(file_path).parent
+        pools = build_pools(pool_name, file_path, source_pdf(pool_name, directory), last_updated_pl, last_updated_iso)
+        upcoming_data = directory / f"{pool_name}_next_data.json"
+        upcoming_source = upcoming_pdf(pool_name, directory)
+        if upcoming_data.exists() and upcoming_source.exists():
+            upcoming_pools = build_pools(pool_name, upcoming_data, upcoming_source, last_updated_pl, last_updated_iso)
+            for pool, upcoming in zip(pools, upcoming_pools):
+                append_upcoming_week(pool, upcoming)
         for pool in pools:
-            pool["dates"] = dates
-            values = sorted(set(dates.values()), key=lambda v: datetime.datetime.strptime(v, "%d.%m.%Y"))
-            pool["weekRange"] = f"{values[0]} – {values[-1]}" if values else None
-            pool["sourcePdf"] = pdf.name
-            if pool_name.lower() == "olimpijczyk":
-                for entry in pool["schedule"]:
-                    config = configurations.get(entry["day"])
-                    if config:
-                        entry.update(lane_configuration(entry["availableLanes"], config))
-            print(f"{pool['name']}: {pool['weekRange'] or 'unknown dates'}")
+            ranges = [r for r in (pool["weekRange"], pool.get("upcomingWeekRange")) if r]
+            print(f"{pool['name']}: {', '.join(ranges) or 'unknown dates'}")
         transformed.extend(pools)
 
-    payload = json.dumps(transformed, ensure_ascii=False, indent=4, allow_nan=False)
+    payload = json.dumps(transformed, ensure_ascii=False, indent=1, allow_nan=False)
     destination = Path(output_path)
     temporary = destination.with_suffix(destination.suffix + ".tmp")
     temporary.write_text(payload, encoding="utf-8")

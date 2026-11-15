@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const { aggregateHourlySlots, filterAndRankSlots, getFreeLanesDetail, getLiveSummary,
-    getPoolClock, getSlotCalendarDates, buildGoogleCalendarUrl } = require('../script.js');
+    getPoolClock, getSlotCalendarDates, buildGoogleCalendarUrl, getUpcomingDates,
+    mergeConsecutiveEntries } = require('../script.js');
 const now = new Date('2026-11-09T00:00:00+01:00');
 const dates = { 'Poniedziałek': '09.11.2026', 'Czwartek': '12.11.2026', 'Piątek': '13.11.2026' };
 const row = (time, availableLanes = 'dostępna', day = 'Poniedziałek', extra = {}) => ({ time, availableLanes, day, ...extra });
@@ -119,4 +120,23 @@ test('calendar exports require a confirmed date and pin the pool timezone', () =
 test('a dated weekday pill cannot select the same weekday in another week', () => {
     const pools = [pool([row('08:00 – 09:00'), row('08:00 – 09:00', 'dostępna', 'Poniedziałek', { date: '16.11.2026' })])];
     assert.deepEqual(rank(pools, { day: 'Poniedziałek', date: '09.11.2026' }).map(s => s.date), ['09.11.2026']);
+});
+
+test('day pills roll forward from today across the week boundary', () => {
+    const upcoming = getUpcomingDates(new Date('2026-11-15T23:30:00+01:00'));
+    assert.deepEqual(Object.entries(upcoming.fullDates).slice(0, 2), [['Niedziela', '15.11.2026'], ['Poniedziałek', '16.11.2026']]);
+    assert.equal(upcoming.fullDates['Sobota'], '21.11.2026');
+    assert.equal(upcoming.weekRange, '15.11 – 21.11');
+});
+
+test('timetable rows merge only adjacent identical entries of the same date', () => {
+    const mewa = pool([
+        row('08:00'), row('08:00', 'dostępna', 'Czwartek'), row('08:15'), row('08:30', 'I tor zajęty'),
+        row('09:00'), row('08:00', 'dostępna', 'Poniedziałek', { date: '16.11.2026' })
+    ]);
+    assert.deepEqual(mergeConsecutiveEntries(mewa, mewa.schedule).map(r => [r.date, r.timeLabel, r.raw]), [
+        ['09.11.2026', '08:00 – 08:30', 'dostępna'], ['09.11.2026', '08:30 – 08:45', 'I tor zajęty'],
+        ['09.11.2026', '09:00 – 09:15', 'dostępna'], ['12.11.2026', '08:00 – 08:15', 'dostępna'],
+        ['16.11.2026', '08:00 – 08:15', 'dostępna']
+    ]);
 });

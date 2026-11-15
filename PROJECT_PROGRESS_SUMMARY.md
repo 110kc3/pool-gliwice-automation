@@ -1,6 +1,18 @@
 # Project Implementation & Review Summary
 
-## Current work — 2026-11-13
+## Current work — 2026-11-15
+
+Accepted scope: find out why no new schedules appeared, trim the amount of text on the page, push.
+
+1. Cause: the downloader fetched only the PDF covering today, so next week's timetables (already published for Olimpijczyk and Neptun on 15 November) were ignored until Monday's run, and the 02:00 UTC cron actually started around 08:45–09:25 UTC. Every Monday morning the page had only expired data.
+2. Second cause, found on the 16–22 November Olimpijczyk PDF: its title reads `16 - 22 listopada 2026` without `od`, which the date parser rejected. That week would have been published without dates and excluded from recommendations.
+3. Fix: upcoming-week PDFs are downloaded, parsed and appended per pool; week titles without `od` are accepted; the workflow runs at 03:17 and 15:17 UTC and stages deleted upcoming files.
+4. Page text: rolling seven-day pills from today, eight results per page with "Pokaż więcej", source timetables merged from about 2,300 quarter-hour rows to about 320 ranges, matrix cells reduced to `free / total`, freshness banner shown only for pools without a current timetable, shorter labels, and the info tab without descriptive paragraphs. Rendered text on the default tab went from 3,952 to 2,177 characters, across all tabs from 8,151 to 4,208.
+5. Unchanged by decision: Delfin's open-ended `od 12 listopada 2026` timetable still ends on 15 November and is not repeated; Delfin and Mewa show "brak nowego harmonogramu" until the operator publishes new PDFs.
+
+Verification: 33 Python tests and 45 JavaScript tests pass; the full pipeline ran against the live site on 15 November; the page was rendered in headless Chromium at 390px and 1440px.
+
+## Previous work — 2026-11-13
 
 Accepted scope: fix the six findings from the 2026-11-12 review and push the completed changes.
 

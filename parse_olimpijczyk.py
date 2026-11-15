@@ -1,10 +1,7 @@
-import glob
-import json
-import os
 import re
 import pandas as pd
 import tabula
-from pdf_utils import nan_to_none
+from pdf_utils import run_parser
 
 def parse_olimpijczyk_pdf(pdf_path):
     """
@@ -65,11 +62,4 @@ def parse_olimpijczyk_pdf(pdf_path):
     return schedule
 
 if __name__ == "__main__":
-    candidates = sorted(glob.glob("Harmonogram_Olimpijczyk_*.pdf") + glob.glob("olimpijczyk.pdf"), key=os.path.getmtime, reverse=True)
-    olimpijczyk_pdf_path = "Harmonogram_Olimpijczyk_latest.pdf" if os.path.exists("Harmonogram_Olimpijczyk_latest.pdf") else candidates[0] if candidates else "Harmonogram_Olimpijczyk_26.10.2026_-_01.11.2026.pdf"
-    print(f"Parsing Olimpijczyk schedule from {olimpijczyk_pdf_path}...")
-    data = nan_to_none(parse_olimpijczyk_pdf(olimpijczyk_pdf_path))
-
-    with open("olimpijczyk_data.json", "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4, allow_nan=False)
-    print(f"Successfully saved {len(data)} entries to olimpijczyk_data.json")
+    run_parser("olimpijczyk", parse_olimpijczyk_pdf)

@@ -12,7 +12,7 @@ Live Application: https://110kc3.github.io/pool-gliwice-automation/
 - **Installable PWA:** Offline-capable Progressive Web App with service worker caching and Warsaw-timezone date awareness
 - **Pricing & Facility Specs:** Accurate admission pricing, benefit sports card rules (MultiSport, Medicover), pool dimensions, and water temperatures
 
-Each pool keeps the dates printed in its own PDF. Missing dates stay unknown, and expired timetables remain readable but are excluded from recommendations.
+Each pool keeps the dates printed in its own PDF. When the operator has already published the following week, it is fetched as `<pool>_next.pdf` and appended to that pool, so Sunday visitors can plan Monday. The page shows a rolling seven days from today, lists eight recommendations at a time, and merges identical quarter-hours in the source timetables into time ranges. Missing dates stay unknown, and expired timetables remain readable but are excluded from recommendations.
 
 ## Quick Start
 

@@ -1,10 +1,7 @@
-import glob
-import json
-import os
 import re
 import pandas as pd
 import tabula
-from pdf_utils import nan_to_none
+from pdf_utils import run_parser
 
 def parse_mewa_pdf(pdf_path):
     """
@@ -75,11 +72,4 @@ def parse_mewa_pdf(pdf_path):
     return schedule
 
 if __name__ == "__main__":
-    candidates = sorted(glob.glob("Harmonogram_Mewa_*.pdf") + glob.glob("mewa.pdf"), key=os.path.getmtime, reverse=True)
-    mewa_pdf_path = "mewa.pdf" if os.path.exists("mewa.pdf") else candidates[0] if candidates else "mewa.pdf"
-    print(f"Parsing Mewa schedule from {mewa_pdf_path}...")
-    data = nan_to_none(parse_mewa_pdf(mewa_pdf_path))
-
-    with open("mewa_data.json", "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4, allow_nan=False)
-    print(f"Successfully saved {len(data)} entries to mewa_data.json")
+    run_parser("mewa", parse_mewa_pdf)

@@ -14,6 +14,7 @@ from schedule_metadata import dates_from_text, configurations_from_text, lane_co
     ('Harmonogram od 30 marca do 5 kwietnia 2026', '30.03.2026'),
     ('Harmonogram od 28 grudnia do 3 stycznia 2027', '28.12.2026'),
     ('Harmonogram 26.10.2026 – 01.11.2026', '26.10.2026'),
+    ('Harmonogram dostępności niecki basenowej 16 - 22 listopada 2026', '16.11.2026'),
 ])
 def test_source_dates_are_not_replaced_by_build_week(text, monday):
     dates = dates_from_text(text)
@@ -75,3 +76,52 @@ def test_canonical_source_is_not_selected_by_checkout_mtime(tmp_path):
     (tmp_path / 'Harmonogram_Olimpijczyk_latest.pdf').touch()
     (tmp_path / 'Harmonogram_Olimpijczyk_30_03-05_04_2026.pdf').touch()
     assert source_pdf('olimpijczyk', tmp_path).name == 'Harmonogram_Olimpijczyk_latest.pdf'
+
+
+def write_week(tmp_path, data_name, pdf_name, day_value):
+    (tmp_path / data_name).write_text(json.dumps([{'time': '08:00', 'days': {'Poniedziałek': day_value}}]))
+    (tmp_path / pdf_name).touch()
+
+
+def aggregate_with_titles(tmp_path, titles):
+    def metadata(path):
+        return dates_from_text(titles[path.name]), {}
+    with patch('master_aggregator.read_metadata', side_effect=metadata):
+        aggregate_data({'neptun': tmp_path / 'neptun_data.json'}, tmp_path / 'output.json')
+    return json.loads((tmp_path / 'output.json').read_text())[0]
+
+
+def test_published_upcoming_week_is_appended_with_its_own_dates(tmp_path):
+    write_week(tmp_path, 'neptun_data.json', 'neptun.pdf', 'dostępna')
+    write_week(tmp_path, 'neptun_next_data.json', 'neptun_next.pdf', '0')
+    pool = aggregate_with_titles(tmp_path, {'neptun.pdf': 'od 9 do 15 listopada 2026',
+                                            'neptun_next.pdf': 'od 16 do 22 listopada 2026'})
+    assert [(e['date'], e['availableLanes']) for e in pool['schedule']] == [('09.11.2026', 'dostępna'), ('16.11.2026', '0')]
+    assert pool['weekRange'] == '09.11.2026 – 15.11.2026'
+    assert pool['upcomingWeekRange'] == '16.11.2026 – 22.11.2026'
+    assert pool['dates']['Poniedziałek'] == '09.11.2026'
+
+
+@pytest.mark.parametrize('upcoming_title', ['od 9 do 15 listopada 2026', 'od 2 do 8 listopada 2026', 'No dates'])
+def test_upcoming_file_that_is_not_later_or_undated_is_ignored(tmp_path, upcoming_title):
+    write_week(tmp_path, 'neptun_data.json', 'neptun.pdf', 'dostępna')
+    write_week(tmp_path, 'neptun_next_data.json', 'neptun_next.pdf', '0')
+    pool = aggregate_with_titles(tmp_path, {'neptun.pdf': 'od 9 do 15 listopada 2026', 'neptun_next.pdf': upcoming_title})
+    assert [e['date'] for e in pool['schedule']] == ['09.11.2026']
+    assert 'upcomingWeekRange' not in pool
+
+
+def test_downloader_selects_current_and_upcoming_weeks_from_filenames():
+    from download_schedules import select_best_link, select_upcoming_link
+    links = ['/a/Harmonogram_Neptun_09_11-15_11_2026.pdf', '/a/Harmonogram_Neptun_16_11-22_11_2026.pdf']
+    sunday = dt.date(2026, 11, 15)
+    current = select_best_link(links, sunday)
+    assert current == links[0]
+    assert select_upcoming_link(links, sunday, current) == links[1]
+    assert select_upcoming_link(links[:1], sunday, current) is None
+    monday = dt.date(2026, 11, 16)
+    assert select_best_link(links, monday) == links[1]
+    assert select_upcoming_link(links, monday, links[1]) is None
+    mewa = ['/a/Harmonogram_Mewa_od_09._11_2026-15_11_2026.pdf']
+    assert select_upcoming_link(mewa, dt.date(2026, 11, 8)) == mewa[0]
+    assert select_upcoming_link(['/a/Harmonogram_Delfin_od_12_11_2026.pdf'], sunday) is None

@@ -2,6 +2,7 @@ const DAYS_ORDER = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", 
 const DAY_SET = new Set(DAYS_ORDER);
 
 const DEFAULT_CAPACITY = 10;
+const RESULTS_PAGE_SIZE = 8;
 
 const POOL_SPECS = {
     "Olimpijczyk": {
@@ -250,6 +251,18 @@ function getScheduleDates(pools, fallbackDate = new Date()) {
     return { fullDates, shortDates, weekRange: values.length ? `${values[0]} – ${values.at(-1)}` : '' };
 }
 
+function getUpcomingDates(now = new Date()) {
+    const start = new Date(`${getPoolClock(now).iso}T00:00:00Z`);
+    const fullDates = Object.fromEntries(DAYS_ORDER.map((_, offset) => {
+        const date = new Date(start);
+        date.setUTCDate(date.getUTCDate() + offset);
+        return [DAYS_ORDER[(date.getUTCDay() + 6) % 7], polishDate(date.toISOString().slice(0, 10))];
+    }));
+    const shortDates = Object.fromEntries(Object.entries(fullDates).map(([d, v]) => [d, v.replace(/\.\d{4}$/, '')]));
+    const values = Object.values(shortDates);
+    return { fullDates, shortDates, weekRange: `${values[0]} – ${values.at(-1)}` };
+}
+
 function parseTimeInterval(value) {
     const m = /^\s*(\d{1,2})[:.](\d{2})(?:\s*[-–—]\s*(\d{1,2})[:.](\d{2}))?\s*$/.exec(value || '');
     if (!m || +m[1] > 23 || +m[2] > 59 || (m[3] && (+m[3] > 24 || +m[4] > 59 || (+m[3] === 24 && +m[4] !== 0)))) return null;
@@ -260,6 +273,32 @@ function parseTimeInterval(value) {
 
 function entryDate(pool, entry) {
     return entry.date || pool.dates?.[entry.day] || '';
+}
+
+function formatMinutes(minutes) {
+    return `${String(Math.floor(minutes / 60)).padStart(2, '0')}:${String(minutes % 60).padStart(2, '0')}`;
+}
+
+function mergeConsecutiveEntries(pool, entries) {
+    const rows = entries.map((entry, index) => {
+        const interval = parseTimeInterval(entry.time);
+        const date = entryDate(pool, entry);
+        return { entry, index, day: entry.day, date, raw: cleanCell(entry.availableLanes),
+            start: interval ? interval.start : null, end: interval ? interval.end : null,
+            sortKey: `${parseScheduleDate(date) || '9999'}-${DAYS_ORDER.indexOf(entry.day)}` };
+    });
+    rows.sort((a, b) => a.sortKey.localeCompare(b.sortKey) || (a.start ?? 1440) - (b.start ?? 1440) || a.index - b.index);
+    const merged = [];
+    rows.forEach(row => {
+        const last = merged.at(-1);
+        const continues = last && row.start !== null && last.end === row.start && last.sortKey === row.sortKey
+            && last.raw === row.raw && last.entry.totalLanes === row.entry.totalLanes
+            && last.entry.laneLength === row.entry.laneLength;
+        if (continues) last.end = row.end;
+        else merged.push({ ...row });
+    });
+    return merged.map(row => ({ entry: row.entry, day: row.day, date: row.date, raw: row.raw,
+        timeLabel: row.start === null ? cleanCell(row.entry.time) : `${formatMinutes(row.start)} – ${formatMinutes(row.end)}` }));
 }
 
 function aggregateHourlySlots(pools) {
@@ -462,6 +501,7 @@ function validatePoolData(data) {
             name: pool.name,
             weekRange: pool.weekRange,
             dates: pool.dates,
+            upcomingWeekRange: pool.upcomingWeekRange,
             sourcePdf: pool.sourcePdf,
             lastUpdated: pool.lastUpdated,
             lastUpdatedPl: pool.lastUpdatedPl,
@@ -576,7 +616,7 @@ function initApp(rawData) {
     }
 
     window.poolData = pools;
-    const weekDates = getScheduleDates([], new Date());
+    const weekDates = getUpcomingDates(new Date());
     const hourlySlots = aggregateHourlySlots(pools);
     const todayName = getPoolClock().day;
 
@@ -591,6 +631,8 @@ function initApp(rawData) {
         matrixDuration: 1,
         sortBy: 'lanes',
         onlyHigh: false,
+        visibleResults: RESULTS_PAGE_SIZE,
+        resultsFilterKey: '',
         matrixDay: todayName,
         searchQuery: '',
         scheduleDay: 'all',
@@ -604,26 +646,25 @@ function initApp(rawData) {
         const anyOpen = statuses.some(s => s.freeLanes > 0);
         const cards = statuses.map(status => {
             const specs = POOL_SPECS[status.poolName] || {};
-            const label = status.status === 'unknown' ? 'Brak aktualnych danych'
-                : status.freeLanes > 0 ? `${status.freeLanes} z ${status.totalLanes} torów wolnych` : 'Brak wolnych torów';
+            const label = status.status === 'unknown' ? 'Brak danych'
+                : status.freeLanes > 0 ? `${status.freeLanes} z ${status.totalLanes} torów` : 'Brak wolnych torów';
             return `<div class="radar-card status-${status.status}">
                 <div class="radar-card-header"><div><h4 class="radar-pool-title">${escapeHtml(status.poolName)}</h4>
                 <span class="radar-pool-meta">${escapeHtml(specs.type || '')}</span></div></div>
                 <div class="radar-current-hour"><span class="radar-hour-val">${escapeHtml(label)}</span></div>
-                <button type="button" class="btn-radar-pool" data-pool="${escapeHtml(status.poolName)}">Pokaż terminy ➔</button>
+                <button type="button" class="btn-radar-pool" data-pool="${escapeHtml(status.poolName)}">Terminy ➔</button>
             </div>`;
         }).join('');
         container.innerHTML = `<div class="live-hero-card">
             <div class="live-hero-top"><div class="live-title-group">
-                <span class="live-pulse-badge"><span class="pulse-dot"></span> TERAZ W HARMONOGRAMIE</span>
-                <h2>${anyOpen ? 'Wolne tory w tej chwili' : 'Brak potwierdzonych wolnych torów w tej chwili'}</h2>
-            </div><div class="live-clock-badge">${escapeHtml(clock.day)} ${clock.date}, ${String(clock.hour).padStart(2, '0')}:${String(clock.minute).padStart(2, '0')} (Gliwice)</div></div>
+                <span class="live-pulse-badge"><span class="pulse-dot"></span> TERAZ</span>
+                <h2>${anyOpen ? 'Wolne tory teraz' : 'Teraz brak wolnych torów'}</h2>
+            </div><div class="live-clock-badge">${escapeHtml(clock.day)} ${clock.date}, ${String(clock.hour).padStart(2, '0')}:${String(clock.minute).padStart(2, '0')}</div></div>
             ${nextSlot ? `<div class="immediate-pick-banner"><div class="immediate-pick-content">
-                <span class="immediate-pick-tag">Najbliższy potwierdzony termin na pełną godzinę:</span>
-                <h3 class="immediate-pick-name">${escapeHtml(nextSlot.poolName)} • ${escapeHtml(nextSlot.date)} • ${escapeHtml(nextSlot.timeLabel)}</h3>
-                <p class="immediate-pick-sub">Co najmniej <strong>${nextSlot.freeLanes} wolnych torów</strong> przez całą godzinę.</p>
-                </div><div class="immediate-pick-btns"><a href="${buildGoogleCalendarUrl(nextSlot)}" target="_blank" rel="noopener noreferrer" class="btn-hero-action gcal">📅 Dodaj do kalendarza</a></div></div>`
-                : '<p>Brak potwierdzonych nadchodzących terminów. Sprawdź daty harmonogramów poniżej.</p>'}
+                <span class="immediate-pick-tag">Najbliższy termin:</span>
+                <h3 class="immediate-pick-name">${escapeHtml(nextSlot.poolName)} • ${escapeHtml(nextSlot.shortDate)} • ${escapeHtml(nextSlot.timeLabel)} • min. ${nextSlot.freeLanes} torów</h3>
+                </div><div class="immediate-pick-btns"><a href="${buildGoogleCalendarUrl(nextSlot)}" target="_blank" rel="noopener noreferrer" class="btn-hero-action gcal">📅 Kalendarz</a></div></div>`
+                : '<p>Brak potwierdzonych nadchodzących terminów.</p>'}
             <div class="radar-grid">${cards}</div></div>`;
         container.querySelectorAll('.btn-radar-pool').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -639,13 +680,16 @@ function initApp(rawData) {
     function renderFreshness() {
         const banner = document.getElementById('data-freshness-banner');
         if (!banner) return;
-        const clock = getPoolClock();
-        banner.textContent = pools.map(pool => {
-            const dates = Object.values(pool.dates || {}).map(parseScheduleDate).filter(Boolean).sort();
-            const status = !dates.length ? 'brak potwierdzonych dat'
-                : dates.at(-1) < clock.iso ? 'nieaktualny' : dates[0] > clock.iso ? 'na przyszły termin' : 'aktualny';
-            return `${pool.name}: ${pool.weekRange || 'brak dat'} (${status})`;
-        }).join(' • ');
+        const today = getPoolClock().iso;
+        const problems = pools.map(pool => {
+            const dates = pool.schedule.map(entry => parseScheduleDate(entryDate(pool, entry))).filter(Boolean).sort();
+            if (!dates.length) return `${pool.name}: brak dat`;
+            if (dates.at(-1) < today) return `${pool.name}: brak nowego harmonogramu (ostatni do ${polishDate(dates.at(-1))})`;
+            if (dates[0] > today) return `${pool.name}: od ${polishDate(dates[0])}`;
+            return null;
+        }).filter(Boolean);
+        banner.hidden = problems.length === 0;
+        banner.textContent = problems.length ? `⚠️ ${problems.join(' • ')}` : '';
     }
 
     function renderInsights() {
@@ -662,7 +706,7 @@ function initApp(rawData) {
                 <div class="insight-content">
                     <span class="insight-title">Najlepszy dzień</span>
                     <strong class="insight-value">${escapeHtml(insights.bestDayLabel || insights.bestDay)}</strong>
-                    <span class="insight-desc">Średnio <strong>${insights.bestDayPercentage}%</strong> wolnych torów</span>
+                    <span class="insight-desc">śr. <strong>${insights.bestDayPercentage}%</strong> wolnych torów</span>
                 </div>
             </div>
             <div class="insight-card">
@@ -670,23 +714,14 @@ function initApp(rawData) {
                 <div class="insight-content">
                     <span class="insight-title">Najlepsza pora</span>
                     <strong class="insight-value">${escapeHtml(insights.bestBucket)}</strong>
-                    <span class="insight-desc">Średnio <strong>${insights.bestBucketPercentage}%</strong> wolnych torów</span>
+                    <span class="insight-desc">śr. <strong>${insights.bestBucketPercentage}%</strong> wolnych torów</span>
                 </div>
             </div>
             <div class="insight-card highlight">
                 <div class="insight-icon">🏊‍♂️</div>
                 <div class="insight-content">
-                    <span class="insight-title">Rekord wolnych torów</span>
-                    <strong class="insight-value">${escapeHtml(insights.peakSlot || 'Brak potwierdzonych terminów')}</strong>
-                    <span class="insight-desc">W nadchodzących potwierdzonych terminach</span>
-                </div>
-            </div>
-            <div class="insight-card">
-                <div class="insight-icon">⚠️</div>
-                <div class="insight-content">
-                    <span class="insight-title">Godziny szczytu</span>
-                    <strong class="insight-value">Pn–Pt 08:00 – 14:00</strong>
-                    <span class="insight-desc">Rezerwacje szkolne i klubowe</span>
+                    <span class="insight-title">Najwięcej wolnych torów</span>
+                    <strong class="insight-value">${escapeHtml(insights.peakSlot || 'Brak terminów')}</strong>
                 </div>
             </div>
         `;
@@ -711,9 +746,14 @@ function initApp(rawData) {
         };
 
         const rankedSlots = filterAndRankSlots(hourlySlots, options);
+        const filterKey = JSON.stringify({ ...options, now: null });
+        if (filterKey !== state.resultsFilterKey) {
+            state.resultsFilterKey = filterKey;
+            state.visibleResults = RESULTS_PAGE_SIZE;
+        }
 
         if (countBadge) {
-            countBadge.textContent = `${rankedSlots.length} znalezionych`;
+            countBadge.textContent = `${rankedSlots.length} terminów`;
         }
 
         if (rankedSlots.length === 0) {
@@ -721,9 +761,8 @@ function initApp(rawData) {
             resultsContainer.innerHTML = `
                 <div class="empty-state">
                     <div class="empty-icon">🔍</div>
-                    <h3>Brak dostępnych terminów</h3>
-                    <p>Brak wolnych torów dla wybranego filtru${state.minHour ? ' na resztę dzisiejszego dnia' : ''}. Wybierz inną porę, dzień lub zresetuj filtry.</p>
-                    <button type="button" class="btn-reset-filters" id="btn-reset-filters">Pokaż cały tydzień</button>
+                    <h3>Brak wolnych torów dla tego filtru</h3>
+                    <button type="button" class="btn-reset-filters" id="btn-reset-filters">Pokaż wszystkie terminy</button>
                 </div>
             `;
             const resetBtn = document.getElementById('btn-reset-filters');
@@ -746,14 +785,13 @@ function initApp(rawData) {
         const topPick = rankedSlots[0];
         const topSpecs = POOL_SPECS[topPick.poolName] || { length: '25m', type: 'Basen sportowy', address: '' };
         const percent = Math.round(topPick.openness * 100);
-        const durationBadge = topPick.duration > 1 ? ` • ${topPick.duration}h ciągłego pływania` : '';
         const lanesDisplay = (topPick.duration > 1 && topPick.minFreeLanes !== topPick.freeLanes)
             ? `min. ${topPick.minFreeLanes} <span class="lanes-unit">torów (śr. ${topPick.freeLanes})</span>`
             : `${topPick.freeLanes} <span class="lanes-unit">wolnych torów</span>`;
 
         topPickContainer.innerHTML = `
             <div class="top-pick-card">
-                <div class="top-pick-badge">🌟 Rekomendacja #1 • Najwięcej wolnego miejsca${durationBadge}</div>
+                <div class="top-pick-badge">🌟 Najlepszy termin</div>
                 <div class="top-pick-header">
                     <div>
                         <h3 class="top-pick-pool">${escapeHtml(topPick.poolName)}</h3>
@@ -762,27 +800,25 @@ function initApp(rawData) {
                     </div>
                     <div class="top-pick-stats">
                         <div class="top-pick-lanes">${lanesDisplay}</div>
-                        <div class="top-pick-percent">${percent}% pojemności</div>
+                        <div class="top-pick-percent">${percent}%</div>
                     </div>
                 </div>
 
                 <div class="top-pick-details">
                     <div class="top-pick-when">
-                        <span class="when-date">📅 <strong>${escapeHtml(topPick.date || '')}</strong> (${escapeHtml(topPick.day)})</span>
+                        <span class="when-date">📅 <strong>${escapeHtml(topPick.shortDate || '')}</strong> ${escapeHtml(topPick.day)}</span>
                         <span class="when-time">⏰ ${escapeHtml(topPick.timeLabel)}</span>
                     </div>
                     <div class="lane-progress-bar">
                         <div class="lane-progress-fill high" style="width: ${percent}%;"></div>
                     </div>
-                    <div class="top-pick-notes">
-                        <strong>Szczegóły:</strong> ${escapeHtml(topPick.details || 'Wszystkie tory dostępne dla klientów indywidualnych')}
-                    </div>
+                    ${topPick.duration > 1 ? `<div class="top-pick-notes">${escapeHtml(topPick.details)}</div>` : ''}
                     <div class="calendar-actions">
                         <a href="${buildGoogleCalendarUrl(topPick)}" target="_blank" rel="noopener noreferrer" class="btn-cal-action btn-cal-gcal">
-                            <span>📅</span> Dodaj do Kalendarza Google
+                            <span>📅</span> Google Calendar
                         </a>
                         <button type="button" class="btn-cal-action btn-cal-ics" id="btn-top-pick-ics">
-                            <span>📥</span> Pobierz .ics (Apple / Outlook)
+                            <span>📥</span> .ics
                         </button>
                     </div>
                 </div>
@@ -795,12 +831,10 @@ function initApp(rawData) {
         }
 
         const otherSlots = rankedSlots.slice(1);
-        if (otherSlots.length === 0) {
-            resultsContainer.innerHTML = '';
-            return;
-        }
+        const visibleSlots = otherSlots.slice(0, state.visibleResults);
+        const hiddenCount = otherSlots.length - visibleSlots.length;
 
-        resultsContainer.innerHTML = otherSlots.map((slot, index) => {
+        resultsContainer.innerHTML = visibleSlots.map((slot, index) => {
             const rank = index + 2;
             const slotSpecs = POOL_SPECS[slot.poolName] || { length: '25m', type: 'Basen' };
             const pct = Math.round(slot.openness * 100);
@@ -814,7 +848,7 @@ function initApp(rawData) {
                         <span class="slot-type">${escapeHtml(slot.laneLength || slotSpecs.length)}</span>
                     </div>
                     <div class="slot-when">
-                        <div class="slot-date-badge">📅 <strong>${escapeHtml(slot.date || '')}</strong> (${escapeHtml(slot.day)})</div>
+                        <div class="slot-date-badge">📅 <strong>${escapeHtml(slot.shortDate || '')}</strong> ${escapeHtml(slot.day)}</div>
                         <span class="slot-time">⏰ ${escapeHtml(slot.timeLabel)}</span>
                     </div>
                     <div class="slot-lanes-badge status-${statusClass}">
@@ -823,7 +857,6 @@ function initApp(rawData) {
                     <div class="lane-progress-bar small">
                         <div class="lane-progress-fill ${statusClass}" style="width: ${pct}%;"></div>
                     </div>
-                    ${slot.details ? `<div class="slot-subnote">⏱️ ${escapeHtml(slot.details)}</div>` : ''}
                     <div class="slot-card-actions">
                         <a href="${buildGoogleCalendarUrl(slot)}" target="_blank" rel="noopener noreferrer" class="slot-btn-cal gcal" title="Dodaj do Kalendarza Google">
                             📅 Google
@@ -834,16 +867,24 @@ function initApp(rawData) {
                     </div>
                 </div>
             `;
-        }).join('');
+        }).join('') + (hiddenCount > 0
+            ? `<button type="button" class="btn-reset-filters btn-show-more" id="btn-show-more">Pokaż więcej (${hiddenCount})</button>` : '');
 
         resultsContainer.querySelectorAll('.btn-slot-ics').forEach(btn => {
             btn.addEventListener('click', () => {
                 const idx = parseInt(btn.dataset.index, 10);
-                if (otherSlots[idx]) {
-                    triggerIcsDownload(otherSlots[idx]);
+                if (visibleSlots[idx]) {
+                    triggerIcsDownload(visibleSlots[idx]);
                 }
             });
         });
+        const showMoreBtn = document.getElementById('btn-show-more');
+        if (showMoreBtn) {
+            showMoreBtn.addEventListener('click', () => {
+                state.visibleResults += RESULTS_PAGE_SIZE * 2;
+                renderSuggester();
+            });
+        }
     }
 
     function renderMatrix() {
@@ -862,25 +903,18 @@ function initApp(rawData) {
 
         let rowsHtml = '';
         hours.forEach(h => {
-            const timeLabel = dur === 1
-                ? `${String(h).padStart(2, '0')}:00 – ${String(h + 1).padStart(2, '0')}:00`
-                : `${String(h).padStart(2, '0')}:00 – ${String(h + dur).padStart(2, '0')}:00 (${dur}h)`;
+            const timeLabel = `${String(h).padStart(2, '0')}:00 – ${String(h + dur).padStart(2, '0')}:00`;
 
             const cols = poolNames.map(pName => {
                 const match = comparisonSlots.find(s => s.poolName === pName && s.day === day && s.hour === h);
                 if (!match || match.openness === 0 || match.status === 'closed') {
-                    return `<td class="matrix-cell closed"><span class="matrix-badge closed">${!match || match.status === 'unknown' ? 'Brak pełnych danych' : 'Brak ciągłej dostępności'}</span>${dur > 1 && match && match.details ? `<div class="matrix-subnote">${escapeHtml(match.details)}</div>` : ''}</td>`;
+                    return !match || match.status === 'unknown'
+                        ? '<td class="matrix-cell closed"><span class="matrix-badge closed">brak danych</span></td>'
+                        : '<td class="matrix-cell closed" title="Brak ciągłej dostępności"><span class="matrix-badge closed">—</span></td>';
                 }
-                const pct = Math.round(match.openness * 100);
-                const laneText = (dur > 1 && typeof match.minFreeLanes === 'number')
-                    ? `<strong>min. ${match.minFreeLanes}</strong> torów (śr. ${match.averageFreeLanes ?? match.freeLanes})`
-                    : `<strong>${match.freeLanes}</strong> torów wolnych`;
-
                 return `
-                    <td class="matrix-cell ${match.status}">
-                        <div class="matrix-lanes">${laneText}</div>
-                        <div class="matrix-pct">${pct}% (${match.laneBadge})</div>
-                        ${dur > 1 && match.details ? `<div class="matrix-subnote">${escapeHtml(match.details)}</div>` : ''}
+                    <td class="matrix-cell ${match.status}" title="${escapeHtml(match.laneBadge)}">
+                        <div class="matrix-lanes"><strong>${match.freeLanes}</strong> / ${match.totalLanes}</div>
                     </td>
                 `;
             }).join('');
@@ -898,28 +932,27 @@ function initApp(rawData) {
                 <div class="matrix-controls-group">
                     <label for="matrix-day-select"><strong>Dzień:</strong></label>
                     <select id="matrix-day-select" class="styled-select">
-                        ${DAYS_ORDER.map(d => `<option value="${escapeHtml(d)}" ${d === day ? 'selected' : ''}>${escapeHtml(d)} — ${escapeHtml(weekDates.fullDates[d] || '')}</option>`).join('')}
+                        ${Object.keys(weekDates.fullDates).map(d => `<option value="${escapeHtml(d)}" ${d === day ? 'selected' : ''}>${escapeHtml(weekDates.shortDates[d])} ${escapeHtml(d)}</option>`).join('')}
                     </select>
                 </div>
                 <div class="matrix-controls-group">
                     <strong>Czas wizyty:</strong>
                     <div class="matrix-duration-pills">
-                        <button type="button" class="btn-matrix-duration ${dur === 1 ? 'active' : ''}" data-duration="1">1 godzina</button>
-                        <button type="button" class="btn-matrix-duration ${dur === 2 ? 'active' : ''}" data-duration="2">2 godziny</button>
-                        <button type="button" class="btn-matrix-duration ${dur === 3 ? 'active' : ''}" data-duration="3">3 godziny</button>
+                        <button type="button" class="btn-matrix-duration ${dur === 1 ? 'active' : ''}" data-duration="1">1h</button>
+                        <button type="button" class="btn-matrix-duration ${dur === 2 ? 'active' : ''}" data-duration="2">2h</button>
+                        <button type="button" class="btn-matrix-duration ${dur === 3 ? 'active' : ''}" data-duration="3">3h</button>
                     </div>
                 </div>
-                <span class="matrix-current-date-badge">📅 Obowiązuje: <strong>${escapeHtml(weekDates.fullDates[day] || '')}</strong></span>
             </div>
             <div class="table-responsive">
                 <table class="comparison-matrix-table">
                     <thead>
                         <tr>
                             <th>Godzina</th>
-                            <th>Olimpijczyk <span class="th-sub">25/50m • według konfiguracji</span></th>
-                            <th>Mewa <span class="th-sub">25m • 6 torów</span></th>
-                            <th>Delfin <span class="th-sub">25m • 6 torów</span></th>
-                            <th>Neptun <span class="th-sub">25m • 6 torów</span></th>
+                            <th>Olimpijczyk</th>
+                            <th>Mewa</th>
+                            <th>Delfin</th>
+                            <th>Neptun</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -952,7 +985,7 @@ function initApp(rawData) {
         const scheduleDaySelect = document.getElementById('schedule-day-select');
         if (scheduleDaySelect && scheduleDaySelect.options.length <= 8) {
             scheduleDaySelect.innerHTML = `
-                <option value="all" ${state.scheduleDay === 'all' ? 'selected' : ''}>Wszystkie dni źródłowych harmonogramów</option>
+                <option value="all" ${state.scheduleDay === 'all' ? 'selected' : ''}>Wszystkie dni</option>
                 ${DAYS_ORDER.map(d => `<option value="${escapeHtml(d)}" ${d === state.scheduleDay ? 'selected' : ''}>${escapeHtml(d)}</option>`).join('')}
             `;
         }
@@ -973,39 +1006,38 @@ function initApp(rawData) {
                 });
 
             if (poolSchedule.length === 0) return;
+            const rows = mergeConsecutiveEntries(pool, poolSchedule);
+            const ranges = [pool.weekRange, pool.upcomingWeekRange].filter(Boolean).join(', ');
 
-            const specs = POOL_SPECS[pool.name] || { length: '25m', address: '' };
             const card = document.createElement('div');
             card.classList.add('pool-schedule-card');
             card.innerHTML = `
                 <div class="schedule-card-header">
                     <div>
                         <h2>${escapeHtml(pool.name)}</h2>
-                        <span class="pool-address-line">${escapeHtml(specs.address)} • ${escapeHtml(specs.length)} • ${escapeHtml(pool.weekRange || 'Daty niepotwierdzone')}</span>
+                        <span class="pool-address-line">${escapeHtml(ranges || 'Daty niepotwierdzone')}</span>
                     </div>
-                    <span class="count-tag">${poolSchedule.length} wpisów</span>
                 </div>
                 <div class="table-responsive">
                     <table class="schedule-table">
                         <thead>
                             <tr>
-                                <th>Dzień i Data</th>
-                                <th>Godzina</th>
-                                <th>Dostępność</th>
-                                <th>Status</th>
+                                <th>Dzień</th>
+                                <th>Godziny</th>
+                                <th>Harmonogram</th>
+                                <th>Wolne tory</th>
                             </tr>
                         </thead>
                         <tbody>
-                            ${poolSchedule.map(e => {
-                                const detail = getFreeLanesDetail(pool.name, e.availableLanes, e);
+                            ${rows.map(row => {
+                                const detail = getFreeLanesDetail(pool.name, row.entry.availableLanes, row.entry);
                                 const statusClass = detail ? detail.status : 'low';
-                                const badgeText = detail ? detail.label : cleanCell(e.availableLanes);
-                                const dateStr = entryDate(pool, e);
+                                const badgeText = !detail ? '?' : detail.status === 'closed' ? '—' : `${detail.freeLanes} / ${detail.totalLanes}`;
                                 return `
                                     <tr>
-                                        <td><strong>${escapeHtml(cleanCell(e.day))}</strong>${dateStr ? `<span class="cell-date">(${escapeHtml(dateStr)})</span>` : ''}</td>
-                                        <td>${escapeHtml(cleanCell(e.time))}</td>
-                                        <td>${escapeHtml(cleanCell(e.availableLanes))}</td>
+                                        <td><strong>${escapeHtml(cleanCell(row.day))}</strong>${row.date ? `<span class="cell-date">${escapeHtml(row.date.replace(/\.\d{4}$/, ''))}</span>` : ''}</td>
+                                        <td>${escapeHtml(row.timeLabel)}</td>
+                                        <td>${escapeHtml(row.raw)}</td>
                                         <td><span class="status-pill status-${statusClass}">${escapeHtml(badgeText)}</span></td>
                                     </tr>
                                 `;
@@ -1174,9 +1206,9 @@ function initApp(rawData) {
     const lastUpdatedPl = pools[0]?.lastUpdatedPl || rawData[0]?.lastUpdatedPl;
     if (updateText) {
         if (lastUpdatedPl) {
-            updateText.textContent = `Zaktualizowano: ${lastUpdatedPl}`;
+            updateText.textContent = `Dane z ${lastUpdatedPl}`;
         } else {
-            updateText.textContent = `Codzienna aktualizacja nocna`;
+            updateText.textContent = 'Aktualizacja 2× dziennie';
         }
     }
 
@@ -1220,34 +1252,21 @@ function initApp(rawData) {
 
     function renderDateLabels() {
         const weekBadge = document.getElementById('schedule-week-badge');
-        if (weekBadge) weekBadge.textContent = `📅 Ten tydzień: ${weekDates.weekRange}`;
-        const allPill = document.querySelector('.filter-day-pill[data-day="all"]');
-        if (allPill && weekDates.shortDates["Poniedziałek"]) {
-            allPill.innerHTML = `Wszystkie nadchodzące dni`;
-        }
-        DAYS_ORDER.forEach(d => {
-            const pill = document.querySelector(`.filter-day-pill[data-day="${d}"]`);
-            if (pill) {
-                const shortDt = weekDates.shortDates[d] || '';
-                pill.innerHTML = `<strong>${shortDt}</strong> <span class="pill-day-sub">(${d})</span>`;
-            }
-        });
+        if (weekBadge) weekBadge.textContent = `📅 ${weekDates.weekRange}`;
         const workdaysPill = document.querySelector('.filter-day-pill[data-day="workdays"]');
-        if (workdaysPill && weekDates.shortDates["Poniedziałek"]) {
-            workdaysPill.innerHTML = `Dni robocze`;
-        }
-        const weekendPill = document.querySelector('.filter-day-pill[data-day="weekend"]');
-        if (weekendPill && weekDates.shortDates["Sobota"]) {
-            weekendPill.innerHTML = `Weekendy`;
-        }
-
+        Object.keys(weekDates.fullDates).forEach(d => {
+            const pill = document.querySelector(`.filter-day-pill[data-day="${d}"]`);
+            if (!pill) return;
+            pill.innerHTML = `<strong>${weekDates.shortDates[d]}</strong> <span class="pill-day-sub">${d.slice(0, 2)}</span>`;
+            if (workdaysPill) workdaysPill.before(pill);
+        });
     }
     renderDateLabels();
 
     renderLiveNow();
     renderFreshness();
     const refresh = () => {
-        Object.assign(weekDates, getScheduleDates([], new Date()));
+        Object.assign(weekDates, getUpcomingDates(new Date()));
         renderDateLabels();
         renderLiveNow();
         renderFreshness();
@@ -1304,6 +1323,8 @@ if (typeof module !== 'undefined' && module.exports) {
         getTimeBucket,
         getPolishDayName,
         getScheduleDates,
+        getUpcomingDates,
+        mergeConsecutiveEntries,
         aggregateHourlySlots,
         getMultiHourSlots,
         filterAndRankSlots,

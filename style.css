@@ -1996,3 +1996,4 @@ body {
 
 .data-freshness-banner { margin: 1rem 0; padding: 1rem; border: 1px solid currentColor; border-radius: .75rem; line-height: 1.6; overflow-wrap: anywhere; }
 .status-unknown { opacity: .8; }
+.btn-show-more { grid-column: 1 / -1; justify-self: center; }

@@ -14,6 +14,7 @@ PDF_FILES = {
     "mewa": "mewa.pdf", "delfin": "delfin.pdf",
     "olimpijczyk": "Harmonogram_Olimpijczyk_latest.pdf", "neptun": "neptun.pdf",
 }
+UPCOMING_PDF_FILES = {name: f"{name}_next.pdf" for name in PDF_FILES}
 MONTHS = {name: i + 1 for i, name in enumerate([
     "stycznia", "lutego", "marca", "kwietnia", "maja", "czerwca",
     "lipca", "sierpnia", "września", "października", "listopada", "grudnia",
@@ -36,17 +37,17 @@ def dates_from_text(text):
                 return week_dates(numeric[0])
             return {}
 
-        pattern = (rf"\bod\s+(\d{{1,2}})(?:\s+({MONTH_PATTERN}))?(?:\s+(\d{{4}}))?"
+        pattern = (rf"\b(\d{{1,2}})(?:\s+({MONTH_PATTERN}))?(?:\s+(\d{{4}}))?"
                    rf"\s*(?:do|[-–—])\s*(\d{{1,2}})\s+({MONTH_PATTERN})\s+(\d{{4}})")
-        match = re.search(pattern, text)
-        if match:
-            d1, m1, y1, d2, m2, y2 = match.groups()
+        ranges = re.findall(pattern, text)
+        for d1, m1, y1, d2, m2, y2 in ranges:
             end = dt.date(int(y2), MONTHS[m2], int(d2))
             start_month = MONTHS[m1 or m2]
             start_year = int(y1) if y1 else end.year - (start_month > end.month)
             start = dt.date(start_year, start_month, int(d1))
             if (end - start).days == 6 and start.weekday() == 0:
                 return week_dates(start)
+        if ranges:
             return {}
 
         match = re.search(rf"\bod\s+(\d{{1,2}})\s+({MONTH_PATTERN})\s+(\d{{4}})", text)
@@ -77,6 +78,9 @@ def read_metadata(pdf_path):
 def source_pdf(pool_name, directory="."):
     """Use the downloader's canonical file, never archived files' checkout mtimes."""
     return Path(directory) / PDF_FILES[pool_name.lower()]
+
+def upcoming_pdf(pool_name, directory="."):
+    return Path(directory) / UPCOMING_PDF_FILES[pool_name.lower()]
 
 def lane_configuration(raw, configuration):
     has_50m = bool(re.search(r"\d+\s*x\s*50\s*m", raw, re.I))
