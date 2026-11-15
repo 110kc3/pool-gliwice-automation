@@ -8,9 +8,11 @@ Accepted scope: find out why no new schedules appeared, trim the amount of text 
 2. Second cause, found on the 16–22 November Olimpijczyk PDF: its title reads `16 - 22 listopada 2026` without `od`, which the date parser rejected. That week would have been published without dates and excluded from recommendations.
 3. Fix: upcoming-week PDFs are downloaded, parsed and appended per pool; week titles without `od` are accepted; the workflow runs at 03:17 and 15:17 UTC and stages deleted upcoming files.
 4. Page text: rolling seven-day pills from today, eight results per page with "Pokaż więcej", source timetables merged from about 2,300 quarter-hour rows to about 320 ranges, matrix cells reduced to `free / total`, freshness banner shown only for pools without a current timetable, shorter labels, and the info tab without descriptive paragraphs. Rendered text on the default tab went from 3,952 to 2,177 characters, across all tabs from 8,151 to 4,208.
-5. Unchanged by decision: Delfin's open-ended `od 12 listopada 2026` timetable still ends on 15 November and is not repeated; Delfin and Mewa show "brak nowego harmonogramu" until the operator publishes new PDFs.
+5. Owner decision later on 15 November: an open-ended timetable (Delfin's `od 12 listopada 2026`) is now a standing schedule, repeated through the current and following week until a replacement is published. Timetables with an end date or printed dates are still never repeated. Mewa shows "brak nowego harmonogramu" until the operator publishes a new PDF.
+6. Neptun parser: a merged holiday cell removed one cell per row, so every later day was read one column to the left (Sunday's values landed on Saturday, Sunday was empty), and the 14:00 row was dropped every week because its time cell sits on the previous page row. Cells are now placed by x-position.
+7. Not done: the 9–15 November Olimpijczyk PDF has four rows with the same missing-cell pattern; that parser still reads columns by position.
 
-Verification: 33 Python tests and 45 JavaScript tests pass; the full pipeline ran against the live site on 15 November; the page was rendered in headless Chromium at 390px and 1440px.
+Verification: 38 Python tests and 45 JavaScript tests pass; the full pipeline ran against the live site on 15 November; the page was rendered in headless Chromium at 390px and 1440px.
 
 ## Previous work — 2026-11-13
 

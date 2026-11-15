@@ -34,7 +34,8 @@ The system is a classic three-tier structure:
 
 - Each pool uses its own canonical PDF for availability, dates, and configuration. Never replace missing dates with the current week or another pool's dates.
 - When the operator already publishes the following week, the downloader stores it as `<pool>_next.pdf`, parsers write `<pool>_next_data.json`, and the aggregator appends those entries to the same pool with their own dates (`upcomingWeekRange`). An upcoming file is used only if its PDF dates start after the canonical week; it is deleted when the operator no longer lists a future week.
-- Open-ended titles (`od 12 listopada`) cover only the rest of that week and are never repeated into later weeks.
+- An open-ended title (`od 12 listopada 2026`, no end date and no dated column) is a standing timetable: it applies from its first day through the current and following week until the operator publishes a replacement, whose dates take precedence. A timetable with any printed date or an end date is never repeated.
+- The Neptun parser assigns cells to days by their x-position in Tabula's JSON output, because merged cells (holiday closures) remove cells from a row and shift positional columns.
 - Missing/unknown intervals are not available. Recommendations require full visit coverage and minimum lane availability throughout the interval.
 - Relative dates use Europe/Warsaw. Expired and undated records remain visible only in source timetables, not recommendations.
 - Olimpijczyk can use 20 lanes in its split 25m configuration; preserve per-entry `totalLanes` and `laneLength`.

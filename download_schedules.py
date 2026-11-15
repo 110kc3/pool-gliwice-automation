@@ -34,28 +34,35 @@ def parse_filename_range(url):
         return None
     return None
 
+def parse_filename_start(url):
+    m = re.search(r"od[._ ]+(\d{1,2})[._]+(\d{1,2})[._]+(\d{4})", unquote(url), re.IGNORECASE)
+    try:
+        return datetime.date(int(m.group(3)), int(m.group(2)), int(m.group(1))) if m else None
+    except ValueError:
+        return None
+
+def filename_validity(url):
+    return parse_filename_range(url) or ((start, None) if (start := parse_filename_start(url)) else None)
+
 def select_best_link(matches, today=None):
     if not matches:
         return None
     if today is None:
         today = warsaw_today()
-    for url in matches:
-        rng = parse_filename_range(url)
-        if rng and rng[0] <= today <= rng[1]:
+    dated = [(url, validity) for url in matches if (validity := filename_validity(url))]
+    for url, (start, end) in dated:
+        if end and start <= today <= end:
             return url
-    valid_with_dates = []
-    for url in matches:
-        rng = parse_filename_range(url)
-        if rng:
-            valid_with_dates.append((url, rng))
-    if valid_with_dates:
-        valid_with_dates.sort(key=lambda item: abs((item[1][0] - today).days))
-        return valid_with_dates[0][0]
+    standing = [(start, url) for url, (start, end) in dated if end is None and start <= today]
+    if standing:
+        return max(standing)[1]
+    if dated:
+        return min(dated, key=lambda item: abs((item[1][0] - today).days))[0]
     return matches[0]
 
 def select_upcoming_link(matches, today, current_link=None):
-    upcoming = [(rng[0], url) for url in matches
-                if url != current_link and (rng := parse_filename_range(url)) and rng[0] > today]
+    upcoming = [(validity[0], url) for url in matches
+                if url != current_link and (validity := filename_validity(url)) and validity[0] > today]
     return min(upcoming)[1] if upcoming else None
 
 def warsaw_today():

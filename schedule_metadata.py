@@ -26,16 +26,17 @@ def week_dates(anchor, valid_from=None):
     return {day: date.strftime("%d.%m.%Y") for i, day in enumerate(DAYS)
             if (date := monday + dt.timedelta(days=i)) >= (valid_from or monday)}
 
-def dates_from_text(text):
+def schedule_validity(text):
     text = re.sub(r"\s+", " ", text.lower())
     try:
         numeric = [dt.date(2000 + int(y) if len(y) == 2 else int(y), int(m), int(d))
                    for d, m, y in re.findall(r"\b(\d{1,2})[./](\d{1,2})[./](\d{4}|\d{2})\b", text)]
         if numeric:
-            weeks = {date - dt.timedelta(days=date.weekday()) for date in numeric}
-            if len(weeks) == 1:
-                return week_dates(numeric[0])
-            return {}
+            mondays = {date - dt.timedelta(days=date.weekday()) for date in numeric}
+            if len(mondays) == 1:
+                monday = mondays.pop()
+                return monday, monday + dt.timedelta(days=6)
+            return None
 
         pattern = (rf"\b(\d{{1,2}})(?:\s+({MONTH_PATTERN}))?(?:\s+(\d{{4}}))?"
                    rf"\s*(?:do|[-–—])\s*(\d{{1,2}})\s+({MONTH_PATTERN})\s+(\d{{4}})")
@@ -46,18 +47,34 @@ def dates_from_text(text):
             start_year = int(y1) if y1 else end.year - (start_month > end.month)
             start = dt.date(start_year, start_month, int(d1))
             if (end - start).days == 6 and start.weekday() == 0:
-                return week_dates(start)
+                return start, end
         if ranges:
-            return {}
+            return None
 
         match = re.search(rf"\bod\s+(\d{{1,2}})\s+({MONTH_PATTERN})\s+(\d{{4}})", text)
         if match:
             d, m, y = match.groups()
-            start = dt.date(int(y), MONTHS[m], int(d))
-            return week_dates(start, valid_from=start)
+            return dt.date(int(y), MONTHS[m], int(d)), None
     except ValueError:
         pass
-    return {}
+    return None
+
+def dates_from_text(text):
+    validity = schedule_validity(text)
+    return week_dates(validity[0], valid_from=validity[0]) if validity else {}
+
+def open_ended_start_from_text(text):
+    validity = schedule_validity(text)
+    return validity[0] if validity and validity[1] is None else None
+
+def first_page_text(pdf_path):
+    return PdfReader(pdf_path).pages[0].extract_text(extraction_mode="layout")
+
+def open_ended_start(pdf_path):
+    try:
+        return open_ended_start_from_text(first_page_text(pdf_path))
+    except Exception:
+        return None
 
 def configurations_from_text(text):
     """Read Olimpijczyk's seven day-column configurations in layout order."""
@@ -69,7 +86,7 @@ def configurations_from_text(text):
 
 def read_metadata(pdf_path):
     try:
-        text = PdfReader(pdf_path).pages[0].extract_text(extraction_mode="layout")
+        text = first_page_text(pdf_path)
         return dates_from_text(text), configurations_from_text(text)
     except Exception as exc:
         print(f"Warning: Cannot determine schedule metadata from {pdf_path}: {exc}")

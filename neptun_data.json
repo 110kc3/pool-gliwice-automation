@@ -100,11 +100,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Piątek": "1x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Sobota": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Niedziela": null
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "0 wolnych torów (rekreacyjny: zajęty)",
+            "Sobota": "1x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Niedziela": "2x25m wolne (rekreacyjny: 1/3 wolna)"
         }
     },
     {
@@ -112,11 +112,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Piątek": "1x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Sobota": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Niedziela": null
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "0 wolnych torów (rekreacyjny: zajęty)",
+            "Sobota": "1x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Niedziela": "2x25m wolne (rekreacyjny: 1/3 wolna)"
         }
     },
     {
@@ -124,11 +124,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Piątek": "1x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Sobota": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Niedziela": null
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "0 wolnych torów (rekreacyjny: zajęty)",
+            "Sobota": "1x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Niedziela": "2x25m wolne (rekreacyjny: 1/3 wolna)"
         }
     },
     {
@@ -136,11 +136,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Piątek": "1x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Sobota": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Niedziela": null
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "0 wolnych torów (rekreacyjny: zajęty)",
+            "Sobota": "1x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Niedziela": "2x25m wolne (rekreacyjny: 1/3 wolna)"
         }
     },
     {
@@ -148,11 +148,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Piątek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "0 wolnych torów (rekreacyjny: zajęty)",
             "Sobota": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Niedziela": null
+            "Niedziela": "2x25m wolne (rekreacyjny: 1/3 wolna)"
         }
     },
     {
@@ -160,11 +160,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Piątek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "0 wolnych torów (rekreacyjny: zajęty)",
             "Sobota": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Niedziela": null
+            "Niedziela": "2x25m wolne (rekreacyjny: 1/3 wolna)"
         }
     },
     {
@@ -172,11 +172,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Piątek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "0 wolnych torów (rekreacyjny: zajęty)",
             "Sobota": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Niedziela": null
+            "Niedziela": "2x25m wolne (rekreacyjny: 1/3 wolna)"
         }
     },
     {
@@ -184,11 +184,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Piątek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "0 wolnych torów (rekreacyjny: zajęty)",
             "Sobota": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Niedziela": null
+            "Niedziela": "2x25m wolne (rekreacyjny: 1/3 wolna)"
         }
     },
     {
@@ -196,11 +196,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Piątek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Sobota": "4x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Niedziela": null
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "0 wolnych torów (rekreacyjny: zajęty)",
+            "Sobota": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Niedziela": "4x25m wolne (rekreacyjny: 1/3 wolna)"
         }
     },
     {
@@ -208,11 +208,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Piątek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Sobota": "4x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Niedziela": null
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "0 wolnych torów (rekreacyjny: zajęty)",
+            "Sobota": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Niedziela": "4x25m wolne (rekreacyjny: 1/3 wolna)"
         }
     },
     {
@@ -220,11 +220,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Piątek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Sobota": "4x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Niedziela": null
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "0 wolnych torów (rekreacyjny: zajęty)",
+            "Sobota": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Niedziela": "4x25m wolne (rekreacyjny: 1/3 wolna)"
         }
     },
     {
@@ -232,11 +232,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Piątek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Sobota": "4x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Niedziela": null
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "0 wolnych torów (rekreacyjny: zajęty)",
+            "Sobota": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Niedziela": "4x25m wolne (rekreacyjny: 1/3 wolna)"
         }
     },
     {
@@ -244,11 +244,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne",
-            "Czwartek": "0 wolnych torów (rekreacyjny: wolny)",
-            "Piątek": "3x25m wolne (rekreacyjny: zajęty)",
-            "Sobota": "4x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Niedziela": null
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "0 wolnych torów (rekreacyjny: zajęty)",
+            "Sobota": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Niedziela": "4x25m wolne (rekreacyjny: 1/3 wolna)"
         }
     },
     {
@@ -256,11 +256,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Piątek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Sobota": "4x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Niedziela": null
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "0 wolnych torów (rekreacyjny: zajęty)",
+            "Sobota": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Niedziela": "4x25m wolne (rekreacyjny: 1/3 wolna)"
         }
     },
     {
@@ -268,11 +268,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Piątek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Sobota": "4x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Niedziela": null
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "0 wolnych torów (rekreacyjny: zajęty)",
+            "Sobota": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Niedziela": "4x25m wolne (rekreacyjny: 1/3 wolna)"
         }
     },
     {
@@ -280,11 +280,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "0 wolnych torów (rekreacyjny: zajęty)",
-            "Piątek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Sobota": "4x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Niedziela": null
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "0 wolnych torów (rekreacyjny: zajęty)",
+            "Sobota": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Niedziela": "4x25m wolne (rekreacyjny: 1/3 wolna)"
         }
     },
     {
@@ -292,11 +292,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne",
+            "Środa": null,
             "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
             "Piątek": "5x25m wolne (rekreacyjny: wolny)",
             "Sobota": "5x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -304,11 +304,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
             "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
-            "Piątek": "5x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Sobota": "5x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -316,11 +316,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
             "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
-            "Piątek": "5x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Sobota": "5x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -328,11 +328,23 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
             "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
-            "Piątek": "5x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Sobota": "5x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
+        }
+    },
+    {
+        "time": "14:00",
+        "days": {
+            "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
+            "Wtorek": "3x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Sobota": "5x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -340,11 +352,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "3x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: YWA)",
+            "Środa": null,
             "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
             "Piątek": "5x25m wolne (rekreacyjny: wolny)",
             "Sobota": "5x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -352,11 +364,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "3x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
             "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
-            "Piątek": "5x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Sobota": "5x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -364,11 +376,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "3x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
             "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
-            "Piątek": "5x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Sobota": "5x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -376,11 +388,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -388,11 +400,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -400,11 +412,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -412,11 +424,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -424,11 +436,11 @@
         "days": {
             "Poniedziałek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "3x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
+            "Czwartek": "3x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -436,11 +448,11 @@
         "days": {
             "Poniedziałek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "3x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
+            "Czwartek": "3x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -448,11 +460,11 @@
         "days": {
             "Poniedziałek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "3x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
+            "Czwartek": "3x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -460,11 +472,11 @@
         "days": {
             "Poniedziałek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "3x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
+            "Czwartek": "3x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -472,11 +484,11 @@
         "days": {
             "Poniedziałek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Wtorek": "5x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Środa": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Środa": null,
             "Czwartek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -484,11 +496,11 @@
         "days": {
             "Poniedziałek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Wtorek": "5x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Środa": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Środa": null,
             "Czwartek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -496,11 +508,11 @@
         "days": {
             "Poniedziałek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Wtorek": "5x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Środa": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Środa": null,
             "Czwartek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -508,11 +520,11 @@
         "days": {
             "Poniedziałek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Wtorek": "5x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Środa": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Środa": null,
             "Czwartek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -520,11 +532,11 @@
         "days": {
             "Poniedziałek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Środa": null,
             "Czwartek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -532,11 +544,11 @@
         "days": {
             "Poniedziałek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Środa": null,
             "Czwartek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -544,11 +556,11 @@
         "days": {
             "Poniedziałek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Środa": null,
             "Czwartek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -556,11 +568,11 @@
         "days": {
             "Poniedziałek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "3x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Środa": null,
             "Czwartek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "3x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -568,11 +580,11 @@
         "days": {
             "Poniedziałek": "2x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Środa": null,
             "Czwartek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -580,11 +592,11 @@
         "days": {
             "Poniedziałek": "2x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Środa": null,
             "Czwartek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -592,11 +604,11 @@
         "days": {
             "Poniedziałek": "2x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Środa": null,
             "Czwartek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -604,11 +616,11 @@
         "days": {
             "Poniedziałek": "2x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "2x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Środa": null,
             "Czwartek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -616,11 +628,11 @@
         "days": {
             "Poniedziałek": "3x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "4x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "3x25m wolne (rekreacyjny: wolny)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "3x25m wolne (rekreacyjny: wolny)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -628,11 +640,11 @@
         "days": {
             "Poniedziałek": "3x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "4x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "3x25m wolne (rekreacyjny: wolny)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "3x25m wolne (rekreacyjny: wolny)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -640,11 +652,11 @@
         "days": {
             "Poniedziałek": "3x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "4x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "3x25m wolne (rekreacyjny: wolny)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "3x25m wolne (rekreacyjny: wolny)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -652,11 +664,11 @@
         "days": {
             "Poniedziałek": "3x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "4x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
-            "Czwartek": "3x25m wolne (rekreacyjny: wolny)",
-            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "3x25m wolne (rekreacyjny: wolny)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -664,11 +676,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
             "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
             "Piątek": "5x25m wolne (rekreacyjny: wolny)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -676,11 +688,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
             "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
             "Piątek": "5x25m wolne (rekreacyjny: wolny)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
     {
@@ -688,11 +700,11 @@
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
             "Wtorek": "5x25m wolne (rekreacyjny: wolny)",
-            "Środa": "5x25m wolne (rekreacyjny: wolny)",
+            "Środa": null,
             "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
             "Piątek": "5x25m wolne (rekreacyjny: wolny)",
             "Sobota": "5x25m wolne (rekreacyjny: wolny)",
-            "Niedziela": null
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     }
 ]

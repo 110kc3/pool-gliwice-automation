@@ -336,6 +336,18 @@
         }
     },
     {
+        "time": "14:00",
+        "days": {
+            "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",
+            "Wtorek": "3x25m wolne (rekreacyjny: wolny)",
+            "Środa": "0 wolnych torów (rekreacyjny: zajęty)",
+            "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
+            "Piątek": "5x25m wolne (rekreacyjny: wolny)",
+            "Sobota": "5x25m wolne (rekreacyjny: 1/3 wolna)",
+            "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
+        }
+    },
+    {
         "time": "14:15",
         "days": {
             "Poniedziałek": "5x25m wolne (rekreacyjny: wolny)",

@@ -6,7 +6,8 @@ from collections import defaultdict
 import numpy as np
 from zoneinfo import ZoneInfo
 from pathlib import Path
-from schedule_metadata import read_metadata, source_pdf, upcoming_pdf, lane_configuration
+from schedule_metadata import (read_metadata, source_pdf, upcoming_pdf, lane_configuration,
+                               open_ended_start, week_dates)
 
 DAYS = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"]
 DAY_SET = set(DAYS)
@@ -132,12 +133,13 @@ def week_range(dates):
     values = sorted(set(dates.values()), key=parse_date)
     return f"{values[0]} – {values[-1]}" if values else None
 
-def build_pools(pool_name, file_path, pdf, last_updated_pl, last_updated_iso):
+def build_pools(pool_name, file_path, pdf, last_updated_pl, last_updated_iso, dates=None):
     with open(file_path, encoding="utf-8") as f:
         raw = json.load(f)
     entries = raw if isinstance(raw, list) else [raw]
     entries = [dict(entry, name=pool_name.capitalize()) for entry in entries if isinstance(entry, dict)]
-    dates, configurations = read_metadata(pdf)
+    source_dates, configurations = read_metadata(pdf)
+    dates = source_dates if dates is None else dates
     pools = transform_data(entries, dates, last_updated_pl, last_updated_iso)
     for pool in pools:
         pool["dates"] = dates
@@ -150,36 +152,68 @@ def build_pools(pool_name, file_path, pdf, last_updated_pl, last_updated_iso):
                     entry.update(lane_configuration(entry["availableLanes"], config))
     return pools
 
-def starts_after(upcoming_dates, current_dates):
-    if not upcoming_dates:
+def starts_after(later_dates, current_dates):
+    if not later_dates:
         return False
     if not current_dates:
         return True
-    return min(map(parse_date, upcoming_dates.values())) > max(map(parse_date, current_dates.values()))
+    return min(map(parse_date, later_dates.values())) > max(map(parse_date, current_dates.values()))
 
-def append_upcoming_week(pool, upcoming):
-    if not starts_after(upcoming["dates"], pool["dates"]):
-        return
-    pool["schedule"].extend(entry for entry in upcoming["schedule"] if "date" in entry)
-    pool["upcomingWeekRange"] = upcoming["weekRange"]
-    pool["upcomingSourcePdf"] = upcoming["sourcePdf"]
+def later_weeks(pool, repeated, published, published_pdf_name):
+    published_week = next((week for week in published if starts_after(week["dates"], pool["dates"])), None)
+    cutoff = min(map(parse_date, published_week["dates"].values())) if published_week else None
+    weeks = []
+    for week in repeated:
+        dates = {day: value for day, value in week["dates"].items()
+                 if cutoff is None or parse_date(value) < cutoff}
+        if dates:
+            weeks.append((dates, week["schedule"], None))
+    if published_week:
+        weeks.append((published_week["dates"], published_week["schedule"], published_pdf_name))
+    return weeks
 
-def aggregate_data(file_paths, output_path):
+def append_later_weeks(pool, weeks):
+    appended_dates = {}
+    for dates, schedule, pdf_name in weeks:
+        allowed = set(dates.values())
+        pool["schedule"].extend(entry for entry in schedule if entry.get("date") in allowed)
+        appended_dates.update(dict.fromkeys(allowed))
+        if pdf_name:
+            pool["upcomingSourcePdf"] = pdf_name
+    if appended_dates:
+        pool["upcomingWeekRange"] = week_range({value: value for value in appended_dates})
+
+def open_ended_weeks(start, today):
+    anchor = max(start, today)
+    return (week_dates(anchor, valid_from=start),
+            week_dates(anchor + datetime.timedelta(days=7), valid_from=start))
+
+def warsaw_today():
+    return datetime.datetime.now(ZoneInfo("Europe/Warsaw")).date()
+
+def aggregate_data(file_paths, output_path, today=None):
     transformed = []
+    today = today or warsaw_today()
     now_utc = datetime.datetime.now(datetime.timezone.utc)
     last_updated_iso = now_utc.isoformat()
     last_updated_pl = now_utc.astimezone(ZoneInfo("Europe/Warsaw")).strftime("%d.%m.%Y, %H:%M")
+    stamps = (last_updated_pl, last_updated_iso)
 
     for pool_name, file_path in file_paths.items():
         directory = Path(file_path).parent
-        pools = build_pools(pool_name, file_path, source_pdf(pool_name, directory), last_updated_pl, last_updated_iso)
+        pdf = source_pdf(pool_name, directory)
+        standing_start = open_ended_start(pdf)
+        this_week, following_week = open_ended_weeks(standing_start, today) if standing_start else (None, None)
+        pools = build_pools(pool_name, file_path, pdf, *stamps, dates=this_week)
+
         upcoming_data = directory / f"{pool_name}_next_data.json"
         upcoming_source = upcoming_pdf(pool_name, directory)
-        if upcoming_data.exists() and upcoming_source.exists():
-            upcoming_pools = build_pools(pool_name, upcoming_data, upcoming_source, last_updated_pl, last_updated_iso)
-            for pool, upcoming in zip(pools, upcoming_pools):
-                append_upcoming_week(pool, upcoming)
+        published = (build_pools(pool_name, upcoming_data, upcoming_source, *stamps)
+                     if upcoming_data.exists() and upcoming_source.exists() else [])
+        repeated = build_pools(pool_name, file_path, pdf, *stamps, dates=following_week) if standing_start else []
+
         for pool in pools:
+            append_later_weeks(pool, later_weeks(pool, repeated, published, upcoming_source.name))
             ranges = [r for r in (pool["weekRange"], pool.get("upcomingWeekRange")) if r]
             print(f"{pool['name']}: {', '.join(ranges) or 'unknown dates'}")
         transformed.extend(pools)

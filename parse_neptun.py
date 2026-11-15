@@ -1,77 +1,73 @@
 import re
-import pandas as pd
 import tabula
 from pdf_utils import run_parser
 
-def parse_neptun_pdf(pdf_path):
-    """
-    Parses the weekly schedule PDF for Kryta Pływalnia Neptun (ul. Dzionkarzy 29).
-    The PDF contains 15-minute slot entries across 2 tables for:
-      - B. sportowy (6-lane 25m basin, 0-5 lanes available for public swimming)
-      - B. rekreacyjny (small/recreational basin, 'wolny', 'zajęty', etc.)
-    """
+DAYS = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"]
+TIME_RE = re.compile(r"^\d{1,2}[:.]\d{2}")
+COLUMN_TOLERANCE = 5
+
+def read_table_rows(pdf_path):
     try:
-        tables = tabula.read_pdf(pdf_path, pages="all", multiple_tables=True, lattice=True, pandas_options={"header": None})
+        tables = tabula.read_pdf(pdf_path, pages="all", multiple_tables=True, lattice=True, output_format="json")
     except Exception:
         tables = []
-    if not tables:
-        tables = tabula.read_pdf(pdf_path, pages="all", multiple_tables=True, pandas_options={"header": None})
+    return [positioned_cells(row) for table in tables for row in table["data"]]
 
-    if not tables:
+def positioned_cells(row):
+    return [{"left": cell["left"], "right": cell["left"] + cell["width"],
+             "text": re.sub(r"\s+", " ", cell["text"]).strip()}
+            for cell in row if cell["width"] > 0]
+
+def day_columns(cells):
+    return {cell["text"]: (cell["left"], cell["right"]) for cell in cells if cell["text"] in DAYS}
+
+def values_by_day(cells, columns):
+    values = {}
+    for cell in cells:
+        if not cell["text"]:
+            continue
+        for day, (left, right) in columns.items():
+            if cell["left"] < right - COLUMN_TOLERANCE and cell["right"] > left + COLUMN_TOLERANCE:
+                values[day] = cell["text"]
+    return values
+
+def lane_text(sport_value, recreational_value):
+    if not sport_value.isdigit():
+        return sport_value
+    free_lanes = int(sport_value)
+    text = f"{free_lanes}x25m wolne" if free_lanes > 0 else "0 wolnych torów"
+    return f"{text} (rekreacyjny: {recreational_value})" if recreational_value else text
+
+def parse_neptun_pdf(pdf_path):
+    rows = read_table_rows(pdf_path)
+    if not rows:
         print("No tables found in Neptun PDF.")
         return []
 
-    days = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"]
-    time_re = re.compile(r"^\d{1,2}[:.]\d{2}")
     schedule = []
+    columns = {}
+    current_time = None
+    recreational = {}
 
-    for df in tables:
-        current_time = None
-        rekreacyjny_info = {}
+    for cells in rows:
+        columns = day_columns(cells) or columns
+        if not columns or not cells:
+            continue
+        first_day_left = min(left for left, _ in columns.values())
+        labels = [cell["text"] for cell in cells if cell["left"] < first_day_left - COLUMN_TOLERANCE]
+        times = [label for label in labels if TIME_RE.match(label)]
+        if times:
+            current_time = times[0]
+        if not current_time:
+            continue
 
-        for _, row in df.iterrows():
-            col0 = str(row[0]).strip() if not pd.isna(row[0]) else ""
-            col1 = str(row[1]).strip() if len(row) > 1 and not pd.isna(row[1]) else ""
-
-            if time_re.match(col0):
-                current_time = col0
-
-            if not current_time:
-                continue
-
-            if "rekreacyjny" in col1.lower():
-                rekreacyjny_info = {}
-                for d_idx, d_name in enumerate(days):
-                    col_i = d_idx + 2
-                    val = str(row[col_i]).strip() if col_i < len(row) and not pd.isna(row[col_i]) else None
-                    if val and val.lower() != "nan":
-                        rekreacyjny_info[d_name] = val
-
-            elif "sportowy" in col1.lower():
-                day_data = {}
-                for d_idx, d_name in enumerate(days):
-                    col_i = d_idx + 2
-                    val = str(row[col_i]).strip() if col_i < len(row) and not pd.isna(row[col_i]) else None
-                    if val and val.lower() != "nan":
-                        rek_val = rekreacyjny_info.get(d_name)
-                        if val.isdigit():
-                            num = int(val)
-                            if num > 0:
-                                lane_str = f"{num}x25m wolne"
-                            else:
-                                lane_str = "0 wolnych torów"
-                            if rek_val and rek_val.lower() != "nan":
-                                lane_str += f" (rekreacyjny: {rek_val})"
-                            day_data[d_name] = lane_str
-                        else:
-                            day_data[d_name] = val
-                    else:
-                        day_data[d_name] = None
-
-                schedule.append({
-                    "time": current_time,
-                    "days": day_data
-                })
+        label_text = " ".join(labels).lower()
+        if "rekreacyjny" in label_text:
+            recreational = values_by_day(cells, columns)
+        elif "sportowy" in label_text:
+            sport = values_by_day(cells, columns)
+            schedule.append({"time": current_time, "days": {
+                day: lane_text(sport[day], recreational.get(day)) if day in sport else None for day in DAYS}})
 
     return schedule
 
