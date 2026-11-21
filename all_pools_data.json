@@ -1,0 +1,756 @@
+[
+    {
+        "time": "7.00- 8.00",
+        "days": {
+            "Poniedziałek": "Pływalnia dostępna",
+            "Wtorek": "Pływalnia dostępna",
+            "Środa": "Pływalnia dostępna",
+            "Czwartek": "Pływalnia dostępna",
+            "Piątek": "Pływalnia dostępna",
+            "Sobota": "Pływalnia nieczynna",
+            "Niedziela": "Pływalnia nieczynna"
+        },
+        "name": "Mewa"
+    },
+    {
+        "time": "8.00-9.00",
+        "days": {
+            "Poniedziałek": "Pływalnia niedostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Pływalnia nieczynna",
+            "Niedziela": "Pływalnia nieczynna"
+        },
+        "name": "Mewa"
+    },
+    {
+        "time": "9.00- 10.00",
+        "days": {
+            "Poniedziałek": "Pływalnia niedostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Pływalnia nieczynna",
+            "Niedziela": "Pływalnia nieczynna"
+        },
+        "name": "Mewa"
+    },
+    {
+        "time": "10.00- 11.00",
+        "days": {
+            "Poniedziałek": "Pływalnia niedostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Zajęte 3 tory",
+            "Niedziela": "wolne wszystkie tory"
+        },
+        "name": "Mewa"
+    },
+    {
+        "time": "11.00- 12.00",
+        "days": {
+            "Poniedziałek": "Pływalnia niedostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Zajęte 3 tory",
+            "Niedziela": "wolne wszystkie tory"
+        },
+        "name": "Mewa"
+    },
+    {
+        "time": "12.00- 13.00",
+        "days": {
+            "Poniedziałek": "Pływalnia niedostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Zajęte 3 tory",
+            "Niedziela": "wolne wszystkie tory"
+        },
+        "name": "Mewa"
+    },
+    {
+        "time": "13.00- 14.00",
+        "days": {
+            "Poniedziałek": "Pływalnia niedostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Zajęte 3 tory",
+            "Niedziela": "wolne wszystkie tory"
+        },
+        "name": "Mewa"
+    },
+    {
+        "time": "14.00- 15.00",
+        "days": {
+            "Poniedziałek": "Pływalnia niedostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Zajęte 3 tory",
+            "Niedziela": "wolne wszystkie tory"
+        },
+        "name": "Mewa"
+    },
+    {
+        "time": "15.00- 16.00",
+        "days": {
+            "Poniedziałek": "Zajęty 1 tor",
+            "Wtorek": "Zajęty 1 tor",
+            "Środa": "Zajęty 1 tor",
+            "Czwartek": "Zajęty 1 tor",
+            "Piątek": "wolne wszystkie tory",
+            "Sobota": "wolne wszystkie tory",
+            "Niedziela": "wolne wszystkie tory"
+        },
+        "name": "Mewa"
+    },
+    {
+        "time": "16.00- 17.00",
+        "days": {
+            "Poniedziałek": "Zajęty 3 tory",
+            "Wtorek": "Zajęty 3 tory",
+            "Środa": "Zajęty 2 tory",
+            "Czwartek": "Zajęte 2 tory",
+            "Piątek": "Zajęte 3 tory",
+            "Sobota": "wolne wszystkie tory",
+            "Niedziela": "wolne wszystkie tory"
+        },
+        "name": "Mewa"
+    },
+    {
+        "time": "17.00- 18.00",
+        "days": {
+            "Poniedziałek": "Zajęty 2 tory",
+            "Wtorek": "Zajęty 2 tory",
+            "Środa": "Zajęty 3 tory",
+            "Czwartek": "Zajęte 2 tory",
+            "Piątek": "Zajęty 2 tory",
+            "Sobota": "wolne wszystkie tory",
+            "Niedziela": "wolne wszystkie tory"
+        },
+        "name": "Mewa"
+    },
+    {
+        "time": "18.00- 19.00",
+        "days": {
+            "Poniedziałek": "Zajęty 2 tory",
+            "Wtorek": "Zajęty 2 tory",
+            "Środa": "Zajęty 2 tory",
+            "Czwartek": "Zajęte 2 tory",
+            "Piątek": "Zajęty 2 tory",
+            "Sobota": "wolne wszystkie tory",
+            "Niedziela": "wolne wszystkie tory"
+        },
+        "name": "Mewa"
+    },
+    {
+        "time": "19.00- 20.00",
+        "days": {
+            "Poniedziałek": "Zajęty 3 tory",
+            "Wtorek": "Zajęty 3 tory",
+            "Środa": "Zajęty 3 tory",
+            "Czwartek": "Zajęty 3 tory",
+            "Piątek": "Zajęty 2 tory",
+            "Sobota": "wolne wszystkie tory",
+            "Niedziela": "wolne wszystkie tory"
+        },
+        "name": "Mewa"
+    },
+    {
+        "time": "20.00- 21.00",
+        "days": {
+            "Poniedziałek": "Zajęte 3 tory",
+            "Wtorek": "Zajęty 3 tory",
+            "Środa": "Zajęty 3 tory",
+            "Czwartek": "Zajęty 3 tory",
+            "Piątek": "Zajęty 2 tory",
+            "Sobota": "wolne wszystkie tory",
+            "Niedziela": "wolne wszystkie tory"
+        },
+        "name": "Mewa"
+    },
+    {
+        "time": "21.00- 21.45",
+        "days": {
+            "Poniedziałek": "wolne wszystkie tory",
+            "Wtorek": "wolne wszystkie tory",
+            "Środa": "wolne wszystkie tory",
+            "Czwartek": "wolne wszystkie tory",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "wolne wszystkie tory",
+            "Niedziela": "wolne wszystkie tory"
+        },
+        "name": "Mewa"
+    },
+    {
+        "time": "6.00- 7.00",
+        "days": {
+            "Poniedziałek": "Pływalnia dostępna",
+            "Wtorek": "Pływalnia dostępna",
+            "Środa": "Pływalnia dostępna",
+            "Czwartek": "Pływalnia dostępna",
+            "Piątek": "Pływalnia dostępna",
+            "Sobota": "Pływalnia niedostępna",
+            "Niedziela": "Pływalnia niedostępna"
+        },
+        "name": "Delfin"
+    },
+    {
+        "time": "7.00- 8.00",
+        "days": {
+            "Poniedziałek": "Pływalnia dostępna",
+            "Wtorek": "Pływalnia dostępna",
+            "Środa": "Pływalnia dostępna",
+            "Czwartek": "Pływalnia dostępna",
+            "Piątek": "Pływalnia dostępna",
+            "Sobota": "Pływalnia niedostępna",
+            "Niedziela": "Pływalnia niedostępna"
+        },
+        "name": "Delfin"
+    },
+    {
+        "time": "8.00-9.00",
+        "days": {
+            "Poniedziałek": "Pływalnia niedostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Pływalnia dostępna",
+            "Niedziela": "Pływalnia dostępna"
+        },
+        "name": "Delfin"
+    },
+    {
+        "time": "9.00- 10.00",
+        "days": {
+            "Poniedziałek": "Pływalnia dostępna-zajęty 1\rtor",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Pływalnia dostępna-zajęty 1 tor",
+            "Niedziela": "Pływalnia dostępna"
+        },
+        "name": "Delfin"
+    },
+    {
+        "time": "10.00- 11.00",
+        "days": {
+            "Poniedziałek": "Pływalnia niedostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Pływalnia dostępna-zajęty 1 tor",
+            "Niedziela": "Pływalnia dostępna"
+        },
+        "name": "Delfin"
+    },
+    {
+        "time": "11.00- 12.00",
+        "days": {
+            "Poniedziałek": "Pływalnia niedostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Pływalnia dostępna-zajęty 1 tor",
+            "Niedziela": "Pływalnia dostępna"
+        },
+        "name": "Delfin"
+    },
+    {
+        "time": "12.00- 13.00",
+        "days": {
+            "Poniedziałek": "Pływalnia niedostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Pływalnia dostępna-zajęty 1 tor",
+            "Niedziela": "Pływalnia dostępna"
+        },
+        "name": "Delfin"
+    },
+    {
+        "time": "13.00- 14.00",
+        "days": {
+            "Poniedziałek": "Pływalnia niedostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia niedostępna",
+            "Piątek": "Pływalnia niedostępna",
+            "Sobota": "Pływalnia dostępna-zajęty 1 tor",
+            "Niedziela": "Pływalnia dostępna"
+        },
+        "name": "Delfin"
+    },
+    {
+        "time": "14.00- 15.00",
+        "days": {
+            "Poniedziałek": "Pływalnia dostępna",
+            "Wtorek": "Pływalnia niedostępna",
+            "Środa": "Pływalnia niedostępna",
+            "Czwartek": "Pływalnia dostępna",
+            "Piątek": "Pływalnia dostępna",
+            "Sobota": "Pływalnia dostępna-zajęty 1 tor",
+            "Niedziela": "Pływalnia dostępna"
+        },
+        "name": "Delfin"
+    },
+    {
+        "time": "15.00- 16.00",
+        "days": {
+            "Poniedziałek": "Pływalnia dostępna",
+            "Wtorek": "Pływalnia dostępna-zajęty 2\rtory",
+            "Środa": "Pływalnia dostępna",
+            "Czwartek": "Pływalnia dostępna-zajęte 2\rtory",
+            "Piątek": "Pływalnia dostępna",
+            "Sobota": "Pływalnia dostępna-zajęty 1 tor",
+            "Niedziela": "Pływalnia dostępna"
+        },
+        "name": "Delfin"
+    },
+    {
+        "time": "16.00- 17.00",
+        "days": {
+            "Poniedziałek": "Pływalnia dostępna-zajęty 1\rtor",
+            "Wtorek": "Pływalnia dostępna-zajęte 2\rtory",
+            "Środa": "Pływalnia dostępna-zajęty 1\rtor",
+            "Czwartek": "Pływalnia dostępna-zajęte 2\rtory",
+            "Piątek": "Pływalnia dostępna-zajęty 1 tor",
+            "Sobota": "Pływalnia dostępna-zajęty 1 tor",
+            "Niedziela": "Pływalnia dostępna"
+        },
+        "name": "Delfin"
+    },
+    {
+        "time": "17.00- 18.00",
+        "days": {
+            "Poniedziałek": "Pływalnia dostępna-zajęty 1\rtor",
+            "Wtorek": "Pływalnia dostępna-zajęte 2\rtory",
+            "Środa": "Pływalnia dostępna-zajęty 1\rtor",
+            "Czwartek": "Pływalnia dostępna-zajęte 2\rtory",
+            "Piątek": "Pływalnia dostępna-zajęty 1 tor",
+            "Sobota": "Pływalnia dostępna-zajęty 2 tor",
+            "Niedziela": "Pływalnia dostępna"
+        },
+        "name": "Delfin"
+    },
+    {
+        "time": "18.00- 19.00",
+        "days": {
+            "Poniedziałek": "Pływalnia dostępna-zajęty 1\rtor",
+            "Wtorek": "Pływalnia dostępna-zajęte 2\rtory",
+            "Środa": "Pływalnia dostępna-zajęty 1\rtor",
+            "Czwartek": "Pływalnia dostępna-zajęte 2\rtory",
+            "Piątek": "Pływalnia dostępna-zajęty 1 tor",
+            "Sobota": "Pływalnia dostępna-zajęty 1 tor",
+            "Niedziela": "Pływalnia dostępna"
+        },
+        "name": "Delfin"
+    },
+    {
+        "time": "19.00- 20.00",
+        "days": {
+            "Poniedziałek": "Pływalnia dostępna-zajęty 1\rtor",
+            "Wtorek": "Pływalnia dostępna-zajęte 2\rtory",
+            "Środa": "Pływalnia dostępna-zajęty 1\rtor",
+            "Czwartek": "Pływalnia dostępna-zajęte 2\rtory",
+            "Piątek": "Pływalnia dostępna-zajęty 1 tor",
+            "Sobota": "Pływalnia dostępna-zajęty 1 tor",
+            "Niedziela": "Pływalnia dostępna"
+        },
+        "name": "Delfin"
+    },
+    {
+        "time": "20.00- 21.00",
+        "days": {
+            "Poniedziałek": "Pływalnia dostępna-zajęte 2\rtory",
+            "Wtorek": "Pływalnia dostępna-zajęte 2\rtory",
+            "Środa": "Pływalnia dostępna-zajęte 2\rtory",
+            "Czwartek": "Pływalnia dostępna-zajęte 2\rtory",
+            "Piątek": "Pływalnia dostępna",
+            "Sobota": "Pływalnia dostępna",
+            "Niedziela": "Pływalnia dostępna"
+        },
+        "name": "Delfin"
+    },
+    {
+        "time": "21.00- 21.45",
+        "days": {
+            "Poniedziałek": "Pływalnia dostępna",
+            "Wtorek": "Pływalnia dostępna-zajęty 1\rtor",
+            "Środa": "Pływalnia dostępna",
+            "Czwartek": "Pływalnia dostępna",
+            "Piątek": "Pływalnia dostępna",
+            "Sobota": "Pływalnia dostępna",
+            "Niedziela": "Pływalnia dostępna"
+        },
+        "name": "Delfin"
+    },
+    {
+        "time": "Harmonogram dostępności niecki basenowej od 30 marca do 5 kwietnia 2026",
+        "days": {
+            "Poniedziałek": null,
+            "Wtorek": null,
+            "Środa": null,
+            "Czwartek": null,
+            "Piątek": null,
+            "Sobota": null,
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "Dzień\rtygodnia",
+        "days": {
+            "Poniedziałek": "Poniedziałek",
+            "Wtorek": "Wtorek",
+            "Środa": "Środa",
+            "Czwartek": "Czwartek",
+            "Piątek": "Piątek",
+            "Sobota": "Sobota",
+            "Niedziela": "Niedziela"
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "Data",
+        "days": {
+            "Poniedziałek": "30 marca",
+            "Wtorek": "31 marca",
+            "Środa": "1 kwietnia",
+            "Czwartek": "2 kwietnia",
+            "Piątek": "3 kwietnia",
+            "Sobota": "4 kwietnia",
+            "Niedziela": "5 kwietnia"
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "Godzina",
+        "days": {
+            "Poniedziałek": "Ilość wolnych torów",
+            "Wtorek": null,
+            "Środa": null,
+            "Czwartek": null,
+            "Piątek": null,
+            "Sobota": null,
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "06:00",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "6x50m, 1x25m i wypł",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "8x50m, 1x25m i wypł",
+            "Piątek": "8x50m, 1x25m i wypł",
+            "Sobota": "P\rł\ry\rw",
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "06:15",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "6x50m, 1x25m i wypł",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "8x50m, 1x25m i wypł",
+            "Piątek": "8x50m, 1x25m i wypł",
+            "Sobota": null,
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "06:30",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "6x50m, 1x25m i wypł",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "8x50m, 1x25m i wypł",
+            "Piątek": "8x50m, 1x25m i wypł",
+            "Sobota": null,
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "06:45",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "6x50m, 1x25m i wypł",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "8x50m, 1x25m i wypł",
+            "Piątek": "8x50m, 1x25m i wypł",
+            "Sobota": null,
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "07:00",
+        "days": {
+            "Poniedziałek": "3x50m, 1x25m i wypł",
+            "Wtorek": "3x50m, 1x25m i wypł",
+            "Środa": "2x50m, 1x25m i wypł",
+            "Czwartek": "5x50m, 1x25m i wypł",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": null,
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "07:15",
+        "days": {
+            "Poniedziałek": "3x50m, 1x25m i wypł",
+            "Wtorek": "3x50m, 1x25m i wypł",
+            "Środa": "2x50m, 1x25m i wypł",
+            "Czwartek": "5x50m, 1x25m i wypł",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": "a",
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "07:30",
+        "days": {
+            "Poniedziałek": "3x50m, 1x25m i wypł",
+            "Wtorek": "3x50m, 1x25m i wypł",
+            "Środa": "2x50m, 1x25m i wypł",
+            "Czwartek": "5x50m, 1x25m i wypł",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": "l",
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "07:45",
+        "days": {
+            "Poniedziałek": "3x50m, 1x25m i wypł",
+            "Wtorek": "3x50m, 1x25m i wypł",
+            "Środa": "2x50m, 1x25m i wypł",
+            "Czwartek": "5x50m, 1x25m i wypł",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": "n",
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "08:00",
+        "days": {
+            "Poniedziałek": "3x50m, 1x25m i wypł",
+            "Wtorek": "4x50m",
+            "Środa": "1x50m",
+            "Czwartek": "4x50m",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": null,
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "08:15",
+        "days": {
+            "Poniedziałek": "3x50m, 1x25m i wypł",
+            "Wtorek": "4x50m",
+            "Środa": "1x50m",
+            "Czwartek": "4x50m",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": null,
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "08:30",
+        "days": {
+            "Poniedziałek": "3x50m, 1x25m i wypł",
+            "Wtorek": "4x50m",
+            "Środa": "1x50m",
+            "Czwartek": "4x50m",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": null,
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "08:45",
+        "days": {
+            "Poniedziałek": "3x50m, 1x25m i wypł",
+            "Wtorek": "4x50m",
+            "Środa": "1x50m",
+            "Czwartek": "4x50m",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": null,
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "09:00",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "4x50m",
+            "Środa": "8x50m",
+            "Czwartek": "8x50m",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": "n",
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "09:15",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "4x50m",
+            "Środa": "8x50m",
+            "Czwartek": "8x50m",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": "i",
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "09:30",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "4x50m",
+            "Środa": "8x50m",
+            "Czwartek": "8x50m",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": "e",
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "09:45",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "4x50m",
+            "Środa": "8x50m",
+            "Czwartek": "8x50m",
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": null,
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "10:00",
+        "days": {
+            "Poniedziałek": "5x50m, 1x25m",
+            "Wtorek": "5x50m, 1x25m",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "4x50m, 1x25m i wypł",
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": null,
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "10:15",
+        "days": {
+            "Poniedziałek": "5x50m, 1x25m",
+            "Wtorek": "5x50m, 1x25m",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "4x50m, 1x25m i wypł",
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": null,
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "10:30",
+        "days": {
+            "Poniedziałek": "5x50m, 1x25m",
+            "Wtorek": "5x50m, 1x25m",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "4x50m, 1x25m i wypł",
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": null,
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "10:45",
+        "days": {
+            "Poniedziałek": "5x50m, 1x25m",
+            "Wtorek": "5x50m, 1x25m",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "4x50m, 1x25m i wypł",
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": "n",
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "11:00",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "8x50m i wypł",
+            "Środa": "4x50m, 1x25m i wypł",
+            "Czwartek": "8x50m, 1x25m i wypł",
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "n",
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "11:15",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "8x50m i wypł",
+            "Środa": "4x50m, 1x25m i wypł",
+            "Czwartek": "8x50m, 1x25m i wypł",
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "a",
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    },
+    {
+        "time": "11:30",
+        "days": {
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "8x50m i wypł",
+            "Środa": "4x50m, 1x25m i wypł",
+            "Czwartek": "8x50m, 1x25m i wypł",
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": null,
+            "Niedziela": null
+        },
+        "name": "Olimpijczyk"
+    }
+]

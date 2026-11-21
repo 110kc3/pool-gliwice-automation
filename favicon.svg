@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#034b75" />
+    </linearGradient>
+    <linearGradient id="wave" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#7dd3fc" />
+    </linearGradient>
+  </defs>
+  <!-- Background rounded squircle -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)" />
+  
+  <!-- Swimming Swimmer Silhouette & Waves -->
+  <g transform="translate(0, 20)">
+    <!-- Swimmer head -->
+    <circle cx="340" cy="170" r="32" fill="#ffffff" />
+    
+    <!-- Swimmer body / stroke -->
+    <path d="M 140 250 C 180 200, 260 210, 310 200 L 320 225 C 270 235, 200 235, 150 280 Z" fill="#ffffff" />
+    <!-- Arms -->
+    <path d="M 270 205 C 320 160, 380 150, 410 165 C 415 175, 400 185, 360 195 L 305 220 Z" fill="#ffffff" opacity="0.95" />
+    
+    <!-- Water Waves / Swimming Lanes -->
+    <!-- Wave 1 -->
+    <path d="M 60 300 C 120 280, 180 320, 240 300 C 300 280, 360 320, 452 300 C 465 297, 465 315, 452 318 C 360 338, 300 298, 240 318 C 180 338, 120 298, 60 318 C 48 318, 48 300, 60 300 Z" fill="url(#wave)" />
+    <!-- Wave 2 -->
+    <path d="M 60 355 C 120 335, 180 375, 240 355 C 300 335, 360 375, 452 355 C 465 352, 465 370, 452 373 C 360 393, 300 353, 240 373 C 180 393, 120 353, 60 373 C 48 373, 48 355, 60 355 Z" fill="#38bdf8" opacity="0.85" />
+    <!-- Wave 3 -->
+    <path d="M 60 410 C 120 390, 180 430, 240 410 C 300 390, 360 430, 452 410 C 465 407, 465 425, 452 428 C 360 448, 300 408, 240 428 C 180 448, 120 408, 60 428 C 48 428, 48 410, 60 410 Z" fill="#0284c7" opacity="0.7" />
+  </g>
+</svg>

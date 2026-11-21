@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gliwice Pływalnie — Sugester Wolnych Torów i Dostępność Basenów</title>
+    <meta name="description" content="Sprawdź kiedy na basenach w Gliwicach (Olimpijczyk, Mewa, Delfin, Neptun) jest najwięcej wolnych torów. Inteligentny sugester godzin pływania na podstawie oficjalnych harmonogramów.">
+    <link rel="canonical" href="https://110kc3.github.io/pool-gliwice-automation/">
+    <link rel="alternate" type="application/json" href="https://110kc3.github.io/pool-gliwice-automation/data.json" title="Pool availability (JSON)">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Gliwice Pool Availability">
+    <meta property="og:title" content="Gliwice Pływalnie — Kiedy jest najwięcej wolnych torów?">
+    <meta property="og:description" content="Inteligentny sugester wolnych torów na basenach Olimpijczyk, Mewa, Delfin i Neptun w Gliwicach. Znajdź najlepszą godzinę na pływanie.">
+    <meta property="og:url" content="https://110kc3.github.io/pool-gliwice-automation/">
+    <meta property="og:image" content="https://110kc3.github.io/pool-gliwice-automation/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#0284c7">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Pływalnie Gliwice">
+
+    <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon.png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://110kc3.github.io/pool-gliwice-automation/#website",
+          "url": "https://110kc3.github.io/pool-gliwice-automation/",
+          "name": "Gliwice Pool Availability",
+          "description": "Weekly opening hours and free-swim availability for the Gliwice municipal swimming pools, parsed from the operators' PDF timetables.",
+          "inLanguage": "pl",
+          "isBasedOn": "https://110kc3.github.io/pool-gliwice-automation/data.json"
+        },
+        {
+          "@type": "ItemList",
+          "name": "Gliwice municipal swimming pools",
+          "numberOfItems": 4,
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "item": { "@type": "SportsActivityLocation", "name": "Pływalnia Delfin", "address": { "@type": "PostalAddress", "streetAddress": "ul. Warszawska 35", "addressLocality": "Gliwice", "addressCountry": "PL" } } },
+            { "@type": "ListItem", "position": 2, "item": { "@type": "SportsActivityLocation", "name": "Pływalnia Mewa", "address": { "@type": "PostalAddress", "streetAddress": "ul. Mewy 36", "addressLocality": "Gliwice", "addressCountry": "PL" } } },
+            { "@type": "ListItem", "position": 3, "item": { "@type": "SportsActivityLocation", "name": "Pływalnia Olimpijczyk", "address": { "@type": "PostalAddress", "streetAddress": "ul. Oriona 120", "addressLocality": "Gliwice", "addressCountry": "PL" } } },
+            { "@type": "ListItem", "position": 4, "item": { "@type": "SportsActivityLocation", "name": "Pływalnia Neptun", "address": { "@type": "PostalAddress", "streetAddress": "ul. Dzionkarzy 29", "addressLocality": "Gliwice", "addressCountry": "PL" } } }
+          ]
+        }
+      ]
+    }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-container">
+            <div class="brand">
+                <span class="brand-icon">🏊‍♂️</span>
+                <div class="brand-text">
+                    <h1>Pływalnie Gliwice</h1>
+                    <p class="tagline">Kiedy są wolne tory?</p>
+                </div>
+            </div>
+            <div class="header-badges">
+                <span class="badge date-badge" id="schedule-week-badge">📅</span>
+                <span class="badge live-badge" id="schedule-update-badge" title="Automatyczna synchronizacja z portalu sport.gliwice.eu">
+                    <span class="pulse-dot"></span> <span id="update-badge-text">…</span>
+                </span>
+                <button type="button" class="badge btn-install-badge" id="btn-install-pwa" style="display: none;" title="Zainstaluj aplikację na telefonie">
+                    📲 Zainstaluj
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div id="offline-banner" class="offline-banner" style="display: none;">
+            📶 <strong>Offline</strong> — ostatnio pobrany harmonogram.
+        </div>
+        <p id="data-freshness-banner" class="data-freshness-banner" role="status" hidden></p>
+        <div id="error-banner" class="error-banner" style="display: none;"></div>
+
+        <nav class="nav-tabs" aria-label="Nawigacja po widokach">
+            <button type="button" class="nav-tab active" data-tab="suggester">
+                <span class="tab-icon">🎯</span> Wolne tory
+            </button>
+            <button type="button" class="nav-tab" data-tab="matrix">
+                <span class="tab-icon">📊</span> Porównanie
+            </button>
+            <button type="button" class="nav-tab" data-tab="schedules">
+                <span class="tab-icon">📋</span> Harmonogramy
+            </button>
+            <button type="button" class="nav-tab" data-tab="info">
+                <span class="tab-icon">ℹ️</span> Baseny i ceny
+            </button>
+        </nav>
+
+        <section id="view-suggester" class="view-panel active">
+            <div id="live-now-container" class="live-now-container">
+            </div>
+
+            <div class="suggester-panel">
+                <div class="panel-header">
+                    <h2>Terminy</h2>
+                    <span class="results-count" id="results-count">Ładowanie...</span>
+                </div>
+
+                <div class="preset-filter-row">
+                    <span class="preset-label">Szybko:</span>
+                    <div class="pill-group" id="preset-pills">
+                        <button type="button" class="filter-pill preset-pill active" data-preset="now">⚡ Dziś</button>
+                        <button type="button" class="filter-pill preset-pill" data-preset="today_evening">🌙 Dziś wieczorem</button>
+                        <button type="button" class="filter-pill preset-pill" data-preset="tomorrow_morning">☀️ Jutro rano</button>
+                        <button type="button" class="filter-pill preset-pill" data-preset="weekend">🏖️ Weekend</button>
+                        <button type="button" class="filter-pill preset-pill" data-preset="all">📅 Wszystkie</button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <span class="filter-label">Dzień:</span>
+                    <div class="pill-group" id="day-pills">
+                        <button type="button" class="filter-pill filter-day-pill active" data-day="all">Wszystkie</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Poniedziałek">Poniedziałek</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Wtorek">Wtorek</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Środa">Środa</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Czwartek">Czwartek</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Piątek">Piątek</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Sobota">Sobota</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="Niedziela">Niedziela</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="workdays">Dni robocze</button>
+                        <button type="button" class="filter-pill filter-day-pill" data-day="weekend">Weekendy</button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <span class="filter-label">Czas:</span>
+                    <div class="pill-group" id="duration-pills">
+                        <button type="button" class="filter-pill filter-duration-pill active" data-duration="1">1h</button>
+                        <button type="button" class="filter-pill filter-duration-pill" data-duration="2">2h</button>
+                        <button type="button" class="filter-pill filter-duration-pill" data-duration="3">3h</button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <span class="filter-label">Pora:</span>
+                    <div class="pill-group" id="time-pills">
+                        <button type="button" class="filter-pill filter-time-pill active" data-time="all">Cały dzień</button>
+                        <button type="button" class="filter-pill filter-time-pill" data-time="morning">Rano 6–12</button>
+                        <button type="button" class="filter-pill filter-time-pill" data-time="afternoon">Popołudnie 12–17</button>
+                        <button type="button" class="filter-pill filter-time-pill" data-time="evening">Wieczór 17–22</button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <span class="filter-label">Basen:</span>
+                    <div class="pill-group" id="pool-pills">
+                        <button type="button" class="filter-pill filter-pool-pill active" data-pool="all">Wszystkie</button>
+                        <button type="button" class="filter-pill filter-pool-pill" data-pool="Olimpijczyk">Olimpijczyk</button>
+                        <button type="button" class="filter-pill filter-pool-pill" data-pool="Mewa">Mewa</button>
+                        <button type="button" class="filter-pill filter-pool-pill" data-pool="Delfin">Delfin</button>
+                        <button type="button" class="filter-pill filter-pool-pill" data-pool="Neptun">Neptun</button>
+                    </div>
+                </div>
+
+                <div class="filter-row-bottom">
+                    <div class="filter-subgroup">
+                        <span class="filter-label-inline">Sortuj:</span>
+                        <div class="btn-group">
+                            <button type="button" class="btn-sort filter-sort-btn active" data-sort="lanes">Najwięcej torów</button>
+                            <button type="button" class="btn-sort filter-sort-btn" data-sort="openness">% wolnych</button>
+                            <button type="button" class="btn-sort filter-sort-btn" data-sort="time">Najwcześniej</button>
+                        </div>
+                    </div>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="toggle-only-high">
+                        <span class="checkmark"></span>
+                        ≥80% wolnych torów
+                    </label>
+                </div>
+            </div>
+
+            <div id="top-pick-container">
+            </div>
+
+            <div class="results-section">
+                <h3 class="results-title">Kolejne terminy</h3>
+                <div id="suggester-results" class="slots-grid">
+                </div>
+            </div>
+
+            <div class="insights-section">
+                <div class="section-heading-row">
+                    <h2>Nadchodzące dni w skrócie</h2>
+                </div>
+                <div id="insights-grid" class="insights-grid">
+                </div>
+            </div>
+        </section>
+
+        <section id="view-matrix" class="view-panel">
+            <div class="matrix-card">
+                <div class="section-heading-row">
+                    <h2>Wolne tory godzina po godzinie</h2>
+                </div>
+                <div id="matrix-content">
+                </div>
+            </div>
+        </section>
+
+        <section id="view-schedules" class="view-panel">
+            <div class="schedules-filter-bar">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="schedule-search" placeholder="Szukaj..." aria-label="Szukaj w harmonogramach">
+                </div>
+                <div class="select-group">
+                    <select id="schedule-day-select" class="styled-select" aria-label="Wybierz dzień">
+                        <option value="all">Wszystkie dni</option>
+                        <option value="Poniedziałek">Poniedziałek</option>
+                        <option value="Wtorek">Wtorek</option>
+                        <option value="Środa">Środa</option>
+                        <option value="Czwartek">Czwartek</option>
+                        <option value="Piątek">Piątek</option>
+                        <option value="Sobota">Sobota</option>
+                        <option value="Niedziela">Niedziela</option>
+                    </select>
+                    <select id="schedule-pool-select" class="styled-select" aria-label="Wybierz basen">
+                        <option value="all">Wszystkie pływalnie</option>
+                        <option value="Olimpijczyk">Olimpijczyk</option>
+                        <option value="Mewa">Mewa</option>
+                        <option value="Delfin">Delfin</option>
+                        <option value="Neptun">Neptun</option>
+                    </select>
+                </div>
+            </div>
+            <div id="schedules-container" class="schedules-stack">
+            </div>
+        </section>
+
+        <section id="view-info" class="view-panel">
+            <div class="info-section">
+                <div class="section-heading-row">
+                    <h2>Pływalnie miejskie w Gliwicach</h2>
+                </div>
+                <div class="pools-info-grid">
+                    <div class="pool-info-card">
+                        <div class="pool-info-header">
+                            <span class="pool-spec-icon">🏊</span>
+                            <div>
+                                <h3>Kryta Pływalnia "Olimpijczyk"</h3>
+                                <span class="pool-type-tag">Basen Olimpijski 50m • 10 torów</span>
+                            </div>
+                        </div>
+                        <ul class="pool-details-list">
+                            <li><strong>📍 Adres:</strong> ul. Oriona 120, 44-117 Gliwice (Łabędy)</li>
+                            <li><strong>📏 Wymiary:</strong> 50 m × 25 m (10 torów)</li>
+                            <li><strong>💧 Temperatura wody:</strong> ~27,5°C</li>
+                        </ul>
+                        <div class="pool-info-footer">
+                            <a href="https://maps.google.com/?q=Kryta+Pływalnia+Olimpijczyk+Gliwice" target="_blank" rel="noopener noreferrer" class="link-btn">🗺️ Pokaż na mapie</a>
+                        </div>
+                    </div>
+
+                    <div class="pool-info-card">
+                        <div class="pool-info-header">
+                            <span class="pool-spec-icon">🌊</span>
+                            <div>
+                                <h3>Kryta Pływalnia "Mewa"</h3>
+                                <span class="pool-type-tag">Basen Sportowy 25m • 6 torów</span>
+                            </div>
+                        </div>
+                        <ul class="pool-details-list">
+                            <li><strong>📍 Adres:</strong> ul. Mewy 36, 44-100 Gliwice (Sośnica)</li>
+                            <li><strong>📏 Wymiary:</strong> 25 m × 12,5 m (6 torów)</li>
+                            <li><strong>💧 Dodatkowo:</strong> sauna, brodzik, bicze wodne</li>
+                        </ul>
+                        <div class="pool-info-footer">
+                            <a href="https://maps.google.com/?q=Kryta+Pływalnia+Mewa+Gliwice" target="_blank" rel="noopener noreferrer" class="link-btn">🗺️ Pokaż na mapie</a>
+                        </div>
+                    </div>
+
+                    <div class="pool-info-card">
+                        <div class="pool-info-header">
+                            <span class="pool-spec-icon">🐬</span>
+                            <div>
+                                <h3>Kryta Pływalnia "Delfin"</h3>
+                                <span class="pool-type-tag">Basen Sportowy 25m • 6 torów</span>
+                            </div>
+                        </div>
+                        <ul class="pool-details-list">
+                            <li><strong>📍 Adres:</strong> ul. Warszawska 35, 44-100 Gliwice (Śródmieście)</li>
+                            <li><strong>📏 Wymiary:</strong> 25 m × 12,5 m (6 torów)</li>
+                            <li><strong>💧 Dodatkowo:</strong> mała niecka do oswajania z wodą</li>
+                        </ul>
+                        <div class="pool-info-footer">
+                            <a href="https://maps.google.com/?q=Kryta+Pływalnia+Delfin+Gliwice" target="_blank" rel="noopener noreferrer" class="link-btn">🗺️ Pokaż na mapie</a>
+                        </div>
+                    </div>
+
+                    <div class="pool-info-card">
+                        <div class="pool-info-header">
+                            <span class="pool-spec-icon">🔱</span>
+                            <div>
+                                <h3>Kryta Pływalnia "Neptun"</h3>
+                                <span class="pool-type-tag">Basen Sportowy 25m • 6 torów + Rekreacyjny</span>
+                            </div>
+                        </div>
+                        <ul class="pool-details-list">
+                            <li><strong>📍 Adres:</strong> ul. Dzionkarzy 29, 44-100 Gliwice (Sośnica)</li>
+                            <li><strong>📏 Wymiary:</strong> 25 m × 12,5 m (6 torów) + niecka rekreacyjna 9,5 × 9,2 m</li>
+                            <li><strong>💧 Dodatkowo:</strong> strefa saun (17:00–21:30), gejzery, masaże podwodne</li>
+                        </ul>
+                        <div class="pool-info-footer">
+                            <a href="https://maps.google.com/?q=Kryta+Pływalnia+Neptun+Gliwice" target="_blank" rel="noopener noreferrer" class="link-btn">🗺️ Pokaż na mapie</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-section" id="cennik-info">
+                    <div class="section-heading-row">
+                        <h2>💰 Cennik</h2>
+                    </div>
+
+                    <div class="pricing-grid">
+                        <div class="price-card highlight">
+                            <div class="price-card-header">
+                                <span class="price-pool-name">Olimpijczyk</span>
+                            </div>
+                            <div class="price-items">
+                                <div class="price-row">
+                                    <span class="price-type">Bilet normalny (1h)</span>
+                                    <span class="price-val">20,00 zł</span>
+                                </div>
+                                <div class="price-row">
+                                    <span class="price-type">Bilet ulgowy (1h)</span>
+                                    <span class="price-val">15,00 zł</span>
+                                </div>
+                                <div class="price-row">
+                                    <span class="price-type">Bilet OPEN (bez limitu)</span>
+                                    <span class="price-val">38,00 zł</span>
+                                </div>
+                                <div class="price-row sub">
+                                    <span class="price-type">Dopłata za minutę</span>
+                                    <span class="price-val">0,33 zł / min</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="price-card">
+                            <div class="price-card-header">
+                                <span class="price-pool-name">Mewa</span>
+                            </div>
+                            <div class="price-items">
+                                <div class="price-row">
+                                    <span class="price-type">Bilet normalny (1h)</span>
+                                    <span class="price-val">18,00 zł</span>
+                                </div>
+                                <div class="price-row">
+                                    <span class="price-type">Bilet ulgowy (1h)</span>
+                                    <span class="price-val">13,00 zł</span>
+                                </div>
+                                <div class="price-row">
+                                    <span class="price-type">Bilet OPEN (bez limitu)</span>
+                                    <span class="price-val">34,00 zł</span>
+                                </div>
+                                <div class="price-row sub">
+                                    <span class="price-type">Dopłata za minutę</span>
+                                    <span class="price-val">0,30 zł / min</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="price-card">
+                            <div class="price-card-header">
+                                <span class="price-pool-name">Delfin</span>
+                            </div>
+                            <div class="price-items">
+                                <div class="price-row">
+                                    <span class="price-type">Bilet normalny (1h)</span>
+                                    <span class="price-val">18,00 zł</span>
+                                </div>
+                                <div class="price-row">
+                                    <span class="price-type">Bilet ulgowy (1h)</span>
+                                    <span class="price-val">13,00 zł</span>
+                                </div>
+                                <div class="price-row">
+                                    <span class="price-type">Bilet OPEN (bez limitu)</span>
+                                    <span class="price-val">34,00 zł</span>
+                                </div>
+                                <div class="price-row sub">
+                                    <span class="price-type">Dopłata za minutę</span>
+                                    <span class="price-val">0,30 zł / min</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="price-card">
+                            <div class="price-card-header">
+                                <span class="price-pool-name">Neptun</span>
+                            </div>
+                            <div class="price-items">
+                                <div class="price-row">
+                                    <span class="price-type">Bilet normalny (1h)</span>
+                                    <span class="price-val">18,00 zł</span>
+                                </div>
+                                <div class="price-row">
+                                    <span class="price-type">Bilet ulgowy (1h)</span>
+                                    <span class="price-val">13,00 zł</span>
+                                </div>
+                                <div class="price-row">
+                                    <span class="price-type">Basen + Saunarium (1h)</span>
+                                    <span class="price-val">28,00 zł</span>
+                                </div>
+                                <div class="price-row sub">
+                                    <span class="price-type">Dopłata za minutę</span>
+                                    <span class="price-val">0,30 zł / min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sports-cards-section">
+                        <h3>💳 Karty sportowe</h3>
+                        <p>MultiSport, Medicover Sport, PZU Sport i FitProfit: 60 minut dziennie, potem dopłata minutowa według cennika obiektu.</p>
+                    </div>
+
+                    <div class="rules-info-box">
+                        <h4>ℹ️ Warto wiedzieć</h4>
+                        <div class="rules-columns">
+                            <div>
+                                <strong>Bilet ulgowy:</strong>
+                                <ul>
+                                    <li>Uczniowie do końca szkoły średniej</li>
+                                    <li>Studenci do 26 lat z legitymacją</li>
+                                    <li>Emeryci, renciści, osoby niepełnosprawne</li>
+                                    <li>Dzieci do 7 lat: bezpłatnie z opiekunem</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong>Zasady:</strong>
+                                <ul>
+                                    <li>Czas liczony od bramki do bramki</li>
+                                    <li>Obowiązkowe: czepek, strój, klapki</li>
+                                    <li>Zniżki: Gliwicka Karta Mieszkańca, Karta Dużej Rodziny</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <div class="footer-container">
+            <p>Dane z harmonogramów PDF <a href="https://sport.gliwice.eu" target="_blank" rel="noopener noreferrer">sport.gliwice.eu</a>, aktualizowane 2× dziennie.</p>
+            <p class="footer-links">
+                <a href="data.json" target="_blank">JSON</a> • 
+                <a href="https://github.com/110kc3/pool-gliwice-automation" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
