@@ -3,7 +3,7 @@
         "time": "06:00",
         "days": {
             "Poniedziałek": "9x50m, 1x25m i wypł",
-            "Wtorek": "0",
+            "Wtorek": "8x50m, 1x25m i wypł",
             "Środa": "9x50m, 1x25m i wypł",
             "Czwartek": "7x50m, 1x25m i wypł",
             "Piątek": "8x50m, 1x25m i wypł",
@@ -15,7 +15,7 @@
         "time": "06:15",
         "days": {
             "Poniedziałek": "9x50m, 1x25m i wypł",
-            "Wtorek": "0",
+            "Wtorek": "8x50m, 1x25m i wypł",
             "Środa": "9x50m, 1x25m i wypł",
             "Czwartek": "7x50m, 1x25m i wypł",
             "Piątek": "8x50m, 1x25m i wypł",
@@ -27,7 +27,7 @@
         "time": "06:30",
         "days": {
             "Poniedziałek": "9x50m, 1x25m i wypł",
-            "Wtorek": "0",
+            "Wtorek": "8x50m, 1x25m i wypł",
             "Środa": "9x50m, 1x25m i wypł",
             "Czwartek": "7x50m, 1x25m i wypł",
             "Piątek": "8x50m, 1x25m i wypł",
@@ -39,7 +39,7 @@
         "time": "06:45",
         "days": {
             "Poniedziałek": "9x50m, 1x25m i wypł",
-            "Wtorek": "0",
+            "Wtorek": "8x50m, 1x25m i wypł",
             "Środa": "9x50m, 1x25m i wypł",
             "Czwartek": "7x50m, 1x25m i wypł",
             "Piątek": "8x50m, 1x25m i wypł",
@@ -51,7 +51,7 @@
         "time": "07:00",
         "days": {
             "Poniedziałek": "4x50m, 1x25m i wypł",
-            "Wtorek": "0",
+            "Wtorek": "5x50m, 1x25m i wypł",
             "Środa": "4x50m, 1x25m i wypł",
             "Czwartek": "4x50m, 1x25m i wypł",
             "Piątek": "4x50m, 1x25m i wypł",
@@ -63,7 +63,7 @@
         "time": "07:15",
         "days": {
             "Poniedziałek": "4x50m, 1x25m i wypł",
-            "Wtorek": "0",
+            "Wtorek": "5x50m, 1x25m i wypł",
             "Środa": "4x50m, 1x25m i wypł",
             "Czwartek": "4x50m, 1x25m i wypł",
             "Piątek": "4x50m, 1x25m i wypł",
@@ -75,10 +75,10 @@
         "time": "07:30",
         "days": {
             "Poniedziałek": "4x50m, 1x25m i wypł",
-            "Wtorek": "0",
+            "Wtorek": "5x50m, 1x25m i wypł",
             "Środa": "4x50m, 1x25m i wypł",
             "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0",
+            "Piątek": "4x50m, 1x25m i wypł",
             "Sobota": null,
             "Niedziela": null
         }
@@ -87,10 +87,10 @@
         "time": "07:45",
         "days": {
             "Poniedziałek": "4x50m, 1x25m i wypł",
-            "Wtorek": "0",
+            "Wtorek": "5x50m, 1x25m i wypł",
             "Środa": "4x50m, 1x25m i wypł",
             "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0",
+            "Piątek": "4x50m, 1x25m i wypł",
             "Sobota": null,
             "Niedziela": null
         }
@@ -99,144 +99,144 @@
         "time": "08:00",
         "days": {
             "Poniedziałek": "4x50m, 1x25m i wypł",
-            "Wtorek": "0",
+            "Wtorek": "4x50m",
             "Środa": "4x50m, 1x25m i wypł",
             "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "4x50m, 1x25m i wypł",
+            "Sobota": "3x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "08:15",
         "days": {
             "Poniedziałek": "4x50m, 1x25m i wypł",
-            "Wtorek": "0",
+            "Wtorek": "4x50m",
             "Środa": "4x50m, 1x25m i wypł",
             "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "4x50m, 1x25m i wypł",
+            "Sobota": "3x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "08:30",
         "days": {
             "Poniedziałek": "4x50m, 1x25m i wypł",
-            "Wtorek": "0",
+            "Wtorek": "4x50m",
             "Środa": "4x50m, 1x25m i wypł",
             "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "4x50m, 1x25m i wypł",
+            "Sobota": "3x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "08:45",
         "days": {
             "Poniedziałek": "4x50m, 1x25m i wypł",
-            "Wtorek": "0",
+            "Wtorek": "4x50m",
             "Środa": "4x50m, 1x25m i wypł",
             "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "4x50m, 1x25m i wypł",
+            "Sobota": "3x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "09:00",
         "days": {
-            "Poniedziałek": "6x50m, 1x25m i wypł",
-            "Wtorek": "0",
-            "Środa": "6x50m, 1x25m i wypł",
-            "Czwartek": "6x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "8x50m",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "9x50m, 1x25m i wypł",
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "3x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "09:15",
         "days": {
-            "Poniedziałek": "6x50m, 1x25m i wypł",
-            "Wtorek": "0",
-            "Środa": "6x50m, 1x25m i wypł",
-            "Czwartek": "6x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "8x50m",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "9x50m, 1x25m i wypł",
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "3x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "09:30",
         "days": {
-            "Poniedziałek": "6x50m, 1x25m i wypł",
-            "Wtorek": "0",
-            "Środa": "6x50m, 1x25m i wypł",
-            "Czwartek": "6x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "8x50m",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "9x50m, 1x25m i wypł",
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "5x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "09:45",
         "days": {
-            "Poniedziałek": "6x50m, 1x25m i wypł",
-            "Wtorek": "0",
-            "Środa": "6x50m, 1x25m i wypł",
-            "Czwartek": "6x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Poniedziałek": "9x50m, 1x25m i wypł",
+            "Wtorek": "8x50m",
+            "Środa": "9x50m, 1x25m i wypł",
+            "Czwartek": "9x50m, 1x25m i wypł",
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "5x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "10:00",
         "days": {
-            "Poniedziałek": "2x50m, 1x25m",
-            "Wtorek": "0",
-            "Środa": "2x50m, 1x25m i wypł",
-            "Czwartek": "1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Poniedziałek": "5x50m, 1x25m",
+            "Wtorek": "5x50m, 1x25m i wypł",
+            "Środa": "5x50m, 1x25m i wypł",
+            "Czwartek": "3x50m, 1x25m i wypł",
+            "Piątek": "3x50m, 1x25m i wypł",
+            "Sobota": "5x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "10:15",
         "days": {
-            "Poniedziałek": "2x50m, 1x25m",
-            "Wtorek": "0",
-            "Środa": "2x50m, 1x25m i wypł",
-            "Czwartek": "1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Poniedziałek": "5x50m, 1x25m",
+            "Wtorek": "5x50m, 1x25m i wypł",
+            "Środa": "5x50m, 1x25m i wypł",
+            "Czwartek": "3x50m, 1x25m i wypł",
+            "Piątek": "3x50m, 1x25m i wypł",
+            "Sobota": "5x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "10:30",
         "days": {
-            "Poniedziałek": "2x50m, 1x25m",
-            "Wtorek": "0",
-            "Środa": "2x50m, 1x25m i wypł",
-            "Czwartek": "1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Poniedziałek": "5x50m, 1x25m",
+            "Wtorek": "5x50m, 1x25m i wypł",
+            "Środa": "5x50m, 1x25m i wypł",
+            "Czwartek": "3x50m, 1x25m i wypł",
+            "Piątek": "3x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "10:45",
         "days": {
-            "Poniedziałek": "2x50m, 1x25m",
-            "Wtorek": "0",
-            "Środa": "2x50m, 1x25m i wypł",
-            "Czwartek": "1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Poniedziałek": "5x50m, 1x25m",
+            "Wtorek": "5x50m, 1x25m i wypł",
+            "Środa": "5x50m, 1x25m i wypł",
+            "Czwartek": "3x50m, 1x25m i wypł",
+            "Piątek": "3x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -245,10 +245,10 @@
             "Poniedziałek": "9x50m, 1x25m i wypł",
             "Wtorek": "4x50m",
             "Środa": "5x50m, 1x25m i wypł",
-            "Czwartek": "5x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Czwartek": "6x50m i wypł",
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -257,10 +257,10 @@
             "Poniedziałek": "9x50m, 1x25m i wypł",
             "Wtorek": "4x50m",
             "Środa": "5x50m, 1x25m i wypł",
-            "Czwartek": "5x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Czwartek": "6x50m i wypł",
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -269,10 +269,10 @@
             "Poniedziałek": "9x50m, 1x25m i wypł",
             "Wtorek": "4x50m",
             "Środa": "5x50m, 1x25m i wypł",
-            "Czwartek": "5x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Czwartek": "6x50m i wypł",
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": "8x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -281,10 +281,10 @@
             "Poniedziałek": "9x50m, 1x25m i wypł",
             "Wtorek": "4x50m",
             "Środa": "5x50m, 1x25m i wypł",
-            "Czwartek": "5x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Czwartek": "6x50m i wypł",
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": "8x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -294,9 +294,9 @@
             "Wtorek": "8x50m, 1x25m i wypł",
             "Środa": "9x50m, 1x25m i wypł",
             "Czwartek": "5x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": "8x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -306,9 +306,9 @@
             "Wtorek": "8x50m, 1x25m i wypł",
             "Środa": "9x50m, 1x25m i wypł",
             "Czwartek": "5x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": "8x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -318,9 +318,9 @@
             "Wtorek": "8x50m, 1x25m i wypł",
             "Środa": "9x50m, 1x25m i wypł",
             "Czwartek": "5x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": "8x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -330,9 +330,9 @@
             "Wtorek": "8x50m, 1x25m i wypł",
             "Środa": "9x50m, 1x25m i wypł",
             "Czwartek": "5x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "5x50m, 1x25m i wypł",
+            "Sobota": "8x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -342,9 +342,9 @@
             "Wtorek": "5x50m, 1x25m i wypł",
             "Środa": "3x50m, 1x25m i wypł",
             "Czwartek": "5x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -354,9 +354,9 @@
             "Wtorek": "5x50m, 1x25m i wypł",
             "Środa": "3x50m, 1x25m i wypł",
             "Czwartek": "5x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -366,9 +366,9 @@
             "Wtorek": "5x50m, 1x25m i wypł",
             "Środa": "3x50m, 1x25m i wypł",
             "Czwartek": "5x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -378,9 +378,9 @@
             "Wtorek": "5x50m, 1x25m i wypł",
             "Środa": "3x50m, 1x25m i wypł",
             "Czwartek": "5x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -390,9 +390,9 @@
             "Wtorek": "9x50m, 1x25m i wypł",
             "Środa": "3x50m, 1x25m",
             "Czwartek": "9x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -402,9 +402,9 @@
             "Wtorek": "9x50m, 1x25m i wypł",
             "Środa": "3x50m, 1x25m",
             "Czwartek": "9x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -414,9 +414,9 @@
             "Wtorek": "4x50m, 1x25m i wypł",
             "Środa": "3x50m, 1x25m",
             "Czwartek": "6x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -426,9 +426,9 @@
             "Wtorek": "4x50m, 1x25m i wypł",
             "Środa": "3x50m, 1x25m",
             "Czwartek": "6x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -438,9 +438,9 @@
             "Wtorek": "4x50m, 1x25m i wypł",
             "Środa": "6x50m, 1x25m i wypł",
             "Czwartek": "6x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -450,9 +450,9 @@
             "Wtorek": "4x50m, 1x25m i wypł",
             "Środa": "6x50m, 1x25m i wypł",
             "Czwartek": "6x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -462,9 +462,9 @@
             "Wtorek": "4x50m, 1x25m i wypł",
             "Środa": "6x50m, 1x25m i wypł",
             "Czwartek": "6x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -474,9 +474,9 @@
             "Wtorek": "4x50m, 1x25m i wypł",
             "Środa": "6x50m, 1x25m i wypł",
             "Czwartek": "6x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -486,9 +486,9 @@
             "Wtorek": "4x50m, 1x25m i wypł",
             "Środa": "6x50m, 1x25m i wypł",
             "Czwartek": "6x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -498,9 +498,9 @@
             "Wtorek": "4x50m, 1x25m i wypł",
             "Środa": "2x50m, 1x25m i wypł",
             "Czwartek": "2x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -510,9 +510,9 @@
             "Wtorek": "6x50m, 1x25m i wypł",
             "Środa": "5x50m, 1x25m i wypł",
             "Czwartek": "5x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -522,9 +522,9 @@
             "Wtorek": "6x50m, 1x25m i wypł",
             "Środa": "5x50m, 1x25m i wypł",
             "Czwartek": "5x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -534,9 +534,9 @@
             "Wtorek": "3x50m",
             "Środa": "4x50m i wypł",
             "Czwartek": "3x50m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "2x50m, 1x25m",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -546,9 +546,9 @@
             "Wtorek": "3x50m",
             "Środa": "4x50m i wypł",
             "Czwartek": "3x50m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "2x50m, 1x25m",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -558,9 +558,9 @@
             "Wtorek": "3x50m",
             "Środa": "8x50m i wypł",
             "Czwartek": "6x50m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "2x50m, 1x25m",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -570,9 +570,9 @@
             "Wtorek": "3x50m",
             "Środa": "8x50m i wypł",
             "Czwartek": "6x50m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "2x50m, 1x25m",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -580,11 +580,11 @@
         "days": {
             "Poniedziałek": "4x50m",
             "Wtorek": "6x50m i wypł",
-            "Środa": "4x50m i wypł",
+            "Środa": "7x50m i wypł",
             "Czwartek": "8x50m, 1x25m",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "7x50m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -592,11 +592,11 @@
         "days": {
             "Poniedziałek": "4x50m",
             "Wtorek": "6x50m i wypł",
-            "Środa": "4x50m i wypł",
+            "Środa": "7x50m i wypł",
             "Czwartek": "8x50m, 1x25m",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "7x50m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -604,11 +604,11 @@
         "days": {
             "Poniedziałek": "4x50m",
             "Wtorek": "6x50m i wypł",
-            "Środa": "4x50m i wypł",
+            "Środa": "7x50m i wypł",
             "Czwartek": "8x50m, 1x25m",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "7x50m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -616,131 +616,131 @@
         "days": {
             "Poniedziałek": "4x50m",
             "Wtorek": "6x50m i wypł",
-            "Środa": "4x50m i wypł",
+            "Środa": "7x50m i wypł",
             "Czwartek": "8x50m, 1x25m",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Piątek": "7x50m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "19:00",
         "days": {
             "Poniedziałek": "3x50m, 1x25m i wypł",
-            "Wtorek": "9x50m i wypł",
-            "Środa": "3x50m, 1x25m i wypł",
-            "Czwartek": "2x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Wtorek": "8x50m i wypł",
+            "Środa": "6x50m, 1x25m i wypł",
+            "Czwartek": "7x50m, 1x25m i wypł",
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "19:15",
         "days": {
             "Poniedziałek": "3x50m, 1x25m i wypł",
-            "Wtorek": "9x50m i wypł",
-            "Środa": "3x50m, 1x25m i wypł",
-            "Czwartek": "2x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Wtorek": "8x50m i wypł",
+            "Środa": "6x50m, 1x25m i wypł",
+            "Czwartek": "7x50m, 1x25m i wypł",
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "19:30",
         "days": {
             "Poniedziałek": "3x50m, 1x25m i wypł",
-            "Wtorek": "9x50m i wypł",
-            "Środa": "3x50m, 1x25m i wypł",
-            "Czwartek": "2x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Wtorek": "8x50m i wypł",
+            "Środa": "6x50m, 1x25m i wypł",
+            "Czwartek": "7x50m, 1x25m i wypł",
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "19:45",
         "days": {
             "Poniedziałek": "3x50m, 1x25m i wypł",
-            "Wtorek": "9x50m i wypł",
-            "Środa": "3x50m, 1x25m i wypł",
-            "Czwartek": "2x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Wtorek": "8x50m i wypł",
+            "Środa": "6x50m, 1x25m i wypł",
+            "Czwartek": "7x50m, 1x25m i wypł",
+            "Piątek": "6x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "20:00",
         "days": {
-            "Poniedziałek": "5x50m, 1x25m i wypł",
+            "Poniedziałek": "8x50m, 1x25m i wypł",
             "Wtorek": "9x50m, 1x25m i wypł",
             "Środa": "8x50m, 1x25m i wypł",
-            "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Czwartek": "9x50m, 1x25m i wypł",
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "20:15",
         "days": {
-            "Poniedziałek": "5x50m, 1x25m i wypł",
+            "Poniedziałek": "8x50m, 1x25m i wypł",
             "Wtorek": "9x50m, 1x25m i wypł",
             "Środa": "8x50m, 1x25m i wypł",
-            "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Czwartek": "9x50m, 1x25m i wypł",
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "20:30",
         "days": {
-            "Poniedziałek": "5x50m, 1x25m i wypł",
+            "Poniedziałek": "8x50m, 1x25m i wypł",
             "Wtorek": "9x50m, 1x25m i wypł",
             "Środa": "8x50m, 1x25m i wypł",
-            "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Czwartek": "9x50m, 1x25m i wypł",
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "20:45",
         "days": {
-            "Poniedziałek": "5x50m, 1x25m i wypł",
+            "Poniedziałek": "8x50m, 1x25m i wypł",
             "Wtorek": "9x50m, 1x25m i wypł",
             "Środa": "8x50m, 1x25m i wypł",
-            "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Czwartek": "9x50m, 1x25m i wypł",
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "21:00",
         "days": {
-            "Poniedziałek": "6x50m, 1x25m i wypł",
+            "Poniedziałek": "9x50m, 1x25m i wypł",
             "Wtorek": "9x50m, 1x25m i wypł",
             "Środa": "9x50m, 1x25m i wypł",
-            "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Czwartek": "9x50m, 1x25m i wypł",
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
         "time": "21:15",
         "days": {
-            "Poniedziałek": "6x50m, 1x25m i wypł",
+            "Poniedziałek": "9x50m, 1x25m i wypł",
             "Wtorek": "9x50m, 1x25m i wypł",
             "Środa": "9x50m, 1x25m i wypł",
-            "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Czwartek": "9x50m, 1x25m i wypł",
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {
@@ -749,10 +749,10 @@
             "Poniedziałek": "9x50m, 1x25m i wypł",
             "Wtorek": "9x50m, 1x25m i wypł",
             "Środa": "9x50m, 1x25m i wypł",
-            "Czwartek": "4x50m, 1x25m i wypł",
-            "Piątek": "0",
-            "Sobota": "0",
-            "Niedziela": "0"
+            "Czwartek": "9x50m, 1x25m i wypł",
+            "Piątek": "9x50m, 1x25m i wypł",
+            "Sobota": "9x50m, 1x25m i wypł",
+            "Niedziela": "9x50m, 1x25m i wypł"
         }
     },
     {

@@ -391,7 +391,7 @@
             "Środa": "5x25m wolne (rekreacyjny: wolny)",
             "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
             "Piątek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Sobota": "5x25m wolne (rekreacyjny: wolny)",
+            "Sobota": "5x25m wolne (rekreacyjny: 1/3 wolna)",
             "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
@@ -403,7 +403,7 @@
             "Środa": "5x25m wolne (rekreacyjny: wolny)",
             "Czwartek": "5x25m wolne (rekreacyjny: wolny)",
             "Piątek": "2x25m wolne (rekreacyjny: 1/3 wolna)",
-            "Sobota": "5x25m wolne (rekreacyjny: wolny)",
+            "Sobota": "5x25m wolne (rekreacyjny: 1/3 wolna)",
             "Niedziela": "5x25m wolne (rekreacyjny: wolny)"
         }
     },
